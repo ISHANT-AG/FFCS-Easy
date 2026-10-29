@@ -1,3 +1,4 @@
+import {downloadTimetablePdf} from './pdf-export.js';
 import { startGeneration } from './generation.js';
 import { mergeSections, needsFaculty } from './sections.js';
 import { pdfItemsToText } from './pdf-text.js';
@@ -209,7 +210,7 @@ function coursesView() {
             </div>
             <div class="field">
               <label class="field-label" for="branch">Branch</label>
-              <select id="branch" aria-label="Branch" ${state.year ? '' : 'disabled'}>
+              <select id="branch" aria-label="Branch" ${state.year && branchesList.length ? '' : 'disabled'}>
                 <option value="">${state.year ? 'Choose your branch' : 'Select year first'}</option>
                 ${state.year ? branchesList.map(b => `<option value="${b}" ${b === state.branch ? 'selected' : ''}>${esc(branches[b] || b)}</option>`).join('') : ''}
               </select>
@@ -270,7 +271,7 @@ function coursesView() {
               </svg>
             </div>
             <h3>Course list unavailable for Year ${state.year}</h3>
-            <p>The university registration catalog for this year has not been uploaded yet. Please select another year or add your courses manually.</p>
+            <p>The university registration catalog for this year has not been uploaded yet. Please select a year with an available course list.</p>
           </section>
         ` : !state.year ? `
           <section class="panel empty-state-panel intro-empty-panel">
@@ -332,7 +333,7 @@ function coursesView() {
 }
 
 function facultyView() {
-  const readyCourses = state.courses.filter(c => c.online || (c.sections && c.sections.length));
+  const readyCourses = state.courses.filter(c => !needsFaculty(c));
   const progressPct = state.courses.length ? Math.round((readyCourses.length / state.courses.length) * 100) : 100;
 
   return `
@@ -371,6 +372,9 @@ function facultyView() {
     } else if (c.sections.length) {
       statusText = `${c.sections.length} options`;
       statusClass = 'badge-ready';
+    } else if (c.scheduled === false) {
+      statusText = 'No weekly classes';
+      statusClass = 'badge-slate';
     }
     return `
                 <button type="button" class="nav-course-item" data-nav-target="${c.id}" aria-label="Jump to ${esc(c.code)}">
@@ -409,6 +413,9 @@ function facultyView() {
     } else if (c.sections.length) {
       statusText = `${c.sections.length} options`;
       statusClass = 'badge-ready';
+    } else if (c.scheduled === false) {
+      statusText = 'No weekly classes';
+      statusClass = 'badge-slate';
     }
 
     return `
@@ -696,7 +703,7 @@ function resultsView() {
         <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75">
           <path d="M4 6V2h8v4M4 12H2.5A1.5 1.5 0 011 10.5v-3A1.5 1.5 0 012.5 6h11A1.5 1.5 0 0115 7.5v3a1.5 1.5 0 01-1.5 1.5H12M4 9h8v5H4V9z"/>
         </svg>
-        <span>Print / Save PDF</span>
+        <span>Download PDF</span>
       </button>
     </div>
 
@@ -860,7 +867,7 @@ function bind() {
   });
 
   $('#jump-incomplete')?.addEventListener('click', () => {
-    const nextIncomplete = state.courses.find(c => !c.online && (!c.sections || !c.sections.length));
+    const nextIncomplete = state.courses.find(needsFaculty);
     if (nextIncomplete) {
       const card = document.getElementById('card-' + nextIncomplete.id);
       if (card) {
@@ -919,15 +926,12 @@ function bind() {
       const update = () => {
         const c = state.courses.find(c => c.id === el.dataset[key]);
         if (c) {
-          c[key] = el.value.split(',').map(s => s.trim()).filter(Boolean);
+          c[key] = el.value.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
           invalidate();
         }
       };
       el.addEventListener('input', update);
       el.addEventListener('change', update);
-      el.addEventListener('blur', update);
-      el.oninput = update;
-      el.onchange = update;
     });
   }
 
@@ -993,7 +997,7 @@ function bind() {
     };
   });
 
-  $('#print')?.addEventListener('click', () => window.print());
+  $('#print')?.addEventListener('click', downloadPdf);
   $('#regenerate')?.addEventListener('click', generate);
   $('#retry-generation')?.addEventListener('click', generate);
   $('#cancel-generation')?.addEventListener('click', () => go(2));
@@ -1076,6 +1080,14 @@ async function readUpload(id, file) {
   }
 }
 
+async function downloadPdf(){
+ const schedule=result?.results?.[resultIndex];if(!schedule)return;
+ const button=$('#print');if(button){button.disabled=true;button.textContent='Preparing PDF…';}
+ try{await downloadTimetablePdf(schedule,{option:resultIndex+1,courses:state.courses});}
+ catch(error){toast(error.message||'Could not export PDF. Please try again.');}
+ finally{if(button){button.disabled=false;button.textContent='Download PDF';}}
+}
+
 function generate() {
   worker?.terminate();
   state.step = 3;
@@ -1086,7 +1098,7 @@ function generate() {
   const id = ++job;
   render();
   window.scrollTo({ top: 0, behavior: 'instant' });
-  worker = startGeneration({ id, courses: state.courses, settings: state.settings, preset: state.preset, limit: 4 }, {
+  worker = startGeneration({ id, courses: state.courses, settings: state.settings, preset: state.preset, limit: 5 }, {
     onProgress: progress => {
       if (id !== job) return;
       const message = $('#generation-status');

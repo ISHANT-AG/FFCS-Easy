@@ -61,3 +61,13 @@ The search now prepares slot masks, meeting items and faculty preference costs o
 Search stops at 250,000 nodes or approximately 3 seconds, whichever comes first, returning the best shortlist found and reporting truncation. An unfinished search with no result is explicitly distinguished from a completed infeasibility search. Progress messages do not complete the job. `src/generation.js` handles cancellation, stale responses, worker/startup errors and a 10-second safety timeout; all terminal paths leave loading and offer a retry without clearing uploads. Back/Cancel stops the current worker.
 
 A local ten-course benchmark fell from about 72 seconds to under 1 second. A separate browser session with the full course list and all seven weekly-course PDFs displayed four results in approximately 0.5 seconds. These are measured sample timings, not a guarantee for every plan/device. Lifecycle, timeout, full-plan and all-six-day lunch-mask regressions are covered by tests.
+
+## PDF export and strict exclusions
+
+The default shortlist and worker cap are now five distinct timetables (fewer when fewer valid arrangements exist). Avoid faculty is a hard exclusion in search, same-time alternatives, faculty switching and export eligibility checks. It accepts case/spacing/punctuation differences and standalone name-part queries: `sanat` excludes SANAT JAIN; `ram` does not match GARIMA. Multiple names can be separated by commas, semicolons or newlines. It does not use fuzzy typo matching.
+
+A section with zero available seats, whether numeric 0, string `0`, or padded zero, is excluded per faculty/slot section. Another open section of the same faculty remains eligible. Blank seats remain unknown rather than zero. Neither avoided faculty nor full sections are used as fallbacks when constraints leave no valid timetable. Reuploads refresh matching section counts and invalidate old results.
+
+Download PDF now draws the selected timetable directly into a landscape A4 PDF using client-side jsPDF 2.5.2 (downloaded from jsDelivr on first export). No timetable data is sent to a server. The export is independent of browser viewport/scroll position, includes all six weekday columns and full wrapped faculty names/venues, and checks that chosen sections remain eligible before exporting. Standard Ctrl+P styles also remove minimum widths and scroll clipping.
+
+The actual browser download was verified as one landscape page with all weekdays. Browser regression checked all five options and their dropdown content after avoiding SARATHKUMAR and setting KANNAN S's only section to zero seats; neither appeared. The downloaded PDF also excluded both. These checks used a separate localhost test origin; the student's 127.0.0.1 plan was left untouched.

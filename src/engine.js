@@ -3,10 +3,13 @@ export const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturda
 export const GRID = [['A11','B11','C11','A21','A14','B21','C21'],['D11','E11','F11','D21','E14','E21','F21'],['A12','B12','C12','A22','B14','B22','A24'],['D12','E12','F12','D22','F14','E22','F22'],['A13','B13','C13','A23','C14','B23','B24'],['D13','E13','F13','D23','D14','D24','E23']];
 export const START = [510,605,700,795,890,985,1080], END = [600,695,790,885,980,1075,1170];
 const facultyKey = s=>String(s||'').trim().replace(/\s+/g,' ').toLowerCase();
+const nameWords=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().split(/\s+/).filter(Boolean);
+export function matchesAvoidFaculty(query,faculty){const q=nameWords(query),f=nameWords(faculty);if(!q.length)return false;if(q.join('')===f.join(''))return true;return f.some((_,i)=>q.every((word,j)=>word===f[i+j]));}
+
 const index = Object.fromEntries(GRID.flatMap((r,d)=>r.map((s,p)=>[s,{day:d,period:p}])));
 export function parseSlots(text) { const codes=String(text).toUpperCase().split(/[+,;\s]+/).filter(Boolean); if(!codes.length) throw Error('Enter at least one slot.'); const bad=codes.filter(s=>!index[s]); if(bad.length) throw Error('Unknown slot: '+bad.join(', ')); return [...new Set(codes)].map(s=>({...index[s],code:s})); }
 export function zone(venue) { return /^AB0?2\b/i.test(venue.trim())?'far':'near'; }
-export function validateSection(s, {allowNil=false}={}) { if(!s.faculty?.trim()) throw Error('Faculty is required.'); if(!s.venue?.trim()) throw Error('Venue is required.'); if(!(allowNil && String(s.slots).trim().toUpperCase()==='NIL'))parseSlots(s.slots); if(s.seats!=='' && s.seats!=null && (!Number.isFinite(Number(s.seats)) || Number(s.seats)<0)) throw Error('Seats must be a non-negative number.'); }
+export function validateSection(s, {allowNil=false}={}) { if(!s.faculty?.trim()) throw Error('Faculty is required.'); if(!s.venue?.trim()) throw Error('Venue is required.'); if(!(allowNil && String(s.slots).trim().toUpperCase()==='NIL'))parseSlots(s.slots); if(s.seats!=='' && s.seats!=null && (!Number.isInteger(Number(s.seats)) || Number(s.seats)<0)) throw Error('Seats must be a whole non-negative number.'); }
 export function lunchValid(items) { return DAYS.every((_,d)=> !items.some(x=>x.day===d&&x.period===2) || !items.some(x=>x.day===d&&x.period===3)); }
 export function metrics(items) { let gaps=0,travel=0,morning=0,evening=0,balance=0,days=0; for(let d=0;d<6;d++){const a=items.filter(x=>x.day===d).sort((a,b)=>a.period-b.period);if(!a.length)continue;days++; for(const x of a){morning+=Math.max(0,x.period-2);evening+=Math.max(0,3-x.period);} for(let i=1;i<a.length;i++){const delta=a[i].period-a[i-1].period;gaps+=delta-1;if(delta===1&&zone(a[i].venue)!==zone(a[i-1].venue))travel++;} balance+=Math.abs(a.reduce((s,x)=>s+x.period,0)/a.length-3); } return {gaps,travel,morning,evening,balance,days}; }
 export const PRESETS = [{id:'compact',name:'Minimal gaps',description:'Keep your campus day compact.'},{id:'morning',name:'Morning person',description:'Make room for free evenings.'},{id:'evening',name:'Evening person',description:'Start your day a little later.'},{id:'travel',name:'Less travel',description:'Fewer back-to-back AB2 switches.'},{id:'balanced',name:'Whole day',description:'Spread classes across the day.'},{id:'bus',name:'Day scholar',description:'Finish before your bus deadline.'}];
@@ -17,7 +20,7 @@ export function eligibleSections(course) {
  if(course.online)return [];
  return (course.sections||[]).filter(s=>{
   if(s.seats!==''&&s.seats!=null&&!(Number(s.seats)>0))return false;
-  if((course.avoid||[]).some(f=>facultyKey(f)===facultyKey(s.faculty)))return false;
+  if((Array.isArray(course.avoid)?course.avoid:String(course.avoid||'').split(/[,;\n]+/)).some(f=>matchesAvoidFaculty(f,s.faculty)))return false;
   if(course.only&&facultyKey(course.only)!==facultyKey(s.faculty))return false;
   try{validateSection(s,{allowNil:course.scheduled===false});return course.scheduled!==false||String(s.slots).trim().toUpperCase()==='NIL';}catch{return false;}
  });
@@ -48,8 +51,8 @@ export function changeFaculty(schedule,courseCode,sectionId,settings={},preset='
  return scheduleFrom(schedule.chosen.map(x=>x===current?{course:x.course,section:next}:x),settings,preset);
 }
 function bundleDistance(a,b){const other=new Map(b.chosen.map(x=>[x.course.code,slotBundle(x.section,x.course.scheduled)]));return a.chosen.filter(x=>x.course.scheduled!==false&&other.get(x.course.code)!==slotBundle(x.section)).length;}
-export function solve(courses,settings={},preset='compact',limit=4,hooks={}) {
- limit=Math.min(100,Math.max(1,Number(limit)||4));
+export function solve(courses,settings={},preset='compact',limit=5,hooks={}) {
+ limit=Math.min(100,Math.max(1,Number(limit)||5));
  const prepared=new WeakMap();
  const started=Date.now(),maxMilliseconds=Math.max(1,Number(settings.maxMilliseconds)||3000);let lastProgress=started;
  const active=courses.filter(c=>!c.online&&(c.scheduled!==false||(c.sections||[]).length)),missing=[],nodesMax=settings.maxNodes||250000;
