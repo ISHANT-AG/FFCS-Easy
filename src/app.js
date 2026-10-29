@@ -82,6 +82,7 @@ function course(r) {
   return {
     ...r,
     id: uid(),
+    custom: false,
     scheduled: r.type !== 'PJ',
     online: false,
     sections: [],
@@ -90,6 +91,8 @@ function course(r) {
     only: ''
   };
 }
+
+const isCustom = c => Boolean(c.custom || (!c.batch && c.custom !== false));
 
 const prefix = () => String(27 - Number(state.year)).padStart(2, '0');
 
@@ -304,11 +307,12 @@ function coursesView() {
             </div>
             <div class="course-list">
               ${state.courses.map(c => `
-                <div class="course-row">
+                <div class="course-row ${isCustom(c) ? 'is-custom-course' : ''}">
                   <div class="course-info">
                     <div class="course-name-row">
                       <strong class="course-name">${esc(c.name)}</strong>
                       <span class="course-code-badge">${esc(c.code)}</span>
+                      ${isCustom(c) ? '<span class="badge badge-amber">Custom</span>' : ''}
                     </div>
                     <div class="course-meta">
                       <span class="meta-tag">${c.credits} cr</span>
@@ -419,12 +423,13 @@ function facultyView() {
     }
 
     return `
-            <article class="faculty-card ${c.online ? 'is-online' : ''}" id="card-${c.id}" data-course-id="${c.id}">
+            <article class="faculty-card ${c.online ? 'is-online' : ''} ${isCustom(c) ? 'is-custom-course' : ''}" id="card-${c.id}" data-course-id="${c.id}">
               <header class="faculty-card-header">
                 <div class="faculty-course-header-left">
                   <div class="faculty-title-row">
                     <span class="course-code-badge">${esc(c.code)}</span>
                     <h2 class="faculty-course-name">${esc(c.name)}</h2>
+                    ${isCustom(c) ? '<span class="badge badge-amber">Custom</span>' : ''}
                   </div>
                   <div class="faculty-course-meta">
                     <span>${c.credits} credits</span>
@@ -850,6 +855,7 @@ function bind() {
 
     state.courses.push({
       id: uid(),
+      custom: true,
       code,
       name,
       credits,

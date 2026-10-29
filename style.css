@@ -667,6 +667,14 @@ button {
   transition: all var(--transition-fast);
 }
 
+.course-row.is-custom-course {
+  border-left: 3px solid var(--color-warning);
+}
+
+.course-row.is-custom-course:hover {
+  border-left-color: var(--color-warning);
+}
+
 .course-row:hover {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-xs);
@@ -913,6 +921,14 @@ button {
   padding: 22px;
   box-shadow: var(--shadow-xs);
   transition: all var(--transition-fast);
+}
+
+.faculty-card.is-custom-course {
+  border-left: 3px solid var(--color-warning);
+}
+
+.faculty-card.is-custom-course:hover {
+  border-left-color: var(--color-warning);
 }
 
 .faculty-card:hover {
