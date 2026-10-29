@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mergeSections,needsFaculty} from '../src/sections.js';
+import {solve} from '../src/engine.js';
+const row=(faculty='A',slots='A11',seats='70')=>({id:faculty,faculty,slots,venue:'AB1-102',seats});
+const course=(extra={})=>({code:'X',scheduled:true,sections:[],...extra});
+test('validated upload is immediately usable by the Continue guard',()=>{const c=course();assert.ok(needsFaculty(c));c.sections=mergeSections(c,[row()]);assert.equal(needsFaculty(c),false);});
+test('reupload deduplicates sections and refreshes seats',()=>{const c=course({sections:[row()]});const rows=mergeSections(c,[row('A','A11','65'),row('B','B11')]);assert.equal(rows.length,2);assert.equal(rows[0].seats,'65');});
+test('bad upload never partially commits',()=>{const c=course({sections:[row()]});assert.throws(()=>mergeSections(c,[row('B','B11'),row('C','A99')]));assert.equal(c.sections.length,1);});
+test('NIL project upload commits without creating weekly meetings',()=>{const c=course({scheduled:false});c.sections=mergeSections(c,[{...row(),slots:'NIL',venue:'NIL'}]);assert.equal(needsFaculty(c),false);const r=solve([{...course({sections:[row()]}),code:'W'},c]);assert.equal(r.results[0].items.length,1);});
+test('online course needs no faculty and is absent from clashes and shortlist',()=>{const c=course({online:true,only:'Unavailable',sections:[row()]});assert.equal(needsFaculty(c),false);const r=solve([c,{...course({sections:[row()]}),code:'W'}]);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen.length,1);assert.equal(r.results[0].chosen[0].course.code,'W');c.online=false;assert.equal(solve([c,{...course({sections:[row()]}),code:'W'}]).results.length,0);});

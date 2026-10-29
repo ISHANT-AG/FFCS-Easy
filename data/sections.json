@@ -1,0 +1,5481 @@
+{
+  "snapshotDate": "2026-10-28",
+  "status": "User-provided snapshots. Matching screenshot seat counts retained; new DBMS/DLD rows use 20 June 2026 mock PDF counts. No live availability.",
+  "courses": [
+    {
+      "code": "CSE2001",
+      "name": "Object Oriented Programming with C++",
+      "source": "13.32.37",
+      "scheduled": true,
+      "sections": [
+        {
+          "id": "CSE2001-1",
+          "slots": "A11+A12+A13",
+          "venue": "AR-102",
+          "faculty": "KANNAN S",
+          "totalSeats": 100,
+          "allottedSeats": 1,
+          "seats": "99",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-1",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KANNAN S",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-2",
+          "slots": "A14+D11+D12",
+          "venue": "AB02-401",
+          "faculty": "ANKUR JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 1,
+          "seats": "99",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-2",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANKUR JAIN",
+              "seats": "96"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-3",
+          "slots": "A14+D11+D12",
+          "venue": "AB02-402",
+          "faculty": "RAM KUMAR",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-3",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAM KUMAR",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-4",
+          "slots": "A21+A22+A23",
+          "venue": "AB02-325",
+          "faculty": "MOSES DIAN S",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-4",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MOSES DIAN S",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-5",
+          "slots": "A24+E21+F22",
+          "venue": "AB02-306",
+          "faculty": "Sajjad Ahmed",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-5",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "Sajjad Ahmed",
+              "seats": "100"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-6",
+          "slots": "B11+B12+B13",
+          "venue": "AB02-401",
+          "faculty": "ANKUR JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-6",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANKUR JAIN",
+              "seats": "94"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-7",
+          "slots": "B11+B12+B13",
+          "venue": "AB02-402",
+          "faculty": "GARIMA JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-7",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "GARIMA JAIN",
+              "seats": "78"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-8",
+          "slots": "B21+E14+E22",
+          "venue": "AB02-402",
+          "faculty": "SANAT JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-8",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SANAT JAIN",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-9",
+          "slots": "B22+B24+F21",
+          "venue": "AB02-316",
+          "faculty": "Sajjad Ahmed",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-9",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "Sajjad Ahmed",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-10",
+          "slots": "C11+C12+C13",
+          "venue": "AB02-301",
+          "faculty": "BASEERA.A",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-10",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "BASEERA.A",
+              "seats": "92"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-11",
+          "slots": "C11+C12+C13",
+          "venue": "AB02-325",
+          "faculty": "RAM KUMAR",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-11",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAM KUMAR",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-12",
+          "slots": "C14+E11+E12",
+          "venue": "AB02-301",
+          "faculty": "BASEERA.A",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-12",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "BASEERA.A",
+              "seats": "99"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-13",
+          "slots": "C14+E11+E12",
+          "venue": "AB02-401",
+          "faculty": "SANAT JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-13",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SANAT JAIN",
+              "seats": "96"
+            }
+          ]
+        },
+        {
+          "id": "CSE2001-14",
+          "slots": "C14+E11+E12",
+          "venue": "AB02-402",
+          "faculty": "GARIMA JAIN",
+          "totalSeats": 100,
+          "allottedSeats": 0,
+          "seats": "100",
+          "source": "13.32.37",
+          "sourceRowId": "CSE2001-14",
+          "observations": [
+            {
+              "source": "CPP.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "GARIMA JAIN",
+              "seats": "92"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MAT3002",
+      "name": "Applied Linear Algebra",
+      "source": "13.32.38 (1)",
+      "scheduled": true,
+      "sections": [
+        {
+          "id": "MAT3002-1",
+          "slots": "A11+A12",
+          "venue": "AB-103",
+          "faculty": "HEMANT KUMAR NASHINE",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-1",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "HEMANT KUMAR NASHINE",
+              "seats": "69"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-2",
+          "slots": "A11+A12",
+          "venue": "AB-320",
+          "faculty": "NITISHA PANDEY",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-2",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NITISHA PANDEY",
+              "seats": "67"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-3",
+          "slots": "A21+A22",
+          "venue": "AB-216",
+          "faculty": "ANANT KANT SHUKLA",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-3",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANANT KANT SHUKLA",
+              "seats": "64"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-4",
+          "slots": "A24+B24",
+          "venue": "AB-218",
+          "faculty": "DONDU HARISH BABU",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-4",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "DONDU HARISH BABU",
+              "seats": "67"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-5",
+          "slots": "B11+B12",
+          "venue": "AB-217",
+          "faculty": "AJAY KUMAR BHURJEE",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-5",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AJAY KUMAR BHURJEE",
+              "seats": "69"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-6",
+          "slots": "B14+D21",
+          "venue": "AB-218",
+          "faculty": "MAYANK SHARMA",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-6",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MAYANK SHARMA",
+              "seats": "64"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-7",
+          "slots": "B14+D21",
+          "venue": "AB-128",
+          "faculty": "SANTOSH KUMAR BHAL",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-7",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SANTOSH KUMAR BHAL",
+              "seats": "67"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-8",
+          "slots": "B21+E14",
+          "venue": "AB-216",
+          "faculty": "BENEVATHO JAISON A",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-8",
+          "facultyAliases": [
+            "BENEWATHO JAISON A"
+          ],
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "BENEVATHO JAISON A",
+              "seats": "63"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-9",
+          "slots": "B21+E22",
+          "venue": "AB-229",
+          "faculty": "DILEEP KUMAR",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-9",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "DILEEP KUMAR",
+              "seats": "67"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-10",
+          "slots": "C11+C12",
+          "venue": "AB-230",
+          "faculty": "ANUPAM SEN",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-10",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANUPAM SEN",
+              "seats": "64"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-11",
+          "slots": "C11+C12",
+          "venue": "AB-228",
+          "faculty": "ADNAN ABBASI",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-11",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ADNAN ABBASI",
+              "seats": "67"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-12",
+          "slots": "D11+D12",
+          "venue": "AB-128",
+          "faculty": "JUHI KESARWANI",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-12",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JUHI KESARWANI",
+              "seats": "58"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-13",
+          "slots": "E11+E12",
+          "venue": "AB-230",
+          "faculty": "RANJITHA",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-13",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RANJITHA",
+              "seats": "64"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-14",
+          "slots": "E11+E12",
+          "venue": "AB-317",
+          "faculty": "ABHISHEKH",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-14",
+          "facultyAliases": [
+            "ABHISHEK"
+          ],
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ABHISHEKH",
+              "seats": "68"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-15",
+          "slots": "E11+E12",
+          "venue": "AB-330",
+          "faculty": "GIRIRAJ",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-15",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "GIRIRAJ",
+              "seats": "69"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-16",
+          "slots": "F11+F12",
+          "venue": "AB-303",
+          "faculty": "AKSHARA MAKRARIYA",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-16",
+          "facultyAliases": [
+            "AKSHARA MAKARRIYA"
+          ],
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AKSHARA MAKRARIYA",
+              "seats": "66"
+            }
+          ]
+        },
+        {
+          "id": "MAT3002-17",
+          "slots": "F11+F12",
+          "venue": "AB-230",
+          "faculty": "KIRAN KUMAR BEHERA",
+          "totalSeats": 70,
+          "allottedSeats": 2,
+          "seats": "68",
+          "source": "13.32.38 (1)",
+          "sourceRowId": "MAT3002-17",
+          "observations": [
+            {
+              "source": "ALA.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KIRAN KUMAR BEHERA",
+              "seats": "39"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CHY1006",
+      "name": "Environmental Sustainability",
+      "source": "13.32.39 (1)",
+      "scheduled": true,
+      "sections": [
+        {
+          "id": "CHY1006-1",
+          "slots": "A11",
+          "venue": "AB-102",
+          "faculty": "SAURABH BHARGAVA",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-1"
+        },
+        {
+          "id": "CHY1006-2",
+          "slots": "A12",
+          "venue": "AB-417",
+          "faculty": "JAGRITI GUPTA",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-2"
+        },
+        {
+          "id": "CHY1006-3",
+          "slots": "A13",
+          "venue": "AB-230",
+          "faculty": "SATYAM RAVI",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-3"
+        },
+        {
+          "id": "CHY1006-4",
+          "slots": "A14",
+          "venue": "AB-102",
+          "faculty": "Pradeep Kumar Kashyap",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-4"
+        },
+        {
+          "id": "CHY1006-5",
+          "slots": "A21",
+          "venue": "AB-102",
+          "faculty": "SUGAVANESHWAR R P",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-5"
+        },
+        {
+          "id": "CHY1006-6",
+          "slots": "A22",
+          "venue": "AB-102",
+          "faculty": "GEETANJALI GIRI",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-6"
+        },
+        {
+          "id": "CHY1006-7",
+          "slots": "A24",
+          "venue": "AB-007",
+          "faculty": "NELLAIAPPAN S",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-7"
+        },
+        {
+          "id": "CHY1006-8",
+          "slots": "B11",
+          "venue": "AB-102",
+          "faculty": "SAURAV PRASAD",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-8"
+        },
+        {
+          "id": "CHY1006-9",
+          "slots": "B12",
+          "venue": "AB-102",
+          "faculty": "SHWETA MUKHERJEE",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-9"
+        },
+        {
+          "id": "CHY1006-10",
+          "slots": "B13",
+          "venue": "AB-217",
+          "faculty": "DIPANKAR SUTRADHAR",
+          "totalSeats": 70,
+          "allottedSeats": 3,
+          "seats": "67",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-10"
+        },
+        {
+          "id": "CHY1006-11",
+          "slots": "B14",
+          "venue": "AB-315",
+          "faculty": "ASHOK KUMAR BARAL",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-11"
+        },
+        {
+          "id": "CHY1006-12",
+          "slots": "B22",
+          "venue": "AB-103",
+          "faculty": "VENKATESAN K",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-12"
+        },
+        {
+          "id": "CHY1006-13",
+          "slots": "B24",
+          "venue": "AB-007",
+          "faculty": "M. AZHAGURAJAN",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-13"
+        },
+        {
+          "id": "CHY1006-14",
+          "slots": "C11",
+          "venue": "AB-126",
+          "faculty": "SAURABH MISHRA",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-14"
+        },
+        {
+          "id": "CHY1006-15",
+          "slots": "C13",
+          "venue": "AB-330",
+          "faculty": "JAYACHANDIRAN J",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-15"
+        },
+        {
+          "id": "CHY1006-16",
+          "slots": "C21",
+          "venue": "AB-007",
+          "faculty": "PIJUSH KANTI MONDAL",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-16"
+        },
+        {
+          "id": "CHY1006-17",
+          "slots": "D11",
+          "venue": "AB-102",
+          "faculty": "AVIRUP DAS",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-17"
+        },
+        {
+          "id": "CHY1006-18",
+          "slots": "D21",
+          "venue": "AB-126",
+          "faculty": "ABHINAV KUMAR",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-18"
+        },
+        {
+          "id": "CHY1006-19",
+          "slots": "E11",
+          "venue": "AB-102",
+          "faculty": "SHARAD CHANDRA TRIPATHI",
+          "totalSeats": 70,
+          "allottedSeats": 0,
+          "seats": "70",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-19"
+        },
+        {
+          "id": "CHY1006-20",
+          "slots": "E14",
+          "venue": "AB-229",
+          "faculty": "ARINDAM GHOSH",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-20"
+        },
+        {
+          "id": "CHY1006-21",
+          "slots": "E21",
+          "venue": "AB-007",
+          "faculty": "ABHINAV KUMAR",
+          "totalSeats": 70,
+          "allottedSeats": 2,
+          "seats": "68",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-21"
+        },
+        {
+          "id": "CHY1006-22",
+          "slots": "F12",
+          "venue": "AB-317",
+          "faculty": "P. VAYUNANDANAKISHORE",
+          "totalSeats": 70,
+          "allottedSeats": 1,
+          "seats": "69",
+          "source": "13.32.39 (1)",
+          "sourceRowId": "CHY1006-22"
+        }
+      ]
+    },
+    {
+      "code": "HUM0003",
+      "name": "Indian Constitution",
+      "source": "13.32.40",
+      "scheduled": true,
+      "sections": [
+        {
+          "id": "HUM0003-1",
+          "slots": "A11",
+          "venue": "MPH-7",
+          "faculty": "JAGRITI GUPTA",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-1",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JAGRITI GUPTA",
+              "seats": "344"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-2",
+          "slots": "A13",
+          "venue": "AR-001",
+          "faculty": "SUGAVANESHWAR R P",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-2",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SUGAVANESHWAR R P",
+              "seats": "346"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-3",
+          "slots": "A13",
+          "venue": "MPH-2",
+          "faculty": "VIPIN KUMAR MISHRA",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-3",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIPIN KUMAR MISHRA",
+              "seats": "345"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-4",
+          "slots": "A14",
+          "venue": "MPH-2",
+          "faculty": "GEETANJALI GIRI",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-4",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "GEETANJALI GIRI",
+              "seats": "303"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-5",
+          "slots": "A21",
+          "venue": "CR-029",
+          "faculty": "ARINDAM GHOSH",
+          "totalSeats": 350,
+          "allottedSeats": 1,
+          "seats": "349",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-5",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARINDAM GHOSH",
+              "seats": "339"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-6",
+          "slots": "A23",
+          "venue": "MPH-3",
+          "faculty": "P. VAYUNANDANAKISHORE",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-6",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "P. VAYUNANDANAKISHORE",
+              "seats": "336"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-7",
+          "slots": "A23",
+          "venue": "MPH-8",
+          "faculty": "VENKATESAN K",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-7",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VENKATESAN K",
+              "seats": "347"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-8",
+          "slots": "B12",
+          "venue": "AB02-408",
+          "faculty": "SAURABH BHARGAVA",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-8",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SAURABH BHARGAVA",
+              "seats": "340"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-9",
+          "slots": "B14",
+          "venue": "MPH-8",
+          "faculty": "JAYACHANDIRAN J",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-9",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JAYACHANDIRAN J",
+              "seats": "348"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-10",
+          "slots": "C11",
+          "venue": "MPH-3",
+          "faculty": "PIJUSH KANTI MONDAL",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-10",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PIJUSH KANTI MONDAL",
+              "seats": "346"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-11",
+          "slots": "C12",
+          "venue": "MPH-3",
+          "faculty": "ABHINAV KUMAR",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-11",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ABHINAV KUMAR",
+              "seats": "338"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-12",
+          "slots": "D22",
+          "venue": "MPH-2",
+          "faculty": "ABHINAV KUMAR",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-12",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ABHINAV KUMAR",
+              "seats": "327"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-13",
+          "slots": "E11",
+          "venue": "AR-103",
+          "faculty": "ASHOK KUMAR BARAL",
+          "totalSeats": 350,
+          "allottedSeats": 2,
+          "seats": "348",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-13",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ASHOK KUMAR BARAL",
+              "seats": "321"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-14",
+          "slots": "F11",
+          "venue": "AR-002",
+          "faculty": "Pradeep Kumar Kayshap",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-14",
+          "facultyAliases": [
+            "Pradeep Kumar Kashyap"
+          ],
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "Pradeep Kumar Kayshap",
+              "seats": "327"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-15",
+          "slots": "F12",
+          "venue": "MPH-2",
+          "faculty": "M. AZHAGURAJAN",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-15",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "M. AZHAGURAJAN",
+              "seats": "345"
+            }
+          ]
+        },
+        {
+          "id": "HUM0003-16",
+          "slots": "F14",
+          "venue": "MPH-8",
+          "faculty": "NELLAIAPPAN S",
+          "totalSeats": 350,
+          "allottedSeats": 1,
+          "seats": "349",
+          "source": "13.32.40",
+          "sourceRowId": "HUM0003-16",
+          "observations": [
+            {
+              "source": "INDIAN CONS.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NELLAIAPPAN S",
+              "seats": "342"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "HUM0002",
+      "name": "Swachh Bharat",
+      "source": "13.32.40 (1)",
+      "scheduled": false,
+      "sections": [
+        {
+          "id": "HUM0002-1",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "AVIRUP DAS",
+          "totalSeats": 350,
+          "allottedSeats": 53,
+          "seats": "297",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-1",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AVIRUP DAS",
+              "seats": "290"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-2",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SHARAD CHANDRA TRIPATHI",
+          "totalSeats": 350,
+          "allottedSeats": 7,
+          "seats": "343",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-2",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SHARAD CHANDRA TRIPATHI",
+              "seats": "343"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-3",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SHWETA MUKHERJEE",
+          "totalSeats": 350,
+          "allottedSeats": 25,
+          "seats": "325",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-3",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SHWETA MUKHERJEE",
+              "seats": "323"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-4",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "XAVIER SURESH",
+          "totalSeats": 350,
+          "allottedSeats": 11,
+          "seats": "339",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-4",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "XAVIER SURESH",
+              "seats": "339"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-5",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MANOJ ACHARYA",
+          "totalSeats": 350,
+          "allottedSeats": 7,
+          "seats": "343",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-5",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MANOJ ACHARYA",
+              "seats": "341"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-6",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SAURAV PRASAD",
+          "totalSeats": 350,
+          "allottedSeats": 50,
+          "seats": "300",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-6",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SAURAV PRASAD",
+              "seats": "295"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-7",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "DIPANKAR SUTRADHAR",
+          "totalSeats": 350,
+          "allottedSeats": 14,
+          "seats": "336",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-7",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "DIPANKAR SUTRADHAR",
+              "seats": "336"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-8",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SARAVANAN L",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-8",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SARAVANAN L",
+              "seats": "350"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-9",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "POOJA",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-9",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "POOJA",
+              "seats": "350"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-10",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "RAJAT PARKASH",
+          "totalSeats": 350,
+          "allottedSeats": 0,
+          "seats": "350",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-10",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAJAT PARKASH",
+              "seats": "350"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-11",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "RAJDEEP SINGH PAYAL",
+          "totalSeats": 350,
+          "allottedSeats": 3,
+          "seats": "347",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-11",
+          "facultyAliases": [
+            "RADJEEP SINGH PAYAL"
+          ],
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAJDEEP SINGH PAYAL",
+              "seats": "347"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-12",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SAURABH MISHRA",
+          "totalSeats": 350,
+          "allottedSeats": 7,
+          "seats": "343",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-12",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SAURABH MISHRA",
+              "seats": "343"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-13",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SATYAM RAVI",
+          "totalSeats": 350,
+          "allottedSeats": 9,
+          "seats": "341",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-13",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SATYAM RAVI",
+              "seats": "341"
+            }
+          ]
+        },
+        {
+          "id": "HUM0002-14",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JAGRITI GUPTA",
+          "totalSeats": 350,
+          "allottedSeats": 15,
+          "seats": "335",
+          "source": "13.32.40 (1)",
+          "sourceRowId": "HUM0002-14",
+          "observations": [
+            {
+              "source": "swach bharat.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JAGRITI GUPTA",
+              "seats": "334"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "EXC0001",
+      "name": "Extra Curricular Activities",
+      "source": "13.32.40 (2)",
+      "scheduled": false,
+      "sections": [
+        {
+          "id": "EXC0001-1",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 114,
+          "seats": "336",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-1"
+        },
+        {
+          "id": "EXC0001-2",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 11,
+          "seats": "439",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-2"
+        },
+        {
+          "id": "EXC0001-3",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 8,
+          "seats": "442",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-3"
+        },
+        {
+          "id": "EXC0001-4",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 6,
+          "seats": "444",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-4"
+        },
+        {
+          "id": "EXC0001-5",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 12,
+          "seats": "438",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-5"
+        },
+        {
+          "id": "EXC0001-6",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 12,
+          "seats": "438",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-6"
+        },
+        {
+          "id": "EXC0001-7",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 8,
+          "seats": "442",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-7"
+        },
+        {
+          "id": "EXC0001-8",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 5,
+          "seats": "445",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-8"
+        },
+        {
+          "id": "EXC0001-9",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 7,
+          "seats": "443",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-9"
+        },
+        {
+          "id": "EXC0001-10",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 6,
+          "seats": "444",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-10"
+        },
+        {
+          "id": "EXC0001-11",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "CHANDAN KUMAR BEHERA",
+          "totalSeats": 450,
+          "allottedSeats": 10,
+          "seats": "440",
+          "source": "13.32.40 (2)",
+          "sourceRowId": "EXC0001-11"
+        }
+      ],
+      "note": "Screenshot shows 1 credit; college PDF shows 0. Preserve the college PDF credit until verified. Repeated NIL rows are distinct portal entries; screenshot has no section identifiers."
+    },
+    {
+      "code": "DSN2098",
+      "name": "Project Exhibition \u2013 I",
+      "source": "13.32.41",
+      "scheduled": false,
+      "sections": [
+        {
+          "id": "DSN2098-1",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "PRASHANT G K",
+          "totalSeats": 450,
+          "allottedSeats": 21,
+          "seats": "429",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-1",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PRASHANT G K",
+              "seats": "428"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-2",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SIDDHARTHA MAITI",
+          "totalSeats": 450,
+          "allottedSeats": 10,
+          "seats": "440",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-2",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SIDDHARTHA MAITI",
+              "seats": "440"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-3",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "totalSeats": 450,
+          "allottedSeats": 11,
+          "seats": "439",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-3",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIKAS PANTHI",
+              "seats": "436"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-4",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "totalSeats": 450,
+          "allottedSeats": 28,
+          "seats": "422",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-4",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JITENDRA PRATAP SINGH MATHUR",
+              "seats": "419"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-5",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "totalSeats": 450,
+          "allottedSeats": 5,
+          "seats": "445",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-5",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIKAS PANTHI",
+              "seats": "445"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-6",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "totalSeats": 450,
+          "allottedSeats": 1,
+          "seats": "449",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-6",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIKAS PANTHI",
+              "seats": "448"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-7",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "totalSeats": 450,
+          "allottedSeats": 19,
+          "seats": "431",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-7",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JITENDRA PRATAP SINGH MATHUR",
+              "seats": "430"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-8",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "totalSeats": 450,
+          "allottedSeats": 8,
+          "seats": "442",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-8",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JITENDRA PRATAP SINGH MATHUR",
+              "seats": "442"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-9",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ADARSH PATEL",
+          "totalSeats": 450,
+          "allottedSeats": 6,
+          "seats": "444",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-9",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ADARSH PATEL",
+              "seats": "441"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-10",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ANJU SHUKLA",
+          "totalSeats": 450,
+          "allottedSeats": 4,
+          "seats": "446",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-10",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANJU SHUKLA",
+              "seats": "444"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-11",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "GUNJAN ANSARI",
+          "totalSeats": 450,
+          "allottedSeats": 2,
+          "seats": "448",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-11",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "GUNJAN ANSARI",
+              "seats": "448"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-12",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "T. VENKATESWARA RAO",
+          "totalSeats": 450,
+          "allottedSeats": 5,
+          "seats": "445",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-12",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "T. VENKATESWARA RAO",
+              "seats": "445"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-13",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MANOJ KUMAR",
+          "totalSeats": 450,
+          "allottedSeats": 4,
+          "seats": "446",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-13",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MANOJ KUMAR",
+              "seats": "445"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-14",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MURUGESWARI K",
+          "totalSeats": 450,
+          "allottedSeats": 3,
+          "seats": "447",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-14",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MURUGESWARI K",
+              "seats": "447"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-15",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "V. SIVASANKARAN",
+          "totalSeats": 450,
+          "allottedSeats": 3,
+          "seats": "447",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-15",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "V. SIVASANKARAN",
+              "seats": "447"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-16",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SOUMITRA KESHARI NAYAK",
+          "totalSeats": 450,
+          "allottedSeats": 1,
+          "seats": "449",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-16",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SOUMITRA KESHARI NAYAK",
+              "seats": "447"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-17",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ROHIT SHARMA",
+          "totalSeats": 450,
+          "allottedSeats": 11,
+          "seats": "439",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-17",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ROHIT SHARMA",
+              "seats": "439"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-18",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "Shiv Manjaree Gopaliya",
+          "totalSeats": 450,
+          "allottedSeats": 1,
+          "seats": "449",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-18",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "Shiv Manjaree Gopaliya",
+              "seats": "449"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-19",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "T. VENKATESWARA RAO",
+          "totalSeats": 450,
+          "allottedSeats": 2,
+          "seats": "448",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-19",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "T. VENKATESWARA RAO",
+              "seats": "447"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-20",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "DEVARAJU S",
+          "totalSeats": 450,
+          "allottedSeats": 7,
+          "seats": "443",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-20",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "DEVARAJU S",
+              "seats": "443"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-21",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "PRISCILLA DINKAR MOYYA",
+          "totalSeats": 450,
+          "allottedSeats": 6,
+          "seats": "444",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-21",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PRISCILLA DINKAR MOYYA",
+              "seats": "444"
+            }
+          ]
+        },
+        {
+          "id": "DSN2098-22",
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SUMIT MITTAL",
+          "totalSeats": 450,
+          "allottedSeats": 40,
+          "seats": "410",
+          "source": "13.32.41",
+          "sourceRowId": "DSN2098-22",
+          "observations": [
+            {
+              "source": "PE-1.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "SUMIT MITTAL",
+              "seats": "404"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CSE3001",
+      "name": "Database Management Systems",
+      "scheduled": true,
+      "source": "dbms.pdf",
+      "sourcePath": "data/sources/CSE3001.sections.txt",
+      "sections": [
+        {
+          "slots": "A11+A12+A13",
+          "venue": "LC-002",
+          "faculty": "RAJNEESH KUMAR PATEL",
+          "seats": "85",
+          "id": "CSE3001-pdf-1",
+          "sourceRowId": "CSE3001-pdf-1",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAJNEESH KUMAR PATEL",
+              "seats": "85"
+            }
+          ]
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "LC-207",
+          "faculty": "VANDANA SHAKYA",
+          "seats": "95",
+          "id": "CSE3001-pdf-2",
+          "sourceRowId": "CSE3001-pdf-2",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VANDANA SHAKYA",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-316",
+          "faculty": "RIZWAN UR RAHMAN",
+          "seats": "86",
+          "id": "CSE3001-pdf-3",
+          "sourceRowId": "CSE3001-pdf-3",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RIZWAN UR RAHMAN",
+              "seats": "86"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-404",
+          "faculty": "NILESH KUNHARE",
+          "seats": "98",
+          "id": "CSE3001-pdf-4",
+          "sourceRowId": "CSE3001-pdf-4",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NILESH KUNHARE",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-126-Audi1",
+          "faculty": "HARSHLATA VISHWAKARMA",
+          "seats": "96",
+          "id": "CSE3001-pdf-5",
+          "sourceRowId": "CSE3001-pdf-5",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "HARSHLATA VISHWAKARMA",
+              "seats": "96"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AR-202",
+          "faculty": "JALALUDDIN KHAN",
+          "seats": "93",
+          "id": "CSE3001-pdf-6",
+          "sourceRowId": "CSE3001-pdf-6",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JALALUDDIN KHAN",
+              "seats": "93"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "LC-207",
+          "faculty": "VANDANA SHAKYA",
+          "seats": "98",
+          "id": "CSE3001-pdf-7",
+          "sourceRowId": "CSE3001-pdf-7",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VANDANA SHAKYA",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "LC-002",
+          "faculty": "MITHUN SINGH AHIRWAR",
+          "seats": "100",
+          "id": "CSE3001-pdf-8",
+          "sourceRowId": "CSE3001-pdf-8",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MITHUN SINGH AHIRWAR",
+              "seats": "100"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB02-316",
+          "faculty": "RIZWAN UR RAHMAN",
+          "seats": "92",
+          "id": "CSE3001-pdf-9",
+          "sourceRowId": "CSE3001-pdf-9",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RIZWAN UR RAHMAN",
+              "seats": "92"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "LC-201",
+          "faculty": "VIKAS PAL VEELON",
+          "seats": "98",
+          "id": "CSE3001-pdf-10",
+          "sourceRowId": "CSE3001-pdf-10",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIKAS PAL VEELON",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-316",
+          "faculty": "VIRENDRA SINGH KUSHWAH",
+          "seats": "95",
+          "id": "CSE3001-pdf-11",
+          "sourceRowId": "CSE3001-pdf-11",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIRENDRA SINGH KUSHWAH",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-126-Audi1",
+          "faculty": "HARSHLATA VISHWAKARMA",
+          "seats": "97",
+          "id": "CSE3001-pdf-12",
+          "sourceRowId": "CSE3001-pdf-12",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "HARSHLATA VISHWAKARMA",
+              "seats": "97"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-301",
+          "faculty": "G.R. HEMALAKSHMI",
+          "seats": "112",
+          "id": "CSE3001-pdf-13",
+          "sourceRowId": "CSE3001-pdf-13",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "G.R. HEMALAKSHMI",
+              "seats": "112"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AR-202",
+          "faculty": "VIJENDRA",
+          "seats": "85",
+          "id": "CSE3001-pdf-14",
+          "sourceRowId": "CSE3001-pdf-14",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIJENDRA",
+              "seats": "85"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "LC-207",
+          "faculty": "MITHUN SINGH AHIRWAR",
+          "seats": "97",
+          "id": "CSE3001-pdf-15",
+          "sourceRowId": "CSE3001-pdf-15",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MITHUN SINGH AHIRWAR",
+              "seats": "97"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "LC-201",
+          "faculty": "VIKAS PAL VEELON",
+          "seats": "96",
+          "id": "CSE3001-pdf-16",
+          "sourceRowId": "CSE3001-pdf-16",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIKAS PAL VEELON",
+              "seats": "96"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB02-404",
+          "faculty": "G.R. HEMALAKSHMI",
+          "seats": "97",
+          "id": "CSE3001-pdf-17",
+          "sourceRowId": "CSE3001-pdf-17",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "G.R. HEMALAKSHMI",
+              "seats": "97"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AR-202",
+          "faculty": "VIJENDRA",
+          "seats": "97",
+          "id": "CSE3001-pdf-18",
+          "sourceRowId": "CSE3001-pdf-18",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIJENDRA",
+              "seats": "97"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB02-423",
+          "faculty": "CHOUR SINGH RAJPOOT",
+          "seats": "95",
+          "id": "CSE3001-pdf-19",
+          "sourceRowId": "CSE3001-pdf-19",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "CHOUR SINGH RAJPOOT",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB02-325",
+          "faculty": "VIRENDRA SINGH KUSHWAH",
+          "seats": "98",
+          "id": "CSE3001-pdf-20",
+          "sourceRowId": "CSE3001-pdf-20",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIRENDRA SINGH KUSHWAH",
+              "seats": "98"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB02-423",
+          "faculty": "CHOUR SINGH RAJPOOT",
+          "seats": "95",
+          "id": "CSE3001-pdf-21",
+          "sourceRowId": "CSE3001-pdf-21",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "CHOUR SINGH RAJPOOT",
+              "seats": "95"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AR-203",
+          "faculty": "VIJAY KUMAR TRIVEDI",
+          "seats": "93",
+          "id": "CSE3001-pdf-22",
+          "sourceRowId": "CSE3001-pdf-22",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "VIJAY KUMAR TRIVEDI",
+              "seats": "93"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AR-102",
+          "faculty": "JALALUDDIN KHAN",
+          "seats": "100",
+          "id": "CSE3001-pdf-23",
+          "sourceRowId": "CSE3001-pdf-23",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "JALALUDDIN KHAN",
+              "seats": "100"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB02-408",
+          "faculty": "NILESH KUNHARE",
+          "seats": "100",
+          "id": "CSE3001-pdf-24",
+          "sourceRowId": "CSE3001-pdf-24",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NILESH KUNHARE",
+              "seats": "100"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "LC-201",
+          "faculty": "BHUPENDRA PANCHAL",
+          "seats": "97",
+          "id": "CSE3001-pdf-25",
+          "sourceRowId": "CSE3001-pdf-25",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "BHUPENDRA PANCHAL",
+              "seats": "97"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "LC-207",
+          "faculty": "RAJNEESH KUMAR PATEL",
+          "seats": "92",
+          "id": "CSE3001-pdf-26",
+          "sourceRowId": "CSE3001-pdf-26",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RAJNEESH KUMAR PATEL",
+              "seats": "92"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AR-302",
+          "faculty": "LOKESH MALVIYA",
+          "seats": "98",
+          "id": "CSE3001-pdf-27",
+          "sourceRowId": "CSE3001-pdf-27",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "dbms.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "LOKESH MALVIYA",
+              "seats": "98"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "ECE2002",
+      "name": "Digital Logic Design",
+      "scheduled": true,
+      "source": "DLD.pdf",
+      "sourcePath": "data/sources/ECE2002.sections.txt",
+      "sections": [
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-302",
+          "faculty": "ARINDAM SADHUKHAN",
+          "seats": "43",
+          "id": "ECE2002-pdf-1",
+          "sourceRowId": "ECE2002-pdf-1",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARINDAM SADHUKHAN",
+              "seats": "43"
+            }
+          ]
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-301",
+          "faculty": "ABHAY VIDYARTHI",
+          "seats": "58",
+          "id": "ECE2002-pdf-2",
+          "sourceRowId": "ECE2002-pdf-2",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ABHAY VIDYARTHI",
+              "seats": "58"
+            }
+          ]
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-329",
+          "faculty": "P. RAMESH BABU",
+          "seats": "74",
+          "id": "ECE2002-pdf-3",
+          "sourceRowId": "ECE2002-pdf-3",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "P. RAMESH BABU",
+              "seats": "74"
+            }
+          ]
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-402",
+          "faculty": "NF1-NEW FACULTY SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-4",
+          "sourceRowId": "ECE2002-pdf-4",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NF1-NEW FACULTY SEEE",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-313",
+          "faculty": "RUPESH KUMARI",
+          "seats": "72",
+          "id": "ECE2002-pdf-5",
+          "sourceRowId": "ECE2002-pdf-5",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RUPESH KUMARI",
+              "seats": "72"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-303",
+          "faculty": "MANIKANDAN S P",
+          "seats": "71",
+          "id": "ECE2002-pdf-6",
+          "sourceRowId": "ECE2002-pdf-6",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "MANIKANDAN S P",
+              "seats": "71"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-317",
+          "faculty": "NITISHA CHANDRAMANI SHAHARE",
+          "seats": "75",
+          "id": "ECE2002-pdf-7",
+          "sourceRowId": "ECE2002-pdf-7",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NITISHA CHANDRAMANI SHAHARE",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-314",
+          "faculty": "KANIMOZHI M",
+          "seats": "75",
+          "id": "ECE2002-pdf-8",
+          "sourceRowId": "ECE2002-pdf-8",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KANIMOZHI M",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-302",
+          "faculty": "ARINDAM DUTTA",
+          "seats": "65",
+          "id": "ECE2002-pdf-9",
+          "sourceRowId": "ECE2002-pdf-9",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARINDAM DUTTA",
+              "seats": "65"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-315",
+          "faculty": "P. RAMESH BABU",
+          "seats": "75",
+          "id": "ECE2002-pdf-10",
+          "sourceRowId": "ECE2002-pdf-10",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "P. RAMESH BABU",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-319",
+          "faculty": "NF1-NEW FACULTY SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-11",
+          "sourceRowId": "ECE2002-pdf-11",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NF1-NEW FACULTY SEEE",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-127",
+          "faculty": "RUPESH KUMARI",
+          "seats": "72",
+          "id": "ECE2002-pdf-12",
+          "sourceRowId": "ECE2002-pdf-12",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RUPESH KUMARI",
+              "seats": "72"
+            }
+          ]
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-313",
+          "faculty": "INDHUMATHI S",
+          "seats": "75",
+          "id": "ECE2002-pdf-13",
+          "sourceRowId": "ECE2002-pdf-13",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "INDHUMATHI S",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-127",
+          "faculty": "NARENDRA BABU",
+          "seats": "71",
+          "id": "ECE2002-pdf-14",
+          "sourceRowId": "ECE2002-pdf-14",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NARENDRA BABU",
+              "seats": "71"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-402",
+          "faculty": "KANIMOZHI M",
+          "seats": "75",
+          "id": "ECE2002-pdf-15",
+          "sourceRowId": "ECE2002-pdf-15",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KANIMOZHI M",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-403",
+          "faculty": "ALOK KUMAR",
+          "seats": "73",
+          "id": "ECE2002-pdf-16",
+          "sourceRowId": "ECE2002-pdf-16",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ALOK KUMAR",
+              "seats": "73"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-417",
+          "faculty": "NF1-SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-17",
+          "sourceRowId": "ECE2002-pdf-17",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NF1-SEEE",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-303",
+          "faculty": "RUPESH KUMARI",
+          "seats": "71",
+          "id": "ECE2002-pdf-18",
+          "sourceRowId": "ECE2002-pdf-18",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "RUPESH KUMARI",
+              "seats": "71"
+            }
+          ]
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-313",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "73",
+          "id": "ECE2002-pdf-19",
+          "sourceRowId": "ECE2002-pdf-19",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KRISHNA CHAUHAN",
+              "seats": "73"
+            }
+          ]
+        },
+        {
+          "slots": "A24+E21+F22",
+          "venue": "AB-107",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-20",
+          "sourceRowId": "ECE2002-pdf-20",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "LOKESH SONI",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "A24+E21+F22",
+          "venue": "AB-103",
+          "faculty": "DIPAK PRASAD",
+          "seats": "73",
+          "id": "ECE2002-pdf-21",
+          "sourceRowId": "ECE2002-pdf-21",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "DIPAK PRASAD",
+              "seats": "73"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB-301",
+          "faculty": "ANIRBAN BHOWMICK",
+          "seats": "63",
+          "id": "ECE2002-pdf-22",
+          "sourceRowId": "ECE2002-pdf-22",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANIRBAN BHOWMICK",
+              "seats": "63"
+            }
+          ]
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB-319",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "76",
+          "id": "ECE2002-pdf-23",
+          "sourceRowId": "ECE2002-pdf-23",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KRISHNA CHAUHAN",
+              "seats": "76"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-301",
+          "faculty": "PALLAV",
+          "seats": "74",
+          "id": "ECE2002-pdf-24",
+          "sourceRowId": "ECE2002-pdf-24",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PALLAV",
+              "seats": "74"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-303",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "75",
+          "id": "ECE2002-pdf-25",
+          "sourceRowId": "ECE2002-pdf-25",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AMIT KUMAR DWIVEDI",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-314",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-26",
+          "sourceRowId": "ECE2002-pdf-26",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "LOKESH SONI",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-301",
+          "faculty": "ANURAG",
+          "seats": "69",
+          "id": "ECE2002-pdf-27",
+          "sourceRowId": "ECE2002-pdf-27",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANURAG",
+              "seats": "69"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-126",
+          "faculty": "AMIT KUMAR SINGH",
+          "seats": "70",
+          "id": "ECE2002-pdf-28",
+          "sourceRowId": "ECE2002-pdf-28",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AMIT KUMAR SINGH",
+              "seats": "70"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-103",
+          "faculty": "NELLA ANVESHKUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-29",
+          "sourceRowId": "ECE2002-pdf-29",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "NELLA ANVESHKUMAR",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-314",
+          "faculty": "ANIL KUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-30",
+          "sourceRowId": "ECE2002-pdf-30",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANIL KUMAR",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-303",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "74",
+          "id": "ECE2002-pdf-31",
+          "sourceRowId": "ECE2002-pdf-31",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AMIT KUMAR DWIVEDI",
+              "seats": "74"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-302",
+          "faculty": "PALLABI SARKAR",
+          "seats": "55",
+          "id": "ECE2002-pdf-32",
+          "sourceRowId": "ECE2002-pdf-32",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PALLABI SARKAR",
+              "seats": "55"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-103",
+          "faculty": "ANURAG",
+          "seats": "75",
+          "id": "ECE2002-pdf-33",
+          "sourceRowId": "ECE2002-pdf-33",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANURAG",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-314",
+          "faculty": "AMIT KUMAR SINGH",
+          "seats": "60",
+          "id": "ECE2002-pdf-34",
+          "sourceRowId": "ECE2002-pdf-34",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AMIT KUMAR SINGH",
+              "seats": "60"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-331",
+          "faculty": "ARJUN LAL KUMAWAT",
+          "seats": "75",
+          "id": "ECE2002-pdf-35",
+          "sourceRowId": "ECE2002-pdf-35",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARJUN LAL KUMAWAT",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-107",
+          "faculty": "ARINDAM DUTTA",
+          "seats": "54",
+          "id": "ECE2002-pdf-36",
+          "sourceRowId": "ECE2002-pdf-36",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARINDAM DUTTA",
+              "seats": "54"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-315",
+          "faculty": "PALLAV",
+          "seats": "71",
+          "id": "ECE2002-pdf-37",
+          "sourceRowId": "ECE2002-pdf-37",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PALLAV",
+              "seats": "71"
+            }
+          ]
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-317",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-38",
+          "sourceRowId": "ECE2002-pdf-38",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "LOKESH SONI",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-415",
+          "faculty": "ARJUN LAL KUMAWAT",
+          "seats": "75",
+          "id": "ECE2002-pdf-39",
+          "sourceRowId": "ECE2002-pdf-39",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ARJUN LAL KUMAWAT",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-407",
+          "faculty": "PALLAV",
+          "seats": "75",
+          "id": "ECE2002-pdf-40",
+          "sourceRowId": "ECE2002-pdf-40",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "PALLAV",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-413",
+          "faculty": "P. RAMESH BABU",
+          "seats": "75",
+          "id": "ECE2002-pdf-41",
+          "sourceRowId": "ECE2002-pdf-41",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "P. RAMESH BABU",
+              "seats": "75"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-417",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "74",
+          "id": "ECE2002-pdf-42",
+          "sourceRowId": "ECE2002-pdf-42",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "AMIT KUMAR DWIVEDI",
+              "seats": "74"
+            }
+          ]
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-319",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "73",
+          "id": "ECE2002-pdf-43",
+          "sourceRowId": "ECE2002-pdf-43",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "KRISHNA CHAUHAN",
+              "seats": "73"
+            }
+          ]
+        },
+        {
+          "slots": "C21+F11+F12",
+          "venue": "AB-302",
+          "faculty": "ANIL KUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-44",
+          "sourceRowId": "ECE2002-pdf-44",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "observations": [
+            {
+              "source": "DLD.pdf",
+              "sourceDate": "2026-06-20",
+              "registrationMode": "mock",
+              "faculty": "ANIL KUMAR",
+              "seats": "75"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ignoredSources": [
+    "13.32.38 (2)",
+    "13.32.38",
+    "13.32.39"
+  ],
+  "pdfSnapshots": [
+    {
+      "code": "MAT3002",
+      "name": "Applied Linear Algebra",
+      "scheduled": true,
+      "sections": [
+        {
+          "slots": "A11+A12",
+          "venue": "AB-103",
+          "faculty": "HEMANT KUMAR NASHINE",
+          "seats": "69",
+          "id": "MAT3002-1",
+          "sourceRowId": "MAT3002-1",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A11+A12",
+          "venue": "AB-320",
+          "faculty": "NITISHA PANDEY",
+          "seats": "67",
+          "id": "MAT3002-2",
+          "sourceRowId": "MAT3002-2",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A21+A22",
+          "venue": "AB-216",
+          "faculty": "ANANT KANT SHUKLA",
+          "seats": "64",
+          "id": "MAT3002-3",
+          "sourceRowId": "MAT3002-3",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A24+B24",
+          "venue": "AB-218",
+          "faculty": "DONDU HARISH BABU",
+          "seats": "67",
+          "id": "MAT3002-4",
+          "sourceRowId": "MAT3002-4",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B11+B12",
+          "venue": "AB-217",
+          "faculty": "AJAY KUMAR BHURJEE",
+          "seats": "69",
+          "id": "MAT3002-5",
+          "sourceRowId": "MAT3002-5",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B14+D21",
+          "venue": "AB-218",
+          "faculty": "MAYANK SHARMA",
+          "seats": "64",
+          "id": "MAT3002-6",
+          "sourceRowId": "MAT3002-6",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B14+D21",
+          "venue": "AB-128",
+          "faculty": "SANTOSH KUMAR BHAL",
+          "seats": "67",
+          "id": "MAT3002-7",
+          "sourceRowId": "MAT3002-7",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B21+E14",
+          "venue": "AB-216",
+          "faculty": "BENEVATHO JAISON A",
+          "seats": "63",
+          "id": "MAT3002-8",
+          "sourceRowId": "MAT3002-8",
+          "facultyAliases": [
+            "BENEWATHO JAISON A"
+          ],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B21+E22",
+          "venue": "AB-229",
+          "faculty": "DILEEP KUMAR",
+          "seats": "67",
+          "id": "MAT3002-9",
+          "sourceRowId": "MAT3002-9",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C11+C12",
+          "venue": "AB-230",
+          "faculty": "ANUPAM SEN",
+          "seats": "64",
+          "id": "MAT3002-10",
+          "sourceRowId": "MAT3002-10",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C11+C12",
+          "venue": "AB-228",
+          "faculty": "ADNAN ABBASI",
+          "seats": "67",
+          "id": "MAT3002-11",
+          "sourceRowId": "MAT3002-11",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "D11+D12",
+          "venue": "AB-128",
+          "faculty": "JUHI KESARWANI",
+          "seats": "58",
+          "id": "MAT3002-12",
+          "sourceRowId": "MAT3002-12",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "E11+E12",
+          "venue": "AB-230",
+          "faculty": "RANJITHA",
+          "seats": "64",
+          "id": "MAT3002-13",
+          "sourceRowId": "MAT3002-13",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "E11+E12",
+          "venue": "AB-317",
+          "faculty": "ABHISHEKH",
+          "seats": "68",
+          "id": "MAT3002-14",
+          "sourceRowId": "MAT3002-14",
+          "facultyAliases": [
+            "ABHISHEK"
+          ],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "E11+E12",
+          "venue": "AB-330",
+          "faculty": "GIRIRAJ",
+          "seats": "69",
+          "id": "MAT3002-15",
+          "sourceRowId": "MAT3002-15",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "F11+F12",
+          "venue": "AB-303",
+          "faculty": "AKSHARA MAKRARIYA",
+          "seats": "66",
+          "id": "MAT3002-16",
+          "sourceRowId": "MAT3002-16",
+          "facultyAliases": [
+            "AKSHARA MAKARRIYA"
+          ],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "F11+F12",
+          "venue": "AB-230",
+          "faculty": "KIRAN KUMAR BEHERA",
+          "seats": "39",
+          "id": "MAT3002-17",
+          "sourceRowId": "MAT3002-17",
+          "facultyAliases": [],
+          "source": "ALA.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        }
+      ],
+      "file": "ALA.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/MAT3002.sections.txt"
+    },
+    {
+      "code": "CSE2001",
+      "name": "Object Oriented Programming with C++",
+      "scheduled": true,
+      "sections": [
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AR-102",
+          "faculty": "KANNAN S",
+          "seats": "75",
+          "id": "CSE2001-1",
+          "sourceRowId": "CSE2001-1",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-401",
+          "faculty": "ANKUR JAIN",
+          "seats": "96",
+          "id": "CSE2001-2",
+          "sourceRowId": "CSE2001-2",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-402",
+          "faculty": "RAM KUMAR",
+          "seats": "98",
+          "id": "CSE2001-3",
+          "sourceRowId": "CSE2001-3",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB02-325",
+          "faculty": "MOSES DIAN S",
+          "seats": "98",
+          "id": "CSE2001-4",
+          "sourceRowId": "CSE2001-4",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A24+E21+F22",
+          "venue": "AB02-306",
+          "faculty": "Sajjad Ahmed",
+          "seats": "100",
+          "id": "CSE2001-5",
+          "sourceRowId": "CSE2001-5",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-401",
+          "faculty": "ANKUR JAIN",
+          "seats": "94",
+          "id": "CSE2001-6",
+          "sourceRowId": "CSE2001-6",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-402",
+          "faculty": "GARIMA JAIN",
+          "seats": "78",
+          "id": "CSE2001-7",
+          "sourceRowId": "CSE2001-7",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB02-402",
+          "faculty": "SANAT JAIN",
+          "seats": "98",
+          "id": "CSE2001-8",
+          "sourceRowId": "CSE2001-8",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B22+B24+F21",
+          "venue": "AB02-316",
+          "faculty": "Sajjad Ahmed",
+          "seats": "95",
+          "id": "CSE2001-9",
+          "sourceRowId": "CSE2001-9",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB02-301",
+          "faculty": "BASEERA.A",
+          "seats": "92",
+          "id": "CSE2001-10",
+          "sourceRowId": "CSE2001-10",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB02-325",
+          "faculty": "RAM KUMAR",
+          "seats": "95",
+          "id": "CSE2001-11",
+          "sourceRowId": "CSE2001-11",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB02-301",
+          "faculty": "BASEERA.A",
+          "seats": "99",
+          "id": "CSE2001-12",
+          "sourceRowId": "CSE2001-12",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB02-401",
+          "faculty": "SANAT JAIN",
+          "seats": "96",
+          "id": "CSE2001-13",
+          "sourceRowId": "CSE2001-13",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB02-402",
+          "faculty": "GARIMA JAIN",
+          "seats": "92",
+          "id": "CSE2001-14",
+          "sourceRowId": "CSE2001-14",
+          "facultyAliases": [],
+          "source": "CPP.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        }
+      ],
+      "file": "CPP.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/CSE2001.sections.txt"
+    },
+    {
+      "code": "CSE3001",
+      "name": "Database Management Systems",
+      "scheduled": true,
+      "sections": [
+        {
+          "slots": "A11+A12+A13",
+          "venue": "LC-002",
+          "faculty": "RAJNEESH KUMAR PATEL",
+          "seats": "85",
+          "id": "CSE3001-pdf-1",
+          "sourceRowId": "CSE3001-pdf-1",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "LC-207",
+          "faculty": "VANDANA SHAKYA",
+          "seats": "95",
+          "id": "CSE3001-pdf-2",
+          "sourceRowId": "CSE3001-pdf-2",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-316",
+          "faculty": "RIZWAN UR RAHMAN",
+          "seats": "86",
+          "id": "CSE3001-pdf-3",
+          "sourceRowId": "CSE3001-pdf-3",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-404",
+          "faculty": "NILESH KUNHARE",
+          "seats": "98",
+          "id": "CSE3001-pdf-4",
+          "sourceRowId": "CSE3001-pdf-4",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB02-126-Audi1",
+          "faculty": "HARSHLATA VISHWAKARMA",
+          "seats": "96",
+          "id": "CSE3001-pdf-5",
+          "sourceRowId": "CSE3001-pdf-5",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AR-202",
+          "faculty": "JALALUDDIN KHAN",
+          "seats": "93",
+          "id": "CSE3001-pdf-6",
+          "sourceRowId": "CSE3001-pdf-6",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "LC-207",
+          "faculty": "VANDANA SHAKYA",
+          "seats": "98",
+          "id": "CSE3001-pdf-7",
+          "sourceRowId": "CSE3001-pdf-7",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "LC-002",
+          "faculty": "MITHUN SINGH AHIRWAR",
+          "seats": "100",
+          "id": "CSE3001-pdf-8",
+          "sourceRowId": "CSE3001-pdf-8",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB02-316",
+          "faculty": "RIZWAN UR RAHMAN",
+          "seats": "92",
+          "id": "CSE3001-pdf-9",
+          "sourceRowId": "CSE3001-pdf-9",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "LC-201",
+          "faculty": "VIKAS PAL VEELON",
+          "seats": "98",
+          "id": "CSE3001-pdf-10",
+          "sourceRowId": "CSE3001-pdf-10",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-316",
+          "faculty": "VIRENDRA SINGH KUSHWAH",
+          "seats": "95",
+          "id": "CSE3001-pdf-11",
+          "sourceRowId": "CSE3001-pdf-11",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-126-Audi1",
+          "faculty": "HARSHLATA VISHWAKARMA",
+          "seats": "97",
+          "id": "CSE3001-pdf-12",
+          "sourceRowId": "CSE3001-pdf-12",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB02-301",
+          "faculty": "G.R. HEMALAKSHMI",
+          "seats": "112",
+          "id": "CSE3001-pdf-13",
+          "sourceRowId": "CSE3001-pdf-13",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AR-202",
+          "faculty": "VIJENDRA",
+          "seats": "85",
+          "id": "CSE3001-pdf-14",
+          "sourceRowId": "CSE3001-pdf-14",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "LC-207",
+          "faculty": "MITHUN SINGH AHIRWAR",
+          "seats": "97",
+          "id": "CSE3001-pdf-15",
+          "sourceRowId": "CSE3001-pdf-15",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "LC-201",
+          "faculty": "VIKAS PAL VEELON",
+          "seats": "96",
+          "id": "CSE3001-pdf-16",
+          "sourceRowId": "CSE3001-pdf-16",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB02-404",
+          "faculty": "G.R. HEMALAKSHMI",
+          "seats": "97",
+          "id": "CSE3001-pdf-17",
+          "sourceRowId": "CSE3001-pdf-17",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AR-202",
+          "faculty": "VIJENDRA",
+          "seats": "97",
+          "id": "CSE3001-pdf-18",
+          "sourceRowId": "CSE3001-pdf-18",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB02-423",
+          "faculty": "CHOUR SINGH RAJPOOT",
+          "seats": "95",
+          "id": "CSE3001-pdf-19",
+          "sourceRowId": "CSE3001-pdf-19",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB02-325",
+          "faculty": "VIRENDRA SINGH KUSHWAH",
+          "seats": "98",
+          "id": "CSE3001-pdf-20",
+          "sourceRowId": "CSE3001-pdf-20",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB02-423",
+          "faculty": "CHOUR SINGH RAJPOOT",
+          "seats": "95",
+          "id": "CSE3001-pdf-21",
+          "sourceRowId": "CSE3001-pdf-21",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AR-203",
+          "faculty": "VIJAY KUMAR TRIVEDI",
+          "seats": "93",
+          "id": "CSE3001-pdf-22",
+          "sourceRowId": "CSE3001-pdf-22",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AR-102",
+          "faculty": "JALALUDDIN KHAN",
+          "seats": "100",
+          "id": "CSE3001-pdf-23",
+          "sourceRowId": "CSE3001-pdf-23",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB02-408",
+          "faculty": "NILESH KUNHARE",
+          "seats": "100",
+          "id": "CSE3001-pdf-24",
+          "sourceRowId": "CSE3001-pdf-24",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "LC-201",
+          "faculty": "BHUPENDRA PANCHAL",
+          "seats": "97",
+          "id": "CSE3001-pdf-25",
+          "sourceRowId": "CSE3001-pdf-25",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "LC-207",
+          "faculty": "RAJNEESH KUMAR PATEL",
+          "seats": "92",
+          "id": "CSE3001-pdf-26",
+          "sourceRowId": "CSE3001-pdf-26",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AR-302",
+          "faculty": "LOKESH MALVIYA",
+          "seats": "98",
+          "id": "CSE3001-pdf-27",
+          "sourceRowId": "CSE3001-pdf-27",
+          "source": "dbms.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        }
+      ],
+      "file": "dbms.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/CSE3001.sections.txt"
+    },
+    {
+      "code": "ECE2002",
+      "name": "Digital Logic Design",
+      "scheduled": true,
+      "sections": [
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-302",
+          "faculty": "ARINDAM SADHUKHAN",
+          "seats": "43",
+          "id": "ECE2002-pdf-1",
+          "sourceRowId": "ECE2002-pdf-1",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-301",
+          "faculty": "ABHAY VIDYARTHI",
+          "seats": "58",
+          "id": "ECE2002-pdf-2",
+          "sourceRowId": "ECE2002-pdf-2",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-329",
+          "faculty": "P. RAMESH BABU",
+          "seats": "74",
+          "id": "ECE2002-pdf-3",
+          "sourceRowId": "ECE2002-pdf-3",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-402",
+          "faculty": "NF1-NEW FACULTY SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-4",
+          "sourceRowId": "ECE2002-pdf-4",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A11+A12+A13",
+          "venue": "AB-313",
+          "faculty": "RUPESH KUMARI",
+          "seats": "72",
+          "id": "ECE2002-pdf-5",
+          "sourceRowId": "ECE2002-pdf-5",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-303",
+          "faculty": "MANIKANDAN S P",
+          "seats": "71",
+          "id": "ECE2002-pdf-6",
+          "sourceRowId": "ECE2002-pdf-6",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-317",
+          "faculty": "NITISHA CHANDRAMANI SHAHARE",
+          "seats": "75",
+          "id": "ECE2002-pdf-7",
+          "sourceRowId": "ECE2002-pdf-7",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-314",
+          "faculty": "KANIMOZHI M",
+          "seats": "75",
+          "id": "ECE2002-pdf-8",
+          "sourceRowId": "ECE2002-pdf-8",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-302",
+          "faculty": "ARINDAM DUTTA",
+          "seats": "65",
+          "id": "ECE2002-pdf-9",
+          "sourceRowId": "ECE2002-pdf-9",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-315",
+          "faculty": "P. RAMESH BABU",
+          "seats": "75",
+          "id": "ECE2002-pdf-10",
+          "sourceRowId": "ECE2002-pdf-10",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-319",
+          "faculty": "NF1-NEW FACULTY SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-11",
+          "sourceRowId": "ECE2002-pdf-11",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-127",
+          "faculty": "RUPESH KUMARI",
+          "seats": "72",
+          "id": "ECE2002-pdf-12",
+          "sourceRowId": "ECE2002-pdf-12",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A14+D11+D12",
+          "venue": "AB-313",
+          "faculty": "INDHUMATHI S",
+          "seats": "75",
+          "id": "ECE2002-pdf-13",
+          "sourceRowId": "ECE2002-pdf-13",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-127",
+          "faculty": "NARENDRA BABU",
+          "seats": "71",
+          "id": "ECE2002-pdf-14",
+          "sourceRowId": "ECE2002-pdf-14",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-402",
+          "faculty": "KANIMOZHI M",
+          "seats": "75",
+          "id": "ECE2002-pdf-15",
+          "sourceRowId": "ECE2002-pdf-15",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-403",
+          "faculty": "ALOK KUMAR",
+          "seats": "73",
+          "id": "ECE2002-pdf-16",
+          "sourceRowId": "ECE2002-pdf-16",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-417",
+          "faculty": "NF1-SEEE",
+          "seats": "75",
+          "id": "ECE2002-pdf-17",
+          "sourceRowId": "ECE2002-pdf-17",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-303",
+          "faculty": "RUPESH KUMARI",
+          "seats": "71",
+          "id": "ECE2002-pdf-18",
+          "sourceRowId": "ECE2002-pdf-18",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A21+A22+A23",
+          "venue": "AB-313",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "73",
+          "id": "ECE2002-pdf-19",
+          "sourceRowId": "ECE2002-pdf-19",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A24+E21+F22",
+          "venue": "AB-107",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-20",
+          "sourceRowId": "ECE2002-pdf-20",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "A24+E21+F22",
+          "venue": "AB-103",
+          "faculty": "DIPAK PRASAD",
+          "seats": "73",
+          "id": "ECE2002-pdf-21",
+          "sourceRowId": "ECE2002-pdf-21",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB-301",
+          "faculty": "ANIRBAN BHOWMICK",
+          "seats": "63",
+          "id": "ECE2002-pdf-22",
+          "sourceRowId": "ECE2002-pdf-22",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B11+B12+B13",
+          "venue": "AB-319",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "76",
+          "id": "ECE2002-pdf-23",
+          "sourceRowId": "ECE2002-pdf-23",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-301",
+          "faculty": "PALLAV",
+          "seats": "74",
+          "id": "ECE2002-pdf-24",
+          "sourceRowId": "ECE2002-pdf-24",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-303",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "75",
+          "id": "ECE2002-pdf-25",
+          "sourceRowId": "ECE2002-pdf-25",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B14+B23+D21",
+          "venue": "AB-314",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-26",
+          "sourceRowId": "ECE2002-pdf-26",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-301",
+          "faculty": "ANURAG",
+          "seats": "69",
+          "id": "ECE2002-pdf-27",
+          "sourceRowId": "ECE2002-pdf-27",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-126",
+          "faculty": "AMIT KUMAR SINGH",
+          "seats": "70",
+          "id": "ECE2002-pdf-28",
+          "sourceRowId": "ECE2002-pdf-28",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-103",
+          "faculty": "NELLA ANVESHKUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-29",
+          "sourceRowId": "ECE2002-pdf-29",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-314",
+          "faculty": "ANIL KUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-30",
+          "sourceRowId": "ECE2002-pdf-30",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "B21+E14+E22",
+          "venue": "AB-303",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "74",
+          "id": "ECE2002-pdf-31",
+          "sourceRowId": "ECE2002-pdf-31",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-302",
+          "faculty": "PALLABI SARKAR",
+          "seats": "55",
+          "id": "ECE2002-pdf-32",
+          "sourceRowId": "ECE2002-pdf-32",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-103",
+          "faculty": "ANURAG",
+          "seats": "75",
+          "id": "ECE2002-pdf-33",
+          "sourceRowId": "ECE2002-pdf-33",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-314",
+          "faculty": "AMIT KUMAR SINGH",
+          "seats": "60",
+          "id": "ECE2002-pdf-34",
+          "sourceRowId": "ECE2002-pdf-34",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-331",
+          "faculty": "ARJUN LAL KUMAWAT",
+          "seats": "75",
+          "id": "ECE2002-pdf-35",
+          "sourceRowId": "ECE2002-pdf-35",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-107",
+          "faculty": "ARINDAM DUTTA",
+          "seats": "54",
+          "id": "ECE2002-pdf-36",
+          "sourceRowId": "ECE2002-pdf-36",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-315",
+          "faculty": "PALLAV",
+          "seats": "71",
+          "id": "ECE2002-pdf-37",
+          "sourceRowId": "ECE2002-pdf-37",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C11+C12+C13",
+          "venue": "AB-317",
+          "faculty": "LOKESH SONI",
+          "seats": "75",
+          "id": "ECE2002-pdf-38",
+          "sourceRowId": "ECE2002-pdf-38",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-415",
+          "faculty": "ARJUN LAL KUMAWAT",
+          "seats": "75",
+          "id": "ECE2002-pdf-39",
+          "sourceRowId": "ECE2002-pdf-39",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-407",
+          "faculty": "PALLAV",
+          "seats": "75",
+          "id": "ECE2002-pdf-40",
+          "sourceRowId": "ECE2002-pdf-40",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-413",
+          "faculty": "P. RAMESH BABU",
+          "seats": "75",
+          "id": "ECE2002-pdf-41",
+          "sourceRowId": "ECE2002-pdf-41",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-417",
+          "faculty": "AMIT KUMAR DWIVEDI",
+          "seats": "74",
+          "id": "ECE2002-pdf-42",
+          "sourceRowId": "ECE2002-pdf-42",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C14+E11+E12",
+          "venue": "AB-319",
+          "faculty": "KRISHNA CHAUHAN",
+          "seats": "73",
+          "id": "ECE2002-pdf-43",
+          "sourceRowId": "ECE2002-pdf-43",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        },
+        {
+          "slots": "C21+F11+F12",
+          "venue": "AB-302",
+          "faculty": "ANIL KUMAR",
+          "seats": "75",
+          "id": "ECE2002-pdf-44",
+          "sourceRowId": "ECE2002-pdf-44",
+          "source": "DLD.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock",
+          "facultyAliases": []
+        }
+      ],
+      "file": "DLD.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/ECE2002.sections.txt"
+    },
+    {
+      "code": "HUM0003",
+      "name": "INDIAN CONSTITUTION",
+      "scheduled": true,
+      "sections": [
+        {
+          "slots": "A11",
+          "venue": "MPH-7",
+          "faculty": "JAGRITI GUPTA",
+          "seats": "344",
+          "id": "HUM0003-1",
+          "sourceRowId": "HUM0003-1",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A13",
+          "venue": "AR-001",
+          "faculty": "SUGAVANESHWAR R P",
+          "seats": "346",
+          "id": "HUM0003-2",
+          "sourceRowId": "HUM0003-2",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A13",
+          "venue": "MPH-2",
+          "faculty": "VIPIN KUMAR MISHRA",
+          "seats": "345",
+          "id": "HUM0003-3",
+          "sourceRowId": "HUM0003-3",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A14",
+          "venue": "MPH-2",
+          "faculty": "GEETANJALI GIRI",
+          "seats": "303",
+          "id": "HUM0003-4",
+          "sourceRowId": "HUM0003-4",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A21",
+          "venue": "CR-029",
+          "faculty": "ARINDAM GHOSH",
+          "seats": "339",
+          "id": "HUM0003-5",
+          "sourceRowId": "HUM0003-5",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A23",
+          "venue": "MPH-3",
+          "faculty": "P. VAYUNANDANAKISHORE",
+          "seats": "336",
+          "id": "HUM0003-6",
+          "sourceRowId": "HUM0003-6",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "A23",
+          "venue": "MPH-8",
+          "faculty": "VENKATESAN K",
+          "seats": "347",
+          "id": "HUM0003-7",
+          "sourceRowId": "HUM0003-7",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B12",
+          "venue": "AB02-408",
+          "faculty": "SAURABH BHARGAVA",
+          "seats": "340",
+          "id": "HUM0003-8",
+          "sourceRowId": "HUM0003-8",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "B14",
+          "venue": "MPH-8",
+          "faculty": "JAYACHANDIRAN J",
+          "seats": "348",
+          "id": "HUM0003-9",
+          "sourceRowId": "HUM0003-9",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C11",
+          "venue": "MPH-3",
+          "faculty": "PIJUSH KANTI MONDAL",
+          "seats": "346",
+          "id": "HUM0003-10",
+          "sourceRowId": "HUM0003-10",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "C12",
+          "venue": "MPH-3",
+          "faculty": "ABHINAV KUMAR",
+          "seats": "338",
+          "id": "HUM0003-11",
+          "sourceRowId": "HUM0003-11",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "D22",
+          "venue": "MPH-2",
+          "faculty": "ABHINAV KUMAR",
+          "seats": "327",
+          "id": "HUM0003-12",
+          "sourceRowId": "HUM0003-12",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "E11",
+          "venue": "AR-103",
+          "faculty": "ASHOK KUMAR BARAL",
+          "seats": "321",
+          "id": "HUM0003-13",
+          "sourceRowId": "HUM0003-13",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "F11",
+          "venue": "AR-002",
+          "faculty": "Pradeep Kumar Kayshap",
+          "seats": "327",
+          "id": "HUM0003-14",
+          "sourceRowId": "HUM0003-14",
+          "facultyAliases": [
+            "Pradeep Kumar Kashyap"
+          ],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "F12",
+          "venue": "MPH-2",
+          "faculty": "M. AZHAGURAJAN",
+          "seats": "345",
+          "id": "HUM0003-15",
+          "sourceRowId": "HUM0003-15",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "F14",
+          "venue": "MPH-8",
+          "faculty": "NELLAIAPPAN S",
+          "seats": "342",
+          "id": "HUM0003-16",
+          "sourceRowId": "HUM0003-16",
+          "facultyAliases": [],
+          "source": "INDIAN CONS.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        }
+      ],
+      "file": "INDIAN CONS.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/HUM0003.sections.txt"
+    },
+    {
+      "code": "DSN2098",
+      "name": "Project Exhibition \u2013 I",
+      "scheduled": false,
+      "sections": [
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "PRASHANT G K",
+          "seats": "428",
+          "id": "DSN2098-1",
+          "sourceRowId": "DSN2098-1",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SIDDHARTHA MAITI",
+          "seats": "440",
+          "id": "DSN2098-2",
+          "sourceRowId": "DSN2098-2",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "seats": "436",
+          "id": "DSN2098-3",
+          "sourceRowId": "DSN2098-3",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "seats": "419",
+          "id": "DSN2098-4",
+          "sourceRowId": "DSN2098-4",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "seats": "445",
+          "id": "DSN2098-5",
+          "sourceRowId": "DSN2098-5",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "VIKAS PANTHI",
+          "seats": "448",
+          "id": "DSN2098-6",
+          "sourceRowId": "DSN2098-6",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "seats": "430",
+          "id": "DSN2098-7",
+          "sourceRowId": "DSN2098-7",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JITENDRA PRATAP SINGH MATHUR",
+          "seats": "442",
+          "id": "DSN2098-8",
+          "sourceRowId": "DSN2098-8",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ADARSH PATEL",
+          "seats": "441",
+          "id": "DSN2098-9",
+          "sourceRowId": "DSN2098-9",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ANJU SHUKLA",
+          "seats": "444",
+          "id": "DSN2098-10",
+          "sourceRowId": "DSN2098-10",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "GUNJAN ANSARI",
+          "seats": "448",
+          "id": "DSN2098-11",
+          "sourceRowId": "DSN2098-11",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "T. VENKATESWARA RAO",
+          "seats": "445",
+          "id": "DSN2098-12",
+          "sourceRowId": "DSN2098-12",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MANOJ KUMAR",
+          "seats": "445",
+          "id": "DSN2098-13",
+          "sourceRowId": "DSN2098-13",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MURUGESWARI K",
+          "seats": "447",
+          "id": "DSN2098-14",
+          "sourceRowId": "DSN2098-14",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "V. SIVASANKARAN",
+          "seats": "447",
+          "id": "DSN2098-15",
+          "sourceRowId": "DSN2098-15",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SOUMITRA KESHARI NAYAK",
+          "seats": "447",
+          "id": "DSN2098-16",
+          "sourceRowId": "DSN2098-16",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "ROHIT SHARMA",
+          "seats": "439",
+          "id": "DSN2098-17",
+          "sourceRowId": "DSN2098-17",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "Shiv Manjaree Gopaliya",
+          "seats": "449",
+          "id": "DSN2098-18",
+          "sourceRowId": "DSN2098-18",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "T. VENKATESWARA RAO",
+          "seats": "447",
+          "id": "DSN2098-19",
+          "sourceRowId": "DSN2098-19",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "DEVARAJU S",
+          "seats": "443",
+          "id": "DSN2098-20",
+          "sourceRowId": "DSN2098-20",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "PRISCILLA DINKAR MOYYA",
+          "seats": "444",
+          "id": "DSN2098-21",
+          "sourceRowId": "DSN2098-21",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SUMIT MITTAL",
+          "seats": "404",
+          "id": "DSN2098-22",
+          "sourceRowId": "DSN2098-22",
+          "facultyAliases": [],
+          "source": "PE-1.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        }
+      ],
+      "file": "PE-1.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/DSN2098.sections.txt"
+    },
+    {
+      "code": "HUM0002",
+      "name": "Swachh Bharat",
+      "scheduled": false,
+      "sections": [
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "AVIRUP DAS",
+          "seats": "290",
+          "id": "HUM0002-1",
+          "sourceRowId": "HUM0002-1",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SHARAD CHANDRA TRIPATHI",
+          "seats": "343",
+          "id": "HUM0002-2",
+          "sourceRowId": "HUM0002-2",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SHWETA MUKHERJEE",
+          "seats": "323",
+          "id": "HUM0002-3",
+          "sourceRowId": "HUM0002-3",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "XAVIER SURESH",
+          "seats": "339",
+          "id": "HUM0002-4",
+          "sourceRowId": "HUM0002-4",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "MANOJ ACHARYA",
+          "seats": "341",
+          "id": "HUM0002-5",
+          "sourceRowId": "HUM0002-5",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SAURAV PRASAD",
+          "seats": "295",
+          "id": "HUM0002-6",
+          "sourceRowId": "HUM0002-6",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "DIPANKAR SUTRADHAR",
+          "seats": "336",
+          "id": "HUM0002-7",
+          "sourceRowId": "HUM0002-7",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SARAVANAN L",
+          "seats": "350",
+          "id": "HUM0002-8",
+          "sourceRowId": "HUM0002-8",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "POOJA",
+          "seats": "350",
+          "id": "HUM0002-9",
+          "sourceRowId": "HUM0002-9",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "RAJAT PARKASH",
+          "seats": "350",
+          "id": "HUM0002-10",
+          "sourceRowId": "HUM0002-10",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "RAJDEEP SINGH PAYAL",
+          "seats": "347",
+          "id": "HUM0002-11",
+          "sourceRowId": "HUM0002-11",
+          "facultyAliases": [
+            "RADJEEP SINGH PAYAL"
+          ],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SAURABH MISHRA",
+          "seats": "343",
+          "id": "HUM0002-12",
+          "sourceRowId": "HUM0002-12",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "SATYAM RAVI",
+          "seats": "341",
+          "id": "HUM0002-13",
+          "sourceRowId": "HUM0002-13",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        },
+        {
+          "slots": "NIL",
+          "venue": "NIL",
+          "faculty": "JAGRITI GUPTA",
+          "seats": "334",
+          "id": "HUM0002-14",
+          "sourceRowId": "HUM0002-14",
+          "facultyAliases": [],
+          "source": "swach bharat.pdf",
+          "sourceDate": "2026-06-20",
+          "registrationMode": "mock"
+        }
+      ],
+      "file": "swach bharat.pdf",
+      "sourceDate": "2026-06-20",
+      "registrationMode": "mock",
+      "sourcePath": "data/sources/HUM0002.sections.txt"
+    }
+  ]
+}

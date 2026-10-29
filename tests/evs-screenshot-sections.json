@@ -1,0 +1,134 @@
+[
+  {
+    "slots": "A11",
+    "venue": "AB-102",
+    "faculty": "SAURABH BHARGAVA",
+    "seats": "70"
+  },
+  {
+    "slots": "A12",
+    "venue": "AB-417",
+    "faculty": "JAGRITI GUPTA",
+    "seats": "65"
+  },
+  {
+    "slots": "A13",
+    "venue": "AB-230",
+    "faculty": "SATYAM RAVI",
+    "seats": "63"
+  },
+  {
+    "slots": "A14",
+    "venue": "AB-102",
+    "faculty": "Pradeep Kumar Kayshap",
+    "seats": "67"
+  },
+  {
+    "slots": "A21",
+    "venue": "AB-102",
+    "faculty": "SUGAVANESHWAR R P",
+    "seats": "68"
+  },
+  {
+    "slots": "A22",
+    "venue": "AB-102",
+    "faculty": "GEETANJALI GIRI",
+    "seats": "60"
+  },
+  {
+    "slots": "A24",
+    "venue": "AB-007",
+    "faculty": "NELLAIAPPAN S",
+    "seats": "70"
+  },
+  {
+    "slots": "B11",
+    "venue": "AB-102",
+    "faculty": "SAURAV PRASAD",
+    "seats": "57"
+  },
+  {
+    "slots": "B12",
+    "venue": "AB-102",
+    "faculty": "SHWETA MUKHERJEE",
+    "seats": "69"
+  },
+  {
+    "slots": "B13",
+    "venue": "AB-217",
+    "faculty": "DIPANKAR SUTRADHAR",
+    "seats": "66"
+  },
+  {
+    "slots": "B14",
+    "venue": "AB-315",
+    "faculty": "ASHOK KUMAR BARAL",
+    "seats": "57"
+  },
+  {
+    "slots": "B22",
+    "venue": "AB-103",
+    "faculty": "VENKATESAN K",
+    "seats": "70"
+  },
+  {
+    "slots": "B24",
+    "venue": "AB-007",
+    "faculty": "M. AZHAGURAJAN",
+    "seats": "70"
+  },
+  {
+    "slots": "C11",
+    "venue": "AB-126",
+    "faculty": "SAURABH MISHRA",
+    "seats": "60"
+  },
+  {
+    "slots": "C13",
+    "venue": "AB-330",
+    "faculty": "JAYACHANDIRAN J",
+    "seats": "68"
+  },
+  {
+    "slots": "C21",
+    "venue": "AB-007",
+    "faculty": "PIJUSH KANTI MONDAL",
+    "seats": "68"
+  },
+  {
+    "slots": "D11",
+    "venue": "AB-102",
+    "faculty": "AVIRUP DAS",
+    "seats": "61"
+  },
+  {
+    "slots": "D21",
+    "venue": "AB-126",
+    "faculty": "ABHINAV KUMAR",
+    "seats": "65"
+  },
+  {
+    "slots": "E11",
+    "venue": "AB-102",
+    "faculty": "SHARAD CHANDRA TRIPATHI",
+    "seats": "60"
+  },
+  {
+    "slots": "E14",
+    "venue": "AB-229",
+    "faculty": "ARINDAM GHOSH",
+    "seats": "59"
+  },
+  {
+    "slots": "E21",
+    "venue": "AB-007",
+    "faculty": "ABHINAV KUMAR",
+    "seats": "68"
+  },
+  {
+    "slots": "F12",
+    "venue": "AB-317",
+    "faculty": "P. VAYUNANDANAKISHORE",
+    "seats": "62"
+  }
+]

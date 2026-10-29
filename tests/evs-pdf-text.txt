@@ -1,0 +1,30 @@
+EVS faculty options
+Fall 2026-27 | Student-prepared copy from supplied screenshots
+CHY1006 - Environmental Sustainability - Lecture and Tutorial Hours Only
+L 1 T 1 P 0 J 0 C 2 Category: UCHSSMC
+Slot Venue Faculty Source clash Seats
+A11 AB-102 SAURABH BHARGAVA NONE 70
+A12 AB-417 JAGRITI GUPTA NONE 65
+A13 AB-230 SATYAM RAVI NONE 63
+A14 AB-102 Pradeep Kumar Kayshap NONE 67
+A21 AB-102 SUGAVANESHWAR R P Clashed with C11 68
+A22 AB-102 GEETANJALI GIRI NONE 60
+A24 AB-007 NELLAIAPPAN S NONE 70
+B11 AB-102 SAURAV PRASAD Clashed with B11 57
+B12 AB-102 SHWETA MUKHERJEE Clashed with B12 69
+B13 AB-217 DIPANKAR SUTRADHAR Clashed with B13 66
+B14 AB-315 ASHOK KUMAR BARAL NONE 57
+B22 AB-103 VENKATESAN K NONE 70
+B24 AB-007 M. AZHAGURAJAN NONE 70
+C11 AB-126 SAURABH MISHRA Clashed with C11 60
+C13 AB-330 JAYACHANDIRAN J Clashed with C13 68
+C21 AB-007 PIJUSH KANTI MONDAL NONE 68
+D11 AB-102 AVIRUP DAS NONE 61
+D21 AB-126 ABHINAV KUMAR NONE 65
+E11 AB-102 SHARAD CHANDRA TRIPATHI NONE 60
+E14 AB-229 ARINDAM GHOSH Clashed with E14 59
+E21 AB-007 ABHINAV KUMAR NONE 68
+F12 AB-317 P. VAYUNANDANAKISHORE NONE 62
+22 options transcribed. Seat counts are snapshots, not live availability.
+Source clash labels belong to the original session; the planner recalculates clashes.
+Student-prepared dataset; not an official university-issued document.
