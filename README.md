@@ -50,7 +50,7 @@ Browser verification used a separate localhost origin to preserve the existing 1
 
 ## Short shortlist and in-cell faculty changes
 
-The UI and worker now request/enforce at most four shortlisted distinct schedules. Same-slot faculty controls live inside timetable class cells rather than in a separate alternatives panel. Changing one meeting's faculty updates all meetings of that course, the venue and travel metrics while retaining times. Dropdowns are omitted for single-choice cells; print output replaces controls with the selected faculty text. NIL/project selections remain visible in the collapsed selected-faculty summary because they have no timetable cell.
+The UI and worker now request/enforce at most five shortlisted distinct schedules. Same-slot faculty controls live inside timetable class cells rather than in a separate alternatives panel. Changing one meeting's faculty updates all meetings of that course, the venue and travel metrics while retaining times. Dropdowns are omitted for single-choice cells; print output replaces controls with the selected faculty text. NIL/project selections remain visible in the collapsed selected-faculty summary because they have no timetable cell.
 
 `EVS_CHY1006_Faculty.pdf` was prepared from the two latest supplied EVS screenshots as a user-facing output. It has 22 text-readable sections, snapshot seat counts and the original session's clash labels. Import ignores those source clash labels. Both direct PDF extraction and the portal importer were checked against the transcribed 22-row fixture.
 
@@ -71,3 +71,9 @@ A section with zero available seats, whether numeric 0, string `0`, or padded ze
 Download PDF now draws the selected timetable directly into a landscape A4 PDF using client-side jsPDF 2.5.2 (downloaded from jsDelivr on first export). No timetable data is sent to a server. The export is independent of browser viewport/scroll position, includes all six weekday columns and full wrapped faculty names/venues, and checks that chosen sections remain eligible before exporting. Standard Ctrl+P styles also remove minimum widths and scroll clipping.
 
 The actual browser download was verified as one landscape page with all weekdays. Browser regression checked all five options and their dropdown content after avoiding SARATHKUMAR and setting KANNAN S's only section to zero seats; neither appeared. The downloaded PDF also excluded both. These checks used a separate localhost test origin; the student's 127.0.0.1 plan was left untouched.
+
+## Detailed regression audit — 29 October 2026
+
+Final run: 73 tests passed, including 600 randomized scenarios checked against an independent exhaustive reference and 32 full-semester preference combinations. Browser audit: 44 passing assertions on an isolated localhost origin. Responsive layout checked at 390/768/1440px and a real landscape PDF download rendered and inspected.
+
+Reupload identity canonicalizes faculty, slot ordering and venue aliases so a new zero-seat count cannot leave an old eligible duplicate. Repeated NIL project entries preserve their occurrence and separate seat counts; reuploading the same list stays idempotent. Optional project readiness matches Continue validation. Wrapped PDF rows are supported and recognized partial lists fail atomically. Export rejects stale removed/edited sections.
