@@ -1570,7 +1570,7 @@
   {
     "batch": "25BAS",
     "code": "DSN2098",
-    "name": "Project Exhibition \u2013 I",
+    "name": "Project Exhibition – I",
     "type": "PJ",
     "credits": 1,
     "category": "UCPI"
@@ -2870,5 +2870,517 @@
     "type": "PJ",
     "credits": 1,
     "category": "UEOE"
+  },
+  {
+    "batch": "26BAC",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1001",
+    "name": "Business Mathematics",
+    "type": "LT",
+    "credits": 4,
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1004",
+    "name": "Information Technology in Business",
+    "type": "LT",
+    "credits": 4,
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT2003",
+    "name": "Principles Of Accounting",
+    "type": "LT",
+    "credits": 4,
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BCE",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BET",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BET",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BET",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BET",
+    "code": "MAT1031",
+    "name": "Introduction to Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "MAT1031",
+    "name": "Introduction to Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BME",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BME",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BME",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "MAT1002",
+    "name": "Calculus for Bio Engineers",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIB",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PE"
+  },
+  {
+    "batch": "26MIB",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PE"
+  },
+  {
+    "batch": "26MIB",
+    "code": "MAT1002",
+    "name": "Calculus for Bioengineers",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CSE1021",
+    "name": "Introduction to Problem Solving And Programming",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "ENG1004",
+    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "MAT1003",
+    "name": "Calculus",
+    "type": "LT",
+    "credits": 4,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
   }
 ]

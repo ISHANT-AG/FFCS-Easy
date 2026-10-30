@@ -50,7 +50,31 @@ export function changeFaculty(schedule,courseCode,sectionId,settings={},preset='
  if(!next||slotBundle(next,current.course.scheduled)!==slotBundle(current.section,current.course.scheduled))throw Error('Choose an eligible faculty with the same time slots.');
  return scheduleFrom(schedule.chosen.map(x=>x===current?{course:x.course,section:next}:x),settings,preset);
 }
-function bundleDistance(a,b){const other=new Map(b.chosen.map(x=>[x.course.code,slotBundle(x.section,x.course.scheduled)]));return a.chosen.filter(x=>x.course.scheduled!==false&&other.get(x.course.code)!==slotBundle(x.section)).length;}
+// Compare course timings only; faculty/room changes never create another layout.
+const timingCache=new WeakMap();
+function timingMap(schedule){
+ if(!timingCache.has(schedule))timingCache.set(schedule,new Map(schedule.chosen.filter(x=>x.course.scheduled!==false).map(x=>[x.course.code,new Set(slotBundle(x.section).split('+'))])));
+ return timingCache.get(schedule);
+}
+function timingDistance(a,b){
+ const left=timingMap(a),right=timingMap(b);let moved=0,meetings=0;
+ for(const [course,slots] of left){const next=right.get(course)||new Set();const delta=[...slots].filter(s=>!next.has(s)).length+[...next].filter(s=>!slots.has(s)).length;if(delta){moved++;meetings+=delta;}}
+ return moved*100+meetings;
+}
+export function diverseTimetables(input,limit){
+ const candidates=[...input].sort((a,b)=>a.score-b.score||a.signature.localeCompare(b.signature)),selected=[];
+ // Keep the best preference match first, then maximize the minimum timing
+ // difference from EVERY option already selected. Scores break distance ties.
+ while(candidates.length&&selected.length<limit){
+  let bestIndex=0,bestDistance=-1;
+  if(selected.length)for(let i=0;i<candidates.length;i++){
+   const distance=Math.min(...selected.map(s=>timingDistance(s,candidates[i])));
+   if(distance>bestDistance){bestDistance=distance;bestIndex=i;}
+  }
+  selected.push(candidates.splice(bestIndex,1)[0]);
+ }
+ return selected;
+}
 export function solve(courses,settings={},preset='compact',limit=5,hooks={}) {
  limit=Math.min(100,Math.max(1,Number(limit)||5));
  const prepared=new WeakMap();
@@ -67,7 +91,7 @@ export function solve(courses,settings={},preset='compact',limit=5,hooks={}) {
  }).sort((a,b)=>a.options.length-b.options.length);
  if(missing.length)return {results:[],reason:'No eligible sections for '+missing.join(', ')+'. Check uploaded options or faculty preferences.',nodes:0,truncated:false};
  if(!active.length)return {results:[],reason:'Select at least one course with weekly classes.',nodes:0,truncated:false};
- let nodes=0,truncated=false;const pool=new Map(),poolLimit=Math.max(32,limit*6),bus=settings.bus||preset==='bus',deadline=deadlineFor(settings);
+ let nodes=0,truncated=false;const pool=new Map(),poolLimit=Math.max(128,limit*12),bus=settings.bus||preset==='bus',deadline=deadlineFor(settings);
  function visit(k,items,chosen,low=0,high=0,penalty=0){
   if(++nodes>nodesMax){truncated=true;return;}
   if((nodes&255)===0){const now=Date.now();if(now-started>=maxMilliseconds){truncated=true;return;}if(now-lastProgress>=200){lastProgress=now;hooks.onProgress?.({nodes,found:pool.size});}}
@@ -75,7 +99,7 @@ export function solve(courses,settings={},preset='compact',limit=5,hooks={}) {
    const m=metrics(items),signature=chosen.filter(x=>x.course.scheduled!==false).map(x=>prepared.get(x.section).signature).sort().join('|');
    const candidate={chosen:[...chosen],items:[...items],metrics:m,signature,score:scoreSchedule(items,m,penalty,settings,preset)},previous=pool.get(signature);
    if(!previous||candidate.score<previous.score)pool.set(candidate.signature,candidate);
-   if(pool.size>poolLimit){let worst;for(const entry of pool)if(!worst||entry[1].score>worst[1].score)worst=entry;pool.delete(worst[0]);}return;
+   if(pool.size>poolLimit*2){const ranked=[...pool.values()].sort((a,b)=>a.score-b.score),quality=ranked.slice(0,poolLimit-limit),variety=diverseTimetables(ranked,limit);pool.clear();for(const entry of [...quality,...variety])pool.set(entry.signature,entry);}return;
   }
   const {course:c,options}=lists[k];
   for(const s of options){
@@ -89,9 +113,7 @@ export function solve(courses,settings={},preset='compact',limit=5,hooks={}) {
   }
  }
  visit(0,[],[]);
- const candidates=[...pool.values()].sort((a,b)=>a.score-b.score),selected=[];
- // Prefer different course/slot arrangements among similarly scored options.
- while(candidates.length&&selected.length<limit){let bestIndex=0;if(selected.length){let bestValue=Infinity;for(let i=0;i<candidates.length;i++){const distance=Math.min(...selected.map(s=>bundleDistance(s,candidates[i]))),value=candidates[i].score-distance*8;if(value<bestValue){bestValue=value;bestIndex=i;}}}selected.push(candidates.splice(bestIndex,1)[0]);}
+ const selected=diverseTimetables([...pool.values()],limit);
  return {results:selected.map(s=>scheduleFrom(s.chosen,settings,preset)),nodes,truncated,elapsedMs:Date.now()-started,reason:selected.length?'':truncated?'Search limit reached before a timetable was found. Try again or adjust your preferences.':'No timetable meets all rules. Check overlapping slots, faculty choices, lunch or the bus deadline.'};
 }
 export function parseCatalogue(text){const rows=[];for(const line of text.split('\n')){const m=line.trim().match(/^\d+\s+(\d{2}[A-Z]{3})\s+([A-Z]{3}\d{4})\s+(.+?)\s+(LTP|LT|LP|PJ|P)\s+(\d+)\s+(\w+)\s*$/);if(m){const [,batch,code,name,type,credits,category]=m;rows.push({batch,code,name,type,credits:Number(credits),category});}}return rows;}

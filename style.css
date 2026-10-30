@@ -1939,3 +1939,44 @@ button {
  .event-code,.event-faculty,.event-venue{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere!important;font-size:7.5pt!important;letter-spacing:normal!important}
  .timetable-table tr{break-inside:avoid}
 }
+
+/* Optional PDF help on the faculty upload step. */
+.pdf-save-guide{margin:0 0 24px;border:1px solid #deded8;border-radius:14px;background:#fff;overflow:hidden}
+.pdf-save-guide summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;cursor:pointer;font-weight:600;list-style:none;color:#283e8e}
+.pdf-save-guide summary::-webkit-details-marker{display:none}
+.pdf-save-guide summary:focus-visible{outline:3px solid #8fa4ed;outline-offset:-4px;border-radius:14px}
+.pdf-guide-chevron{font-size:22px;transition:transform .15s}
+.pdf-save-guide[open] .pdf-guide-chevron{transform:rotate(180deg)}
+.pdf-guide-content{border-top:1px solid #e9e7e1;padding:24px}
+.pdf-guide-steps{list-style:none;counter-reset:pdf-step;margin:0;padding:0;display:grid;gap:30px}
+.pdf-guide-steps li{counter-increment:pdf-step;min-width:0}
+.pdf-guide-copy{position:relative;padding-left:44px;margin-bottom:16px}
+.pdf-guide-copy::before{content:counter(pdf-step);position:absolute;left:0;top:0;display:grid;place-items:center;width:30px;height:30px;background:#eef1ff;color:#283e8e;border-radius:50%;font-weight:700}
+.pdf-guide-copy h3{margin:0 0 8px;font-size:17px;line-height:1.5}
+.pdf-guide-copy p{margin:0;line-height:1.7;color:#626977;max-width:850px}
+.pdf-guide-copy kbd{font:inherit;font-size:.9em;border:1px solid #dcdfe6;border-bottom-width:2px;border-radius:4px;background:#f8f9fb;padding:1px 5px;white-space:nowrap}
+.pdf-guide-steps img{display:block;width:100%;max-width:1000px;height:auto;border:1px solid #e4e5e9;border-radius:9px;margin:auto}
+.pdf-guide-note{font-size:13px;line-height:1.6;color:#626977;margin:24px 0 0}
+@media(max-width:600px){.pdf-save-guide summary{padding:16px}.pdf-guide-content{padding:16px}.pdf-guide-copy{padding-left:38px}.pdf-guide-steps{gap:24px}}
+@media print{.pdf-save-guide{display:none!important}}
+
+/* A clear, compact entry point for the optional upload guide. */
+.pdf-save-guide{border-color:#cbd5f5;background:#fff;box-shadow:0 3px 14px #283e8e08}
+.pdf-save-guide summary{justify-content:flex-start;padding:20px 24px;background:linear-gradient(115deg,#eef2ff,#f8faff);gap:16px;min-height:88px;transition:background .15s}
+.pdf-save-guide summary:hover{background:#e9efff}
+.pdf-guide-icon{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border:1px solid #d8e1ff;border-radius:12px;background:white;color:#3049a0}
+.pdf-guide-title{display:flex;flex-direction:column;gap:4px;min-width:0;line-height:1.4;font-size:16px}
+.pdf-guide-title small{font-size:12px;font-weight:400;color:#64718e}
+.pdf-guide-action{display:flex;align-items:center;justify-content:center;gap:8px;margin-left:auto;flex-shrink:0;padding:9px 13px;border:1px solid #c8d4f6;border-radius:8px;background:white;color:#283e8e;font-size:12px;line-height:1.4}
+.pdf-guide-chevron{flex-shrink:0}
+.pdf-guide-hide{display:none}.pdf-save-guide[open] .pdf-guide-hide{display:inline}.pdf-save-guide[open] .pdf-guide-show{display:none}
+.pdf-guide-content{background:#fff}.pdf-guide-steps li+li{padding-top:26px;border-top:1px solid #eceef4}
+@media(max-width:600px){.pdf-save-guide summary{padding:16px 14px;gap:11px;flex-wrap:wrap}.pdf-guide-icon{flex-basis:38px;width:38px;height:38px;border-radius:10px}.pdf-guide-title{font-size:14px;flex:1}.pdf-guide-title small{font-size:11px}.pdf-guide-action{padding:8px 10px;font-size:11px}.pdf-guide-content{padding:18px 14px}.pdf-guide-copy p{font-size:13px}.pdf-guide-copy h3{font-size:15px}}
+@media(max-width:380px){.pdf-guide-action{margin-left:49px}.pdf-guide-title{flex-basis:calc(100% - 49px)}}
+@media(prefers-reduced-motion:reduce){.pdf-save-guide summary,.pdf-guide-chevron{transition:none}}
+@media(max-width:600px){
+ .faculty-workspace,.faculty-navigator,.faculty-list{min-width:0;max-width:100%}
+ .nav-course-item,.nav-course-left{min-width:0}
+ .nav-item-name{min-width:0;overflow:hidden;text-overflow:ellipsis}
+ .nav-progress-header{flex-wrap:wrap;gap:6px}
+}

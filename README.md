@@ -77,3 +77,11 @@ The actual browser download was verified as one landscape page with all weekdays
 Final run: 73 tests passed, including 600 randomized scenarios checked against an independent exhaustive reference and 32 full-semester preference combinations. Browser audit: 44 passing assertions on an isolated localhost origin. Responsive layout checked at 390/768/1440px and a real landscape PDF download rendered and inspected.
 
 Reupload identity canonicalizes faculty, slot ordering and venue aliases so a new zero-seat count cannot leave an old eligible duplicate. Repeated NIL project entries preserve their occurrence and separate seat counts; reuploading the same list stays idempotent. Optional project readiness matches Continue validation. Wrapped PDF rows are supported and recognized partial lists fail atomically. Export rejects stale removed/edited sections.
+
+## Timing diversity — 30 October 2026
+
+The first timetable is the best preference match found. Subsequent choices maximize their minimum course-timing distance from all selected timetables, with changed meeting slots breaking changed-course ties and preference score breaking remaining ties. Faculty and venue variations do not count as another timing layout. The bounded candidate pool preserves both quality leaders and diverse arrangements instead of retaining only near-identical low-score schedules. The UI labels differences as courses moved. Hard seat, avoid, clash, lunch and bus constraints still apply; fewer than five distinct valid layouts are returned when necessary.
+
+## Freshers catalogue — 30 October 2026
+
+Added all 64 course entries across 18 admission-2026 branches from the supplied `1. Course List.pdf` (Fall 2026–27). First-year selection uses the existing 26 batch mapping. Course codes, types, credits and categories are retained, including MAT1002/MAT1003/MAT1031 distinctions. No faculty or seat data is prefilled.
