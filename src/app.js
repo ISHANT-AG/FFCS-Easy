@@ -857,6 +857,9 @@ function bind() {
       if (!wasOpen) parent?.classList.add('is-open');
     };
   });
+  document.querySelectorAll('.credit-popover').forEach(pop => {
+    pop.onclick = e => e.stopPropagation();
+  });
   document.onclick = () => {
     document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
   };
