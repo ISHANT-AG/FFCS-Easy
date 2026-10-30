@@ -186,7 +186,7 @@ function render() {
 
       <footer class="app-bottom-credits">
         <div class="credits-note">
-          Made with <span class="credits-heart" aria-label="love">❤️</span> by 
+          Made with <span class="credits-heart" aria-label="love">❤️</span> by
           <span class="credit-author">
             <button type="button" class="credit-name-btn" aria-label="Ishant Agrawal links">Ishant Agrawal</button>
             <span class="credit-popover" role="tooltip">
@@ -195,7 +195,7 @@ function render() {
               <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
             </span>
           </span>
-          &amp; 
+          &amp;
           <span class="credit-author">
             <button type="button" class="credit-name-btn" aria-label="Prisha Sharma links">Prisha Sharma</button>
             <span class="credit-popover" role="tooltip">
@@ -857,9 +857,9 @@ function bind() {
       if (!wasOpen) parent?.classList.add('is-open');
     };
   });
-  document.addEventListener('click', () => {
+  document.onclick = () => {
     document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
-  });
+  };
 
   $('#back')?.addEventListener('click', () => go(state.step - 1));
 
