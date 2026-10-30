@@ -186,7 +186,24 @@ function render() {
 
       <footer class="app-bottom-credits">
         <div class="credits-note">
-          Made with <span class="credits-heart" aria-label="love">❤️</span> by <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer" class="credit-link">Ishant Agrawal</a> &amp; <a href="https://www.linkedin.com/in/prisha-sharma-400bb13ba/" target="_blank" rel="noopener noreferrer" class="credit-link">Prisha Sharma</a>
+          Made with <span class="credits-heart" aria-label="love">❤️</span> by 
+          <span class="credit-author">
+            <button type="button" class="credit-name-btn" aria-label="Ishant Agrawal links">Ishant Agrawal</button>
+            <span class="credit-popover" role="tooltip">
+              <a href="https://github.com/ISHANT-AG" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <span class="popover-sep">·</span>
+              <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </span>
+          </span>
+          &amp; 
+          <span class="credit-author">
+            <button type="button" class="credit-name-btn" aria-label="Prisha Sharma links">Prisha Sharma</button>
+            <span class="credit-popover" role="tooltip">
+              <a href="https://github.com/prishaaaS11" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              <span class="popover-sep">·</span>
+              <a href="https://www.linkedin.com/in/prisha-sharma-400bb13ba/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </span>
+          </span>
         </div>
         <div class="bottom-note">Designed for VIT students · Registration data saved on your device</div>
       </footer>
@@ -814,6 +831,19 @@ function resultsView() {
 
 function bind() {
   document.querySelectorAll('[data-step]').forEach(b => b.onclick = () => go(Number(b.dataset.step)));
+
+  document.querySelectorAll('.credit-name-btn').forEach(btn => {
+    btn.onclick = e => {
+      e.stopPropagation();
+      const parent = btn.closest('.credit-author');
+      const wasOpen = parent?.classList.contains('is-open');
+      document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
+      if (!wasOpen) parent?.classList.add('is-open');
+    };
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
+  });
 
   $('#back')?.addEventListener('click', () => go(state.step - 1));
 

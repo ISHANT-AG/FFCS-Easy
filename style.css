@@ -1755,6 +1755,91 @@ button {
   text-decoration-color: var(--color-text-main);
 }
 
+.credit-author {
+  position: relative;
+  display: inline-block;
+}
+
+.credit-name-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.credit-name-btn:hover,
+.credit-name-btn:focus-visible,
+.credit-author.is-open .credit-name-btn {
+  color: var(--color-text-main);
+  text-decoration-color: var(--color-text-main);
+}
+
+.credit-popover {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background-color: var(--bg-surface, #FFFFFF);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-sm, 6px);
+  padding: 5px 9px;
+  font-size: 11.5px;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: 50;
+}
+
+.credit-popover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--border-color) transparent transparent transparent;
+}
+
+.credit-popover a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.credit-popover a:hover {
+  text-decoration: underline;
+}
+
+.popover-sep {
+  color: var(--color-text-tertiary);
+  user-select: none;
+  font-size: 11px;
+}
+
+.credit-author:hover .credit-popover,
+.credit-author:focus-within .credit-popover,
+.credit-author.is-open .credit-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
 .credits-heart {
   display: inline-block;
   font-size: 11px;
