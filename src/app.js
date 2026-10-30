@@ -117,6 +117,7 @@ function go(step) {
 
 function render() {
   const steps = ['Courses', 'Faculty', 'Preferences', 'Timetable'];
+  const step0Credits = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
   const intros = [
     { title: 'Let’s plan your semester.', sub: 'Pick your year and branch to load your official college course list.' },
     { title: 'Your courses. Your faculty.', sub: 'Upload the PDF options available in your FFCS registration portal.' },
@@ -175,7 +176,7 @@ function render() {
           </div>
           <div>
             ${state.step < 3 ? `
-              <button id="next" class="primary" ${(!state.courses.length && state.step === 0) || uploading.size ? 'disabled' : ''}>
+              <button id="next" class="primary" ${(!state.courses.length && state.step === 0) || (state.step === 0 && step0Credits > 27) || uploading.size ? 'disabled' : ''}>
                 ${state.step === 2 ? 'Make my timetable' : 'Continue →'}
               </button>
             ` : ''}
@@ -185,7 +186,7 @@ function render() {
 
       <footer class="app-bottom-credits">
         <div class="credits-note">
-          made with <span class="credits-heart" aria-label="love">❤️</span> by <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer" class="credit-link">Ishant agrawal</a> and <a href="https://www.linkedin.com/in/prisha-sharma-400bb13ba/" target="_blank" rel="noopener noreferrer" class="credit-link">prisha sharma</a>
+          Made with <span class="credits-heart" aria-label="love">❤️</span> by <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer" class="credit-link">Ishant Agrawal</a> &amp; <a href="https://www.linkedin.com/in/prisha-sharma-400bb13ba/" target="_blank" rel="noopener noreferrer" class="credit-link">Prisha Sharma</a>
         </div>
         <div class="bottom-note">Designed for VIT students · Registration data saved on your device</div>
       </footer>
@@ -234,8 +235,8 @@ function coursesView() {
                 <span class="stat-label">Courses</span>
               </div>
               <div class="stat-card">
-                <span class="stat-num">${totalCredits}</span>
-                <span class="stat-label">Credits</span>
+                <span class="stat-num">${totalCredits}<small style="font-size: 13px; font-weight: 500; color: var(--color-text-tertiary);"> / 27</small></span>
+                <span class="stat-label">Credits (Max 27)</span>
               </div>
             </div>
           </section>
@@ -257,7 +258,7 @@ function coursesView() {
                 </div>
                 <div class="field">
                   <label class="field-label" for="add-course-credits">Credits</label>
-                  <input id="add-course-credits" type="number" name="credits" min="0" max="30" value="3" required>
+                  <input id="add-course-credits" type="number" name="credits" min="0" max="27" value="3" required>
                 </div>
                 <label class="checkbox-label" style="margin-top: 4px;">
                   <input type="checkbox" name="project">
@@ -308,7 +309,7 @@ function coursesView() {
                 <h2>Your registered courses</h2>
                 <p class="panel-subtitle">Review your course list before uploading faculty options</p>
               </div>
-              <span class="badge badge-neutral">${state.courses.length} courses · ${totalCredits} credits</span>
+              <span class="badge ${totalCredits > 27 ? 'badge-danger' : 'badge-neutral'}">${state.courses.length} courses · ${totalCredits} / 27 credits</span>
             </div>
             <div class="course-list">
               ${state.courses.map(c => `
@@ -817,6 +818,12 @@ function bind() {
   $('#back')?.addEventListener('click', () => go(state.step - 1));
 
   $('#next')?.addEventListener('click', () => {
+    if (state.step === 0) {
+      const total = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
+      if (total > 27) {
+        return toast(`Cannot proceed: Total credits (${total}) exceed the maximum limit of 27. Please remove courses.`);
+      }
+    }
     if (state.step === 1) {
       for (const id of Object.keys(drafts)) {
         if (state.courses.some(c => c.id === id && !c.online) && !saveOptions(id, drafts[id].text, false)) return;
@@ -857,6 +864,14 @@ function bind() {
 
     if (!code || !name) return toast('Please enter both course code and name.');
     if (state.courses.some(c => c.code === code)) return toast('Course ' + code + ' is already in your list.');
+
+    const currentCredits = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
+    if (currentCredits >= 27) {
+      return toast('Credit limit fulfilled! You have already reached the maximum limit of 27 credits.');
+    }
+    if (currentCredits + credits > 27) {
+      return toast(`Cannot add course: Adding ${credits} credits exceeds the 27 credits limit (Current: ${currentCredits} / 27).`);
+    }
 
     state.courses.push({
       id: uid(),
