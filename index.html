@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1E3A8A" />
-    <title>FFCS easy · Plan your semester</title>
+    <title>FFCS Easy · Plan your semester</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=20261030-v2" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png?v=20261030-v2" />
+    <link rel="apple-touch-icon" href="assets/favicon.png?v=20261030-v2" />
+    <link rel="shortcut icon" href="favicon.ico?v=20261030-v2" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,6 +18,24 @@
     <link rel="stylesheet" href="style.css?v=20261030-demo-orbit" />
   </head>
   <body>
+    <!-- Introduction Splash Animation -->
+    <div id="intro-splash" class="intro-splash" aria-label="FFCS Easy Introduction">
+      <div class="intro-backdrop"></div>
+      <div class="intro-content">
+        <div class="intro-logo-box">
+          <img src="assets/logo-icon.png" alt="FFCS Easy Logo" class="intro-logo-icon" />
+        </div>
+        <div class="intro-text-box">
+          <h1 class="intro-title">FFCS <span class="intro-title-accent">Easy</span></h1>
+          <p class="intro-tagline">Pick <span class="intro-dot">•</span> Plan <span class="intro-dot">•</span> Register</p>
+        </div>
+        <div class="intro-loader-bar">
+          <div class="intro-loader-progress"></div>
+        </div>
+      </div>
+      <button class="intro-skip-btn" id="intro-skip" type="button" aria-label="Skip introduction">Skip ✕</button>
+    </div>
+
     <div id="app"></div>
     <div id="toast" role="status" aria-live="polite"></div>
     <dialog id="demo-dialog" class="demo-dialog" aria-labelledby="demo-heading">
@@ -48,6 +70,41 @@
         >
       </p>
     </dialog>
+
+    <script>
+      (function() {
+        const splash = document.getElementById('intro-splash');
+        if (!splash) return;
+        let dismissed = false;
+
+        function dismiss() {
+          if (dismissed) return;
+          dismissed = true;
+          splash.classList.add('is-hidden');
+          setTimeout(() => {
+            splash.classList.add('is-removed');
+            splash.remove();
+          }, 480);
+        }
+
+        // Auto-dismiss smoothly after intro finishes playing (~1.85s)
+        const timer = setTimeout(dismiss, 1850);
+
+        // Skip button or clicking outside dismisses immediately
+        splash.addEventListener('click', (e) => {
+          clearTimeout(timer);
+          dismiss();
+        });
+
+        // Keyboard Esc or Space skip
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' || e.key === ' ') {
+            clearTimeout(timer);
+            dismiss();
+          }
+        });
+      })();
+    </script>
     <script type="module" src="src/app.js"></script>
   </body>
 </html>

@@ -156,15 +156,24 @@ body {
 
 .brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   text-decoration: none;
   color: var(--color-text-main);
-  gap: 6px;
-  transition: opacity var(--transition-fast);
+  gap: 8px;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .brand:hover {
-  opacity: 0.9;
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 170px;
+  display: block;
+  object-fit: contain;
 }
 
 .brand-monogram {
@@ -1987,6 +1996,221 @@ button {
   }
 }
 
+
+/* ==========================================================================
+   Introduction Splash Animation
+   ========================================================================== */
+.intro-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(circle at 50% 35%, rgba(30, 58, 138, 0.07) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(158, 176, 206, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(30, 58, 138, 0.05) 0%, transparent 40%);
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro-splash.is-hidden {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.intro-splash.is-removed {
+  display: none !important;
+}
+
+.intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.intro-logo-box {
+  width: 104px;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  animation: introLogoEntrance 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  filter: drop-shadow(0 14px 28px rgba(22, 59, 140, 0.18));
+}
+
+.intro-logo-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.intro-text-box {
+  animation: introTextEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s backwards;
+}
+
+.intro-title {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #13327D;
+  margin: 0 0 6px 0;
+  line-height: 1.1;
+}
+
+.intro-title-accent {
+  color: #1E3A8A;
+}
+
+.intro-tagline {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #5b6b82;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.intro-dot {
+  color: #9EB0CE;
+  font-size: 0.75rem;
+}
+
+.intro-loader-bar {
+  width: 140px;
+  height: 3px;
+  background-color: rgba(30, 58, 138, 0.12);
+  border-radius: 99px;
+  margin-top: 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+.intro-loader-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #13327D, #3B82F6);
+  border-radius: 99px;
+  animation: introProgressFill 1.55s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.intro-skip-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 99px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: introFadeIn 0.4s ease 0.5s backwards;
+}
+
+.intro-skip-btn:hover {
+  background: #FFFFFF;
+  color: #1E3A8A;
+  border-color: rgba(30, 58, 138, 0.2);
+  transform: translateY(-1px);
+}
+
+@keyframes introLogoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(28px) rotate(-8deg);
+  }
+  65% {
+    transform: scale(1.05) translateY(-4px) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes introTextEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introProgressFill {
+  0% {
+    width: 0%;
+  }
+  60% {
+    width: 75%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes introFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-logo-img {
+    height: 32px;
+    max-width: 140px;
+  }
+  .intro-logo-box {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 18px;
+  }
+  .intro-title {
+    font-size: 1.95rem;
+  }
+  .intro-tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    gap: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash {
+    display: none !important;
+  }
+}
+
 /* ==========================================================================
    Print Stylesheet
    ========================================================================== */
@@ -2010,6 +2234,7 @@ button {
   .scroll-hint,
   .faculty-alternatives-panel,
   .selected-faculty-drawer,
+  .intro-splash,
   .app-bottom-credits,
   .bottom-note,
   #toast {

@@ -166,9 +166,8 @@ function render() {
     <div class="app">
       <header class="app-header">
         <div class="header-brand-wrap">
-          <a class="brand" href="/" aria-label="FFCS easy home">
-            <span class="brand-monogram" aria-hidden="true">FFCS</span>
-            <span class="brand-title">easy</span>
+          <a class="brand" href="./" aria-label="FFCS easy home">
+            <img src="assets/logo.png" alt="FFCS Easy" class="brand-logo-img">
           </a>
           <div class="brand-meta">
             <span class="meta-slash" aria-hidden="true">/</span>
