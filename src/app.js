@@ -1,16 +1,29 @@
-import {downloadTimetablePdf} from './pdf-export.js';
+import { downloadTimetablePdf } from './pdf-export.js';
 import { startGeneration } from './generation.js';
 import { mergeSections, needsFaculty } from './sections.js';
 import { pdfItemsToText } from './pdf-text.js';
-import { TIMES, DAYS, PRESETS, validateSection, END, changeFaculty, slotBundle } from './engine.js';
+import {
+  TIMES,
+  DAYS,
+  PRESETS,
+  validateSection,
+  END,
+  changeFaculty,
+  slotBundle,
+  dailyPattern,
+} from './engine.js';
 import { parsePortalText } from './portal.js';
 import { validatePdfUpload } from './uploads.js';
 
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = (s) => document.querySelector(s);
+const esc = (s) =>
+  String(s ?? '').replace(
+    /[&<>"']/g,
+    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
+  );
 const uid = () => crypto.randomUUID();
 
-const catalogue = await fetch('data/catalogue.json').then(r => r.json());
+const catalogue = await fetch('data/catalogue.json').then((r) => r.json());
 const branches = {
   BAC: 'ECE · AI & Cybernetics',
   BAI: 'CSE · AI & Machine Learning',
@@ -31,12 +44,14 @@ const branches = {
   MIB: 'Integrated M.Tech · AI & Bioinformatics',
   MIM: 'Integrated M.Tech · AI',
   MIP: 'Integrated M.Tech · Data Science',
-  MSI: 'Integrated M.Sc · Biotechnology'
+  MSI: 'Integrated M.Sc · Biotechnology',
 };
 
 const KEY = 'ffcs-simple-v2';
 let saved;
-try { saved = JSON.parse(localStorage.getItem(KEY)); } catch { }
+try {
+  saved = JSON.parse(localStorage.getItem(KEY));
+} catch {}
 
 let state = {
   step: 0,
@@ -45,10 +60,14 @@ let state = {
   courses: [],
   preset: 'compact',
   settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10 },
-  ...saved
+  ...saved,
 };
 
-let result = null, resultIndex = 0, busy = false, worker = null, job = 0;
+let result = null,
+  resultIndex = 0,
+  busy = false,
+  worker = null,
+  job = 0;
 let drafts = state.pendingUploads || {};
 let uploading = new Set();
 let openDetails = new Set();
@@ -88,27 +107,33 @@ function course(r) {
     sections: [],
     preferred: [],
     avoid: [],
-    only: ''
+    only: '',
   };
 }
 
-const isCustom = c => Boolean(c.custom || (!c.batch && c.custom !== false));
+const isCustom = (c) => Boolean(c.custom || (!c.batch && c.custom !== false));
 
 const prefix = () => String(27 - Number(state.year)).padStart(2, '0');
 
 function availableBranches() {
   if (!state.year) return [];
-  return [...new Set(catalogue.filter(c => c.batch.startsWith(prefix())).map(c => c.batch.slice(2)))].sort();
+  return [
+    ...new Set(catalogue.filter((c) => c.batch.startsWith(prefix())).map((c) => c.batch.slice(2))),
+  ].sort();
 }
 
 function loadCourses() {
-  state.courses = catalogue.filter(c => c.batch === prefix() + state.branch).map(course);
+  state.courses = catalogue.filter((c) => c.batch === prefix() + state.branch).map(course);
   drafts = {};
   invalidate();
 }
 
 function go(step) {
-  if (busy) { worker?.terminate(); job++; busy = false; }
+  if (busy) {
+    worker?.terminate();
+    job++;
+    busy = false;
+  }
   state.step = step;
   persist();
   render();
@@ -119,10 +144,22 @@ function render() {
   const steps = ['Courses', 'Faculty', 'Preferences', 'Timetable'];
   const step0Credits = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
   const intros = [
-    { title: 'Let’s plan your semester.', sub: 'Pick your year and branch to load your official college course list.' },
-    { title: 'Your courses. Your faculty.', sub: 'Upload the PDF options available in your FFCS registration portal.' },
-    { title: 'How do you like your day?', sub: 'Set your class timing, lunch break, and travel preferences.' },
-    { title: 'A week that works for you.', sub: 'Compare timetable alternatives and tailor your faculty selections.' }
+    {
+      title: 'Let’s plan your semester.',
+      sub: 'Pick your year and branch to load your official college course list.',
+    },
+    {
+      title: 'Your courses. Your faculty.',
+      sub: 'Upload the PDF options available in your FFCS registration portal.',
+    },
+    {
+      title: 'How do you like your day?',
+      sub: 'Set your class timing, lunch break, and travel preferences.',
+    },
+    {
+      title: 'A week that works for you.',
+      sub: 'Compare timetable alternatives and tailor your faculty selections.',
+    },
   ];
 
   $('#app').innerHTML = `
@@ -141,12 +178,16 @@ function render() {
 
         <nav class="stepper" aria-label="Steps">
           <ol class="stepper-list">
-            ${steps.map((s, i) => {
-    const isCurrent = i === state.step;
-    const isCompleted = i < state.step;
-    const isUpcoming = i > state.step;
-    const connector = i > 0 ? `<li class="stepper-connector ${i <= state.step ? 'is-active' : ''}" aria-hidden="true"></li>` : '';
-    return `
+            ${steps
+              .map((s, i) => {
+                const isCurrent = i === state.step;
+                const isCompleted = i < state.step;
+                const isUpcoming = i > state.step;
+                const connector =
+                  i > 0
+                    ? `<li class="stepper-connector ${i <= state.step ? 'is-active' : ''}" aria-hidden="true"></li>`
+                    : '';
+                return `
                 ${connector}
                 <li class="stepper-item ${isCurrent ? 'is-current' : ''} ${isCompleted ? 'is-completed' : ''} ${isUpcoming ? 'is-upcoming' : ''}">
                   <button data-step="${i}" class="stepper-btn" ${isUpcoming ? 'disabled' : ''} aria-current="${isCurrent ? 'step' : 'false'}">
@@ -157,7 +198,8 @@ function render() {
                   </button>
                 </li>
               `;
-  }).join('')}
+              })
+              .join('')}
           </ol>
         </nav>
       </header>
@@ -175,11 +217,15 @@ function render() {
             ${state.step > 0 ? '<button id="back" class="secondary-btn">← Back</button>' : ''}
           </div>
           <div>
-            ${state.step < 3 ? `
+            ${
+              state.step < 3
+                ? `
               <button id="next" class="primary" ${(!state.courses.length && state.step === 0) || (state.step === 0 && step0Credits > 27) || uploading.size ? 'disabled' : ''}>
                 ${state.step === 2 ? 'Make my timetable' : 'Continue →'}
               </button>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
         </footer>
       </main>
@@ -231,20 +277,22 @@ function coursesView() {
               <label class="field-label" for="year">Current study year</label>
               <select id="year" aria-label="Current study year">
                 <option value="">Choose your year</option>
-                ${[1, 2, 3, 4, 5].map(y => `<option value="${y}" ${String(y) === String(state.year) ? 'selected' : ''}>${['', '1st', '2nd', '3rd', '4th', '5th'][y]} year</option>`).join('')}
+                ${[1, 2, 3, 4, 5].map((y) => `<option value="${y}" ${String(y) === String(state.year) ? 'selected' : ''}>${['', '1st', '2nd', '3rd', '4th', '5th'][y]} year</option>`).join('')}
               </select>
             </div>
             <div class="field">
               <label class="field-label" for="branch">Branch</label>
               <select id="branch" aria-label="Branch" ${state.year && branchesList.length ? '' : 'disabled'}>
                 <option value="">${state.year ? 'Choose your branch' : 'Select year first'}</option>
-                ${state.year ? branchesList.map(b => `<option value="${b}" ${b === state.branch ? 'selected' : ''}>${esc(branches[b] || b)}</option>`).join('') : ''}
+                ${state.year ? branchesList.map((b) => `<option value="${b}" ${b === state.branch ? 'selected' : ''}>${esc(branches[b] || b)}</option>`).join('') : ''}
               </select>
             </div>
           </div>
         </section>
 
-        ${state.branch ? `
+        ${
+          state.branch
+            ? `
           <section class="panel summary-panel">
             <div class="summary-stat-grid">
               <div class="stat-card">
@@ -285,11 +333,15 @@ function coursesView() {
               </form>
             </details>
           </section>
-        ` : ''}
+        `
+            : ''
+        }
       </aside>
 
       <div class="courses-main">
-        ${showEmptyCatalogue ? `
+        ${
+          showEmptyCatalogue
+            ? `
           <section class="panel empty-state-panel" role="status">
             <div class="empty-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -299,7 +351,9 @@ function coursesView() {
             <h3>Course list unavailable for Year ${state.year}</h3>
             <p>The university registration catalog for this year has not been uploaded yet. Please select a year with an available course list.</p>
           </section>
-        ` : !state.year ? `
+        `
+            : !state.year
+              ? `
           <section class="panel empty-state-panel intro-empty-panel">
             <div class="empty-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -309,7 +363,9 @@ function coursesView() {
             <h3>Select your study year</h3>
             <p>Choose your current year and branch on the left to review your registered courses.</p>
           </section>
-        ` : state.year && !state.branch ? `
+        `
+              : state.year && !state.branch
+                ? `
           <section class="panel empty-state-panel intro-empty-panel">
             <div class="empty-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -319,7 +375,8 @@ function coursesView() {
             <h3>Now choose your branch</h3>
             <p>Select your engineering branch to populate your standard semester courses.</p>
           </section>
-        ` : `
+        `
+                : `
           <section class="panel course-list-panel">
             <div class="panel-header">
               <div>
@@ -329,7 +386,9 @@ function coursesView() {
               <span class="badge ${totalCredits > 27 ? 'badge-danger' : 'badge-neutral'}">${state.courses.length} courses · ${totalCredits} / 27 credits</span>
             </div>
             <div class="course-list">
-              ${state.courses.map(c => `
+              ${state.courses
+                .map(
+                  (c) => `
                 <div class="course-row ${isCustom(c) ? 'is-custom-course' : ''}">
                   <div class="course-info">
                     <div class="course-name-row">
@@ -350,18 +409,23 @@ function coursesView() {
                     </svg>
                   </button>
                 </div>
-              `).join('')}
+              `
+                )
+                .join('')}
             </div>
           </section>
-        `}
+        `
+        }
       </div>
     </div>
   `;
 }
 
 function facultyView() {
-  const readyCourses = state.courses.filter(c => !needsFaculty(c));
-  const progressPct = state.courses.length ? Math.round((readyCourses.length / state.courses.length) * 100) : 100;
+  const readyCourses = state.courses.filter((c) => !needsFaculty(c));
+  const progressPct = state.courses.length
+    ? Math.round((readyCourses.length / state.courses.length) * 100)
+    : 100;
 
   return `
     <details class="pdf-save-guide">
@@ -397,29 +461,30 @@ function facultyView() {
           </button>
 
           <div class="nav-course-list" role="navigation" aria-label="Course upload navigator">
-            ${state.courses.map(c => {
-    let statusText = 'Needs PDF';
-    let statusClass = 'badge-amber';
-    if (c.online) {
-      statusText = 'Online';
-      statusClass = 'badge-slate';
-    } else if (uploading.has(c.id)) {
-      statusText = 'Reading…';
-      statusClass = 'badge-amber';
-    } else if (c.uploadError) {
-      statusText = 'Error';
-      statusClass = 'badge-danger';
-    } else if (drafts[c.id]) {
-      statusText = 'Check rows';
-      statusClass = 'badge-amber';
-    } else if (c.sections.length) {
-      statusText = `${c.sections.length} options`;
-      statusClass = 'badge-ready';
-    } else if (c.scheduled === false) {
-      statusText = 'No weekly classes';
-      statusClass = 'badge-slate';
-    }
-    return `
+            ${state.courses
+              .map((c) => {
+                let statusText = 'Needs PDF';
+                let statusClass = 'badge-amber';
+                if (c.online) {
+                  statusText = 'Online';
+                  statusClass = 'badge-slate';
+                } else if (uploading.has(c.id)) {
+                  statusText = 'Reading…';
+                  statusClass = 'badge-amber';
+                } else if (c.uploadError) {
+                  statusText = 'Error';
+                  statusClass = 'badge-danger';
+                } else if (drafts[c.id]) {
+                  statusText = 'Check rows';
+                  statusClass = 'badge-amber';
+                } else if (c.sections.length) {
+                  statusText = `${c.sections.length} options`;
+                  statusClass = 'badge-ready';
+                } else if (c.scheduled === false) {
+                  statusText = 'No weekly classes';
+                  statusClass = 'badge-slate';
+                }
+                return `
                 <button type="button" class="nav-course-item" data-nav-target="${c.id}" aria-label="Jump to ${esc(c.code)}">
                   <div class="nav-course-left">
                     <span class="course-code-badge">${esc(c.code)}</span>
@@ -428,40 +493,42 @@ function facultyView() {
                   <span class="badge ${statusClass}">${statusText}</span>
                 </button>
               `;
-  }).join('')}
+              })
+              .join('')}
           </div>
         </div>
       </aside>
 
       <div class="faculty-list">
-        ${state.courses.map(c => {
-    const d = drafts[c.id];
-    const isUploading = uploading.has(c.id);
-    const hasError = Boolean(c.uploadError);
+        ${state.courses
+          .map((c) => {
+            const d = drafts[c.id];
+            const isUploading = uploading.has(c.id);
+            const hasError = Boolean(c.uploadError);
 
-    let statusText = 'No list yet';
-    let statusClass = 'badge-neutral';
-    if (c.online) {
-      statusText = 'Online';
-      statusClass = 'badge-slate';
-    } else if (isUploading) {
-      statusText = 'Reading PDF…';
-      statusClass = 'badge-amber';
-    } else if (d) {
-      statusText = 'Needs a quick fix';
-      statusClass = 'badge-amber';
-    } else if (hasError) {
-      statusText = 'Upload failed';
-      statusClass = 'badge-danger';
-    } else if (c.sections.length) {
-      statusText = `${c.sections.length} options`;
-      statusClass = 'badge-ready';
-    } else if (c.scheduled === false) {
-      statusText = 'No weekly classes';
-      statusClass = 'badge-slate';
-    }
+            let statusText = 'No list yet';
+            let statusClass = 'badge-neutral';
+            if (c.online) {
+              statusText = 'Online';
+              statusClass = 'badge-slate';
+            } else if (isUploading) {
+              statusText = 'Reading PDF…';
+              statusClass = 'badge-amber';
+            } else if (d) {
+              statusText = 'Needs a quick fix';
+              statusClass = 'badge-amber';
+            } else if (hasError) {
+              statusText = 'Upload failed';
+              statusClass = 'badge-danger';
+            } else if (c.sections.length) {
+              statusText = `${c.sections.length} options`;
+              statusClass = 'badge-ready';
+            } else if (c.scheduled === false) {
+              statusText = 'No weekly classes';
+              statusClass = 'badge-slate';
+            }
 
-    return `
+            return `
             <article class="faculty-card ${c.online ? 'is-online' : ''} ${isCustom(c) ? 'is-custom-course' : ''}" id="card-${c.id}" data-course-id="${c.id}">
               <header class="faculty-card-header">
                 <div class="faculty-course-header-left">
@@ -485,16 +552,21 @@ function facultyView() {
                 </div>
               </header>
 
-              ${c.online ? `
+              ${
+                c.online
+                  ? `
                 <div class="online-banner">
                   <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75">
                     <circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v4M8 5h.01"/>
                   </svg>
                   <span>Not included in your timetable.</span>
                 </div>
-              ` : `
+              `
+                  : `
                 <div class="faculty-card-body">
-                  ${hasError ? `
+                  ${
+                    hasError
+                      ? `
                     <div class="upload-error-box" role="alert">
                       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75">
                         <circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v4M8 11.5h.01"/>
@@ -503,14 +575,20 @@ function facultyView() {
                         <strong>Upload failed:</strong> ${esc(c.uploadError)}
                       </div>
                     </div>
-                  ` : ''}
+                  `
+                      : ''
+                  }
 
-                  ${isUploading ? `
+                  ${
+                    isUploading
+                      ? `
                     <div class="upload-reading" role="status">
                       <div class="spinner" aria-hidden="true"></div>
                       <span>Reading your list…</span>
                     </div>
-                  ` : c.sections.length && !d ? `
+                  `
+                      : c.sections.length && !d
+                        ? `
                     <div class="upload-success-bar">
                       <div class="success-details">
                         <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
@@ -525,7 +603,8 @@ function facultyView() {
                         <input type="file" data-upload="${c.id}" accept=".pdf,application/pdf" class="visually-hidden-file-input">
                       </label>
                     </div>
-                  ` : `
+                  `
+                        : `
                     <div class="upload-dropzone" data-dropzone="${c.id}">
                       <input type="file" id="upload-${c.id}" data-upload="${c.id}" accept=".pdf,application/pdf" class="visually-hidden-file-input">
                       <label for="upload-${c.id}" class="dropzone-label">
@@ -540,9 +619,12 @@ function facultyView() {
                         </div>
                       </label>
                     </div>
-                  `}
+                  `
+                  }
 
-                  ${d ? `
+                  ${
+                    d
+                      ? `
                     <div class="draft-review-box" role="region" aria-label="Review ${esc(c.code)} faculty options">
                       <div class="draft-review-header">
                         <h3>Check these rows</h3>
@@ -555,7 +637,9 @@ function facultyView() {
                         <button data-cancel-draft="${c.id}" class="btn-sm">Cancel</button>
                       </div>
                     </div>
-                  ` : ''}
+                  `
+                      : ''
+                  }
 
                   <div class="faculty-pref-fields">
                     <div class="field">
@@ -578,7 +662,7 @@ function facultyView() {
                       <span>${c.sections.length ? 'View or edit options' : 'Enter options manually'}</span>
                     </summary>
                     <div class="manual-options-content">
-                      <textarea data-edit="${c.id}" aria-label="Edit ${esc(c.code)} options" rows="5" placeholder="Faculty name | A11+A12 | AB1-102 | 70">${esc(c.sections.map(s => [s.faculty, s.slots, s.venue, s.seats ?? ''].join(' | ')).join('\n'))}</textarea>
+                      <textarea data-edit="${c.id}" aria-label="Edit ${esc(c.code)} options" rows="5" placeholder="Faculty name | A11+A12 | AB1-102 | 70">${esc(c.sections.map((s) => [s.faculty, s.slots, s.venue, s.seats ?? ''].join(' | ')).join('\n'))}</textarea>
                       <div class="manual-options-footer">
                         <small class="field-hint">${c.scheduled ? 'Faculty | All weekly slots | Venue | Seats' : 'Faculty | NIL | NIL | Seats'}</small>
                         <button data-save-edit="${c.id}" class="btn-sm">Save options</button>
@@ -586,10 +670,12 @@ function facultyView() {
                     </div>
                   </details>
                 </div>
-              `}
+              `
+              }
             </article>
           `;
-  }).join('')}
+          })
+          .join('')}
       </div>
     </div>
   `;
@@ -604,11 +690,13 @@ function preferencesView() {
       </div>
       <div class="timing-grid">
         ${[
-      ['compact', 'No preference', 'Minimise gaps between classes'],
-      ['morning', 'Morning', 'Try to finish by 1:15 pm'],
-      ['evening', 'Evening', 'Classes from 1:15 pm – 7:30 pm'],
-      ['balanced', 'Whole day', 'Spread classes across the day']
-    ].map(([id, name, sub]) => `
+          ['compact', 'No preference', 'Minimise gaps between classes'],
+          ['morning', 'Morning', 'Try to finish by 1:15 pm'],
+          ['evening', 'Evening', 'Classes from 1:15 pm – 7:30 pm'],
+          ['balanced', 'Whole day', 'Spread classes across the day'],
+        ]
+          .map(
+            ([id, name, sub]) => `
           <button type="button" data-preset="${id}" class="timing-card choice ${state.preset === id ? 'is-selected selected' : ''}">
             <div class="timing-title">
               <b>${name}</b>
@@ -616,7 +704,9 @@ function preferencesView() {
             </div>
             <small class="timing-desc">${sub}</small>
           </button>
-        `).join('')}
+        `
+          )
+          .join('')}
       </div>
 
       <div class="toggles-list">
@@ -709,34 +799,55 @@ function resultsView() {
     `;
   }
 
-  const base = new Map(result.results[0].chosen.map(x => [x.course.code, slotBundle(x.section, x.course.scheduled)]));
-  const changed = s => s.chosen.filter(x => x.course.scheduled !== false && base.get(x.course.code) !== slotBundle(x.section)).length;
-  const first = r.items.length ? TIMES[Math.min(...r.items.map(x => x.period))].split('–')[0] : '—';
-  const last = r.items.length ? TIMES[Math.max(...r.items.map(x => x.period))].split('–')[1] : '—';
+  const base = new Map(
+    result.results[0].chosen.map((x) => [x.course.code, slotBundle(x.section, x.course.scheduled)])
+  );
+  const changed = (s) =>
+    s.chosen.filter(
+      (x) => x.course.scheduled !== false && base.get(x.course.code) !== slotBundle(x.section)
+    ).length;
+  const first = r.items.length
+    ? TIMES[Math.min(...r.items.map((x) => x.period))].split('–')[0]
+    : '—';
+  const last = r.items.length
+    ? TIMES[Math.max(...r.items.map((x) => x.period))].split('–')[1]
+    : '—';
 
   return `
-    ${result.truncated ? `
+    ${result.morningFallback ? '<div class="notice-box subtle-note" style="margin-bottom:16px">A morning-only timetable was not found. These alternatives include later classes.</div>' : ''}
+    ${
+      result.truncated
+        ? `
       <div class="notice-box subtle-note" style="margin-bottom: 16px;">
         <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75">
           <circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v4M8 5h.01"/>
         </svg>
         <span>Best combinations found within the search limit.</span>
       </div>
-    ` : ''}
+    `
+        : ''
+    }
 
     <div class="result-toolbar result-tools">
       <div class="option-tabs tabs" role="tablist" aria-label="Timetable options">
-        ${result.results.map((s, i) => {
-    const sFirst = s.items.length ? TIMES[Math.min(...s.items.map(x => x.period))].split('–')[0] : '—';
-    const sLast = s.items.length ? TIMES[Math.max(...s.items.map(x => x.period))].split('–')[1] : '—';
-    const moved = changed(s);
-    return `
+        ${result.results
+          .map((s, i) => {
+            const sFirst = s.items.length
+              ? TIMES[Math.min(...s.items.map((x) => x.period))].split('–')[0]
+              : '—';
+            const sLast = s.items.length
+              ? TIMES[Math.max(...s.items.map((x) => x.period))].split('–')[1]
+              : '—';
+            const moved = changed(s);
+            const sameRoutine = i > 0 && dailyPattern(s) === dailyPattern(result.results[0]);
+            return `
             <button data-result="${i}" class="tab-btn ${i === resultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === resultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
-              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${moved ? ' · ' + moved + ' courses moved' : ''}</span>
+              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${sameRoutine ? ' · Same routine' : ''}${moved ? ' · ' + moved + ' courses moved' : ''}</span>
             </button>
           `;
-  }).join('')}
+          })
+          .join('')}
       </div>
 
       <select id="schedule-choice" class="visually-hidden-select" aria-label="Select timetable combination">
@@ -789,35 +900,41 @@ function resultsView() {
           <thead>
             <tr>
               <th class="time-header-col">Time</th>
-              ${DAYS.map(d => `<th class="day-header">${d.slice(0, 3)}</th>`).join('')}
+              ${DAYS.map((d) => `<th class="day-header">${d.slice(0, 3)}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
-            ${TIMES.map((t, p) => `
+            ${TIMES.map(
+              (t, p) => `
               <tr>
                 <th class="time-header-col">${t}</th>
                 ${DAYS.map((_, d) => {
-    const x = r.items.find(x => x.day === d && x.period === p);
-    const courseIdx = x ? state.courses.findIndex(c => c.code === x.course) : -1;
-    const colorIdx = (courseIdx >= 0 ? courseIdx : 0) % 5;
-    const selected = x ? r.chosen.find(v => v.course.code === x.course) : null;
-    const sameTime = selected?.alternatives || [];
-    return `
+                  const x = r.items.find((x) => x.day === d && x.period === p);
+                  const courseIdx = x ? state.courses.findIndex((c) => c.code === x.course) : -1;
+                  const colorIdx = (courseIdx >= 0 ? courseIdx : 0) % 5;
+                  const selected = x ? r.chosen.find((v) => v.course.code === x.course) : null;
+                  const sameTime = selected?.alternatives || [];
+                  return `
                     <td class="timetable-cell">
-                      ${x ? `
+                      ${
+                        x
+                          ? `
                         <div class="event color${colorIdx}">
                           <b class="event-code">${esc(x.course)}</b>
-                          ${sameTime.length > 1 ? `<select class="event-faculty-select" data-faculty-course="${esc(x.course)}" aria-label="Faculty for ${esc(x.course)} ${DAYS[d]} ${x.code}">${sameTime.map(a => `<option value="${esc(a.id)}" ${a.id === selected.section.id ? 'selected' : ''}>${esc(a.faculty)} · ${esc(a.venue)}</option>`).join('')}</select><span class="event-faculty print-faculty">${esc(x.faculty)}</span>` : `<span class="event-faculty">${esc(x.faculty)}</span>`}
+                          ${sameTime.length > 1 ? `<select class="event-faculty-select" data-faculty-course="${esc(x.course)}" aria-label="Faculty for ${esc(x.course)} ${DAYS[d]} ${x.code}">${sameTime.map((a) => `<option value="${esc(a.id)}" ${a.id === selected.section.id ? 'selected' : ''}>${esc(a.faculty)} · ${esc(a.venue)}</option>`).join('')}</select><span class="event-faculty print-faculty">${esc(x.faculty)}</span>` : `<span class="event-faculty">${esc(x.faculty)}</span>`}
                           <small class="event-venue">${esc(x.venue)}</small>
                         </div>
-                      ` : `
+                      `
+                          : `
                         <span class="free-slot free">—</span>
-                      `}
+                      `
+                      }
                     </td>
                   `;
-  }).join('')}
+                }).join('')}
               </tr>
-            `).join('')}
+            `
+            ).join('')}
           </tbody>
         </table>
       </div>
@@ -828,14 +945,18 @@ function resultsView() {
         <span>Selected faculty summary</span>
       </summary>
       <div class="faculty-breakdown-list">
-        ${r.chosen.map(({ course: c, section: s }) => `
+        ${r.chosen
+          .map(
+            ({ course: c, section: s }) => `
           <div class="course-row">
             <div>
               <strong>${esc(c.code)} · ${esc(s.faculty)}</strong>
               <small style="display: block; color: var(--color-text-muted); margin-top: 2px;">${esc(s.slots)} · ${esc(s.venue)}${s.seats ? ` · ${esc(s.seats)} seats` : ''}</small>
             </div>
           </div>
-        `).join('')}
+        `
+          )
+          .join('')}
       </div>
     </details>
 
@@ -846,22 +967,24 @@ function resultsView() {
 }
 
 function bind() {
-  document.querySelectorAll('[data-step]').forEach(b => b.onclick = () => go(Number(b.dataset.step)));
+  document
+    .querySelectorAll('[data-step]')
+    .forEach((b) => (b.onclick = () => go(Number(b.dataset.step))));
 
-  document.querySelectorAll('.credit-name-btn').forEach(btn => {
-    btn.onclick = e => {
+  document.querySelectorAll('.credit-name-btn').forEach((btn) => {
+    btn.onclick = (e) => {
       e.stopPropagation();
       const parent = btn.closest('.credit-author');
       const wasOpen = parent?.classList.contains('is-open');
-      document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
+      document.querySelectorAll('.credit-author').forEach((a) => a.classList.remove('is-open'));
       if (!wasOpen) parent?.classList.add('is-open');
     };
   });
-  document.querySelectorAll('.credit-popover').forEach(pop => {
-    pop.onclick = e => e.stopPropagation();
+  document.querySelectorAll('.credit-popover').forEach((pop) => {
+    pop.onclick = (e) => e.stopPropagation();
   });
   document.onclick = () => {
-    document.querySelectorAll('.credit-author').forEach(a => a.classList.remove('is-open'));
+    document.querySelectorAll('.credit-author').forEach((a) => a.classList.remove('is-open'));
   };
 
   $('#back')?.addEventListener('click', () => go(state.step - 1));
@@ -870,20 +993,27 @@ function bind() {
     if (state.step === 0) {
       const total = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
       if (total > 27) {
-        return toast(`Cannot proceed: Total credits (${total}) exceed the maximum limit of 27. Please remove courses.`);
+        return toast(
+          `Cannot proceed: Total credits (${total}) exceed the maximum limit of 27. Please remove courses.`
+        );
       }
     }
     if (state.step === 1) {
       for (const id of Object.keys(drafts)) {
-        if (state.courses.some(c => c.id === id && !c.online) && !saveOptions(id, drafts[id].text, false)) return;
+        if (
+          state.courses.some((c) => c.id === id && !c.online) &&
+          !saveOptions(id, drafts[id].text, false)
+        )
+          return;
       }
       const missing = state.courses.filter(needsFaculty);
-      if (missing.length) return toast('Upload faculty options for ' + missing.map(c => c.code).join(', ') + '.');
+      if (missing.length)
+        return toast('Upload faculty options for ' + missing.map((c) => c.code).join(', ') + '.');
     }
     state.step === 2 ? generate() : go(state.step + 1);
   });
 
-  $('#year')?.addEventListener('change', e => {
+  $('#year')?.addEventListener('change', (e) => {
     state.year = e.target.value;
     state.branch = '';
     state.courses = [];
@@ -891,19 +1021,22 @@ function bind() {
     render();
   });
 
-  $('#branch')?.addEventListener('change', e => {
+  $('#branch')?.addEventListener('change', (e) => {
     state.branch = e.target.value;
     loadCourses();
     render();
   });
 
-  document.querySelectorAll('[data-remove]').forEach(b => b.onclick = () => {
-    state.courses = state.courses.filter(c => c.id !== b.dataset.remove);
-    invalidate();
-    render();
-  });
+  document.querySelectorAll('[data-remove]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        state.courses = state.courses.filter((c) => c.id !== b.dataset.remove);
+        invalidate();
+        render();
+      })
+  );
 
-  $('#add-course')?.addEventListener('submit', e => {
+  $('#add-course')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const code = String(data.get('code')).trim().toUpperCase();
@@ -912,14 +1045,19 @@ function bind() {
     const isProject = data.get('project') === 'on';
 
     if (!code || !name) return toast('Please enter both course code and name.');
-    if (state.courses.some(c => c.code === code)) return toast('Course ' + code + ' is already in your list.');
+    if (state.courses.some((c) => c.code === code))
+      return toast('Course ' + code + ' is already in your list.');
 
     const currentCredits = state.courses.reduce((n, c) => n + Number(c.credits || 0), 0);
     if (currentCredits >= 27) {
-      return toast('Credit limit fulfilled! You have already reached the maximum limit of 27 credits.');
+      return toast(
+        'Credit limit fulfilled! You have already reached the maximum limit of 27 credits.'
+      );
     }
     if (currentCredits + credits > 27) {
-      return toast(`Cannot add course: Adding ${credits} credits exceeds the 27 credits limit (Current: ${currentCredits} / 27).`);
+      return toast(
+        `Cannot add course: Adding ${credits} credits exceeds the 27 credits limit (Current: ${currentCredits} / 27).`
+      );
     }
 
     state.courses.push({
@@ -934,7 +1072,7 @@ function bind() {
       sections: [],
       preferred: [],
       avoid: [],
-      only: ''
+      only: '',
     });
     invalidate();
     render();
@@ -955,7 +1093,7 @@ function bind() {
     }
   });
 
-  document.querySelectorAll('[data-nav-target]').forEach(btn => {
+  document.querySelectorAll('[data-nav-target]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const targetId = btn.dataset.navTarget;
       const card = document.getElementById('card-' + targetId);
@@ -967,28 +1105,33 @@ function bind() {
     });
   });
 
-  document.querySelectorAll('[data-online]').forEach(el => el.onchange = () => {
-    const c = state.courses.find(c => c.id === el.dataset.online);
-    if (c) {
-      c.online = el.checked;
-      invalidate();
-      render();
-    }
-  });
+  document.querySelectorAll('[data-online]').forEach(
+    (el) =>
+      (el.onchange = () => {
+        const c = state.courses.find((c) => c.id === el.dataset.online);
+        if (c) {
+          c.online = el.checked;
+          invalidate();
+          render();
+        }
+      })
+  );
 
-  document.querySelectorAll('[data-upload]').forEach(el => el.onchange = () => readUpload(el.dataset.upload, el.files[0]));
+  document
+    .querySelectorAll('[data-upload]')
+    .forEach((el) => (el.onchange = () => readUpload(el.dataset.upload, el.files[0])));
 
-  document.querySelectorAll('[data-dropzone]').forEach(zone => {
+  document.querySelectorAll('[data-dropzone]').forEach((zone) => {
     const id = zone.dataset.dropzone;
-    zone.addEventListener('dragover', e => {
+    zone.addEventListener('dragover', (e) => {
       e.preventDefault();
       zone.classList.add('is-dragover');
     });
-    zone.addEventListener('dragleave', e => {
+    zone.addEventListener('dragleave', (e) => {
       e.preventDefault();
       zone.classList.remove('is-dragover');
     });
-    zone.addEventListener('drop', e => {
+    zone.addEventListener('drop', (e) => {
       e.preventDefault();
       zone.classList.remove('is-dragover');
       const file = e.dataTransfer?.files?.[0];
@@ -997,11 +1140,14 @@ function bind() {
   });
 
   for (const key of ['preferred', 'avoid']) {
-    document.querySelectorAll(`[data-${key}]`).forEach(el => {
+    document.querySelectorAll(`[data-${key}]`).forEach((el) => {
       const update = () => {
-        const c = state.courses.find(c => c.id === el.dataset[key]);
+        const c = state.courses.find((c) => c.id === el.dataset[key]);
         if (c) {
-          c[key] = el.value.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
+          c[key] = el.value
+            .split(/[,;\n]+/)
+            .map((s) => s.trim())
+            .filter(Boolean);
           invalidate();
         }
       };
@@ -1010,50 +1156,85 @@ function bind() {
     });
   }
 
-  document.querySelectorAll('[data-draft]').forEach(el => el.oninput = () => {
-    if (drafts[el.dataset.draft]) {
-      drafts[el.dataset.draft].text = el.value;
-      persist();
-    }
-  });
+  document.querySelectorAll('[data-draft]').forEach(
+    (el) =>
+      (el.oninput = () => {
+        if (drafts[el.dataset.draft]) {
+          drafts[el.dataset.draft].text = el.value;
+          persist();
+        }
+      })
+  );
 
-  document.querySelectorAll('[data-save-draft]').forEach(b => b.onclick = () => saveOptions(b.dataset.saveDraft, drafts[b.dataset.saveDraft].text, false));
-  document.querySelectorAll('[data-save-edit]').forEach(b => b.onclick = () => saveOptions(b.dataset.saveEdit, document.querySelector(`[data-edit="${b.dataset.saveEdit}"]`).value, true));
-  document.querySelectorAll('[data-cancel-draft]').forEach(b => b.onclick = () => {
-    delete drafts[b.dataset.cancelDraft];
-    persist();
-    render();
-  });
+  document
+    .querySelectorAll('[data-save-draft]')
+    .forEach(
+      (b) =>
+        (b.onclick = () =>
+          saveOptions(b.dataset.saveDraft, drafts[b.dataset.saveDraft].text, false))
+    );
+  document
+    .querySelectorAll('[data-save-edit]')
+    .forEach(
+      (b) =>
+        (b.onclick = () =>
+          saveOptions(
+            b.dataset.saveEdit,
+            document.querySelector(`[data-edit="${b.dataset.saveEdit}"]`).value,
+            true
+          ))
+    );
+  document.querySelectorAll('[data-cancel-draft]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        delete drafts[b.dataset.cancelDraft];
+        persist();
+        render();
+      })
+  );
 
   for (const key of ['lunch', 'bus', 'travel', 'busTime', 'walkMinutes']) {
-    $('#' + key)?.addEventListener('change', e => {
-      if (!e.target.validity.valid || (['busTime', 'walkMinutes'].includes(key) && e.target.value === '')) {
+    $('#' + key)?.addEventListener('change', (e) => {
+      if (
+        !e.target.validity.valid ||
+        (['busTime', 'walkMinutes'].includes(key) && e.target.value === '')
+      ) {
         render();
         return;
       }
-      state.settings[key] = ['lunch', 'bus', 'travel'].includes(key) ? e.target.checked : key === 'walkMinutes' ? Number(e.target.value) : e.target.value;
+      state.settings[key] = ['lunch', 'bus', 'travel'].includes(key)
+        ? e.target.checked
+        : key === 'walkMinutes'
+          ? Number(e.target.value)
+          : e.target.value;
       invalidate();
       render();
     });
   }
 
-  document.querySelectorAll('[data-preset]').forEach(b => b.onclick = () => {
-    state.preset = b.dataset.preset;
-    invalidate();
-    render();
-  });
+  document.querySelectorAll('[data-preset]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        state.preset = b.dataset.preset;
+        invalidate();
+        render();
+      })
+  );
 
-  document.querySelectorAll('[data-result]').forEach(b => b.onclick = () => {
-    resultIndex = Number(b.dataset.result);
-    render();
-  });
+  document.querySelectorAll('[data-result]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        resultIndex = Number(b.dataset.result);
+        render();
+      })
+  );
 
-  $('#schedule-choice')?.addEventListener('change', e => {
+  $('#schedule-choice')?.addEventListener('change', (e) => {
     resultIndex = Number(e.target.value);
     render();
   });
 
-  document.querySelectorAll('[data-faculty-course]').forEach(el => {
+  document.querySelectorAll('[data-faculty-course]').forEach((el) => {
     el.onchange = () => {
       try {
         result.results[resultIndex] = changeFaculty(
@@ -1079,7 +1260,7 @@ function bind() {
   $('#review-faculty')?.addEventListener('click', () => go(1));
   $('#review-settings')?.addEventListener('click', () => go(2));
 
-  document.querySelectorAll('details').forEach(el => {
+  document.querySelectorAll('details').forEach((el) => {
     el.addEventListener('toggle', () => {
       const id = el.id.replace('details-', '');
       if (el.open) openDetails.add(id);
@@ -1090,14 +1271,17 @@ function bind() {
 
 function saveOptions(id, text, replace) {
   try {
-    const c = state.courses.find(c => c.id === id), rows = [];
-    for (const line of text.split('\n').filter(s => s.trim())) {
-      const parts = line.split('|').map(s => s.trim());
-      if (parts.length < 3 || parts.length > 4) throw Error('Use Faculty | Slots | Venue | Seats for each row.');
+    const c = state.courses.find((c) => c.id === id),
+      rows = [];
+    for (const line of text.split('\n').filter((s) => s.trim())) {
+      const parts = line.split('|').map((s) => s.trim());
+      if (parts.length < 3 || parts.length > 4)
+        throw Error('Use Faculty | Slots | Venue | Seats for each row.');
       const [faculty, slots, venue, seats = ''] = parts;
       rows.push({ id: uid(), faculty, slots, venue, seats });
     }
-    c.sections = replace && !rows.length ? [] : mergeSections(replace ? { ...c, sections: [] } : c, rows);
+    c.sections =
+      replace && !rows.length ? [] : mergeSections(replace ? { ...c, sections: [] } : c, rows);
     delete drafts[id];
     delete c.uploadError;
     invalidate();
@@ -1112,11 +1296,13 @@ function saveOptions(id, text, replace) {
 
 async function pdfText(file) {
   const pdf = await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs');
-  pdf.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+  pdf.GlobalWorkerOptions.workerSrc =
+    'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
   const doc = await pdf.getDocument({ data: await file.arrayBuffer() }).promise;
   let text = '';
   for (let i = 1; i <= doc.numPages; i++) {
-    const page = await doc.getPage(i), content = await page.getTextContent();
+    const page = await doc.getPage(i),
+      content = await page.getTextContent();
     text += pdfItemsToText(content.items);
   }
   return text;
@@ -1124,17 +1310,21 @@ async function pdfText(file) {
 
 async function readUpload(id, file) {
   if (!file) return;
-  const c = state.courses.find(c => c.id === id);
+  const c = state.courses.find((c) => c.id === id);
   if (!c) return;
   uploading.add(id);
   delete c.uploadError;
   render();
   try {
     await validatePdfUpload(file);
-    const text = await pdfText(file), parsed = parsePortalText(text);
-    if (parsed.code !== c.code) throw Error('This PDF is for ' + parsed.code + '. Upload it under that course.');
-    const rows = (parsed.sections || []).map(s => ({ ...s, id: uid() }));
-    const reviewText = rows.length ? rows.map(s => [s.faculty, s.slots, s.venue, s.seats ?? ''].join(' | ')).join('\n') : text;
+    const text = await pdfText(file),
+      parsed = parsePortalText(text);
+    if (parsed.code !== c.code)
+      throw Error('This PDF is for ' + parsed.code + '. Upload it under that course.');
+    const rows = (parsed.sections || []).map((s) => ({ ...s, id: uid() }));
+    const reviewText = rows.length
+      ? rows.map((s) => [s.faculty, s.slots, s.venue, s.seats ?? ''].join(' | ')).join('\n')
+      : text;
     try {
       c.sections = mergeSections(c, rows);
       c.lastUpload = file.name;
@@ -1143,7 +1333,10 @@ async function readUpload(id, file) {
       invalidate();
       toast(`${c.code}: ${c.sections.length} options saved.`);
     } catch (validation) {
-      drafts[id] = { text: reviewText, message: 'Please correct these rows before continuing: ' + validation.message };
+      drafts[id] = {
+        text: reviewText,
+        message: 'Please correct these rows before continuing: ' + validation.message,
+      };
       persist();
     }
   } catch (e) {
@@ -1155,12 +1348,24 @@ async function readUpload(id, file) {
   }
 }
 
-async function downloadPdf(){
- const schedule=result?.results?.[resultIndex];if(!schedule)return;
- const button=$('#print');if(button){button.disabled=true;button.textContent='Preparing PDF…';}
- try{await downloadTimetablePdf(schedule,{option:resultIndex+1,courses:state.courses});}
- catch(error){toast(error.message||'Could not export PDF. Please try again.');}
- finally{if(button){button.disabled=false;button.textContent='Download PDF';}}
+async function downloadPdf() {
+  const schedule = result?.results?.[resultIndex];
+  if (!schedule) return;
+  const button = $('#print');
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Preparing PDF…';
+  }
+  try {
+    await downloadTimetablePdf(schedule, { option: resultIndex + 1, courses: state.courses });
+  } catch (error) {
+    toast(error.message || 'Could not export PDF. Please try again.');
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'Download PDF';
+    }
+  }
 }
 
 function generate() {
@@ -1173,19 +1378,25 @@ function generate() {
   const id = ++job;
   render();
   window.scrollTo({ top: 0, behavior: 'instant' });
-  worker = startGeneration({ id, courses: state.courses, settings: state.settings, preset: state.preset, limit: 5 }, {
-    onProgress: progress => {
-      if (id !== job) return;
-      const message = $('#generation-status');
-      if (message) message.textContent = progress.found ? 'Shortlisting a few useful timetables…' : 'Checking your course slots…';
-    },
-    onResult: data => {
-      if (id !== job) return;
-      result = data;
-      busy = false;
-      render();
+  worker = startGeneration(
+    { id, courses: state.courses, settings: state.settings, preset: state.preset, limit: 5 },
+    {
+      onProgress: (progress) => {
+        if (id !== job) return;
+        const message = $('#generation-status');
+        if (message)
+          message.textContent = progress.found
+            ? 'Shortlisting a few useful timetables…'
+            : 'Checking your course slots…';
+      },
+      onResult: (data) => {
+        if (id !== job) return;
+        result = data;
+        busy = false;
+        render();
+      },
     }
-  });
+  );
 }
 
 render();

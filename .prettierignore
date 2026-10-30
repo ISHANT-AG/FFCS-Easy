@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build and scratch
+work/
+dist/
+.cache/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+
+# Package locks
+package-lock.json
+
+# Large data fixtures
+data/
+tests/*-items.json
+tests/*.txt
+tests/*-sections.json
+

@@ -1,12 +1,55 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {parsePortalText} from '../src/portal.js';
-import {validateSection} from '../src/engine.js';
-const fixtures=JSON.parse(await readFile(new URL('portal-fixtures.json',import.meta.url)));
-for(const fixture of fixtures)test(`parse ${fixture.file}: all ${fixture.count} rows, including page continuations`,()=>{const r=parsePortalText(fixture.text);assert.equal(r.code,fixture.code);assert.equal(r.sections.length,fixture.count);for(const s of r.sections){validateSection(s,{allowNil:!r.scheduled});assert.ok(!/Clashed|NONE|Copyright/.test(s.faculty));}});
-test('source-session clashes do not remove valid options',()=>{const r=parsePortalText(fixtures.find(f=>f.code==='MAT3002').text);assert.equal(r.sections[0].slots,'A11+A12');assert.equal(r.sections[0].seats,'69');assert.ok(!('clash' in r.sections[0]));});
-test('published extracts exclude personal account headers',()=>{for(const f of fixtures)assert.ok(!/25BCE11028|ISHANT AGRAWAL|Sign out|Registered \d/.test(f.text));});
-test('screenshot table rows become reviewable faculty options',async()=>{const {parseScreenshotText}=await import('../src/portal.js');const r=parseScreenshotText('Lecture and Tutorial hours only A11+A12 AB-103 HEMANT KUMAR NASHINE 70 1 69\nProject Only NIL NIL AVIRUP DAS Similar to Registered Slot 350 53 297');assert.equal(r.length,2);assert.equal(r[0].faculty,'HEMANT KUMAR NASHINE');assert.equal(r[0].seats,'69');assert.equal(r[1].slots,'NIL');assert.equal(r[1].faculty,'AVIRUP DAS');});
-test('wrapped faculty row and spaced plus signs import without silently dropping the row',()=>{const r=parsePortalText('CSE2001 - Programming - Lecture\nA11 + A12 AB-102 SARATHKUMAR\nSEBASTIN J NONE 70\nB11 AB-103 OTHER NONE 0\nCopyright test');assert.equal(r.sections.length,2);assert.equal(r.sections[0].faculty,'SARATHKUMAR SEBASTIN J');assert.equal(r.sections[0].slots,'A11+A12');assert.equal(r.sections[1].seats,'0');});
-test('partially readable PDF is rejected instead of auto-saving an incomplete faculty list',()=>{assert.throws(()=>parsePortalText('CSE2001 - Programming - Lecture\nA11 AB-102 TEACHER NONE 70\nB11 AB-103 OTHER NONE unreadable\nCopyright test'),/1 of 2/);});
+import { readFile } from 'node:fs/promises';
+import { parsePortalText } from '../src/portal.js';
+import { validateSection } from '../src/engine.js';
+const fixtures = JSON.parse(await readFile(new URL('portal-fixtures.json', import.meta.url)));
+for (const fixture of fixtures)
+  test(`parse ${fixture.file}: all ${fixture.count} rows, including page continuations`, () => {
+    const r = parsePortalText(fixture.text);
+    assert.equal(r.code, fixture.code);
+    assert.equal(r.sections.length, fixture.count);
+    for (const s of r.sections) {
+      validateSection(s, { allowNil: !r.scheduled });
+      assert.ok(!/Clashed|NONE|Copyright/.test(s.faculty));
+    }
+  });
+test('source-session clashes do not remove valid options', () => {
+  const r = parsePortalText(fixtures.find((f) => f.code === 'MAT3002').text);
+  assert.equal(r.sections[0].slots, 'A11+A12');
+  assert.equal(r.sections[0].seats, '69');
+  assert.ok(!('clash' in r.sections[0]));
+});
+test('published extracts exclude personal account headers', () => {
+  for (const f of fixtures)
+    assert.ok(!/25BCE11028|ISHANT AGRAWAL|Sign out|Registered \d/.test(f.text));
+});
+test('screenshot table rows become reviewable faculty options', async () => {
+  const { parseScreenshotText } = await import('../src/portal.js');
+  const r = parseScreenshotText(
+    'Lecture and Tutorial hours only A11+A12 AB-103 HEMANT KUMAR NASHINE 70 1 69\nProject Only NIL NIL AVIRUP DAS Similar to Registered Slot 350 53 297'
+  );
+  assert.equal(r.length, 2);
+  assert.equal(r[0].faculty, 'HEMANT KUMAR NASHINE');
+  assert.equal(r[0].seats, '69');
+  assert.equal(r[1].slots, 'NIL');
+  assert.equal(r[1].faculty, 'AVIRUP DAS');
+});
+test('wrapped faculty row and spaced plus signs import without silently dropping the row', () => {
+  const r = parsePortalText(
+    'CSE2001 - Programming - Lecture\nA11 + A12 AB-102 SARATHKUMAR\nSEBASTIN J NONE 70\nB11 AB-103 OTHER NONE 0\nCopyright test'
+  );
+  assert.equal(r.sections.length, 2);
+  assert.equal(r.sections[0].faculty, 'SARATHKUMAR SEBASTIN J');
+  assert.equal(r.sections[0].slots, 'A11+A12');
+  assert.equal(r.sections[1].seats, '0');
+});
+test('partially readable PDF is rejected instead of auto-saving an incomplete faculty list', () => {
+  assert.throws(
+    () =>
+      parsePortalText(
+        'CSE2001 - Programming - Lecture\nA11 AB-102 TEACHER NONE 70\nB11 AB-103 OTHER NONE unreadable\nCopyright test'
+      ),
+    /1 of 2/
+  );
+});

@@ -1,13 +1,112 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {solve,changeFaculty,slotBundle} from '../src/engine.js';
-const s=(id,slots,faculty=id,venue='AB1-102',seats='70')=>({id,slots,faculty,venue,seats});
-const c=(code,sections,extra={})=>({id:code,code,name:code,sections,scheduled:true,preferred:[],avoid:[],...extra});
-test('faculty-only permutations produce one timing option with every eligible alternative',()=>{const sections=Array.from({length:14},(_,i)=>s(String(i),'A11+A12'));const r=solve([c('X',sections)],{},'compact',24);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen[0].alternatives.length,14);});
-test('same slot bundle with different token order groups together',()=>{const r=solve([c('X',[s('a','A11+A12'),s('b','A12+A11')])]);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen[0].alternatives.length,2);});
-test('multiple courses yield 24 distinct timing permutations rather than four faculty edits',()=>{const slots=['A11','B11','D11','E11','A12','B12'];const r=solve([c('X',slots.map((v,i)=>s('x'+i,v))),c('Y',slots.map((v,i)=>s('y'+i,v)))],{},'compact',24);assert.equal(r.results.length,24);assert.equal(new Set(r.results.map(x=>x.signature)).size,24);});
-test('same-time switch preserves all time assignments and updates faculty, room and travel',()=>{const courses=[c('X',[s('a','A11','A'),s('b','A11','B','AB02-401')]),c('Y',[s('y','B11','Y')])];const r=solve(courses,{travel:true}).results[0];assert.equal(r.metrics.travel,0);const after=changeFaculty(r,'X','b',{travel:true});assert.equal(after.signature,r.signature);assert.deepEqual(after.items.map(x=>[x.course,x.day,x.period]),r.items.map(x=>[x.course,x.day,x.period]));assert.equal(after.items.find(x=>x.course==='X').faculty,'B');assert.equal(after.items.find(x=>x.course==='X').venue,'AB02-401');assert.equal(after.metrics.travel,1);assert.equal(after.chosen.find(x=>x.course.code==='X').section.id,'b');assert.equal(r.items.find(x=>x.course==='X').faculty,'A');});
-test('switch rejects different times, avoided faculty and full sections',()=>{const r=solve([c('X',[s('a','A11'),s('b','B11'),s('avoid','A11'),s('full','A11','full','AB1','0')],{avoid:['avoid']})]).results[0];assert.equal(r.chosen[0].alternatives.length,1);for(const id of ['b','avoid','full'])assert.throws(()=>changeFaculty(r,'X',id),/same time slots/);});
-test('strict faculty is respected by dropdown and switch',()=>{const r=solve([c('X',[s('a','A11','A'),s('b','A11','B')],{only:'A'})]).results[0];assert.equal(r.chosen[0].alternatives.length,1);assert.throws(()=>changeFaculty(r,'X','b'));});
-test('project faculty switches do not add time periods or new timetable options',()=>{const r=solve([c('W',[s('w','A11')]),c('P',[s('p','NIL','P','NIL'),s('q','NIL','Q','NIL')],{scheduled:false})]);assert.equal(r.results.length,1);const next=changeFaculty(r.results[0],'P','q');assert.equal(next.items.length,1);assert.equal(next.signature,r.results[0].signature);});
-test('default shortlist is five distinct timing combinations',()=>{const slots=['A11','B11','D11','E11','A12','B12'];const r=solve([c('X',slots.map((v,i)=>s('x'+i,v))),c('Y',slots.map((v,i)=>s('y'+i,v)))]);assert.equal(r.results.length,5);assert.equal(new Set(r.results.map(x=>x.signature)).size,5);});
+import { solve, changeFaculty, slotBundle } from '../src/engine.js';
+const s = (id, slots, faculty = id, venue = 'AB1-102', seats = '70') => ({
+  id,
+  slots,
+  faculty,
+  venue,
+  seats,
+});
+const c = (code, sections, extra = {}) => ({
+  id: code,
+  code,
+  name: code,
+  sections,
+  scheduled: true,
+  preferred: [],
+  avoid: [],
+  ...extra,
+});
+test('faculty-only permutations produce one timing option with every eligible alternative', () => {
+  const sections = Array.from({ length: 14 }, (_, i) => s(String(i), 'A11+A12'));
+  const r = solve([c('X', sections)], {}, 'compact', 24);
+  assert.equal(r.results.length, 1);
+  assert.equal(r.results[0].chosen[0].alternatives.length, 14);
+});
+test('same slot bundle with different token order groups together', () => {
+  const r = solve([c('X', [s('a', 'A11+A12'), s('b', 'A12+A11')])]);
+  assert.equal(r.results.length, 1);
+  assert.equal(r.results[0].chosen[0].alternatives.length, 2);
+});
+test('multiple courses yield 24 distinct timing permutations rather than four faculty edits', () => {
+  const slots = ['A11', 'B11', 'D11', 'E11', 'A12', 'B12'];
+  const r = solve(
+    [
+      c(
+        'X',
+        slots.map((v, i) => s('x' + i, v))
+      ),
+      c(
+        'Y',
+        slots.map((v, i) => s('y' + i, v))
+      ),
+    ],
+    {},
+    'compact',
+    24
+  );
+  assert.equal(r.results.length, 24);
+  assert.equal(new Set(r.results.map((x) => x.signature)).size, 24);
+});
+test('same-time switch preserves all time assignments and updates faculty, room and travel', () => {
+  const courses = [
+    c('X', [s('a', 'A11', 'A'), s('b', 'A11', 'B', 'AB02-401')]),
+    c('Y', [s('y', 'B11', 'Y')]),
+  ];
+  const r = solve(courses, { travel: true }).results[0];
+  assert.equal(r.metrics.travel, 0);
+  const after = changeFaculty(r, 'X', 'b', { travel: true });
+  assert.equal(after.signature, r.signature);
+  assert.deepEqual(
+    after.items.map((x) => [x.course, x.day, x.period]),
+    r.items.map((x) => [x.course, x.day, x.period])
+  );
+  assert.equal(after.items.find((x) => x.course === 'X').faculty, 'B');
+  assert.equal(after.items.find((x) => x.course === 'X').venue, 'AB02-401');
+  assert.equal(after.metrics.travel, 1);
+  assert.equal(after.chosen.find((x) => x.course.code === 'X').section.id, 'b');
+  assert.equal(r.items.find((x) => x.course === 'X').faculty, 'A');
+});
+test('switch rejects different times, avoided faculty and full sections', () => {
+  const r = solve([
+    c(
+      'X',
+      [s('a', 'A11'), s('b', 'B11'), s('avoid', 'A11'), s('full', 'A11', 'full', 'AB1', '0')],
+      { avoid: ['avoid'] }
+    ),
+  ]).results[0];
+  assert.equal(r.chosen[0].alternatives.length, 1);
+  for (const id of ['b', 'avoid', 'full'])
+    assert.throws(() => changeFaculty(r, 'X', id), /same time slots/);
+});
+test('strict faculty is respected by dropdown and switch', () => {
+  const r = solve([c('X', [s('a', 'A11', 'A'), s('b', 'A11', 'B')], { only: 'A' })]).results[0];
+  assert.equal(r.chosen[0].alternatives.length, 1);
+  assert.throws(() => changeFaculty(r, 'X', 'b'));
+});
+test('project faculty switches do not add time periods or new timetable options', () => {
+  const r = solve([
+    c('W', [s('w', 'A11')]),
+    c('P', [s('p', 'NIL', 'P', 'NIL'), s('q', 'NIL', 'Q', 'NIL')], { scheduled: false }),
+  ]);
+  assert.equal(r.results.length, 1);
+  const next = changeFaculty(r.results[0], 'P', 'q');
+  assert.equal(next.items.length, 1);
+  assert.equal(next.signature, r.results[0].signature);
+});
+test('default shortlist is five distinct timing combinations', () => {
+  const slots = ['A11', 'B11', 'D11', 'E11', 'A12', 'B12'];
+  const r = solve([
+    c(
+      'X',
+      slots.map((v, i) => s('x' + i, v))
+    ),
+    c(
+      'Y',
+      slots.map((v, i) => s('y' + i, v))
+    ),
+  ]);
+  assert.equal(r.results.length, 5);
+  assert.equal(new Set(r.results.map((x) => x.signature)).size, 5);
+});

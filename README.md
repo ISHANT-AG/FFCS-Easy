@@ -85,3 +85,9 @@ The first timetable is the best preference match found. Subsequent choices maxim
 ## Freshers catalogue — 30 October 2026
 
 Added all 64 course entries across 18 admission-2026 branches from the supplied `1. Course List.pdf` (Fall 2026–27). First-year selection uses the existing 26 batch mapping. Course codes, types, credits and categories are retained, including MAT1002/MAT1003/MAT1031 distinctions. No faculty or seat data is prefilled.
+
+## Consistent routine alternatives
+
+The shortlist keeps its best-scoring option first, then prioritizes up to two subject-slot permutations with exactly the same occupied weekly grid cells. These preserve daily class/free/lunch times while giving access to other faculty bundles. A targeted search of the winning occupied pattern (up to 20,000 nodes / 200 ms) supplements the bounded general search. Remaining places maximize timing flexibility; if fewer matching routines exist, other valid layouts fill the shortlist. Same-time faculty-only variants remain dropdown choices. All eligibility and hard timing constraints remain in force. Matching tabs show “Same routine”.
+
+Morning preference now searches for a complete timetable ending by 13:15 first. When any such schedule is found, all shortlisted options stay in that morning window, even if fewer than five exist. Later classes are considered only if the morning search finds no solution, with an explicit fallback notice. Hard exclusions remain unchanged.

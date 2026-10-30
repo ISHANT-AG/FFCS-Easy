@@ -1,15 +1,80 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mergeSections,needsFaculty} from '../src/sections.js';
-import {solve} from '../src/engine.js';
-const row=(faculty='A',slots='A11',seats='70')=>({id:faculty,faculty,slots,venue:'AB1-102',seats});
-const course=(extra={})=>({code:'X',scheduled:true,sections:[],...extra});
-test('validated upload is immediately usable by the Continue guard',()=>{const c=course();assert.ok(needsFaculty(c));c.sections=mergeSections(c,[row()]);assert.equal(needsFaculty(c),false);});
-test('reupload deduplicates sections and refreshes seats',()=>{const c=course({sections:[row()]});const rows=mergeSections(c,[row('A','A11','65'),row('B','B11')]);assert.equal(rows.length,2);assert.equal(rows[0].seats,'65');});
-test('bad upload never partially commits',()=>{const c=course({sections:[row()]});assert.throws(()=>mergeSections(c,[row('B','B11'),row('C','A99')]));assert.equal(c.sections.length,1);});
-test('NIL project upload commits without creating weekly meetings',()=>{const c=course({scheduled:false});c.sections=mergeSections(c,[{...row(),slots:'NIL',venue:'NIL'}]);assert.equal(needsFaculty(c),false);const r=solve([{...course({sections:[row()]}),code:'W'},c]);assert.equal(r.results[0].items.length,1);});
-test('online course needs no faculty and is absent from clashes and shortlist',()=>{const c=course({online:true,only:'Unavailable',sections:[row()]});assert.equal(needsFaculty(c),false);const r=solve([c,{...course({sections:[row()]}),code:'W'}]);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen.length,1);assert.equal(r.results[0].chosen[0].course.code,'W');c.online=false;assert.equal(solve([c,{...course({sections:[row()]}),code:'W'}]).results.length,0);});
-test('reordered slot bundles and punctuation aliases cannot retain an old open row after zero-seat reupload',()=>{const c=course({sections:[{...row('RAM KUMAR','A11+A12','10'),venue:'AB02-401'}]});c.sections=mergeSections(c,[{...row('Ram.Kumar','A12+A11','0'),venue:'AB2-401'}]);assert.equal(c.sections.length,1);assert.equal(c.sections[0].seats,'0');assert.equal(solve([c]).results.length,0);});
-test('a reupload also consolidates legacy duplicate rows',()=>{const c=course({sections:[row('A','A11+A12','70'),row('A','A12+A11','0')]});const merged=mergeSections(c,[row('B','B11','10')]);assert.equal(merged.length,2);assert.equal(merged[0].seats,'0');});
-test('fractional and negative seat counts cannot enter a saved list',()=>{assert.throws(()=>mergeSections(course(),[row('A','A11','1.5')]));assert.throws(()=>mergeSections(course(),[row('A','A11','-1')]));});
-test('distinct NIL project rows with the same faculty are preserved and reupload is idempotent',()=>{const c=course({scheduled:false});const rows=[{...row('A'),id:'one',slots:'NIL',venue:'NIL',seats:'0'},{...row('A'),id:'two',slots:'NIL',venue:'NIL',seats:'12'}];c.sections=mergeSections(c,rows);assert.equal(c.sections.length,2);c.sections=mergeSections(c,rows.map(s=>({...s,id:'new-'+s.id})));assert.equal(c.sections.length,2);const r=solve([c]);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen[0].section.id,'two');});
+import { mergeSections, needsFaculty } from '../src/sections.js';
+import { solve } from '../src/engine.js';
+const row = (faculty = 'A', slots = 'A11', seats = '70') => ({
+  id: faculty,
+  faculty,
+  slots,
+  venue: 'AB1-102',
+  seats,
+});
+const course = (extra = {}) => ({ code: 'X', scheduled: true, sections: [], ...extra });
+test('validated upload is immediately usable by the Continue guard', () => {
+  const c = course();
+  assert.ok(needsFaculty(c));
+  c.sections = mergeSections(c, [row()]);
+  assert.equal(needsFaculty(c), false);
+});
+test('reupload deduplicates sections and refreshes seats', () => {
+  const c = course({ sections: [row()] });
+  const rows = mergeSections(c, [row('A', 'A11', '65'), row('B', 'B11')]);
+  assert.equal(rows.length, 2);
+  assert.equal(rows[0].seats, '65');
+});
+test('bad upload never partially commits', () => {
+  const c = course({ sections: [row()] });
+  assert.throws(() => mergeSections(c, [row('B', 'B11'), row('C', 'A99')]));
+  assert.equal(c.sections.length, 1);
+});
+test('NIL project upload commits without creating weekly meetings', () => {
+  const c = course({ scheduled: false });
+  c.sections = mergeSections(c, [{ ...row(), slots: 'NIL', venue: 'NIL' }]);
+  assert.equal(needsFaculty(c), false);
+  const r = solve([{ ...course({ sections: [row()] }), code: 'W' }, c]);
+  assert.equal(r.results[0].items.length, 1);
+});
+test('online course needs no faculty and is absent from clashes and shortlist', () => {
+  const c = course({ online: true, only: 'Unavailable', sections: [row()] });
+  assert.equal(needsFaculty(c), false);
+  const r = solve([c, { ...course({ sections: [row()] }), code: 'W' }]);
+  assert.equal(r.results.length, 1);
+  assert.equal(r.results[0].chosen.length, 1);
+  assert.equal(r.results[0].chosen[0].course.code, 'W');
+  c.online = false;
+  assert.equal(solve([c, { ...course({ sections: [row()] }), code: 'W' }]).results.length, 0);
+});
+test('reordered slot bundles and punctuation aliases cannot retain an old open row after zero-seat reupload', () => {
+  const c = course({ sections: [{ ...row('RAM KUMAR', 'A11+A12', '10'), venue: 'AB02-401' }] });
+  c.sections = mergeSections(c, [{ ...row('Ram.Kumar', 'A12+A11', '0'), venue: 'AB2-401' }]);
+  assert.equal(c.sections.length, 1);
+  assert.equal(c.sections[0].seats, '0');
+  assert.equal(solve([c]).results.length, 0);
+});
+test('a reupload also consolidates legacy duplicate rows', () => {
+  const c = course({ sections: [row('A', 'A11+A12', '70'), row('A', 'A12+A11', '0')] });
+  const merged = mergeSections(c, [row('B', 'B11', '10')]);
+  assert.equal(merged.length, 2);
+  assert.equal(merged[0].seats, '0');
+});
+test('fractional and negative seat counts cannot enter a saved list', () => {
+  assert.throws(() => mergeSections(course(), [row('A', 'A11', '1.5')]));
+  assert.throws(() => mergeSections(course(), [row('A', 'A11', '-1')]));
+});
+test('distinct NIL project rows with the same faculty are preserved and reupload is idempotent', () => {
+  const c = course({ scheduled: false });
+  const rows = [
+    { ...row('A'), id: 'one', slots: 'NIL', venue: 'NIL', seats: '0' },
+    { ...row('A'), id: 'two', slots: 'NIL', venue: 'NIL', seats: '12' },
+  ];
+  c.sections = mergeSections(c, rows);
+  assert.equal(c.sections.length, 2);
+  c.sections = mergeSections(
+    c,
+    rows.map((s) => ({ ...s, id: 'new-' + s.id }))
+  );
+  assert.equal(c.sections.length, 2);
+  const r = solve([c]);
+  assert.equal(r.results.length, 1);
+  assert.equal(r.results[0].chosen[0].section.id, 'two');
+});

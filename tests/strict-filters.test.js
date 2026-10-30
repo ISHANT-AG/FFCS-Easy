@@ -1,7 +1,70 @@
-import test from 'node:test';import assert from 'node:assert/strict';
-import {solve,eligibleSections,changeFaculty,matchesAvoidFaculty} from '../src/engine.js';
-const section=(id,faculty,seats,slots='A11')=>({id,faculty,seats,slots,venue:'AB1-102'});
-test('avoid supports full names, standalone name parts, punctuation and casing without substring accidents',()=>{assert.ok(matchesAvoidFaculty('sanat','SANAT JAIN'));assert.ok(matchesAvoidFaculty(' Dr. SANAT JAIN ','DR SANAT JAIN'));assert.ok(matchesAvoidFaculty('baseera a','BASEERA.A'));assert.ok(matchesAvoidFaculty('ram kumar','RAMKUMAR'));assert.equal(matchesAvoidFaculty('ram','GARIMA JAIN'),false);assert.equal(matchesAvoidFaculty('','SANAT JAIN'),false);});
-test('avoided faculty and zero-seat sections never enter any result or alternative',()=>{const c={code:'X',scheduled:true,avoid:['sanat'],preferred:['SANAT JAIN'],sections:[section('ban1','SANAT JAIN',100),section('ban2','SANAT KUMAR',100,'B11'),section('zero','AVAILABLE FACULTY',0),section('stringzero','OTHER FACULTY','0','B11'),section('paddedzero','THIRD FACULTY',' 0 '),section('good1','GOOD FACULTY',1),section('good2','ANOTHER GOOD',20,'B11')]};assert.deepEqual(eligibleSections(c).map(s=>s.id),['good1','good2']);const r=solve([c]);assert.equal(r.results.length,2);for(const schedule of r.results){assert.ok(!schedule.items.some(i=>/SANAT/.test(i.faculty)));assert.ok(schedule.chosen.every(v=>v.alternatives.every(s=>Number(s.seats)>0&&!/SANAT/.test(s.faculty))));for(const id of ['ban1','ban2','zero','stringzero','paddedzero'])assert.throws(()=>changeFaculty(schedule,'X',id));}});
-test('a full faculty section is excluded per slot while a different available section remains eligible',()=>{const c={code:'X',scheduled:true,sections:[section('full','SAME FACULTY',0),section('open','SAME FACULTY',10,'B11')]};const r=solve([c]);assert.equal(r.results.length,1);assert.equal(r.results[0].chosen[0].section.id,'open');});
-test('all avoided/full options give an honest no-eligible result, never relax exclusion',()=>{const c={code:'X',scheduled:true,avoid:['SANAT'],sections:[section('ban','SANAT JAIN',50),section('full','OTHER',0)]};assert.equal(solve([c]).results.length,0);});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { solve, eligibleSections, changeFaculty, matchesAvoidFaculty } from '../src/engine.js';
+const section = (id, faculty, seats, slots = 'A11') => ({
+  id,
+  faculty,
+  seats,
+  slots,
+  venue: 'AB1-102',
+});
+test('avoid supports full names, standalone name parts, punctuation and casing without substring accidents', () => {
+  assert.ok(matchesAvoidFaculty('sanat', 'SANAT JAIN'));
+  assert.ok(matchesAvoidFaculty(' Dr. SANAT JAIN ', 'DR SANAT JAIN'));
+  assert.ok(matchesAvoidFaculty('baseera a', 'BASEERA.A'));
+  assert.ok(matchesAvoidFaculty('ram kumar', 'RAMKUMAR'));
+  assert.equal(matchesAvoidFaculty('ram', 'GARIMA JAIN'), false);
+  assert.equal(matchesAvoidFaculty('', 'SANAT JAIN'), false);
+});
+test('avoided faculty and zero-seat sections never enter any result or alternative', () => {
+  const c = {
+    code: 'X',
+    scheduled: true,
+    avoid: ['sanat'],
+    preferred: ['SANAT JAIN'],
+    sections: [
+      section('ban1', 'SANAT JAIN', 100),
+      section('ban2', 'SANAT KUMAR', 100, 'B11'),
+      section('zero', 'AVAILABLE FACULTY', 0),
+      section('stringzero', 'OTHER FACULTY', '0', 'B11'),
+      section('paddedzero', 'THIRD FACULTY', ' 0 '),
+      section('good1', 'GOOD FACULTY', 1),
+      section('good2', 'ANOTHER GOOD', 20, 'B11'),
+    ],
+  };
+  assert.deepEqual(
+    eligibleSections(c).map((s) => s.id),
+    ['good1', 'good2']
+  );
+  const r = solve([c]);
+  assert.equal(r.results.length, 2);
+  for (const schedule of r.results) {
+    assert.ok(!schedule.items.some((i) => /SANAT/.test(i.faculty)));
+    assert.ok(
+      schedule.chosen.every((v) =>
+        v.alternatives.every((s) => Number(s.seats) > 0 && !/SANAT/.test(s.faculty))
+      )
+    );
+    for (const id of ['ban1', 'ban2', 'zero', 'stringzero', 'paddedzero'])
+      assert.throws(() => changeFaculty(schedule, 'X', id));
+  }
+});
+test('a full faculty section is excluded per slot while a different available section remains eligible', () => {
+  const c = {
+    code: 'X',
+    scheduled: true,
+    sections: [section('full', 'SAME FACULTY', 0), section('open', 'SAME FACULTY', 10, 'B11')],
+  };
+  const r = solve([c]);
+  assert.equal(r.results.length, 1);
+  assert.equal(r.results[0].chosen[0].section.id, 'open');
+});
+test('all avoided/full options give an honest no-eligible result, never relax exclusion', () => {
+  const c = {
+    code: 'X',
+    scheduled: true,
+    avoid: ['SANAT'],
+    sections: [section('ban', 'SANAT JAIN', 50), section('full', 'OTHER', 0)],
+  };
+  assert.equal(solve([c]).results.length, 0);
+});
