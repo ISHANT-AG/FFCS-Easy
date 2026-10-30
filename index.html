@@ -11,11 +11,43 @@
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=20261030-merged" />
+    <link rel="stylesheet" href="style.css?v=20261030-demo-orbit" />
   </head>
   <body>
     <div id="app"></div>
     <div id="toast" role="status" aria-live="polite"></div>
+    <dialog id="demo-dialog" class="demo-dialog" aria-labelledby="demo-heading">
+      <div class="demo-dialog-header">
+        <h2 id="demo-heading">Watch the FFCS easy demo</h2>
+        <button type="button" id="close-demo" aria-label="Close demo">✕</button>
+      </div>
+      <div class="demo-video">
+        <iframe
+          id="demo-player"
+          title="FFCS easy walkthrough"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p class="demo-link">
+        Video not loading?
+        <a
+          href="https://www.youtube.com/watch?v=MFKUypP14OA"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Watch on YouTube ↗</a
+        >
+      </p>
+    </dialog>
     <script type="module" src="src/app.js"></script>
   </body>
 </html>

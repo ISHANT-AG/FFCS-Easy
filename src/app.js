@@ -174,6 +174,7 @@ function render() {
             <span class="meta-slash" aria-hidden="true">/</span>
             <span class="semester-pill">Fall 2026–27</span>
           </div>
+          <button type="button" class="watch-demo" id="watch-demo" aria-haspopup="dialog"><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 3.5v13l10-6.5z"/></svg><span>Watch demo</span></button>
         </div>
 
         <nav class="stepper" aria-label="Steps">
@@ -436,9 +437,9 @@ function facultyView() {
       </summary>
       <div class="pdf-guide-content">
         <ol class="pdf-guide-steps">
-          <li><div class="pdf-guide-copy"><h3>Open your course in FFCS</h3><p>Choose a subject in your FFCS portal and open its faculty list. Make sure the slots, faculty names and available seats are visible.</p></div><img src="assets/pdf-guide/course-list.png" alt="FFCS course details and faculty list with slots and available seats" loading="lazy"></li>
-          <li><div class="pdf-guide-copy"><h3>Open print and choose Save as PDF</h3><p>Press <kbd>⌘</kbd> + <kbd>P</kbd> on Mac or <kbd>Ctrl</kbd> + <kbd>P</kbd> on Windows. In the print window, choose <strong>Save as PDF</strong> as the printer or destination. Keep <strong>All pages</strong> selected and check that the full faculty table appears in the preview.</p></div><img src="assets/pdf-guide/print-dialog.png" alt="Browser print window with Save as PDF selected and all pages included" loading="lazy"></li>
-          <li><div class="pdf-guide-copy"><h3>Save it, then upload here</h3><p>Click <strong>Save</strong>, give the file a course name such as <strong>CPP.pdf</strong>, and choose a folder on your device. Come back here and upload that PDF under the matching course. Repeat for your other courses.</p></div><img src="assets/pdf-guide/save-dialog.png" alt="Save dialog for choosing the PDF file name and folder, then clicking Save" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Open your course in FFCS</h3><p>Choose a subject in your FFCS portal and open its faculty list. Make sure the slots, faculty names and available seats are visible.</p></div><img src="assets/pdf-guide/course-list.webp" alt="FFCS course details and faculty list with slots and available seats" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Open print and choose Save as PDF</h3><p>Press <kbd>⌘</kbd> + <kbd>P</kbd> on Mac or <kbd>Ctrl</kbd> + <kbd>P</kbd> on Windows. In the print window, choose <strong>Save as PDF</strong> as the printer or destination. Keep <strong>All pages</strong> selected and check that the full faculty table appears in the preview.</p></div><img src="assets/pdf-guide/print-dialog.webp" alt="Browser print window with Save as PDF selected and all pages included" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Save it, then upload here</h3><p>Click <strong>Save</strong>, give the file a course name such as <strong>CPP.pdf</strong>, and choose a folder on your device. Come back here and upload that PDF under the matching course. Repeat for your other courses.</p></div><img src="assets/pdf-guide/save-dialog.webp" alt="Save dialog for choosing the PDF file name and folder, then clicking Save" loading="lazy"></li>
         </ol>
         <p class="pdf-guide-note">Save directly from the FFCS portal so the text stays readable. Upload the PDF file, rather than a screenshot.</p>
       </div>
@@ -967,6 +968,12 @@ function resultsView() {
 }
 
 function bind() {
+  $('#watch-demo')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dialog = $('#demo-dialog');
+    $('#demo-player').src = 'https://www.youtube-nocookie.com/embed/MFKUypP14OA?rel=0';
+    dialog.showModal();
+  });
   document
     .querySelectorAll('[data-step]')
     .forEach((b) => (b.onclick = () => go(Number(b.dataset.step))));
@@ -1400,3 +1407,18 @@ function generate() {
 }
 
 render();
+
+// Keep the player outside step renders; closing unloads it and stops playback.
+const demoDialog = $('#demo-dialog');
+$('#close-demo').onclick = () => demoDialog.close();
+demoDialog.addEventListener('click', (e) => {
+  if (e.target === demoDialog) {
+    const r = demoDialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)
+      demoDialog.close();
+  }
+});
+demoDialog.addEventListener('close', () => {
+  $('#demo-player').removeAttribute('src');
+  $('#watch-demo')?.focus();
+});
