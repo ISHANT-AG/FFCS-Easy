@@ -183,7 +183,12 @@ function render() {
         </footer>
       </main>
 
-      <div class="bottom-note">Designed for VIT students · Registration data saved on your device</div>
+      <footer class="app-bottom-credits">
+        <div class="credits-note">
+          made with <span class="credits-heart" aria-label="love">❤️</span> by <a href="https://www.linkedin.com/in/ishant-agarwal-266b22364/" target="_blank" rel="noopener noreferrer" class="credit-link">Ishant agrawal</a> and <a href="https://www.linkedin.com/in/prisha-sharma-400bb13ba/" target="_blank" rel="noopener noreferrer" class="credit-link">prisha sharma</a>
+        </div>
+        <div class="bottom-note">Designed for VIT students · Registration data saved on your device</div>
+      </footer>
     </div>
   `;
 

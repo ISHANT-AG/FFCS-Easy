@@ -1730,11 +1730,42 @@ button {
   gap: 16px;
 }
 
-.bottom-note {
+.app-bottom-credits {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.credits-note {
   font-size: 12px;
   color: var(--color-text-tertiary);
+  margin-bottom: 6px;
+}
+
+.credits-note .credit-link {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.credits-note .credit-link:hover {
+  color: var(--color-text-main);
+  text-decoration-color: var(--color-text-main);
+}
+
+.credits-heart {
+  display: inline-block;
+  font-size: 11px;
+  margin: 0 1px;
+}
+
+.bottom-note {
+  font-size: 11.5px;
+  color: var(--color-text-tertiary);
   text-align: center;
-  margin-top: 18px;
+  margin-top: 0;
 }
 
 /* Toast Alerts */
@@ -1860,6 +1891,7 @@ button {
   .scroll-hint,
   .faculty-alternatives-panel,
   .selected-faculty-drawer,
+  .app-bottom-credits,
   .bottom-note,
   #toast {
     display: none !important;
