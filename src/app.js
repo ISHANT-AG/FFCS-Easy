@@ -262,8 +262,14 @@ function render() {
       sub: 'Enter details for both students to find common courses and coordinate classes.',
     },
     {
-      title: `Faculty options for ${name1}.`,
-      sub: `Upload the PDF section allocations available in ${name1}’s registration portal.`,
+      title:
+        name1.toLowerCase() === 'you'
+          ? 'Faculty options for you.'
+          : `Faculty options for ${name1}.`,
+      sub:
+        name1.toLowerCase() === 'you'
+          ? 'Upload the PDF section allocations available in your registration portal.'
+          : `Upload the PDF section allocations available in ${name1}’s registration portal.`,
     },
     {
       title: `Faculty options for ${name2}.`,
@@ -379,7 +385,9 @@ function render() {
                     ? currentStep === 3
                       ? 'Make our timetables'
                       : currentStep === 0
-                        ? `Continue to ${name1}’s faculty →`
+                        ? name1.toLowerCase() === 'you'
+                          ? 'Continue to your faculty →'
+                          : `Continue to ${name1}’s faculty →`
                         : currentStep === 1
                           ? `Continue to ${name2}’s faculty →`
                           : 'Continue →'
@@ -612,21 +620,21 @@ function facultyView() {
     : 100;
 
   return `
-    <div class="faculty-layout">
-      <aside class="faculty-navigator-wrap">
-        <div class="faculty-navigator panel">
-          <div class="nav-header">
-            <span class="nav-title">Upload progress</span>
-            <span class="nav-count">${readyCourses.length} of ${state.courses.length} ready</span>
+    <div class="faculty-workspace">
+      <aside class="faculty-navigator">
+        <div class="navigator-card panel">
+          <div class="nav-progress-header">
+            <span class="nav-progress-title">Upload progress</span>
+            <span class="nav-progress-count">${readyCourses.length} of ${state.courses.length} ready</span>
           </div>
           <div class="progress-bar-track">
             <div class="progress-bar-fill" style="width: ${progressPct}%;"></div>
           </div>
-          <button id="jump-incomplete" class="jump-btn ${progressPct === 100 ? 'is-all-ready' : ''}">
+          <button id="jump-incomplete" class="btn-jump-incomplete ${progressPct === 100 ? 'is-all-ready' : ''}">
             <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8l5 5 5-5"/></svg>
             <span>${progressPct === 100 ? 'All courses ready' : 'Next course needing list'}</span>
           </button>
-          <ul class="nav-pills-list">
+          <div class="nav-course-list">
             ${state.courses
               .map((c) => {
                 const isReady = !needsFaculty(c);
@@ -639,24 +647,24 @@ function facultyView() {
                 const statusLabel = isOnline
                   ? 'Online'
                   : c.sections.length
-                    ? `${c.sections.length} options`
+                    ? `${c.sections.length} saved`
                     : 'Needs PDF';
                 return `
-                <li class="nav-pill-item">
-                  <button type="button" class="nav-pill-btn" data-nav-target="${c.id}">
+                <button type="button" class="nav-course-item" data-nav-target="${c.id}">
+                  <div class="nav-course-left">
                     <span class="course-code-badge">${esc(c.code)}</span>
-                    <span class="nav-pill-name">${esc(c.name)}</span>
-                    <span class="badge ${statusClass}">${statusLabel}</span>
-                  </button>
-                </li>
+                    <span class="nav-item-name" title="${esc(c.name)}">${esc(c.name)}</span>
+                  </div>
+                  <span class="badge ${statusClass}">${statusLabel}</span>
+                </button>
               `;
               })
               .join('')}
-          </ul>
+          </div>
         </div>
       </aside>
 
-      <div class="faculty-cards-list">
+      <div class="faculty-list">
         ${state.courses
           .map((c) => {
             const hasError = Boolean(c.uploadError);
@@ -1122,20 +1130,24 @@ function twinCoursesView() {
             </svg>
             <span>
               ${
-                common.length
-                  ? `${common.length} common course${common.length > 1 ? 's' : ''} found`
-                  : 'Add courses for both students to identify common classes'
+                commonScheduled.length
+                  ? `${commonScheduled.length} common course${commonScheduled.length > 1 ? 's' : ''} found`
+                  : common.length
+                    ? `${common.length} project course${common.length > 1 ? 's' : ''} found`
+                    : 'Add courses for both students to identify common classes'
               }
             </span>
           </div>
           ${
-            common.length
+            commonScheduled.length
               ? `
             <span class="badge badge-success">
               ${commonScheduled.length} scheduled on campus ${common.length > commonScheduled.length ? `· ${common.length - commonScheduled.length} project` : ''}
             </span>
           `
-              : ''
+              : common.length
+                ? '<span class="badge badge-neutral">No weekly classes</span>'
+                : ''
           }
         </div>
 
@@ -1146,7 +1158,7 @@ function twinCoursesView() {
             ${common
               .map(
                 (c) => `
-              <span class="common-course-tag" title="${esc(c.name)}">
+              <span class="common-course-tag ${c.isScheduled ? '' : 'is-project'}" title="${esc(c.name)}">
                 <span>${esc(c.code)}</span>
                 ${c.isScheduled ? '<small>· Together</small>' : '<small>· Project</small>'}
               </span>
@@ -1380,21 +1392,21 @@ function twinFacultyView(studentIdx) {
     : 100;
 
   return `
-    <div class="faculty-layout">
-      <aside class="faculty-navigator-wrap">
-        <div class="faculty-navigator panel">
-          <div class="nav-header">
-            <span class="nav-title">${esc(student.name)}’s uploads</span>
-            <span class="nav-count">${readyCourses.length} of ${student.courses.length} ready</span>
+    <div class="faculty-workspace">
+      <aside class="faculty-navigator">
+        <div class="navigator-card panel">
+          <div class="nav-progress-header">
+            <span class="nav-progress-title">${student.name.toLowerCase() === 'you' ? 'Your uploads' : `${esc(student.name)}’s uploads`}</span>
+            <span class="nav-progress-count">${readyCourses.length} of ${student.courses.length} ready</span>
           </div>
           <div class="progress-bar-track">
             <div class="progress-bar-fill" style="width: ${progressPct}%;"></div>
           </div>
-          <button id="jump-incomplete" class="jump-btn ${progressPct === 100 ? 'is-all-ready' : ''}">
+          <button id="jump-incomplete" class="btn-jump-incomplete ${progressPct === 100 ? 'is-all-ready' : ''}">
             <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8l5 5 5-5"/></svg>
             <span>${progressPct === 100 ? 'All courses ready' : 'Next course needing list'}</span>
           </button>
-          <ul class="nav-pills-list">
+          <div class="nav-course-list">
             ${student.courses
               .map((c) => {
                 const isReady = !needsFaculty(c);
@@ -1407,24 +1419,24 @@ function twinFacultyView(studentIdx) {
                 const statusLabel = isOnline
                   ? 'Online'
                   : c.sections.length
-                    ? `${c.sections.length} options`
+                    ? `${c.sections.length} saved`
                     : 'Needs PDF';
                 return `
-                <li class="nav-pill-item">
-                  <button type="button" class="nav-pill-btn" data-nav-target="${c.id}">
+                <button type="button" class="nav-course-item" data-nav-target="${c.id}">
+                  <div class="nav-course-left">
                     <span class="course-code-badge">${esc(c.code)}</span>
-                    <span class="nav-pill-name">${esc(c.name)}</span>
-                    <span class="badge ${statusClass}">${statusLabel}</span>
-                  </button>
-                </li>
+                    <span class="nav-item-name" title="${esc(c.name)}">${esc(c.name)}</span>
+                  </div>
+                  <span class="badge ${statusClass}">${statusLabel}</span>
+                </button>
               `;
               })
               .join('')}
-          </ul>
+          </div>
         </div>
       </aside>
 
-      <div class="faculty-cards-list">
+      <div class="faculty-list">
         ${student.courses
           .map((c) => {
             const hasError = Boolean(c.uploadError);
@@ -1509,7 +1521,7 @@ function twinFacultyView(studentIdx) {
                         </svg>
                         <span class="file-name">${esc(c.lastUpload || 'Faculty list')}</span>
                         <span class="meta-dot">·</span>
-                        <strong>${c.sections.length} options saved for ${esc(student.name)}</strong>
+                        <strong>${c.sections.length} options saved${student.name.toLowerCase() === 'you' ? '' : ` for ${esc(student.name)}`}</strong>
                       </div>
                       <label class="reupload-btn" title="Upload another PDF for this course">
                         <span>Re-upload</span>
@@ -1525,7 +1537,7 @@ function twinFacultyView(studentIdx) {
                         </svg>
                       </div>
                       <div class="dropzone-text">
-                        <strong>Upload faculty PDF for ${esc(student.name)}</strong>
+                        <strong>${student.name.toLowerCase() === 'you' ? 'Upload your faculty list PDF' : `Upload faculty PDF for ${esc(student.name)}`}</strong>
                         <p>Drop PDF here or <label class="browse-link">browse<input type="file" accept=".pdf,application/pdf" data-twin-upload="${studentIdx}:${c.id}" class="sr-only"></label> · PDF only</p>
                       </div>
                     </div>
@@ -2482,6 +2494,39 @@ function bind() {
   $('#retry-generation')?.addEventListener('click', generate);
   $('#review-faculty')?.addEventListener('click', () => go(1));
   $('#review-settings')?.addEventListener('click', () => go(2));
+
+  // Navigator jump button
+  $('#jump-incomplete')?.addEventListener('click', () => {
+    const isTwin = appMode === 'twin';
+    const currentStep = isTwin ? twinState.step : state.step;
+    const coursesList = isTwin
+      ? currentStep === 1
+        ? twinState.student1.courses
+        : twinState.student2.courses
+      : state.courses;
+    const target = coursesList.find((c) => needsFaculty(c));
+    if (target) {
+      const card = document.getElementById('card-' + target.id);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('is-highlighted');
+        setTimeout(() => card.classList.remove('is-highlighted'), 1200);
+      }
+    }
+  });
+
+  // Navigator items scroll to card
+  document.querySelectorAll('[data-nav-target]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.navTarget;
+      const card = document.getElementById('card-' + id);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('is-highlighted');
+        setTimeout(() => card.classList.remove('is-highlighted'), 1200);
+      }
+    });
+  });
 }
 
 async function exportTwinPdf(which) {
