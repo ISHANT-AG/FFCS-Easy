@@ -91,11 +91,16 @@ export function createTimetablePdf(JsPDF, schedule, { option = 1, courses } = {}
   });
   const codes = [...new Set(schedule.items.map((i) => i.course))],
     colours = [
-      [235, 242, 232],
-      [232, 238, 245],
-      [247, 239, 230],
-      [241, 235, 245],
-      [229, 242, 240],
+      [224, 231, 255],
+      [254, 243, 199],
+      [209, 250, 229],
+      [237, 233, 254],
+      [255, 228, 230],
+      [207, 250, 254],
+      [255, 237, 213],
+      [250, 232, 255],
+      [224, 242, 254],
+      [236, 252, 203],
     ];
   TIMES.forEach((time, p) => {
     const y = top + header + p * rowHeight;
@@ -205,11 +210,16 @@ export function renderSchedulePage(
 
   const codes = [...new Set(schedule.items.map((i) => i.course))],
     colours = [
-      [235, 242, 232],
-      [232, 238, 245],
-      [247, 239, 230],
-      [241, 235, 245],
-      [229, 242, 240],
+      [224, 231, 255],
+      [254, 243, 199],
+      [209, 250, 229],
+      [237, 233, 254],
+      [255, 228, 230],
+      [207, 250, 254],
+      [255, 237, 213],
+      [250, 232, 255],
+      [224, 242, 254],
+      [236, 252, 203],
     ];
 
   // Map of together course codes

@@ -1642,71 +1642,157 @@ button {
   user-select: none;
 }
 
-/* Event Chips with Restrained Academic Colors */
+/* Event Chips with Vibrant, Modern Color System */
 .event {
   display: flex;
   flex-direction: column;
-  padding: 5px 8px;
-  border-radius: var(--radius-xs);
+  padding: 6px 9px;
+  border-radius: 7px;
   line-height: 1.25;
   height: 100%;
-  min-height: 48px;
+  min-height: 50px;
   justify-content: center;
-  transition: transform var(--transition-fast);
+  position: relative;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .event:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
 .event-code {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 12.5px;
+  font-weight: 800;
   letter-spacing: -0.01em;
+  margin-bottom: 2px;
 }
 
 .event-faculty {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  opacity: 0.95;
 }
 
 .event-venue {
   font-size: 10.5px;
+  font-weight: 500;
   opacity: 0.85;
+  margin-top: 2px;
 }
 
-/* Event Colorways (Restrained Academic Editorial) */
+/* Event Colorways (Vibrant & High-Contrast 10-Color Palette) */
 .event.color0 {
-  background-color: #eef2ff;
-  border-left: 3px solid #4f46e5;
+  background-color: #e0e7ff;
+  border: 1px solid rgba(79, 70, 229, 0.28);
+  border-left: 4px solid #4f46e5;
   color: #1e1b4b;
+}
+.event.color0 .event-code {
+  color: #3730a3;
 }
 
 .event.color1 {
   background-color: #fef3c7;
-  border-left: 3px solid #d97706;
+  border: 1px solid rgba(217, 119, 6, 0.32);
+  border-left: 4px solid #d97706;
   color: #78350f;
+}
+.event.color1 .event-code {
+  color: #92400e;
 }
 
 .event.color2 {
-  background-color: #ecfdf5;
-  border-left: 3px solid #059669;
+  background-color: #d1fae5;
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  border-left: 4px solid #059669;
   color: #064e3b;
+}
+.event.color2 .event-code {
+  color: #047857;
 }
 
 .event.color3 {
-  background-color: #f5f3ff;
-  border-left: 3px solid #7c3aed;
+  background-color: #ede9fe;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-left: 4px solid #7c3aed;
   color: #4c1d95;
+}
+.event.color3 .event-code {
+  color: #6d28d9;
 }
 
 .event.color4 {
-  background-color: #f0fdfa;
-  border-left: 3px solid #0d9488;
-  color: #134e4a;
+  background-color: #ffe4e6;
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  border-left: 4px solid #e11d48;
+  color: #881337;
+}
+.event.color4 .event-code {
+  color: #be123c;
+}
+
+.event.color5 {
+  background-color: #cffafe;
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  border-left: 4px solid #0891b2;
+  color: #164e63;
+}
+.event.color5 .event-code {
+  color: #0e7490;
+}
+
+.event.color6 {
+  background-color: #ffedd5;
+  border: 1px solid rgba(234, 88, 12, 0.32);
+  border-left: 4px solid #ea580c;
+  color: #7c2d12;
+}
+.event.color6 .event-code {
+  color: #c2410c;
+}
+
+.event.color7 {
+  background-color: #fae8ff;
+  border: 1px solid rgba(192, 38, 211, 0.3);
+  border-left: 4px solid #c026d3;
+  color: #701a75;
+}
+.event.color7 .event-code {
+  color: #a21caf;
+}
+
+.event.color8 {
+  background-color: #e0f2fe;
+  border: 1px solid rgba(2, 132, 199, 0.32);
+  border-left: 4px solid #0284c7;
+  color: #0c4a6e;
+}
+.event.color8 .event-code {
+  color: #0369a1;
+}
+
+.event.color9 {
+  background-color: #ecfccb;
+  border: 1px solid rgba(101, 163, 13, 0.32);
+  border-left: 4px solid #65a30d;
+  color: #365314;
+}
+.event.color9 .event-code {
+  color: #4d7c0f;
+}
+
+.event.event-together {
+  box-shadow:
+    0 0 0 1.5px rgba(59, 130, 246, 0.5),
+    0 2px 6px rgba(59, 130, 246, 0.15);
 }
 
 /* Faculty Alternatives Panel */
@@ -2337,17 +2423,27 @@ button {
 .event-faculty-select {
   width: 100%;
   min-width: 0;
-  padding: 3px 15px 3px 4px !important;
-  font-size: 10px !important;
-  font-weight: 500;
-  line-height: 1.4;
-  border: 1px solid rgba(0, 0, 0, 0.13);
+  padding: 3px 18px 3px 5px !important;
+  font-size: 10.5px !important;
+  font-weight: 600;
+  line-height: 1.35;
+  border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  background-position: right 2px center !important;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  background-position: right 4px center !important;
   background-size: 10px !important;
-  margin: 2px 0 5px;
+  margin: 2px 0 3px;
   cursor: pointer;
+  color: inherit;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.event-faculty-select:hover {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .event-faculty-select:focus {
@@ -3214,6 +3310,39 @@ button {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 12.5px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.twin-course-status-card.color-accent-0 {
+  border-left: 4px solid #4f46e5;
+}
+.twin-course-status-card.color-accent-1 {
+  border-left: 4px solid #d97706;
+}
+.twin-course-status-card.color-accent-2 {
+  border-left: 4px solid #059669;
+}
+.twin-course-status-card.color-accent-3 {
+  border-left: 4px solid #7c3aed;
+}
+.twin-course-status-card.color-accent-4 {
+  border-left: 4px solid #e11d48;
+}
+.twin-course-status-card.color-accent-5 {
+  border-left: 4px solid #0891b2;
+}
+.twin-course-status-card.color-accent-6 {
+  border-left: 4px solid #ea580c;
+}
+.twin-course-status-card.color-accent-7 {
+  border-left: 4px solid #c026d3;
+}
+.twin-course-status-card.color-accent-8 {
+  border-left: 4px solid #0284c7;
+}
+.twin-course-status-card.color-accent-9 {
+  border-left: 4px solid #65a30d;
 }
 
 .twin-course-status-top {
@@ -3233,14 +3362,15 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  color: var(--color-primary);
-  background-color: rgba(30, 58, 138, 0.1);
-  padding: 1px 5px;
-  border-radius: 3px;
-  margin-top: 2px;
-  border: 1px solid rgba(30, 58, 138, 0.2);
+  color: #1e40af;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(30, 64, 175, 0.25);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
 }
 
 .twin-student-timetable-section {

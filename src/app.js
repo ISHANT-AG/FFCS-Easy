@@ -1051,7 +1051,7 @@ function resultsView() {
                 ${DAYS.map((_, d) => {
                   const x = r.items.find((x) => x.day === d && x.period === p);
                   const courseIdx = x ? state.courses.findIndex((c) => c.code === x.course) : -1;
-                  const colorIdx = (courseIdx >= 0 ? courseIdx : 0) % 5;
+                  const colorIdx = (courseIdx >= 0 ? courseIdx : 0) % 10;
                   const selected = x ? r.chosen.find((v) => v.course.code === x.course) : null;
                   const sameTime = selected?.alternatives || [];
                   return `
@@ -1735,6 +1735,12 @@ function twinResultsView() {
   const name2 = twinState.student2.name || 'Friend';
   const summary = pair.matchSummary;
   const isOptimal = summary.isMaxPossible;
+  const allTwinCodes = Array.from(
+    new Set([
+      ...(twinState.student1?.courses || []).map((c) => c.code.toUpperCase()),
+      ...(twinState.student2?.courses || []).map((c) => c.code.toUpperCase()),
+    ])
+  );
 
   return `
     ${twinResult.morningFallback1 ? `<div class="notice-box subtle-note" style="margin-bottom:12px">A morning-only timetable was not found for ${esc(name1)}. Alternatives include later classes.</div>` : ''}
@@ -1796,8 +1802,10 @@ function twinResultsView() {
                   : c.status === 'online'
                     ? 'Online'
                     : '≠ Different time';
+            const codeIdx = allTwinCodes.indexOf(c.code.toUpperCase());
+            const colorIdx = (codeIdx >= 0 ? codeIdx : 0) % 10;
             return `
-            <div class="twin-course-status-card">
+            <div class="twin-course-status-card color-accent-${colorIdx}">
               <div class="twin-course-status-top">
                 <strong>${esc(c.code)}</strong>
                 <span class="badge ${badgeClass}">${label}</span>
@@ -1843,13 +1851,20 @@ function twinResultsView() {
 
     <!-- Timetables for both students -->
     <div class="twin-grids-container" style="display: flex; flex-direction: column; gap: 24px;">
-      ${renderTimetableGrid(pair.student1, 0, name1, name2, pair.matchSummary)}
-      ${renderTimetableGrid(pair.student2, 1, name2, name1, pair.matchSummary)}
+      ${renderTimetableGrid(pair.student1, 0, name1, name2, pair.matchSummary, allTwinCodes)}
+      ${renderTimetableGrid(pair.student2, 1, name2, name1, pair.matchSummary, allTwinCodes)}
     </div>
   `;
 }
 
-function renderTimetableGrid(schedule, studentIdx, studentName, partnerName, matchSummary) {
+function renderTimetableGrid(
+  schedule,
+  studentIdx,
+  studentName,
+  partnerName,
+  matchSummary,
+  allTwinCodes = []
+) {
   const togetherCodes = new Set(
     (matchSummary?.courses || [])
       .filter((c) => c.status === 'together')
@@ -1882,6 +1897,8 @@ function renderTimetableGrid(schedule, studentIdx, studentName, partnerName, mat
                   ${DAYS.map((_, d) => {
                     const x = schedule.items.find((x) => x.day === d && x.period === p);
                     const isTogether = x && togetherCodes.has(x.course.toUpperCase());
+                    const courseIdx = x ? allTwinCodes.indexOf(x.course.toUpperCase()) : -1;
+                    const colorIdx = (courseIdx >= 0 ? courseIdx : 0) % 10;
                     const selected = x
                       ? schedule.chosen.find((v) => v.course.code === x.course)
                       : null;
@@ -1893,7 +1910,7 @@ function renderTimetableGrid(schedule, studentIdx, studentName, partnerName, mat
                         ${
                           x
                             ? `
-                          <div class="event ${isTogether ? 'event-together' : ''}">
+                          <div class="event color${colorIdx} ${isTogether ? 'event-together' : ''}">
                             <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
                               <b class="event-code">${esc(x.course)}</b>
                               ${isTogether ? `<span class="together-badge" title="Attending together with ${esc(partnerName)}">👥 Together</span>` : ''}
