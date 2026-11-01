@@ -1433,6 +1433,9 @@ demoDialog.addEventListener('close', () => {
 
 
 // Feedback Dialog Management
+// Set your Google Apps Script Web App URL below to automatically log feedback to your Google Sheet:
+const FEEDBACK_ENDPOINT = '';
+
 const feedbackDialog = $('#feedback-dialog');
 const feedbackForm = $('#feedback-form');
 const feedbackSuccess = $('#feedback-success');
@@ -1492,8 +1495,21 @@ feedbackForm?.addEventListener('submit', async (e) => {
     console.warn('Could not save feedback to local storage', err);
   }
 
-  // Smooth realistic transition
-  await new Promise((r) => setTimeout(r, 450));
+  // Send to Google Sheet if endpoint configured, otherwise fallback smoothly
+  if (FEEDBACK_ENDPOINT) {
+    try {
+      await fetch(FEEDBACK_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(feedbackData)
+      });
+    } catch (err) {
+      console.warn('Could not send to Google Sheet', err);
+    }
+  } else {
+    await new Promise((r) => setTimeout(r, 450));
+  }
 
   if (feedbackForm) feedbackForm.style.display = 'none';
   if (feedbackSuccess) feedbackSuccess.style.display = 'flex';
