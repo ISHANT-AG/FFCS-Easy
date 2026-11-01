@@ -160,7 +160,9 @@ body {
   text-decoration: none;
   color: var(--color-text-main);
   gap: 8px;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .brand:hover {
@@ -1996,7 +1998,6 @@ button {
   }
 }
 
-
 /* ==========================================================================
    Introduction Splash Animation
    ========================================================================== */
@@ -2007,14 +2008,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FAF8F5;
-  background-image: 
+  background-color: #faf8f5;
+  background-image:
     radial-gradient(circle at 50% 35%, rgba(30, 58, 138, 0.07) 0%, transparent 60%),
     radial-gradient(circle at 80% 80%, rgba(158, 176, 206, 0.12) 0%, transparent 50%),
     radial-gradient(circle at 20% 90%, rgba(30, 58, 138, 0.05) 0%, transparent 40%);
   overflow: hidden;
   opacity: 1;
-  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .intro-splash.is-hidden {
@@ -2064,13 +2067,13 @@ button {
   font-size: 2.35rem;
   font-weight: 800;
   letter-spacing: -0.035em;
-  color: #13327D;
+  color: #13327d;
   margin: 0 0 6px 0;
   line-height: 1.1;
 }
 
 .intro-title-accent {
-  color: #1E3A8A;
+  color: #1e3a8a;
 }
 
 .intro-tagline {
@@ -2088,7 +2091,7 @@ button {
 }
 
 .intro-dot {
-  color: #9EB0CE;
+  color: #9eb0ce;
   font-size: 0.75rem;
 }
 
@@ -2108,7 +2111,7 @@ button {
   left: 0;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #13327D, #3B82F6);
+  background: linear-gradient(90deg, #13327d, #3b82f6);
   border-radius: 99px;
   animation: introProgressFill 1.55s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
@@ -2126,15 +2129,15 @@ button {
   padding: 6px 14px;
   font-size: 12px;
   font-weight: 600;
-  color: #64748B;
+  color: #64748b;
   cursor: pointer;
   transition: all 0.2s ease;
   animation: introFadeIn 0.4s ease 0.5s backwards;
 }
 
 .intro-skip-btn:hover {
-  background: #FFFFFF;
-  color: #1E3A8A;
+  background: #ffffff;
+  color: #1e3a8a;
   border-color: rgba(30, 58, 138, 0.2);
   transform: translateY(-1px);
 }
@@ -2830,7 +2833,368 @@ button {
 }
 @media print {
   .watch-demo,
-  .demo-dialog {
+  .demo-dialog,
+  .mode-switcher-bar {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Twin FFCS Styles
+   ========================================================================== */
+
+.mode-switcher-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 20px;
+}
+
+.mode-segmented-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--bg-surface-subtle);
+  border: 1px solid var(--border-color);
+  padding: 4px;
+  border-radius: var(--radius-full);
+}
+
+.mode-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mode-tab:hover {
+  color: var(--color-text-main);
+}
+
+.mode-tab.is-active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mode-tab-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background-color: rgba(30, 58, 138, 0.12);
+  color: var(--color-primary);
+}
+
+.mode-tab.is-active .mode-tab-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.twin-courses-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.common-summary-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.common-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.common-summary-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.common-courses-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.common-course-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+}
+
+.twin-students-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 960px) {
+  .twin-students-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.twin-student-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.twin-student-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.twin-name-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.twin-name-input {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  width: 100%;
+  max-width: 200px;
+  transition: all var(--transition-fast);
+}
+
+.twin-name-input:hover {
+  border-color: var(--border-color);
+  background-color: var(--bg-hover);
+}
+
+.twin-name-input:focus {
+  border-color: var(--color-primary);
+  background-color: #ffffff;
+  outline: none;
+}
+
+.empty-branch-courses-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--color-text-main);
+}
+
+.empty-branch-courses-notice p {
+  margin: 4px 0 0;
+  color: var(--color-text-secondary);
+}
+
+/* Modal Popup for No Common Courses */
+.twin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.twin-modal-box {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg, 12px);
+  padding: 24px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.twin-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.twin-modal-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.twin-modal-body {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.twin-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Twin Results UI */
+.twin-results-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.twin-match-banner {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.twin-match-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.twin-match-headline {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.twin-courses-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.twin-course-status-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+}
+
+.twin-course-status-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.twin-course-status-reason {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.together-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: rgba(30, 58, 138, 0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-top: 2px;
+  border: 1px solid rgba(30, 58, 138, 0.2);
+}
+
+.twin-student-timetable-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.twin-student-timetable-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.twin-student-timetable-heading h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.twin-mobile-view-tabs {
+  display: none;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .twin-mobile-view-tabs {
+    display: flex;
+  }
+  .twin-student-timetable-section.is-hidden-mobile {
     display: none !important;
   }
 }
