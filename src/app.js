@@ -1433,8 +1433,8 @@ demoDialog.addEventListener('close', () => {
 
 
 // Feedback Dialog Management
-// Set your Google Apps Script Web App URL below to automatically log feedback to your Google Sheet:
-const FEEDBACK_ENDPOINT = '';
+// Google Apps Script Web App URL to log feedback to Google Sheet:
+const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyuPDObemX1GDvK1kLozHYmSDNLl1cJaXf9grHed3OMq0FrbK6GW1w5X69cqY4YkBqSmQ/exec';
 
 const feedbackDialog = $('#feedback-dialog');
 const feedbackForm = $('#feedback-form');
@@ -1501,7 +1501,7 @@ feedbackForm?.addEventListener('submit', async (e) => {
       await fetch(FEEDBACK_ENDPOINT, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(feedbackData)
       });
     } catch (err) {
