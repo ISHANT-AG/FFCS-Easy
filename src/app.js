@@ -1132,7 +1132,7 @@ function twinCoursesView() {
             common.length
               ? `
             <span class="badge badge-success">
-              ${commonScheduled.length} scheduled on campus ${common.length > commonScheduled.length ? `· ${common.length - commonScheduled.length} project/online` : ''}
+              ${commonScheduled.length} scheduled on campus ${common.length > commonScheduled.length ? `· ${common.length - commonScheduled.length} project` : ''}
             </span>
           `
               : ''
@@ -1148,7 +1148,7 @@ function twinCoursesView() {
                 (c) => `
               <span class="common-course-tag" title="${esc(c.name)}">
                 <span>${esc(c.code)}</span>
-                ${c.isScheduled ? '<small>· Together</small>' : '<small>· Project/Online</small>'}
+                ${c.isScheduled ? '<small>· Together</small>' : '<small>· Project</small>'}
               </span>
             `
               )

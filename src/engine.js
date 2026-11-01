@@ -551,14 +551,16 @@ export function findCommonCourses(courses1 = [], courses2 = []) {
     if (!code) continue;
     const c2 = map2.get(code);
     if (c2) {
-      const isSched = c1.scheduled !== false && c2.scheduled !== false && !c1.online && !c2.online;
+      // Do not include online courses as common
+      if (c1.online || c2.online) continue;
+      const isSched = c1.scheduled !== false && c2.scheduled !== false;
       common.push({
         code,
         name: c1.name || c2.name || code,
         course1: c1,
         course2: c2,
         isScheduled: isSched,
-        isOnline: Boolean(c1.online || c2.online),
+        isOnline: false,
         isProject: c1.scheduled === false || c2.scheduled === false,
       });
     }

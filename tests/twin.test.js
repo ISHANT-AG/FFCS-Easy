@@ -100,11 +100,32 @@ test('4. Shared online/project courses without common scheduled meetings', () =>
 
   assert.equal(res.results.length, 1);
   const pair = res.results[0];
-  assert.equal(pair.matchSummary.totalCommon, 2);
+  // Online course (HUM0002) is NOT included as common
+  assert.equal(pair.matchSummary.totalCommon, 1);
   assert.equal(pair.matchSummary.commonScheduled, 0);
   assert.equal(pair.matchSummary.together, 0);
   assert.equal(pair.matchSummary.courses.find((x) => x.code === 'DSN2098').status, 'project');
-  assert.equal(pair.matchSummary.courses.find((x) => x.code === 'HUM0002').status, 'online');
+  assert.equal(
+    pair.matchSummary.courses.find((x) => x.code === 'HUM0002'),
+    undefined
+  );
+
+  // When only online courses exist, they are not counted as common and trigger noCommonCourses
+  const resOnlyOnline = solveTwin([
+    { name: 'Alice', courses: [c('HUM0002', [], { online: true })] },
+    { name: 'Bob', courses: [c('HUM0002', [], { online: true })] },
+  ]);
+  assert.equal(resOnlyOnline.noCommonCourses, true);
+  assert.equal(
+    findCommonCourses([c('HUM0002', [], { online: true })], [c('HUM0002', [], { online: true })])
+      .length,
+    0
+  );
+  assert.equal(
+    findCommonCourses([c('HUM0002', [], { online: true })], [c('HUM0002', [], { online: false })])
+      .length,
+    0
+  );
 });
 
 test('5. Same course with different availability lists', () => {
