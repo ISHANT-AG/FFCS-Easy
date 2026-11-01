@@ -1062,9 +1062,14 @@ button {
   border: 1.5px dashed var(--border-hover);
   border-radius: var(--radius-sm);
   background-color: var(--bg-surface-elevated);
-  padding: 22px 20px;
+  padding: 24px 20px;
   text-align: center;
   transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .upload-dropzone.is-dragover {
@@ -1081,9 +1086,13 @@ button {
 }
 
 .dropzone-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .dropzone-icon svg {
