@@ -3294,6 +3294,36 @@ button {
   color: var(--color-text-main);
 }
 
+.twin-match-collapsible {
+  margin-top: 12px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+.twin-match-summary-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+}
+
+.twin-match-summary-toggle:hover {
+  text-decoration: underline;
+}
+
+.twin-match-collapsible[open] .twin-match-summary-toggle svg {
+  transform: rotate(180deg);
+}
+
+.twin-match-summary-toggle svg {
+  transition: transform var(--transition-fast);
+}
+
 .twin-courses-status-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

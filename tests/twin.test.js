@@ -8,7 +8,8 @@ import {
   slotBundle,
   parseSlots,
 } from '../src/engine.js';
-import { createTwinTimetablePdf } from '../src/pdf-export.js';
+import { createTwinTimetablePdf, assertExportEligible } from '../src/pdf-export.js';
+import { getCourseStatus } from '../src/sections.js';
 
 const s = (id, slots, faculty = id, venue = 'AB1-102', seats = '70') => ({
   id,
@@ -611,4 +612,261 @@ test('23. Comparison against independent brute-force reference for small generat
 
   assert.ok(res.results.length >= 1);
   assert.equal(res.results[0].matchSummary.together, maxTogetherBrute);
+});
+
+test('24. Shared teacher candidate elimination reproduction (CSE2001, A11+A12+A13, AB-101)', () => {
+  // Exact case from audit:
+  // Both students select CSE2001.
+  // All sections have A11+A12+A13, venue AB-101.
+  // Student A: Teacher A (80 seats), Shared Teacher (60 seats)
+  // Student B: Teacher B (80 seats), Shared Teacher (60 seats)
+  // Expected: Both students get Shared Teacher, 1/1 common courses together.
+  const cAlice = [
+    c('CSE2001', [
+      s('a1', 'A11+A12+A13', 'Teacher A', 'AB-101', 80),
+      s('a2', 'A11+A12+A13', 'Shared Teacher', 'AB-101', 60),
+    ]),
+  ];
+  const cBob = [
+    c('CSE2001', [
+      s('b1', 'A11+A12+A13', 'Teacher B', 'AB-101', 80),
+      s('b2', 'A11+A12+A13', 'Shared Teacher', 'AB-101', 60),
+    ]),
+  ];
+
+  const res = solveTwin([
+    { name: 'Alice', courses: cAlice },
+    { name: 'Bob', courses: cBob },
+  ]);
+
+  assert.equal(res.results.length, 1);
+  const pair = res.results[0];
+  assert.equal(pair.matchSummary.together, 1);
+  assert.equal(pair.matchSummary.courses[0].status, 'together');
+  assert.equal(pair.matchSummary.courses[0].faculty1, 'Shared Teacher');
+  assert.equal(pair.matchSummary.courses[0].faculty2, 'Shared Teacher');
+  assert.equal(pair.isMaxPossible, true);
+});
+
+test('25. Small exhaustive reference check with multiple faculty per slot bundle', () => {
+  // Alice & Bob have 2 courses. Course 1 has 3 teachers all on A11+A12; Course 2 has 3 teachers all on B11+B12.
+  // Only 1 teacher in each course is shared between Alice and Bob, but other teachers have higher seat counts.
+  const cAlice = [
+    c('C1', [
+      s('a1', 'A11+A12', 'Solo A1', 'AB1-101', 99),
+      s('a2', 'A11+A12', 'Shared C1', 'AB1-101', 40),
+      s('a3', 'A11+A12', 'Solo A2', 'AB1-101', 90),
+    ]),
+    c('C2', [
+      s('a4', 'B11+B12', 'Solo A3', 'AB1-102', 95),
+      s('a5', 'B11+B12', 'Shared C2', 'AB1-102', 30),
+      s('a6', 'B11+B12', 'Solo A4', 'AB1-102', 85),
+    ]),
+  ];
+  const cBob = [
+    c('C1', [
+      s('b1', 'A11+A12', 'Solo B1', 'AB1-101', 98),
+      s('b2', 'A11+A12', 'Shared C1', 'AB1-101', 40),
+      s('b3', 'A11+A12', 'Solo B2', 'AB1-101', 92),
+    ]),
+    c('C2', [
+      s('b4', 'B11+B12', 'Solo B3', 'AB1-102', 94),
+      s('b5', 'B11+B12', 'Shared C2', 'AB1-102', 30),
+      s('b6', 'B11+B12', 'Solo B4', 'AB1-102', 88),
+    ]),
+  ];
+
+  const res = solveTwin([
+    { name: 'Alice', courses: cAlice },
+    { name: 'Bob', courses: cBob },
+  ]);
+
+  assert.ok(res.results.length >= 1);
+  const pair = res.results[0];
+  assert.equal(pair.matchSummary.together, 2);
+  assert.equal(pair.student1.chosen[0].section.faculty, 'Shared C1');
+  assert.equal(pair.student2.chosen[0].section.faculty, 'Shared C1');
+  assert.equal(pair.student1.chosen[1].section.faculty, 'Shared C2');
+  assert.equal(pair.student2.chosen[1].section.faculty, 'Shared C2');
+});
+
+test('26. Options 2 and 3 preserve exact occupied weekly cells from Option 1 when subject swaps exist', () => {
+  const cAlice = [
+    c('C1', [
+      s('a1', 'A11+A12', 'Dr. X', 'AB1-101', 50),
+      s('a2', 'B11+B12', 'Dr. Y', 'AB1-102', 50),
+    ]),
+    c('C2', [
+      s('a3', 'B11+B12', 'Dr. Z', 'AB1-103', 50),
+      s('a4', 'A11+A12', 'Dr. W', 'AB1-104', 50),
+    ]),
+  ];
+  const cBob = [
+    c('C1', [
+      s('b1', 'A11+A12', 'Dr. X', 'AB1-101', 50),
+      s('b2', 'B11+B12', 'Dr. Y', 'AB1-102', 50),
+    ]),
+    c('C2', [
+      s('b3', 'B11+B12', 'Dr. Z', 'AB1-103', 50),
+      s('b4', 'A11+A12', 'Dr. W', 'AB1-104', 50),
+    ]),
+  ];
+
+  const res = solveTwin(
+    [
+      { name: 'Alice', courses: cAlice },
+      { name: 'Bob', courses: cBob },
+    ],
+    {},
+    3
+  );
+
+  assert.equal(res.results.length, 2);
+  const opt1 = res.results[0];
+  const opt2 = res.results[1];
+
+  // Option 1 and Option 2 must have identical occupied time slots for Alice and Bob
+  const getOccupiedSlots = (student) =>
+    student.chosen
+      .map((ch) => ch.section.slots.split('+'))
+      .flat()
+      .sort()
+      .join(',');
+
+  assert.equal(getOccupiedSlots(opt1.student1), getOccupiedSlots(opt2.student1));
+  assert.equal(getOccupiedSlots(opt1.student2), getOccupiedSlots(opt2.student2));
+  // But courses swap between those slots:
+  assert.notEqual(
+    opt1.student1.chosen[0].course.code + ':' + opt1.student1.chosen[0].section.slots,
+    opt2.student1.chosen[0].course.code + ':' + opt2.student1.chosen[0].section.slots
+  );
+});
+
+test('27. PDF export succeeds with optional unuploaded projects', () => {
+  class MockJsPDF {
+    constructor() {
+      this.pages = 1;
+      this.calls = [];
+      this.internal = { pageSize: { getWidth: () => 297, getHeight: () => 210 } };
+    }
+    setProperties(props) {
+      this.properties = props;
+    }
+    setFont() {}
+    setFontSize() {}
+    setTextColor() {}
+    setLineWidth() {}
+    setDrawColor() {}
+    setFillColor() {}
+    rect() {}
+    text(txt) {
+      this.calls.push(txt);
+    }
+    splitTextToSize(txt) {
+      return [txt];
+    }
+    addPage() {
+      this.pages++;
+    }
+  }
+
+  // 1 weekly course + 1 project without uploaded sections
+  const cAlice = [
+    c('CSE2001', [s('a1', 'A11+A12', 'Dr. Alice', 'AB1-101', 50)]),
+    c('DSN2098', [], { scheduled: false }),
+  ];
+  const cBob = [
+    c('CSE2001', [s('b1', 'A11+A12', 'Dr. Alice', 'AB1-101', 50)]),
+    c('DSN2098', [], { scheduled: false }),
+  ];
+
+  const res = solveTwin([
+    { name: 'Alice', courses: cAlice },
+    { name: 'Bob', courses: cBob },
+  ]);
+
+  assert.equal(res.results.length, 1);
+  const pair = res.results[0];
+
+  // assertExportEligible must not throw for unuploaded optional projects
+  assert.doesNotThrow(() => {
+    assertExportEligible(pair.student1, cAlice);
+    assertExportEligible(pair.student2, cBob);
+  });
+
+  // Combined export must succeed and render 2 pages
+  const docBoth = createTwinTimetablePdf(MockJsPDF, pair, {
+    which: 'both',
+    courses1: cAlice,
+    courses2: cBob,
+  });
+  assert.equal(docBoth.pages, 2);
+});
+
+test('28. PDF export strictly rejects avoided or removed faculty', () => {
+  const cAlice = [c('CSE2001', [s('a1', 'A11+A12', 'Dr. Bad', 'AB1-101', 50)])];
+  const cBob = [c('CSE2001', [s('b1', 'A11+A12', 'Dr. Bad', 'AB1-101', 50)])];
+
+  const res = solveTwin([
+    { name: 'Alice', courses: cAlice },
+    { name: 'Bob', courses: cBob },
+  ]);
+
+  const pair = res.results[0];
+
+  // If Alice subsequently avoids Dr. Bad:
+  const updatedAlice = [
+    c('CSE2001', [s('a1', 'A11+A12', 'Dr. Bad', 'AB1-101', 50)], { avoid: ['Dr. Bad'] }),
+  ];
+
+  assert.throws(() => assertExportEligible(pair.student1, updatedAlice), /no longer eligible/i);
+});
+
+test('29. getCourseStatus accurately classifies readiness for weekly, online, and project courses', () => {
+  // Weekly course without sections: Needs PDF
+  const weeklyEmpty = c('CSE2001', []);
+  assert.deepEqual(getCourseStatus(weeklyEmpty), {
+    label: 'Needs PDF',
+    cardLabel: 'No list yet',
+    badgeClass: 'badge-amber',
+    isReady: false,
+  });
+
+  // Weekly course with sections: Saved & Ready
+  const weeklyReady = c('CSE2001', [s('s1', 'A11')]);
+  assert.deepEqual(getCourseStatus(weeklyReady), {
+    label: '1 saved',
+    cardLabel: '1 saved',
+    badgeClass: 'badge-success',
+    isReady: true,
+  });
+
+  // Project course without sections: Optional & Ready
+  const projectEmpty = c('DSN2098', [], { scheduled: false });
+  assert.deepEqual(getCourseStatus(projectEmpty), {
+    label: 'Optional',
+    cardLabel: 'No weekly classes · Optional',
+    badgeClass: 'badge-slate',
+    isReady: true,
+  });
+
+  // Project course with sections: Saved & Ready
+  const projectUploaded = c('DSN2098', [s('s2', 'NIL', 'Dr. Guide', 'NIL', 30)], {
+    scheduled: false,
+  });
+  assert.deepEqual(getCourseStatus(projectUploaded), {
+    label: '1 saved',
+    cardLabel: '1 saved',
+    badgeClass: 'badge-success',
+    isReady: true,
+  });
+
+  // Online course: Online & Ready
+  const onlineCourse = c('HUM0002', [], { online: true });
+  assert.deepEqual(getCourseStatus(onlineCourse), {
+    label: 'Online',
+    cardLabel: 'Online',
+    badgeClass: 'badge-slate',
+    isReady: true,
+  });
 });

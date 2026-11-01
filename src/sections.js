@@ -1,5 +1,38 @@
 import { validateSection, slotBundle } from './engine.js';
 export const needsFaculty = (c) => !c.online && c.scheduled !== false && !(c.sections || []).length;
+
+export function getCourseStatus(c) {
+  if (c.online) {
+    return {
+      label: 'Online',
+      cardLabel: 'Online',
+      badgeClass: 'badge-slate',
+      isReady: true,
+    };
+  }
+  if (c.sections && c.sections.length > 0) {
+    return {
+      label: `${c.sections.length} saved`,
+      cardLabel: `${c.sections.length} saved`,
+      badgeClass: 'badge-success',
+      isReady: true,
+    };
+  }
+  if (c.scheduled === false) {
+    return {
+      label: 'Optional',
+      cardLabel: 'No weekly classes · Optional',
+      badgeClass: 'badge-slate',
+      isReady: true,
+    };
+  }
+  return {
+    label: 'Needs PDF',
+    cardLabel: 'No list yet',
+    badgeClass: 'badge-amber',
+    isReady: false,
+  };
+}
 const key = (s) =>
   [
     s.faculty

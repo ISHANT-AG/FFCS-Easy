@@ -1,6 +1,6 @@
 import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js';
 import { startGeneration } from './generation.js';
-import { mergeSections, needsFaculty } from './sections.js';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js';
 import { pdfItemsToText } from './pdf-text.js';
 import {
   TIMES,
@@ -111,7 +111,8 @@ let result = null,
 let twinResult = null,
   twinResultIndex = 0,
   twinActiveStudentTab = 0,
-  showNoCommonModal = false;
+  showNoCommonModal = false,
+  pendingBreakShared = null;
 
 let drafts = state.pendingUploads || {};
 let twinDrafts = [{}, {}];
@@ -167,6 +168,24 @@ function course(r) {
 }
 
 const isCustom = (c) => Boolean(c.custom || (!c.batch && c.custom !== false));
+
+function isStepAccessible(i, isTwin, currentStep) {
+  if (i <= currentStep) return true;
+  if (!isTwin) {
+    if (i === 1) return state.courses.length > 0;
+    if (i === 2) return !state.courses.some(needsFaculty);
+    if (i === 3) return !state.courses.some(needsFaculty);
+    return false;
+  }
+  const s1Ready = !twinState.student1.courses.some(needsFaculty);
+  const s2Ready = !twinState.student2.courses.some(needsFaculty);
+  if (i === 1)
+    return twinState.student1.courses.length > 0 && twinState.student2.courses.length > 0;
+  if (i === 2) return s1Ready;
+  if (i === 3) return s1Ready && s2Ready;
+  if (i === 4) return s1Ready && s2Ready;
+  return false;
+}
 
 const prefix = (year = state.year) => String(27 - Number(year)).padStart(2, '0');
 
@@ -317,15 +336,15 @@ function render() {
               .map((s, i) => {
                 const isCurrent = i === currentStep;
                 const isCompleted = i < currentStep;
-                const isUpcoming = i > currentStep;
+                const accessible = isStepAccessible(i, isTwin, currentStep);
                 const connector =
                   i > 0
                     ? `<li class="stepper-connector ${i <= currentStep ? 'is-active' : ''}" aria-hidden="true"></li>`
                     : '';
                 return `
                 ${connector}
-                <li class="stepper-item ${isCurrent ? 'is-current' : ''} ${isCompleted ? 'is-completed' : ''} ${isUpcoming ? 'is-upcoming' : ''}">
-                  <button data-step="${i}" class="stepper-btn" ${isUpcoming ? 'disabled' : ''} aria-current="${isCurrent ? 'step' : 'false'}">
+                <li class="stepper-item ${isCurrent ? 'is-current' : ''} ${isCompleted ? 'is-completed' : ''} ${!accessible ? 'is-upcoming' : ''}">
+                  <button data-step="${i}" class="stepper-btn" ${!accessible ? 'disabled' : ''} aria-current="${isCurrent ? 'step' : 'false'}">
                     <span class="stepper-badge" aria-hidden="true">
                       ${isCompleted ? '<svg class="icon-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>' : i + 1}
                     </span>
@@ -364,6 +383,11 @@ function render() {
             ${currentStep > 0 ? '<button id="back" class="secondary-btn">← Back</button>' : ''}
           </div>
           <div>
+            ${
+              isTwin && currentStep === 1 && !twinState.student2.courses.some(needsFaculty)
+                ? `<button id="skip-to-preferences" class="secondary-btn" style="margin-right: 8px;">Skip to Preferences →</button>`
+                : ''
+            }
             ${
               currentStep < (isTwin ? 4 : 3)
                 ? `
@@ -614,7 +638,7 @@ function coursesView() {
 }
 
 function facultyView() {
-  const readyCourses = state.courses.filter((c) => !needsFaculty(c));
+  const readyCourses = state.courses.filter((c) => getCourseStatus(c).isReady);
   const progressPct = state.courses.length
     ? Math.round((readyCourses.length / state.courses.length) * 100)
     : 100;
@@ -637,25 +661,14 @@ function facultyView() {
           <div class="nav-course-list">
             ${state.courses
               .map((c) => {
-                const isReady = !needsFaculty(c);
-                const isOnline = c.online;
-                const statusClass = isOnline
-                  ? 'badge-slate'
-                  : isReady
-                    ? 'badge-success'
-                    : 'badge-amber';
-                const statusLabel = isOnline
-                  ? 'Online'
-                  : c.sections.length
-                    ? `${c.sections.length} saved`
-                    : 'Needs PDF';
+                const st = getCourseStatus(c);
                 return `
                 <button type="button" class="nav-course-item" data-nav-target="${c.id}">
                   <div class="nav-course-left">
                     <span class="course-code-badge">${esc(c.code)}</span>
                     <span class="nav-item-name" title="${esc(c.name)}">${esc(c.name)}</span>
                   </div>
-                  <span class="badge ${statusClass}">${statusLabel}</span>
+                  <span class="badge ${st.badgeClass}">${st.label}</span>
                 </button>
               `;
               })
@@ -668,19 +681,9 @@ function facultyView() {
         ${state.courses
           .map((c) => {
             const hasError = Boolean(c.uploadError);
-            const isReady = !needsFaculty(c);
+            const st = getCourseStatus(c);
             const isUploading = uploading.has(c.id);
             const d = drafts[c.id];
-            const statusClass = c.online
-              ? 'badge-slate'
-              : isReady
-                ? 'badge-success'
-                : 'badge-amber';
-            const statusText = c.online
-              ? 'Online'
-              : c.sections.length
-                ? `${c.sections.length} saved`
-                : 'No list yet';
 
             return `
             <article class="faculty-card panel ${c.online ? 'is-online' : ''} ${hasError ? 'has-error' : ''}" id="card-${c.id}">
@@ -701,7 +704,7 @@ function facultyView() {
                     <input type="checkbox" data-online="${c.id}" ${c.online ? 'checked' : ''} aria-label="Online ${esc(c.code)}">
                     <span>Online · skip in timetable</span>
                   </label>
-                  <span class="badge ${statusClass}">${statusText}</span>
+                  <span class="badge ${st.badgeClass}">${st.cardLabel}</span>
                 </div>
               </header>
 
@@ -1130,24 +1133,20 @@ function twinCoursesView() {
             </svg>
             <span>
               ${
-                commonScheduled.length
-                  ? `${commonScheduled.length} common course${commonScheduled.length > 1 ? 's' : ''} found`
-                  : common.length
-                    ? `${common.length} project course${common.length > 1 ? 's' : ''} found`
-                    : 'Add courses for both students to identify common classes'
+                common.length
+                  ? `${common.length} shared course${common.length > 1 ? 's' : ''} found`
+                  : 'Add courses for both students to identify common classes'
               }
             </span>
           </div>
           ${
-            commonScheduled.length
+            common.length
               ? `
             <span class="badge badge-success">
-              ${commonScheduled.length} scheduled on campus ${common.length > commonScheduled.length ? `· ${common.length - commonScheduled.length} project` : ''}
+              ${commonScheduled.length} weekly ${common.length > commonScheduled.length ? `· ${common.length - commonScheduled.length} projects` : ''}
             </span>
           `
-              : common.length
-                ? '<span class="badge badge-neutral">No weekly classes</span>'
-                : ''
+              : ''
           }
         </div>
 
@@ -1160,7 +1159,7 @@ function twinCoursesView() {
                 (c) => `
               <span class="common-course-tag ${c.isScheduled ? '' : 'is-project'}" title="${esc(c.name)}">
                 <span>${esc(c.code)}</span>
-                ${c.isScheduled ? '<small>· Together</small>' : '<small>· Project</small>'}
+                ${c.isScheduled ? '<small>· Shared course</small>' : '<small>· Project</small>'}
               </span>
             `
               )
@@ -1386,7 +1385,7 @@ function twinCoursesView() {
 
 function twinFacultyView(studentIdx) {
   const student = studentIdx === 0 ? twinState.student1 : twinState.student2;
-  const readyCourses = student.courses.filter((c) => !needsFaculty(c));
+  const readyCourses = student.courses.filter((c) => getCourseStatus(c).isReady);
   const progressPct = student.courses.length
     ? Math.round((readyCourses.length / student.courses.length) * 100)
     : 100;
@@ -1409,25 +1408,14 @@ function twinFacultyView(studentIdx) {
           <div class="nav-course-list">
             ${student.courses
               .map((c) => {
-                const isReady = !needsFaculty(c);
-                const isOnline = c.online;
-                const statusClass = isOnline
-                  ? 'badge-slate'
-                  : isReady
-                    ? 'badge-success'
-                    : 'badge-amber';
-                const statusLabel = isOnline
-                  ? 'Online'
-                  : c.sections.length
-                    ? `${c.sections.length} saved`
-                    : 'Needs PDF';
+                const st = getCourseStatus(c);
                 return `
                 <button type="button" class="nav-course-item" data-nav-target="${c.id}">
                   <div class="nav-course-left">
                     <span class="course-code-badge">${esc(c.code)}</span>
                     <span class="nav-item-name" title="${esc(c.name)}">${esc(c.name)}</span>
                   </div>
-                  <span class="badge ${statusClass}">${statusLabel}</span>
+                  <span class="badge ${st.badgeClass}">${st.label}</span>
                 </button>
               `;
               })
@@ -1440,19 +1428,9 @@ function twinFacultyView(studentIdx) {
         ${student.courses
           .map((c) => {
             const hasError = Boolean(c.uploadError);
-            const isReady = !needsFaculty(c);
+            const st = getCourseStatus(c);
             const isUploading = uploading.has(`${studentIdx}:${c.id}`);
             const d = twinDrafts[studentIdx]?.[c.id];
-            const statusClass = c.online
-              ? 'badge-slate'
-              : isReady
-                ? 'badge-success'
-                : 'badge-amber';
-            const statusText = c.online
-              ? 'Online'
-              : c.sections.length
-                ? `${c.sections.length} saved`
-                : 'No list yet';
 
             return `
             <article class="faculty-card panel ${c.online ? 'is-online' : ''} ${hasError ? 'has-error' : ''}" id="card-${c.id}">
@@ -1473,7 +1451,7 @@ function twinFacultyView(studentIdx) {
                     <input type="checkbox" data-twin-online="${studentIdx}:${c.id}" ${c.online ? 'checked' : ''} aria-label="Online ${esc(c.code)}">
                     <span>Online · skip in timetable</span>
                   </label>
-                  <span class="badge ${statusClass}">${statusText}</span>
+                  <span class="badge ${st.badgeClass}">${st.cardLabel}</span>
                 </div>
               </header>
 
@@ -1758,6 +1736,33 @@ function twinResultsView() {
         : ''
     }
 
+    ${
+      pendingBreakShared
+        ? `
+      <div class="twin-modal-backdrop" id="break-shared-modal">
+        <div class="twin-modal-box" role="dialog" aria-modal="true" aria-labelledby="break-modal-title">
+          <div class="twin-modal-header">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-warning);">
+              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <h3 id="break-modal-title">Separate shared class?</h3>
+          </div>
+          <div class="twin-modal-body">
+            Changing to this individual faculty will separate your <strong>${esc(pendingBreakShared.courseCode)}</strong> class from <strong>${esc(pendingBreakShared.partnerName)}</strong>.
+            <p style="margin-top: 8px; color: var(--color-text-secondary); font-size: 13px;">
+              Shared classes together will decrease from <strong>${pendingBreakShared.prevTogether}</strong> to <strong>${pendingBreakShared.newTogether}</strong> of ${pendingBreakShared.totalScheduled}.
+            </p>
+          </div>
+          <div class="twin-modal-actions">
+            <button type="button" class="secondary-btn" id="cancel-break-shared">Keep class together</button>
+            <button type="button" class="primary" id="confirm-break-shared">Separate class</button>
+          </div>
+        </div>
+      </div>
+    `
+        : ''
+    }
+
     <!-- Paired Match Headline Banner -->
     <div class="twin-match-banner">
       <div class="twin-match-title-row">
@@ -1783,40 +1788,46 @@ function twinResultsView() {
         </div>
       </div>
 
-      <div class="twin-courses-status-grid">
-        ${summary.courses
-          .map((c) => {
-            const isTogether = c.status === 'together';
-            const isSameTime = c.status === 'same_time';
-            const badgeClass = isTogether
-              ? 'badge-success'
-              : isSameTime
-                ? 'badge-amber'
-                : 'badge-neutral';
-            const label = isTogether
-              ? '✓ Together · Same class'
-              : isSameTime
-                ? '⏱ Same time · Diff faculty'
-                : c.status === 'project'
-                  ? 'Project (no weekly slots)'
-                  : c.status === 'online'
-                    ? 'Online'
-                    : '≠ Different time';
-            const codeIdx = allTwinCodes.indexOf(c.code.toUpperCase());
-            const colorIdx = (codeIdx >= 0 ? codeIdx : 0) % 10;
-            return `
-            <div class="twin-course-status-card color-accent-${colorIdx}">
-              <div class="twin-course-status-top">
-                <strong>${esc(c.code)}</strong>
-                <span class="badge ${badgeClass}">${label}</span>
+      <details class="twin-match-collapsible">
+        <summary class="twin-match-summary-toggle">
+          <span>View shared course match details (${summary.courses.length} courses)</span>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+        </summary>
+        <div class="twin-courses-status-grid">
+          ${summary.courses
+            .map((c) => {
+              const isTogether = c.status === 'together';
+              const isSameTime = c.status === 'same_time';
+              const badgeClass = isTogether
+                ? 'badge-success'
+                : isSameTime
+                  ? 'badge-amber'
+                  : 'badge-neutral';
+              const label = isTogether
+                ? '✓ Together · Same class'
+                : isSameTime
+                  ? '⏱ Same time · Diff faculty'
+                  : c.status === 'project'
+                    ? 'Project (no weekly slots)'
+                    : c.status === 'online'
+                      ? 'Online'
+                      : '≠ Different time';
+              const codeIdx = allTwinCodes.indexOf(c.code.toUpperCase());
+              const colorIdx = (codeIdx >= 0 ? codeIdx : 0) % 10;
+              return `
+              <div class="twin-course-status-card color-accent-${colorIdx}">
+                <div class="twin-course-status-top">
+                  <strong>${esc(c.code)}</strong>
+                  <span class="badge ${badgeClass}">${label}</span>
+                </div>
+                <small class="course-name" style="color: var(--color-text-secondary);">${esc(c.name)}</small>
+                ${c.reason && !isTogether ? `<span class="twin-course-status-reason">${esc(c.reason)}</span>` : ''}
               </div>
-              <small class="course-name" style="color: var(--color-text-secondary);">${esc(c.name)}</small>
-              ${c.reason && !isTogether ? `<span class="twin-course-status-reason">${esc(c.reason)}</span>` : ''}
-            </div>
-          `;
-          })
-          .join('')}
-      </div>
+            `;
+            })
+            .join('')}
+        </div>
+      </details>
     </div>
 
     <!-- Toolbar: Option Tabs -->
@@ -1919,9 +1930,9 @@ function renderTimetableGrid(
                               sameTime.length > 1
                                 ? `
                               <select class="event-faculty-select" data-twin-faculty-course="${studentIdx}:${esc(x.course)}" aria-label="Faculty for ${esc(x.course)} ${DAYS[d]}">
-                                ${bothAlts.length > 1 ? `<optgroup label="Change for BOTH (keeps together)">${bothAlts.map((a) => `<option value="both:${esc(a.id)}" ${a.id === selected.section.id ? 'selected' : ''}>✓ Both: ${esc(a.faculty)} (${esc(a.venue)})</option>`).join('')}</optgroup>` : ''}
+                                ${bothAlts.length > 1 ? `<optgroup label="Change for BOTH (keeps together)">${bothAlts.map((a) => `<option value="both:${esc(a.id)}" ${isTogether && a.id === selected.section.id ? 'selected' : ''}>✓ Both: ${esc(a.faculty)} (${esc(a.venue)})</option>`).join('')}</optgroup>` : ''}
                                 <optgroup label="Change for ${esc(studentName)} only">
-                                  ${sameTime.map((a) => `<option value="single:${esc(a.id)}" ${a.id === selected.section.id && !bothAlts.some((b) => b.id === a.id) ? 'selected' : ''}>${esc(a.faculty)} (${esc(a.venue)})</option>`).join('')}
+                                  ${sameTime.map((a) => `<option value="single:${esc(a.id)}" ${!isTogether && a.id === selected.section.id ? 'selected' : ''}>${esc(a.faculty)} (${esc(a.venue)})</option>`).join('')}
                                 </optgroup>
                               </select>
                             `
@@ -2339,6 +2350,45 @@ function bind() {
     render();
   });
 
+  $('#skip-to-preferences')?.addEventListener('click', () => {
+    if (twinState.student1.courses.some(needsFaculty)) {
+      toast('Please upload required PDFs for ' + (twinState.student1.name || 'Student 1'));
+      return;
+    }
+    twinState.step = 3;
+    persist();
+    render();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+
+  $('#cancel-break-shared')?.addEventListener('click', () => {
+    pendingBreakShared = null;
+    render();
+  });
+
+  $('#confirm-break-shared')?.addEventListener('click', () => {
+    if (!pendingBreakShared) return;
+    const { studentIdx, courseCode, sectionId, studentName } = pendingBreakShared;
+    pendingBreakShared = null;
+    try {
+      twinResult.results[twinResultIndex] = changeTwinFaculty(
+        twinResult.results[twinResultIndex],
+        studentIdx,
+        courseCode,
+        sectionId,
+        false,
+        twinState.student1.settings,
+        twinState.student2.settings,
+        twinState.student1.preset,
+        twinState.student2.preset
+      );
+      render();
+      toast(`Faculty updated for ${studentName}`);
+    } catch (e) {
+      toast(e.message || 'Could not update faculty');
+    }
+  });
+
   // Twin In-Cell Faculty Dropdown
   document.querySelectorAll('[data-twin-faculty-course]').forEach((select) => {
     select.onchange = () => {
@@ -2347,6 +2397,34 @@ function bind() {
       const isBoth = val.startsWith('both:');
       const sectionId = val.replace(/^(both|single):/, '');
       const studentIdx = Number(idxStr);
+      const studentName =
+        studentIdx === 0 ? twinState.student1.name || 'You' : twinState.student2.name || 'Friend';
+      const partnerName =
+        studentIdx === 0 ? twinState.student2.name || 'Friend' : twinState.student1.name || 'You';
+      const currentPair = twinResult.results[twinResultIndex];
+      const summaryCourse = currentPair.matchSummary.courses.find(
+        (c) => normalizeCourseCode(c.code) === normalizeCourseCode(courseCode)
+      );
+      const isCurrentlyTogether = summaryCourse?.status === 'together';
+
+      if (!isBoth && isCurrentlyTogether) {
+        const prevTogether = currentPair.matchSummary.together;
+        const newTogether = Math.max(0, prevTogether - 1);
+        const totalScheduled = currentPair.matchSummary.commonScheduled;
+        pendingBreakShared = {
+          studentIdx,
+          courseCode,
+          sectionId,
+          studentName,
+          partnerName,
+          prevTogether,
+          newTogether,
+          totalScheduled,
+        };
+        render();
+        return;
+      }
+
       try {
         twinResult.results[twinResultIndex] = changeTwinFaculty(
           twinResult.results[twinResultIndex],

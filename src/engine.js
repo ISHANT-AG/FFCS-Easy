@@ -730,6 +730,8 @@ function recalculateMatchSummary(sched1, sched2, priorSummary = {}) {
       ...courseInfo,
       status: cl.status,
       reason: cl.reason,
+      faculty1: item1.section?.faculty,
+      faculty2: item2.section?.faculty,
     });
   }
 
@@ -825,25 +827,39 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
   const prepared1 = new WeakMap();
   const prepared2 = new WeakMap();
 
+  const commonCodesSet = new Set(common.map((x) => x.code));
+  const commonScheduledCourses = common.filter((x) => x.isScheduled);
+  const commonScheduledCodesSet = new Set(commonScheduledCourses.map((x) => x.code));
+
   function prepareStudentOptions(activeCourses, preparedMap) {
     const result = [];
     for (const c of activeCourses) {
       const eligible = eligibleSections(c);
-      const groups = new Map();
-      for (const s of eligible) {
-        const key = slotBundle(s, c.scheduled) + (c.scheduled === false ? '' : ':' + zone(s.venue));
-        const prior = groups.get(key);
-        if (
-          !prior ||
-          preferencePenalty(c, s) < preferencePenalty(c, prior) ||
-          (preferencePenalty(c, s) === preferencePenalty(c, prior) &&
-            Number(s.seats || 0) > Number(prior.seats || 0))
-        )
-          groups.set(key, s);
+      const isCommon = commonScheduledCodesSet.has(normalizeCourseCode(c.code));
+      let options;
+      if (isCommon) {
+        // Common scheduled courses: DO NOT discard sections with different faculty,
+        // because mutual faculty matching between student 1 and student 2 must be preserved!
+        options = eligible;
+      } else {
+        // Unique course: compression by slotBundle + zone is safe
+        const groups = new Map();
+        for (const s of eligible) {
+          const key =
+            slotBundle(s, c.scheduled) + (c.scheduled === false ? '' : ':' + zone(s.venue));
+          const prior = groups.get(key);
+          if (
+            !prior ||
+            preferencePenalty(c, s) < preferencePenalty(c, prior) ||
+            (preferencePenalty(c, s) === preferencePenalty(c, prior) &&
+              Number(s.seats || 0) > Number(prior.seats || 0))
+          )
+            groups.set(key, s);
+        }
+        options = [...groups.values()].sort(
+          (a, b) => preferencePenalty(c, a) - preferencePenalty(c, b)
+        );
       }
-      const options = [...groups.values()].sort(
-        (a, b) => preferencePenalty(c, a) - preferencePenalty(c, b)
-      );
       for (const section of options) {
         const items = sectionItems(c, section);
         let low = 0,
@@ -868,10 +884,6 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
 
   const preparedList1 = prepareStudentOptions(active1, prepared1);
   const preparedList2 = prepareStudentOptions(active2, prepared2);
-
-  const commonCodesSet = new Set(common.map((x) => x.code));
-  const commonScheduledCourses = common.filter((x) => x.isScheduled);
-  const commonScheduledCodesSet = new Set(commonScheduledCourses.map((x) => x.code));
 
   // Unique scheduled courses for each student
   const uniqueScheduled1 = preparedList1
@@ -918,21 +930,52 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const pCourse2 = preparedList2.find((x) => normalizeCourseCode(x.course.code) === comm.code);
       if (!pCourse1 || !pCourse2) return null;
 
-      const pairs = [];
+      const togetherPairs = [];
+      const sameTimeGroups = new Map();
+      const diffTimeGroups = new Map();
+
       for (const s1 of pCourse1.options) {
         for (const s2 of pCourse2.options) {
           const cl = classifySectionPair(s1, s2, true);
           const pen1 = prepared1.get(s1).penalty;
           const pen2 = prepared2.get(s2).penalty;
-          pairs.push({
+          const candidate = {
             s1,
             s2,
             classification: cl,
             penalty1: pen1,
             penalty2: pen2,
-          });
+          };
+
+          if (cl.together) {
+            // Retain every mutually eligible shared-faculty candidate
+            togetherPairs.push(candidate);
+          } else if (cl.status === 'same_time') {
+            // Compress non-together same-timing candidates by slot bundle & building zones
+            const key = slotBundle(s1, true) + ':' + zone(s1.venue) + ':' + zone(s2.venue);
+            const prior = sameTimeGroups.get(key);
+            if (!prior || pen1 + pen2 < prior.penalty1 + prior.penalty2) {
+              sameTimeGroups.set(key, candidate);
+            }
+          } else {
+            // Compress different-timing candidates by slot bundles & building zones
+            const key =
+              slotBundle(s1, true) +
+              ':' +
+              zone(s1.venue) +
+              '||' +
+              slotBundle(s2, true) +
+              ':' +
+              zone(s2.venue);
+            const prior = diffTimeGroups.get(key);
+            if (!prior || pen1 + pen2 < prior.penalty1 + prior.penalty2) {
+              diffTimeGroups.set(key, candidate);
+            }
+          }
         }
       }
+
+      const pairs = [...togetherPairs, ...sameTimeGroups.values(), ...diffTimeGroups.values()];
 
       pairs.sort((a, b) => {
         const typeOrder = { together: 0, same_time: 1, different_time: 2 };
@@ -1041,6 +1084,11 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         lastProgress = now;
         hooks.onProgress?.({ nodes, found: pool.size, bestMatch: maxTogetherFound });
       }
+    }
+
+    if (k < commonPairsList.length && maxTogetherFound > 0) {
+      const remaining = commonPairsList.length - k;
+      if (matchedTogether + remaining < maxTogetherFound) return;
     }
 
     if (k === commonPairsList.length) {
@@ -1264,6 +1312,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         name: comm.name,
         status: cl.status,
         reason: factualReason,
+        faculty1: item1.section?.faculty,
+        faculty2: item2.section?.faculty,
       });
     }
 
@@ -1285,24 +1335,232 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     const bestPair = rankedCandidates[0];
     selectedPairs.push(bestPair);
 
-    // Try finding pairs with the same daily occupied patterns for both students
+    let targetLow1 = 0,
+      targetHigh1 = 0;
+    for (const x of bestPair.chosen1) {
+      const p = prepared1.get(x.section);
+      if (p) {
+        targetLow1 |= p.low;
+        targetHigh1 |= p.high;
+      }
+    }
+
+    let targetLow2 = 0,
+      targetHigh2 = 0;
+    for (const x of bestPair.chosen2) {
+      const p = prepared2.get(x.section);
+      if (p) {
+        targetLow2 |= p.low;
+        targetHigh2 |= p.high;
+      }
+    }
+
     const pattern1 = dailyPattern(scheduleFrom(bestPair.chosen1, s1, p1));
     const pattern2 = dailyPattern(scheduleFrom(bestPair.chosen2, s2, p2));
 
-    const sameRoutine = rankedCandidates.slice(1).filter((pair) => {
-      const pA = dailyPattern(scheduleFrom(pair.chosen1, s1, p1));
-      const pB = dailyPattern(scheduleFrom(pair.chosen2, s2, p2));
-      return pA === pattern1 && pB === pattern2;
-    });
+    // Explicit search for compatible subject swaps that preserve each student's exact winning routine
+    const routineSwaps = [];
+    const fixedCommon = commonPairsList
+      .map((item) => ({
+        ...item,
+        pairs: item.pairs.filter((pair) => {
+          const p1Info = prepared1.get(pair.s1);
+          const p2Info = prepared2.get(pair.s2);
+          if (!p1Info || !p2Info) return false;
+          if ((p1Info.low & ~targetLow1) !== 0 || (p1Info.high & ~targetHigh1) !== 0) return false;
+          if ((p2Info.low & ~targetLow2) !== 0 || (p2Info.high & ~targetHigh2) !== 0) return false;
+          return true;
+        }),
+      }))
+      .sort((a, b) => a.pairs.length - b.pairs.length);
 
-    for (const pair of sameRoutine.slice(0, Math.min(2, limit - 1))) {
-      selectedPairs.push(pair);
+    const fixedUnique1 = uniqueScheduled1
+      .map((item) => ({
+        ...item,
+        options: item.options.filter((s) => {
+          const p = prepared1.get(s);
+          return p && (p.low & ~targetLow1) === 0 && (p.high & ~targetHigh1) === 0;
+        }),
+      }))
+      .sort((a, b) => a.options.length - b.options.length);
+
+    const fixedUnique2 = uniqueScheduled2
+      .map((item) => ({
+        ...item,
+        options: item.options.filter((s) => {
+          const p = prepared2.get(s);
+          return p && (p.low & ~targetLow2) === 0 && (p.high & ~targetHigh2) === 0;
+        }),
+      }))
+      .sort((a, b) => a.options.length - b.options.length);
+
+    const canDoRoutineSwaps =
+      limit > 1 &&
+      fixedCommon.every((x) => x.pairs.length > 0) &&
+      fixedUnique1.every((x) => x.options.length > 0) &&
+      fixedUnique2.every((x) => x.options.length > 0);
+
+    if (canDoRoutineSwaps) {
+      const routineDeadline = Date.now() + 250;
+      let routineAttempts = 0;
+      const seenSwapSigs = new Set([bestPair.pairSig]);
+
+      function searchRoutineUnique(
+        uniqueList,
+        baseLow,
+        baseHigh,
+        baseItems,
+        basePen,
+        prepMap,
+        targetLow,
+        targetHigh
+      ) {
+        const results = [];
+        function rec(k, low, high, items, pen, chosen) {
+          if (results.length >= 2 || ++routineAttempts > 15000 || Date.now() > routineDeadline)
+            return;
+          if (k === uniqueList.length) {
+            if (low === targetLow && high === targetHigh) {
+              const m = metrics(items);
+              results.push({ chosen, items, metrics: m, pen });
+            }
+            return;
+          }
+          const { course, options } = uniqueList[k];
+          for (const s of options) {
+            const p = prepMap.get(s);
+            if (low & p.low || high & p.high) continue;
+            rec(k + 1, low | p.low, high | p.high, [...items, ...p.items], pen + p.penalty, [
+              ...chosen,
+              { course, section: s },
+            ]);
+          }
+        }
+        rec(0, baseLow, baseHigh, baseItems, basePen, []);
+        return results;
+      }
+
+      function searchRoutine(
+        k,
+        chosen1,
+        chosen2,
+        items1,
+        items2,
+        low1,
+        high1,
+        low2,
+        high2,
+        pen1,
+        pen2,
+        together,
+        sameTime
+      ) {
+        if (routineSwaps.length >= 2 || ++routineAttempts > 15000 || Date.now() > routineDeadline)
+          return;
+        if (together + (fixedCommon.length - k) < bestPair.matchedTogether) return;
+
+        if (k === fixedCommon.length) {
+          const comp1List = searchRoutineUnique(
+            fixedUnique1,
+            low1,
+            high1,
+            items1,
+            pen1,
+            prepared1,
+            targetLow1,
+            targetHigh1
+          );
+          if (!comp1List.length) return;
+          const comp2List = searchRoutineUnique(
+            fixedUnique2,
+            low2,
+            high2,
+            items2,
+            pen2,
+            prepared2,
+            targetLow2,
+            targetHigh2
+          );
+          if (!comp2List.length) return;
+
+          const c1 = comp1List[0];
+          const c2 = comp2List[0];
+          const full1 = [...chosen1, ...c1.chosen, ...unscheduled1];
+          const full2 = [...chosen2, ...c2.chosen, ...unscheduled2];
+
+          const sig1 = full1
+            .filter(
+              (x) => x.course.scheduled !== false && String(x.section.slots).toUpperCase() !== 'NIL'
+            )
+            .map((x) => x.course.code + ':' + slotBundle(x.section, true))
+            .sort()
+            .join('|');
+          const sig2 = full2
+            .filter(
+              (x) => x.course.scheduled !== false && String(x.section.slots).toUpperCase() !== 'NIL'
+            )
+            .map((x) => x.course.code + ':' + slotBundle(x.section, true))
+            .sort()
+            .join('|');
+          const pairSig = sig1 + '||' + sig2;
+
+          if (!seenSwapSigs.has(pairSig)) {
+            seenSwapSigs.add(pairSig);
+            const m1 = metrics([...items1, ...c1.items]);
+            const m2 = metrics([...items2, ...c2.items]);
+            const score1 = scoreSchedule([...items1, ...c1.items], m1, pen1 + c1.pen, s1, p1);
+            const score2 = scoreSchedule([...items2, ...c2.items], m2, pen2 + c2.pen, s2, p2);
+            const pairedScore = -(together * 1000000) - sameTime * 10000 + score1 + score2;
+            routineSwaps.push({
+              chosen1: full1,
+              chosen2: full2,
+              matchedTogether: together,
+              matchedSameTime: sameTime,
+              pairedScore,
+              pairSig,
+            });
+          }
+          return;
+        }
+
+        const item = fixedCommon[k];
+        for (const pair of item.pairs) {
+          const p1Info = prepared1.get(pair.s1);
+          const p2Info = prepared2.get(pair.s2);
+          if (low1 & p1Info.low || high1 & p1Info.high) continue;
+          if (low2 & p2Info.low || high2 & p2Info.high) continue;
+
+          searchRoutine(
+            k + 1,
+            [...chosen1, { course: item.course1, section: pair.s1 }],
+            [...chosen2, { course: item.course2, section: pair.s2 }],
+            [...items1, ...p1Info.items],
+            [...items2, ...p2Info.items],
+            low1 | p1Info.low,
+            high1 | p1Info.high,
+            low2 | p2Info.low,
+            high2 | p2Info.high,
+            pen1 + p1Info.penalty,
+            pen2 + p2Info.penalty,
+            together + (pair.classification.together ? 1 : 0),
+            sameTime + (pair.classification.status === 'same_time' ? 1 : 0)
+          );
+        }
+      }
+
+      searchRoutine(0, [], [], [], [], 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    // Fill remaining up to limit with best remaining pairs
+    // Add discovered routine swaps as Options 2 & 3
+    routineSwaps.sort((a, b) => a.pairedScore - b.pairedScore);
+    for (const swap of routineSwaps.slice(0, Math.min(2, limit - 1))) {
+      selectedPairs.push(swap);
+    }
+
+    // Fill any remaining options up to limit from general pool (Option 4 and 5 provide broader timing flexibility)
     for (const pair of rankedCandidates.slice(1)) {
       if (selectedPairs.length >= limit) break;
-      if (!selectedPairs.includes(pair)) {
+      if (!selectedPairs.some((p) => p.pairSig === pair.pairSig)) {
         selectedPairs.push(pair);
       }
     }
@@ -1323,6 +1581,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       matchSummary,
       matchedTogether: matchSummary.together,
       matchedSameTime: matchSummary.sameTime,
+      isMaxPossible: matchSummary.isMaxPossible,
       pairedScore: pair.pairedScore,
       pairSig: pair.pairSig,
     };
@@ -1418,6 +1677,7 @@ export function changeTwinFaculty(
       matchSummary: updatedSummary,
       matchedTogether: updatedSummary.together,
       matchedSameTime: updatedSummary.sameTime,
+      isMaxPossible: updatedSummary.isMaxPossible,
     };
   } else {
     if (studentIndex === 0) {
@@ -1447,6 +1707,7 @@ export function changeTwinFaculty(
         matchSummary: updatedSummary,
         matchedTogether: updatedSummary.together,
         matchedSameTime: updatedSummary.sameTime,
+        isMaxPossible: updatedSummary.isMaxPossible,
       };
     } else {
       const item2 = targetSched2.chosen.find((x) => normalizeCourseCode(x.course.code) === norm);
@@ -1475,6 +1736,7 @@ export function changeTwinFaculty(
         matchSummary: updatedSummary,
         matchedTogether: updatedSummary.together,
         matchedSameTime: updatedSummary.sameTime,
+        isMaxPossible: updatedSummary.isMaxPossible,
       };
     }
   }

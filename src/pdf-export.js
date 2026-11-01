@@ -29,7 +29,25 @@ async function loadPdfLibrary() {
 export function assertExportEligible(schedule, courses) {
   for (const chosen of schedule.chosen) {
     const current = courses ? courses.find((c) => c.code === chosen.course.code) : chosen.course;
-    const section = current && eligibleSections(current).find((s) => s.id === chosen.section.id);
+    if (!current) {
+      throw Error(
+        'A selected course has been removed. Regenerate your timetable before exporting.'
+      );
+    }
+    const isUnscheduled = current.scheduled === false || current.online === true;
+    const isNilSection =
+      !chosen.section ||
+      String(chosen.section.slots).toUpperCase() === 'NIL' ||
+      String(chosen.section.faculty).toUpperCase() === 'NIL' ||
+      String(chosen.section.venue).toUpperCase() === 'NIL';
+
+    // Optional project or online course without uploaded faculty sections is a legitimate placeholder
+    if (isUnscheduled && isNilSection && (!current.sections || current.sections.length === 0)) {
+      continue;
+    }
+
+    const eligible = eligibleSections(current);
+    const section = eligible.find((s) => s.id === chosen.section?.id);
     if (
       !section ||
       slotBundle(section, current.scheduled) !==
@@ -152,7 +170,15 @@ export function createTimetablePdf(JsPDF, schedule, { option = 1, courses } = {}
   if (projects.length) {
     const text =
       'No weekly classes: ' +
-      projects.map((x) => x.course.code + ' - ' + x.section.faculty).join('; ');
+      projects
+        .map((x) => {
+          const fac =
+            x.section?.faculty && String(x.section.faculty).toUpperCase() !== 'NIL'
+              ? x.section.faculty
+              : null;
+          return fac ? `${x.course.code} (${fac})` : `${x.course.code} (Project)`;
+        })
+        .join('; ');
     doc.setFontSize(6.5);
     doc.text(doc.splitTextToSize(ascii(text), width), margin, bottom + 12);
   }
@@ -295,7 +321,15 @@ export function renderSchedulePage(
   if (projects.length) {
     const text =
       'No weekly classes: ' +
-      projects.map((x) => x.course.code + ' - ' + x.section.faculty).join('; ');
+      projects
+        .map((x) => {
+          const fac =
+            x.section?.faculty && String(x.section.faculty).toUpperCase() !== 'NIL'
+              ? x.section.faculty
+              : null;
+          return fac ? `${x.course.code} (${fac})` : `${x.course.code} (Project)`;
+        })
+        .join('; ');
     doc.setFontSize(6.5);
     doc.text(doc.splitTextToSize(ascii(text), width), margin, bottom + 11);
   }
