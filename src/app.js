@@ -174,6 +174,7 @@ function render() {
             <span class="semester-pill">Fall 2026–27</span>
           </div>
           <button type="button" class="watch-demo" id="watch-demo" aria-haspopup="dialog"><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 3.5v13l10-6.5z"/></svg><span>Watch demo</span></button>
+          <button type="button" class="feedback-btn-header" id="open-feedback" aria-haspopup="dialog" title="Share feedback or report an issue"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0h-2v2h2V9z" clip-rule="evenodd"/></svg><span>Feedback</span></button>
         </div>
 
         <nav class="stepper" aria-label="Steps">
@@ -251,7 +252,7 @@ function render() {
             </span>
           </span>
         </div>
-        <div class="bottom-note">Designed for VIT students · Registration data saved on your device</div>
+        <div class="bottom-note">Designed for VIT students · Registration data saved on your device · <button type="button" class="footer-feedback-link" id="footer-feedback">Share feedback</button></div>
       </footer>
     </div>
   `;
@@ -973,6 +974,14 @@ function bind() {
     $('#demo-player').src = 'https://www.youtube-nocookie.com/embed/MFKUypP14OA?rel=0';
     dialog.showModal();
   });
+  $('#open-feedback')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openFeedbackModal();
+  });
+  $('#footer-feedback')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openFeedbackModal();
+  });
   document
     .querySelectorAll('[data-step]')
     .forEach((b) => (b.onclick = () => go(Number(b.dataset.step))));
@@ -1420,4 +1429,81 @@ demoDialog.addEventListener('click', (e) => {
 demoDialog.addEventListener('close', () => {
   $('#demo-player').removeAttribute('src');
   $('#watch-demo')?.focus();
+});
+
+
+// Feedback Dialog Management
+const feedbackDialog = $('#feedback-dialog');
+const feedbackForm = $('#feedback-form');
+const feedbackSuccess = $('#feedback-success');
+
+function openFeedbackModal() {
+  if (!feedbackDialog) return;
+  if (feedbackSuccess) feedbackSuccess.style.display = 'none';
+  if (feedbackForm) {
+    feedbackForm.style.display = 'flex';
+    feedbackForm.reset();
+  }
+  feedbackDialog.showModal();
+}
+
+function closeFeedbackModal() {
+  feedbackDialog?.close();
+}
+
+$('#close-feedback')?.addEventListener('click', closeFeedbackModal);
+$('#cancel-feedback')?.addEventListener('click', closeFeedbackModal);
+$('#success-done-btn')?.addEventListener('click', closeFeedbackModal);
+
+feedbackDialog?.addEventListener('click', (e) => {
+  if (e.target === feedbackDialog) {
+    const r = feedbackDialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+      feedbackDialog.close();
+    }
+  }
+});
+
+feedbackForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('#submit-feedback');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+  }
+
+  const fd = new FormData(feedbackForm);
+  const feedbackData = {
+    rating: fd.get('rating'),
+    category: fd.get('category') || 'General',
+    message: fd.get('message') || '',
+    name: fd.get('name') || 'Anonymous',
+    contact: fd.get('contact') || '',
+    step: state.step,
+    timestamp: new Date().toISOString()
+  };
+
+  // Save to localStorage so feedback is preserved
+  try {
+    const existing = JSON.parse(localStorage.getItem('ffcs_feedback_list') || '[]');
+    existing.push(feedbackData);
+    localStorage.setItem('ffcs_feedback_list', JSON.stringify(existing));
+  } catch (err) {
+    console.warn('Could not save feedback to local storage', err);
+  }
+
+  // Smooth realistic transition
+  await new Promise((r) => setTimeout(r, 450));
+
+  if (feedbackForm) feedbackForm.style.display = 'none';
+  if (feedbackSuccess) feedbackSuccess.style.display = 'flex';
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = `<span>Send Feedback</span> <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>`;
+  }
+
+  toast('Thank you for your feedback! ❤️');
+  setTimeout(() => {
+    if (feedbackDialog && feedbackDialog.open) feedbackDialog.close();
+  }, 2200);
 });
