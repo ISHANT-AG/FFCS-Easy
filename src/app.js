@@ -77,7 +77,7 @@ let state = {
   branch: '',
   courses: [],
   preset: 'compact',
-  settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10 },
+  settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
   ...saved,
 };
 
@@ -89,7 +89,7 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10 },
+    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
   },
   student2: {
     name: 'Friend',
@@ -97,10 +97,15 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10 },
+    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
   },
   ...savedTwin,
 };
+
+// Migrate legacy 16:20 default to new 04:45 PM (16:45) default
+if (state.settings.busTime === '16:20') state.settings.busTime = '16:45';
+if (twinState.student1.settings.busTime === '16:20') twinState.student1.settings.busTime = '16:45';
+if (twinState.student2.settings.busTime === '16:20') twinState.student2.settings.busTime = '16:45';
 
 let result = null,
   resultIndex = 0,
@@ -761,7 +766,8 @@ function facultyView() {
                     </div>
                   `
                         : `
-                    <div class="upload-dropzone" data-dropzone="${c.id}">
+                    <label class="upload-dropzone" data-dropzone="${c.id}">
+                      <input type="file" accept=".pdf,application/pdf" data-upload="${c.id}" class="sr-only">
                       <div class="dropzone-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
                           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
@@ -769,9 +775,9 @@ function facultyView() {
                       </div>
                       <div class="dropzone-text">
                         <strong>Upload faculty list PDF</strong>
-                        <p>Drop PDF here or <label class="browse-link">browse<input type="file" accept=".pdf,application/pdf" data-upload="${c.id}" class="sr-only"></label> · PDF only</p>
+                        <p>Drop PDF here or <span class="browse-link">browse</span> · PDF only</p>
                       </div>
-                    </div>
+                    </label>
                   `
                   }
 
@@ -1508,7 +1514,8 @@ function twinFacultyView(studentIdx) {
                     </div>
                   `
                         : `
-                    <div class="upload-dropzone" data-twin-dropzone="${studentIdx}:${c.id}">
+                    <label class="upload-dropzone" data-twin-dropzone="${studentIdx}:${c.id}">
+                      <input type="file" accept=".pdf,application/pdf" data-twin-upload="${studentIdx}:${c.id}" class="sr-only">
                       <div class="dropzone-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
                           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
@@ -1516,9 +1523,9 @@ function twinFacultyView(studentIdx) {
                       </div>
                       <div class="dropzone-text">
                         <strong>${student.name.toLowerCase() === 'you' ? 'Upload your faculty list PDF' : `Upload faculty PDF for ${esc(student.name)}`}</strong>
-                        <p>Drop PDF here or <label class="browse-link">browse<input type="file" accept=".pdf,application/pdf" data-twin-upload="${studentIdx}:${c.id}" class="sr-only"></label> · PDF only</p>
+                        <p>Drop PDF here or <span class="browse-link">browse</span> · PDF only</p>
                       </div>
-                    </div>
+                    </label>
                   `
                   }
 

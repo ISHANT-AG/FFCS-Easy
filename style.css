@@ -1070,6 +1070,12 @@ button {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  cursor: pointer;
+}
+
+.upload-dropzone:hover {
+  border-color: var(--color-primary);
+  background-color: var(--bg-hover);
 }
 
 .upload-dropzone.is-dragover {

@@ -150,7 +150,7 @@ function scoreSchedule(items, m, penalty, settings, preset) {
   return score;
 }
 function deadlineFor(settings) {
-  const [h, m] = (settings.busTime || '16:20').split(':').map(Number);
+  const [h, m] = (settings.busTime || '16:45').split(':').map(Number);
   return h * 60 + m - (Number(settings.walkMinutes) || 0);
 }
 function sectionItems(course, section) {
