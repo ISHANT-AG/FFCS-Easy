@@ -245,7 +245,7 @@ function timingDistance(a, b) {
   }
   return moved * 100 + meetings;
 }
-export function diverseTimetables(input, limit) {
+export function diverseTimetables(input, limit, distanceBetween = timingDistance) {
   const candidates = [...input].sort(
       (a, b) => a.score - b.score || a.signature.localeCompare(b.signature)
     ),
@@ -257,7 +257,7 @@ export function diverseTimetables(input, limit) {
       bestDistance = -1;
     if (selected.length)
       for (let i = 0; i < candidates.length; i++) {
-        const distance = Math.min(...selected.map((s) => timingDistance(s, candidates[i])));
+        const distance = Math.min(...selected.map((s) => distanceBetween(s, candidates[i])));
         if (distance > bestDistance) {
           bestDistance = distance;
           bestIndex = i;
@@ -273,19 +273,23 @@ export function dailyPattern(schedule) {
     .sort()
     .join('+');
 }
-export function consistentTimetables(input, limit = 5) {
-  const ranked = [
-    ...new Map(
-      [...input]
-        .sort((a, b) => a.score - b.score || a.signature.localeCompare(b.signature))
-        .map((s) => [s.signature, s])
-    ).values(),
-  ];
+export function consistentTimetables(
+  input,
+  limit = 5,
+  { patternOf = dailyPattern, distanceBetween = timingDistance } = {}
+) {
+  const unique = new Map();
+  for (const candidate of [...input].sort(
+    (a, b) => a.score - b.score || a.signature.localeCompare(b.signature)
+  )) {
+    if (!unique.has(candidate.signature)) unique.set(candidate.signature, candidate);
+  }
+  const ranked = [...unique.values()];
   if (!ranked.length) return [];
   const best = ranked[0],
-    pattern = dailyPattern(best);
-  const same = ranked.filter((s) => dailyPattern(s) === pattern);
-  const selected = diverseTimetables(same, Math.min(3, limit));
+    pattern = patternOf(best);
+  const same = ranked.filter((s) => patternOf(s) === pattern);
+  const selected = diverseTimetables(same, Math.min(3, limit), distanceBetween);
   const remaining = ranked.filter((s) => !selected.includes(s));
   // Fill the remaining places with timing flexibility; exact routine swaps
   // always precede these, and faculty-only variants share one signature.
@@ -293,7 +297,7 @@ export function consistentTimetables(input, limit = 5) {
     let index = 0,
       distance = -1;
     for (let i = 0; i < remaining.length; i++) {
-      const d = Math.min(...selected.map((s) => timingDistance(s, remaining[i])));
+      const d = Math.min(...selected.map((s) => distanceBetween(s, remaining[i])));
       if (d > distance) {
         distance = d;
         index = i;
@@ -302,6 +306,53 @@ export function consistentTimetables(input, limit = 5) {
     selected.push(remaining.splice(index, 1)[0]);
   }
   return selected;
+}
+// Reuse Individual FFCS shortlist selection for two coordinated routines.
+// Matching counts are a strict outer priority; quality/diversity never trade
+// a shared class for a lower timetable score.
+function compareTwinCandidates(a, b) {
+  return (
+    b.matchedTogether - a.matchedTogether ||
+    b.matchedSameTime - a.matchedSameTime ||
+    a.pairedScore - b.pairedScore ||
+    a.pairSig.localeCompare(b.pairSig)
+  );
+}
+export function consistentTwinTimetables(input, limit = 5) {
+  const ranked = [...input].sort(compareTwinCandidates);
+  if (!ranked.length) return [];
+  const best = ranked[0];
+  const eligible = ranked.filter(
+    (p) => p.matchedTogether === best.matchedTogether && p.matchedSameTime === best.matchedSameTime
+  );
+  const adapt = (p) => ({
+    pair: p,
+    signature: p.pairSig,
+    score: p.pairedScore,
+    chosen: [
+      ...p.chosen1.map((x) => ({
+        ...x,
+        course: {
+          ...x.course,
+          code: 'student1:' + x.course.code,
+          scheduled: x.course.scheduled !== false && !x.course.online,
+        },
+      })),
+      ...p.chosen2.map((x) => ({
+        ...x,
+        course: {
+          ...x.course,
+          code: 'student2:' + x.course.code,
+          scheduled: x.course.scheduled !== false && !x.course.online,
+        },
+      })),
+    ],
+  });
+  const patternOf = (s) =>
+    [s.pair.chosen1, s.pair.chosen2]
+      .map((chosen) => dailyPattern({ chosen: chosen.filter((x) => !x.course.online) }))
+      .join('||');
+  return consistentTimetables(eligible.map(adapt), limit, { patternOf }).map((s) => s.pair);
 }
 export function solve(courses, settings = {}, preset = 'compact', limit = 5, hooks = {}) {
   // Prefer an entirely morning shortlist before considering necessary late classes.
@@ -930,7 +981,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const pCourse2 = preparedList2.find((x) => normalizeCourseCode(x.course.code) === comm.code);
       if (!pCourse1 || !pCourse2) return null;
 
-      const togetherPairs = [];
+      const togetherGroups = new Map();
       const sameTimeGroups = new Map();
       const diffTimeGroups = new Map();
 
@@ -948,8 +999,22 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
           };
 
           if (cl.together) {
-            // Retain every mutually eligible shared-faculty candidate
-            togetherPairs.push(candidate);
+            // First intersect actual shared faculty/sections, THEN compress
+            // jointly equivalent timing/zone pairs. Compressing each student's
+            // faculty beforehand loses matches; keeping all joint equivalents
+            // wastes the search budget on faculty-only permutations.
+            const key = slotBundle(s1, true) + ':' + zone(s1.venue) + ':' + zone(s2.venue);
+            const prior = togetherGroups.get(key);
+            const seats = Math.min(Number(s1.seats || 999), Number(s2.seats || 999));
+            const priorSeats = prior
+              ? Math.min(Number(prior.s1.seats || 999), Number(prior.s2.seats || 999))
+              : 0;
+            if (
+              !prior ||
+              pen1 + pen2 < prior.penalty1 + prior.penalty2 ||
+              (pen1 + pen2 === prior.penalty1 + prior.penalty2 && seats > priorSeats)
+            )
+              togetherGroups.set(key, candidate);
           } else if (cl.status === 'same_time') {
             // Compress non-together same-timing candidates by slot bundle & building zones
             const key = slotBundle(s1, true) + ':' + zone(s1.venue) + ':' + zone(s2.venue);
@@ -975,7 +1040,11 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         }
       }
 
-      const pairs = [...togetherPairs, ...sameTimeGroups.values(), ...diffTimeGroups.values()];
+      const pairs = [
+        ...togetherGroups.values(),
+        ...sameTimeGroups.values(),
+        ...diffTimeGroups.values(),
+      ];
 
       pairs.sort((a, b) => {
         const typeOrder = { together: 0, same_time: 1, different_time: 2 };
@@ -1168,9 +1237,11 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       }
 
       if (pool.size > poolLimit * 2) {
-        const sorted = [...pool.values()].sort((a, b) => a.pairedScore - b.pairedScore);
+        const sorted = [...pool.values()].sort(compareTwinCandidates);
+        const quality = sorted.slice(0, poolLimit - limit),
+          variety = consistentTwinTimetables(sorted, limit);
         pool.clear();
-        for (const entry of sorted.slice(0, poolLimit)) {
+        for (const entry of [...quality, ...variety]) {
           pool.set(entry.pairSig, entry);
         }
       }
@@ -1223,9 +1294,69 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     }
   }
 
+  // For fully shared courses and the same routine settings, use the actual
+  // Individual FFCS search as a seed on MUTUALLY eligible shared sections.
+  // The joint search still handles mixed-course/preferences cases afterwards.
+  const sameSettings = ['lunch', 'travel', 'bus', 'busTime', 'walkMinutes'].every(
+    (key) => s1[key] === s2[key]
+  );
+  if (
+    !uniqueScheduled1.length &&
+    !uniqueScheduled2.length &&
+    p1 === p2 &&
+    sameSettings &&
+    commonPairsList.length &&
+    commonPairsList.every((c) => c.pairs.some((p) => p.classification.together))
+  ) {
+    const seedCourses = commonPairsList.map((c) => ({
+      ...c.course1,
+      sections: c.pairs.filter((p) => p.classification.together).map((p) => p.s1),
+    }));
+    const seeds = solve(
+      seedCourses,
+      {
+        ...s1,
+        _morningAttempt: true,
+        _morningOnly: !!options._morning1,
+        maxNodes: Math.min(nodesMax, 60000),
+        maxMilliseconds: Math.min(800, maxMilliseconds / 3),
+      },
+      p1,
+      Math.max(5, limit)
+    );
+    for (const seed of seeds.results) {
+      const chosen1 = [],
+        chosen2 = [];
+      for (const x of seed.chosen) {
+        const item = commonPairsList.find(
+          (c) => normalizeCourseCode(c.course1.code) === normalizeCourseCode(x.course.code)
+        );
+        const shared = item.pairs.find(
+          (p) => p.classification.together && p.s1.id === x.section.id
+        );
+        chosen1.push({ course: item.course1, section: shared.s1 });
+        chosen2.push({ course: item.course2, section: shared.s2 });
+      }
+      chosen1.push(...unscheduled1);
+      chosen2.push(...unscheduled2);
+      const schedule1 = scheduleFrom(chosen1, s1, p1),
+        schedule2 = scheduleFrom(chosen2, s2, p2),
+        pairSig = schedule1.signature + '||' + schedule2.signature;
+      const matchedTogether = commonPairsList.length;
+      pool.set(pairSig, {
+        chosen1,
+        chosen2,
+        matchedTogether,
+        matchedSameTime: 0,
+        pairedScore: -matchedTogether * 1000000 + schedule1.score + schedule2.score,
+        pairSig,
+      });
+      maxTogetherFound = Math.max(maxTogetherFound, matchedTogether);
+    }
+  }
   visitCommon(0, [], [], [], [], 0, 0, 0, 0, 0, 0, 0, 0);
 
-  const rankedCandidates = [...pool.values()].sort((a, b) => a.pairedScore - b.pairedScore);
+  const rankedCandidates = [...pool.values()].sort(compareTwinCandidates);
 
   function buildMatchSummary(sched1, sched2) {
     const coursesSummary = [];
@@ -1330,7 +1461,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
   }
 
   // Consistent routine selection across paired candidates:
-  const selectedPairs = [];
+  let selectedPairs = [];
   if (rankedCandidates.length) {
     const bestPair = rankedCandidates[0];
     selectedPairs.push(bestPair);
@@ -1455,7 +1586,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         together,
         sameTime
       ) {
-        if (routineSwaps.length >= 2 || ++routineAttempts > 15000 || Date.now() > routineDeadline)
+        if (routineSwaps.length >= 64 || ++routineAttempts > 15000 || Date.now() > routineDeadline)
           return;
         if (together + (fixedCommon.length - k) < bestPair.matchedTogether) return;
 
@@ -1506,10 +1637,10 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
 
           if (!seenSwapSigs.has(pairSig)) {
             seenSwapSigs.add(pairSig);
-            const m1 = metrics([...items1, ...c1.items]);
-            const m2 = metrics([...items2, ...c2.items]);
-            const score1 = scoreSchedule([...items1, ...c1.items], m1, pen1 + c1.pen, s1, p1);
-            const score2 = scoreSchedule([...items2, ...c2.items], m2, pen2 + c2.pen, s2, p2);
+            const m1 = metrics(c1.items);
+            const m2 = metrics(c2.items);
+            const score1 = scoreSchedule(c1.items, m1, c1.pen, s1, p1);
+            const score2 = scoreSchedule(c2.items, m2, c2.pen, s2, p2);
             const pairedScore = -(together * 1000000) - sameTime * 10000 + score1 + score2;
             routineSwaps.push({
               chosen1: full1,
@@ -1551,19 +1682,9 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       searchRoutine(0, [], [], [], [], 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    // Add discovered routine swaps as Options 2 & 3
-    routineSwaps.sort((a, b) => a.pairedScore - b.pairedScore);
-    for (const swap of routineSwaps.slice(0, Math.min(2, limit - 1))) {
-      selectedPairs.push(swap);
-    }
-
-    // Fill any remaining options up to limit from general pool (Option 4 and 5 provide broader timing flexibility)
-    for (const pair of rankedCandidates.slice(1)) {
-      if (selectedPairs.length >= limit) break;
-      if (!selectedPairs.some((p) => p.pairSig === pair.pairSig)) {
-        selectedPairs.push(pair);
-      }
-    }
+    // Use the identical consistency-first / farthest-timing selection used
+    // by Individual FFCS, applied to both students as one paired candidate.
+    selectedPairs = consistentTwinTimetables([...rankedCandidates, ...routineSwaps], limit);
   }
 
   const finalResults = selectedPairs.map((pair) => {

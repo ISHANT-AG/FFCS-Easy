@@ -91,3 +91,7 @@ Added all 64 course entries across 18 admission-2026 branches from the supplied 
 The shortlist keeps its best-scoring option first, then prioritizes up to two subject-slot permutations with exactly the same occupied weekly grid cells. These preserve daily class/free/lunch times while giving access to other faculty bundles. A targeted search of the winning occupied pattern (up to 20,000 nodes / 200 ms) supplements the bounded general search. Remaining places maximize timing flexibility; if fewer matching routines exist, other valid layouts fill the shortlist. Same-time faculty-only variants remain dropdown choices. All eligibility and hard timing constraints remain in force. Matching tabs show “Same routine”.
 
 Morning preference now searches for a complete timetable ending by 13:15 first. When any such schedule is found, all shortlisted options stay in that morning window, even if fewer than five exist. Later classes are considered only if the morning search finds no solution, with an explicit fallback notice. Hard exclusions remain unchanged.
+
+## Local startup and browser cache
+
+Use `npm start`. It stamps CSS, the app, module dependencies and worker with one content-based asset version, then serves development files with `Cache-Control: no-store`. This prevents new app code importing cached old dependencies. Re-run `npm run version:assets` after code edits before a static deployment. The startup loader shows a retry panel if module loading fails, preserving local saved plans.

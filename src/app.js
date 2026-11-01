@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js';
-import { startGeneration } from './generation.js';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js';
-import { pdfItemsToText } from './pdf-text.js';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=2a46e88dd0ce';
+import { startGeneration } from './generation.js?v=2a46e88dd0ce';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=2a46e88dd0ce';
+import { pdfItemsToText } from './pdf-text.js?v=2a46e88dd0ce';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js';
-import { parsePortalText } from './portal.js';
-import { validatePdfUpload } from './uploads.js';
+} from './engine.js?v=2a46e88dd0ce';
+import { parsePortalText } from './portal.js?v=2a46e88dd0ce';
+import { validatePdfUpload } from './uploads.js?v=2a46e88dd0ce';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2911,3 +2911,20 @@ demoDialog.addEventListener('close', () => {
   $('#demo-player').removeAttribute('src');
   $('#watch-demo')?.focus();
 });
+
+if (typeof window !== 'undefined') {
+  window.__ffcs = {
+    get state() {
+      return state;
+    },
+    get twinState() {
+      return twinState;
+    },
+    go,
+    render,
+    invalidate,
+    generate,
+    generateTwin,
+    switchMode,
+  };
+}
