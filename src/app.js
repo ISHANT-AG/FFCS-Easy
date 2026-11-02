@@ -77,7 +77,7 @@ let state = {
   branch: '',
   courses: [],
   preset: 'compact',
-  settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
+  settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
   ...saved,
 };
 
@@ -89,7 +89,7 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
+    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
   },
   student2: {
     name: 'Friend',
@@ -97,7 +97,7 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10 },
+    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
   },
   ...savedTwin,
 };
@@ -106,6 +106,9 @@ let twinState = {
 if (state.settings.busTime === '16:20') state.settings.busTime = '16:45';
 if (twinState.student1.settings.busTime === '16:20') twinState.student1.settings.busTime = '16:45';
 if (twinState.student2.settings.busTime === '16:20') twinState.student2.settings.busTime = '16:45';
+if (!state.settings.dayOff) state.settings.dayOff = 'none';
+if (!twinState.student1.settings.dayOff) twinState.student1.settings.dayOff = 'none';
+if (!twinState.student2.settings.dayOff) twinState.student2.settings.dayOff = 'none';
 
 let result = null,
   resultIndex = 0,
@@ -1781,6 +1784,54 @@ function twinResultsView() {
   );
 
   return `
+    ${
+      twinResult.dayOffAchieved1 && twinResult.dayOffAchieved2
+        ? twinResult.dayOffMatched1 === twinResult.dayOffMatched2
+          ? `
+      <div class="notice-box success-note" style="margin-bottom: 12px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>${esc(twinResult.dayOffMatched1)} is completely free for both ${esc(name1)} and ${esc(name2)}!</strong> Both timetables have a 3-day weekend together.</span>
+      </div>
+    `
+          : `
+      <div class="notice-box success-note" style="margin-bottom: 12px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>Weekdays off achieved!</strong> ${esc(twinResult.dayOffMatched1)} is free for ${esc(name1)}, and ${esc(twinResult.dayOffMatched2)} is free for ${esc(name2)}.</span>
+      </div>
+    `
+        : twinResult.dayOffAchieved1
+          ? `
+      <div class="notice-box success-note" style="margin-bottom: 12px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>${esc(twinResult.dayOffMatched1)} is completely free for ${esc(name1)}!</strong></span>
+      </div>
+    `
+          : twinResult.dayOffAchieved2
+            ? `
+      <div class="notice-box success-note" style="margin-bottom: 12px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>${esc(twinResult.dayOffMatched2)} is completely free for ${esc(name2)}!</strong></span>
+      </div>
+    `
+            : twinResult.dayOffFallback1 || twinResult.dayOffFallback2
+              ? `
+      <div class="notice-box subtle-note" style="margin-bottom: 12px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75">
+          <circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v4M8 5h.01"/>
+        </svg>
+        <span>A timetable with a weekday off was not possible with your uploaded course options. Showing the best paired schedule.</span>
+      </div>
+    `
+              : ''
+    }
     ${twinResult.morningFallback1 ? `<div class="notice-box subtle-note" style="margin-bottom:12px">A morning-only timetable was not found for ${esc(name1)}. Alternatives include later classes.</div>` : ''}
     ${twinResult.morningFallback2 ? `<div class="notice-box subtle-note" style="margin-bottom:12px">A morning-only timetable was not found for ${esc(name2)}. Alternatives include later classes.</div>` : ''}
     ${
@@ -1956,12 +2007,19 @@ function renderTimetableGrid(
       .map((c) => c.code.toUpperCase())
   );
 
+  const busyDays = new Set(schedule.items.map((x) => x.day));
+  const freeWeekdays = DAYS.slice(0, 5).filter((_, d) => !busyDays.has(d));
   const isHiddenMobile = twinActiveStudentTab !== studentIdx ? 'is-hidden-mobile' : '';
 
   return `
     <section class="twin-student-timetable-section ${isHiddenMobile}">
       <div class="twin-student-timetable-heading">
-        <h3>${esc(studentName)}’s timetable</h3>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <h3>${esc(studentName)}’s timetable</h3>
+          <span class="tab-off-pill ${freeWeekdays.length > 0 ? 'has-off' : 'none-off'}">
+            ${freeWeekdays.length > 0 ? `${freeWeekdays.length} day${freeWeekdays.length > 1 ? 's' : ''} off (${freeWeekdays.join(', ')})` : 'No days off'}
+          </span>
+        </div>
         <span class="subtle-note">${schedule.metrics.gaps} gap slots · ${schedule.metrics.travel} AB2 transitions</span>
       </div>
 
@@ -1971,7 +2029,7 @@ function renderTimetableGrid(
             <thead>
               <tr>
                 <th class="time-header-col">Time</th>
-                ${DAYS.map((d) => `<th class="day-header">${d.slice(0, 3)}</th>`).join('')}
+                ${DAYS.map((d, dIdx) => `<th class="day-header ${dIdx < 5 && !busyDays.has(dIdx) ? 'is-free-day' : ''}">${d.slice(0, 3)}${dIdx < 5 && !busyDays.has(dIdx) ? ' <span class="free-day-badge">Off</span>' : ''}</th>`).join('')}
               </tr>
             </thead>
             <tbody>
@@ -2016,7 +2074,7 @@ function renderTimetableGrid(
                           </div>
                         `
                             : `
-                          <span class="free-slot free">—</span>
+                          <span class="free-slot free ${d < 5 && !busyDays.has(d) ? 'free-day-slot' : ''}" ${d < 5 && !busyDays.has(d) ? `title="${DAYS[d]} is free"` : ''}>—</span>
                         `
                         }
                       </td>

@@ -941,6 +941,203 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     };
   }
 
+  // Weekday off multi-pass strategy (Weekdays only: Mon-Fri; Saturday is already a holiday)
+  const dayOffPref1 = parseDayOff(s1.dayOff);
+  const dayOffPref2 = parseDayOff(s2.dayOff);
+
+  if ((dayOffPref1 !== null || dayOffPref2 !== null) && !options._dayOffAttempt) {
+    const candidateDays = [4, 0, 2, 3, 1]; // Friday, Monday, Wednesday, Thursday, Tuesday
+
+    // CASE 1: Both students requested a weekday off
+    if (dayOffPref1 !== null && dayOffPref2 !== null) {
+      const cDays1 = dayOffPref1 === 'any' ? candidateDays : [dayOffPref1];
+      const cDays2 = dayOffPref2 === 'any' ? candidateDays : [dayOffPref2];
+
+      // Priority 1: Shared day off (same day off for both students)
+      const sharedDays = cDays1.filter((d) => cDays2.includes(d));
+      for (const d of sharedDays) {
+        const attempt = solveTwin(
+          students,
+          { ...options, _dayOffAttempt: true, _dayOffTarget1: d, _dayOffTarget2: d },
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved1: true,
+            dayOffAchieved2: true,
+            dayOffMatched1: DAYS[d],
+            dayOffMatched2: DAYS[d],
+            dayOffTogether: true,
+          };
+        }
+      }
+
+      // Priority 2: Distinct days off (each student gets a different free day)
+      for (const d1 of cDays1) {
+        for (const d2 of cDays2) {
+          if (d1 === d2) continue;
+          const attempt = solveTwin(
+            students,
+            { ...options, _dayOffAttempt: true, _dayOffTarget1: d1, _dayOffTarget2: d2 },
+            limit,
+            hooks
+          );
+          if (attempt.results.length) {
+            return {
+              ...attempt,
+              dayOffAchieved1: true,
+              dayOffAchieved2: true,
+              dayOffMatched1: DAYS[d1],
+              dayOffMatched2: DAYS[d2],
+              dayOffTogether: false,
+            };
+          }
+        }
+      }
+
+      // Priority 3: Free day for Student 1 only
+      for (const d1 of cDays1) {
+        const attempt = solveTwin(
+          students,
+          { ...options, _dayOffAttempt: true, _dayOffTarget1: d1, _dayOffTarget2: null },
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved1: true,
+            dayOffAchieved2: false,
+            dayOffMatched1: DAYS[d1],
+            dayOffFallback2: true,
+            dayOffRequested2: dayOffPref2 === 'any' ? 'Any weekday' : DAYS[dayOffPref2],
+          };
+        }
+      }
+
+      // Priority 4: Free day for Student 2 only
+      for (const d2 of cDays2) {
+        const attempt = solveTwin(
+          students,
+          { ...options, _dayOffAttempt: true, _dayOffTarget1: null, _dayOffTarget2: d2 },
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved1: false,
+            dayOffAchieved2: true,
+            dayOffMatched2: DAYS[d2],
+            dayOffFallback1: true,
+            dayOffRequested1: dayOffPref1 === 'any' ? 'Any weekday' : DAYS[dayOffPref1],
+          };
+        }
+      }
+
+      // Priority 5: Fallback without day off constraint for both
+      const fallback = solveTwin(
+        students,
+        {
+          ...options,
+          _dayOffAttempt: true,
+          _dayOffTarget1: null,
+          _dayOffTarget2: null,
+          settings1: { ...s1, dayOff: 'none' },
+          settings2: { ...s2, dayOff: 'none' },
+        },
+        limit,
+        hooks
+      );
+      return {
+        ...fallback,
+        dayOffFallback1: true,
+        dayOffFallback2: true,
+        dayOffRequested1: dayOffPref1 === 'any' ? 'Any weekday' : DAYS[dayOffPref1],
+        dayOffRequested2: dayOffPref2 === 'any' ? 'Any weekday' : DAYS[dayOffPref2],
+      };
+    }
+
+    // CASE 2: Only Student 1 requested a weekday off
+    if (dayOffPref1 !== null) {
+      const cDays1 = dayOffPref1 === 'any' ? candidateDays : [dayOffPref1];
+      for (const d1 of cDays1) {
+        const attempt = solveTwin(
+          students,
+          { ...options, _dayOffAttempt: true, _dayOffTarget1: d1, _dayOffTarget2: null },
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved1: true,
+            dayOffMatched1: DAYS[d1],
+          };
+        }
+      }
+      const fallback = solveTwin(
+        students,
+        {
+          ...options,
+          _dayOffAttempt: true,
+          _dayOffTarget1: null,
+          _dayOffTarget2: null,
+          settings1: { ...s1, dayOff: 'none' },
+        },
+        limit,
+        hooks
+      );
+      return {
+        ...fallback,
+        dayOffFallback1: true,
+        dayOffRequested1: dayOffPref1 === 'any' ? 'Any weekday' : DAYS[dayOffPref1],
+      };
+    }
+
+    // CASE 3: Only Student 2 requested a weekday off
+    if (dayOffPref2 !== null) {
+      const cDays2 = dayOffPref2 === 'any' ? candidateDays : [dayOffPref2];
+      for (const d2 of cDays2) {
+        const attempt = solveTwin(
+          students,
+          { ...options, _dayOffAttempt: true, _dayOffTarget1: null, _dayOffTarget2: d2 },
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved2: true,
+            dayOffMatched2: DAYS[d2],
+          };
+        }
+      }
+      const fallback = solveTwin(
+        students,
+        {
+          ...options,
+          _dayOffAttempt: true,
+          _dayOffTarget1: null,
+          _dayOffTarget2: null,
+          settings2: { ...s2, dayOff: 'none' },
+        },
+        limit,
+        hooks
+      );
+      return {
+        ...fallback,
+        dayOffFallback2: true,
+        dayOffRequested2: dayOffPref2 === 'any' ? 'Any weekday' : DAYS[dayOffPref2],
+      };
+    }
+  }
+
+  const targetDay1 = typeof options._dayOffTarget1 === 'number' ? options._dayOffTarget1 : null;
+  const targetDay2 = typeof options._dayOffTarget2 === 'number' ? options._dayOffTarget2 : null;
+
   const started = Date.now();
   const maxMilliseconds = Math.max(1, Number(options.maxMilliseconds) || 3000);
   const nodesMax = options.maxNodes || 250000;
@@ -1026,8 +1223,10 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       for (const section of options) {
         const items = sectionItems(c, section);
         let low = 0,
-          high = 0;
+          high = 0,
+          dayBits = 0;
         for (const x of items) {
+          dayBits |= 1 << x.day;
           const bit = x.day * 7 + x.period;
           if (bit < 32) low |= 1 << bit;
           else high |= 1 << (bit - 32);
@@ -1036,6 +1235,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
           items,
           low,
           high,
+          dayBits,
           penalty: preferencePenalty(c, section),
           signature: c.code + ':' + slotBundle(section, c.scheduled),
         });
@@ -1047,6 +1247,48 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
 
   const preparedList1 = prepareStudentOptions(active1, prepared1);
   const preparedList2 = prepareStudentOptions(active2, prepared2);
+
+  if (targetDay1 !== null) {
+    const impossibleCourses1 = preparedList1.filter(({ options }) =>
+      options.every((s) => {
+        const p = prepared1.get(s);
+        return p && (p.dayBits & (1 << targetDay1));
+      })
+    );
+    if (impossibleCourses1.length) {
+      return {
+        results: [],
+        reason:
+          `Cannot keep ${DAYS[targetDay1]} off for ${student1.name || 'Student 1'} because all sections for ` +
+          impossibleCourses1.map((c) => c.course.code).join(', ') +
+          ` have classes on ${DAYS[targetDay1]}.`,
+        nodes: 0,
+        truncated: false,
+        elapsedMs: Date.now() - started,
+      };
+    }
+  }
+
+  if (targetDay2 !== null) {
+    const impossibleCourses2 = preparedList2.filter(({ options }) =>
+      options.every((s) => {
+        const p = prepared2.get(s);
+        return p && (p.dayBits & (1 << targetDay2));
+      })
+    );
+    if (impossibleCourses2.length) {
+      return {
+        results: [],
+        reason:
+          `Cannot keep ${DAYS[targetDay2]} off for ${student2.name || 'Student 2'} because all sections for ` +
+          impossibleCourses2.map((c) => c.course.code).join(', ') +
+          ` have classes on ${DAYS[targetDay2]}.`,
+        nodes: 0,
+        truncated: false,
+        elapsedMs: Date.now() - started,
+      };
+    }
+  }
 
   // Unique scheduled courses for each student
   const uniqueScheduled1 = preparedList1
@@ -1183,6 +1425,30 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     .filter(Boolean)
     .sort((a, b) => a.pairs.length - b.pairs.length);
 
+  if (targetDay1 !== null || targetDay2 !== null) {
+    const impossibleCommon = commonPairsList.filter((item) =>
+      item.pairs.every((pair) => {
+        const p1Info = prepared1.get(pair.s1);
+        const p2Info = prepared2.get(pair.s2);
+        if (targetDay1 !== null && p1Info && (p1Info.dayBits & (1 << targetDay1))) return true;
+        if (targetDay2 !== null && p2Info && (p2Info.dayBits & (1 << targetDay2))) return true;
+        return false;
+      })
+    );
+    if (impossibleCommon.length) {
+      return {
+        results: [],
+        reason:
+          `Cannot coordinate common courses with requested weekday off because all section pairings for ` +
+          impossibleCommon.map((c) => c.code).join(', ') +
+          ` have classes on the selected day.`,
+        nodes: 0,
+        truncated: false,
+        elapsedMs: Date.now() - started,
+      };
+    }
+  }
+
   const bus1 = s1.bus || p1 === 'bus';
   const deadline1 = deadlineFor(s1);
   const bus2 = s2.bus || p2 === 'bus';
@@ -1205,7 +1471,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     isMorningOnly,
     deadline,
     isBus,
-    preparedMap
+    preparedMap,
+    targetDay = null
   ) {
     const completions = [];
     function search(k, low, high, items, pen, chosen) {
@@ -1219,6 +1486,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const { course, options } = uniqueList[k];
       for (const section of options) {
         const p = preparedMap.get(section);
+        if (targetDay !== null && (p.dayBits & (1 << targetDay))) continue;
         if (low & p.low || high & p.high) continue;
         if (isBus && p.items.some((x) => END[x.period] > deadline)) continue;
         if (isMorningOnly && p.items.some((x) => END[x.period] > 795)) continue;
@@ -1285,7 +1553,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         options._morning1,
         deadline1,
         bus1,
-        prepared1
+        prepared1,
+        targetDay1
       );
       if (!comp1List.length) return;
 
@@ -1301,7 +1570,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         options._morning2,
         deadline2,
         bus2,
-        prepared2
+        prepared2,
+        targetDay2
       );
       if (!comp2List.length) return;
 
@@ -1367,6 +1637,9 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const p1Info = prepared1.get(pair.s1);
       const p2Info = prepared2.get(pair.s2);
 
+      if (targetDay1 !== null && (p1Info.dayBits & (1 << targetDay1))) continue;
+      if (targetDay2 !== null && (p2Info.dayBits & (1 << targetDay2))) continue;
+
       // Student 1 checks
       if (low1 & p1Info.low || high1 & p1Info.high) continue;
       if (bus1 && p1Info.items.some((x) => END[x.period] > deadline1)) continue;
@@ -1409,9 +1682,9 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
   // For fully shared courses and the same routine settings, use the actual
   // Individual FFCS search as a seed on MUTUALLY eligible shared sections.
   // The joint search still handles mixed-course/preferences cases afterwards.
-  const sameSettings = ['lunch', 'travel', 'bus', 'busTime', 'walkMinutes'].every(
-    (key) => s1[key] === s2[key]
-  );
+  const sameSettings =
+    ['lunch', 'travel', 'bus', 'busTime', 'walkMinutes'].every((key) => s1[key] === s2[key]) &&
+    targetDay1 === targetDay2;
   if (
     !uniqueScheduled1.length &&
     !uniqueScheduled2.length &&
@@ -1430,6 +1703,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         ...s1,
         _morningAttempt: true,
         _morningOnly: !!options._morning1,
+        _dayOffAttempt: true,
+        _dayOffTarget: targetDay1 !== null ? targetDay1 : undefined,
         maxNodes: Math.min(nodesMax, 60000),
         maxMilliseconds: Math.min(800, maxMilliseconds / 3),
       },
@@ -1656,7 +1931,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         basePen,
         prepMap,
         targetLow,
-        targetHigh
+        targetHigh,
+        targetDay = null
       ) {
         const results = [];
         function rec(k, low, high, items, pen, chosen) {
@@ -1672,6 +1948,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
           const { course, options } = uniqueList[k];
           for (const s of options) {
             const p = prepMap.get(s);
+            if (targetDay !== null && (p.dayBits & (1 << targetDay))) continue;
             if (low & p.low || high & p.high) continue;
             rec(k + 1, low | p.low, high | p.high, [...items, ...p.items], pen + p.penalty, [
               ...chosen,
@@ -1711,7 +1988,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
             pen1,
             prepared1,
             targetLow1,
-            targetHigh1
+            targetHigh1,
+            targetDay1
           );
           if (!comp1List.length) return;
           const comp2List = searchRoutineUnique(
@@ -1722,7 +2000,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
             pen2,
             prepared2,
             targetLow2,
-            targetHigh2
+            targetHigh2,
+            targetDay2
           );
           if (!comp2List.length) return;
 
@@ -1770,6 +2049,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         for (const pair of item.pairs) {
           const p1Info = prepared1.get(pair.s1);
           const p2Info = prepared2.get(pair.s2);
+          if (targetDay1 !== null && (p1Info.dayBits & (1 << targetDay1))) continue;
+          if (targetDay2 !== null && (p2Info.dayBits & (1 << targetDay2))) continue;
           if (low1 & p1Info.low || high1 & p1Info.high) continue;
           if (low2 & p2Info.low || high2 & p2Info.high) continue;
 

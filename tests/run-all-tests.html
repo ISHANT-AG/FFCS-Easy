@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>All FFCS Unit & Integration Tests</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "node:test": "./test-shim.js",
+      "node:assert/strict": "./assert-shim.js",
+      "node:assert": "./assert-shim.js",
+      "node:fs": "./fs-shim.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <h1>Running All Test Suites...</h1>
+  <div id="test-output">RUNNING</div>
+
+  <script>
+    // Mock jsPDF for offline tests
+    class MockDoc {
+      constructor() {
+        this.pages = 1;
+        this.internal = { pageSize: { getWidth: () => 297, getHeight: () => 210 } };
+      }
+      addPage() { this.pages++; }
+      setFont() {}
+      setFontSize() {}
+      setTextColor() {}
+      setDrawColor() {}
+      setFillColor() {}
+      setLineWidth() {}
+      rect() {}
+      roundedRect() {}
+      line() {}
+      text() {}
+      save() {}
+      output() { return 'mock-pdf-bytes'; }
+      getNumberOfPages() { return this.pages; }
+    }
+    globalThis.jspdf = { jsPDF: MockDoc };
+
+    window.onerror = function(msg, url, line, col, error) {
+      document.getElementById('test-output').textContent = JSON.stringify({
+        error: String(msg) + ' at line ' + line + ':' + col,
+        stack: error ? error.stack : ''
+      });
+    };
+    window.onunhandledrejection = function(e) {
+      document.getElementById('test-output').textContent = JSON.stringify({
+        unhandledRejection: String(e.reason),
+        stack: e.reason ? e.reason.stack : ''
+      });
+    };
+  </script>
+
+  <script type="module">
+    import { suite, runAllTests } from './test-shim.js';
+
+    // Load test modules:
+    await import('./engine.test.js');
+    await import('./twin-sorting.test.js');
+    await import('./strict-filters.test.js');
+
+    const results = await runAllTests();
+
+    const outputEl = document.getElementById('test-output');
+    outputEl.textContent = JSON.stringify(results, null, 2);
+    document.body.className = results.failed === 0 ? 'all-passed' : 'has-failures';
+    console.log('ALL TESTS COMPLETED:', results.passed, 'passed,', results.failed, 'failed');
+  </script>
+</body>
+</html>
