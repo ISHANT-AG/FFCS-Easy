@@ -1031,11 +1031,14 @@ function resultsView() {
             const sameRoutine = i > 0 && dailyPattern(s) === dailyPattern(result.results[0]);
             const sBusy = new Set(s.items.map((x) => x.day));
             const sFreeWeekdays = DAYS.slice(0, 5).filter((_, d) => !sBusy.has(d));
-            const freeDayTag = sFreeWeekdays.length > 0 ? ` · ${sFreeWeekdays[0]} off` : '';
+            const offDaysLabel = sFreeWeekdays.length > 0
+              ? `${sFreeWeekdays.length} day${sFreeWeekdays.length > 1 ? 's' : ''} off (${sFreeWeekdays.join(', ')})`
+              : 'No days off';
             return `
             <button data-result="${i}" class="tab-btn ${i === resultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === resultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
-              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${freeDayTag}${sameRoutine ? ' · Same routine' : ''}${moved ? ' · ' + moved + ' courses moved' : ''}</span>
+              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${sameRoutine ? ' · Same routine' : ''}${moved ? ' · ' + moved + ' courses moved' : ''}</span>
+              <span class="tab-off-pill ${sFreeWeekdays.length > 0 ? 'has-off' : 'none-off'}">${offDaysLabel}</span>
             </button>
           `;
           })
@@ -1054,12 +1057,10 @@ function resultsView() {
     </div>
 
     <div class="metrics-summary-bar">
-      ${freeWeekdays.length > 0 ? `
-      <div class="summary-pill pill-day-off">
-        <span class="pill-dot pill-dot-green"></span>
-        <span><b>${freeWeekdays.join(', ')}</b> off</span>
+      <div class="summary-pill ${freeWeekdays.length > 0 ? 'pill-day-off' : ''}">
+        <span class="pill-dot ${freeWeekdays.length > 0 ? 'pill-dot-green' : ''}"></span>
+        <span><b>${freeWeekdays.length > 0 ? `${freeWeekdays.length} day${freeWeekdays.length > 1 ? 's' : ''} off (${freeWeekdays.join(', ')})` : '0 days off'}</b></span>
       </div>
-      ` : ''}
       <div class="summary-pill">
         <span><b>${first} – ${last}</b> campus day</span>
       </div>
@@ -1896,10 +1897,24 @@ function twinResultsView() {
           .map((p, i) => {
             const together = p.matchSummary.together;
             const total = p.matchSummary.commonScheduled;
+            const s1Busy = new Set(p.student1.items.map((x) => x.day));
+            const s1Free = DAYS.slice(0, 5).filter((_, d) => !s1Busy.has(d));
+            const s2Busy = new Set(p.student2.items.map((x) => x.day));
+            const s2Free = DAYS.slice(0, 5).filter((_, d) => !s2Busy.has(d));
+            const commonFree = s1Free.filter((d) => s2Free.includes(d));
+            let twinOffText = '';
+            if (commonFree.length > 0) {
+              twinOffText = `${commonFree.length} day${commonFree.length > 1 ? 's' : ''} off together (${commonFree.join(', ')})`;
+            } else if (s1Free.length > 0 || s2Free.length > 0) {
+              twinOffText = `${name1}: ${s1Free.length ? s1Free.join(', ') : '0'} off · ${name2}: ${s2Free.length ? s2Free.join(', ') : '0'} off`;
+            } else {
+              twinOffText = 'No days off';
+            }
             return `
             <button data-twin-result="${i}" class="tab-btn ${i === twinResultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === twinResultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
               <span class="tab-sub">${together}/${total} together · ${p.student1.metrics.gaps + p.student2.metrics.gaps} total gaps</span>
+              <span class="tab-off-pill ${commonFree.length > 0 || s1Free.length > 0 || s2Free.length > 0 ? 'has-off' : 'none-off'}">${twinOffText}</span>
             </button>
           `;
           })

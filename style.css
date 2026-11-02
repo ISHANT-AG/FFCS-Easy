@@ -3897,3 +3897,31 @@ button {
 .notice-box.success-note .notice-icon {
   color: #16a34a;
 }
+
+.tab-off-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  line-height: 1.2;
+}
+
+.tab-off-pill.has-off {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.tab-off-pill.none-off {
+  background-color: var(--bg-surface-subtle);
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}
+
+.tab-btn.is-selected .tab-off-pill.has-off {
+  background-color: #bbf7d0;
+  color: #14532d;
+}
