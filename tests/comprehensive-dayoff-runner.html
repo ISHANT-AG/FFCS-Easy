@@ -36,6 +36,7 @@
       parseDayOff,
       metrics
     } from '../src/engine.js';
+    import { parsePortalText } from '../src/portal.js';
 
     const section = (slots, faculty = 'Prof A', venue = 'AB1-101', seats = '40') => ({
       id: 'sec-' + Math.random().toString(36).slice(2, 9),
@@ -490,6 +491,73 @@
       assertEqual(c1Chosen.section.slots, 'A11+A12', 'Should pick lunch-safe slots');
       const busy = new Set(res.results[0].items.map(x => x.day));
       assert(!busy.has(4), 'Friday is free');
+    });
+
+    // ----------------------------------------------------
+    // TEST 11: Real VIT Portal Fixtures with 5 courses + Project in Twin Mode
+    // ----------------------------------------------------
+    await runTest('Real VIT Portal Fixtures: 5 courses + Project in Twin Mode with dayOff', async () => {
+      const fixtures = await fetch('./portal-fixtures.json').then(r => r.json());
+      const realCourses = ['MAT3002', 'CSE2001', 'CSE3001', 'ECE2002', 'HUM0003'].map(code => {
+        const item = fixtures.find(x => x.code === code);
+        const parsed = parsePortalText(item.text);
+        return {
+          code,
+          name: parsed.name || code,
+          scheduled: true,
+          sections: parsed.sections.map((s, idx) => ({ ...s, id: `${code}-${idx}` })),
+          preferred: [],
+          avoid: []
+        };
+      });
+
+      // Add project course DSN2098 (no weekly classes)
+      const projItem = fixtures.find(x => x.code === 'DSN2098');
+      const parsedProj = parsePortalText(projItem.text);
+      const projCourse = {
+        code: 'DSN2098',
+        name: 'Project Exhibition - I',
+        scheduled: false,
+        sections: parsedProj.sections.map((s, idx) => ({ ...s, id: `DSN-${idx}` })),
+        preferred: [],
+        avoid: []
+      };
+
+      const fullLoad1 = [...realCourses, projCourse];
+      const fullLoad2 = [...realCourses, projCourse];
+
+      const twinRes = solveTwin([
+        { name: 'Alice', courses: fullLoad1, settings: { dayOff: 'any' }, preset: 'compact' },
+        { name: 'Bob', courses: fullLoad2, settings: { dayOff: 'any' }, preset: 'compact' }
+      ], {}, 5);
+
+      assert(twinRes.results.length > 0, 'Should find paired timetable for real VIT courses');
+      const best = twinRes.results[0];
+      assert(best.matchSummary.together >= 3, 'Should match multiple courses together in real data');
+      // Verify project course was scheduled as project
+      const projMatch = best.matchSummary.courses.find(c => c.code === 'DSN2098');
+      assertEqual(projMatch.status, 'project', 'Project course must be classified as project');
+    });
+
+    // ----------------------------------------------------
+    // TEST 12: Multiple Free Weekdays (e.g. 2 Days Off)
+    // ----------------------------------------------------
+    await runTest('Multiple Free Days: Schedule with 2 weekdays off', async () => {
+      // Courses only on Mon, Tue, Wed (so Thu and Fri are both free weekdays!)
+      const lightCourses = [
+        course('LC1', [section('A11', 'Prof A', 'AB1', 30)]), // Mon
+        course('LC2', [section('D11', 'Prof B', 'AB1', 30)]), // Tue
+        course('LC3', [section('A12', 'Prof C', 'AB1', 30)]), // Wed
+      ];
+
+      const res = solve(lightCourses, { dayOff: 'any' }, 'compact', 5);
+      assert(res.results.length > 0);
+      assert(res.dayOffAchieved === true);
+      const busy = new Set(res.results[0].items.map(x => x.day));
+      const free = [0, 1, 2, 3, 4].filter(d => !busy.has(d));
+      assert(free.includes(3), 'Thursday is free');
+      assert(free.includes(4), 'Friday is free');
+      assertEqual(free.length, 2, 'Exactly 2 weekdays free');
     });
 
     // Write final results to DOM
