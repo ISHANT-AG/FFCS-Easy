@@ -75,10 +75,19 @@ export function lunchValid(items) {
   );
 }
 export function parseDayOff(dayOff) {
-  if (dayOff === null || dayOff === undefined || dayOff === 'none' || dayOff === false || dayOff === '') return null;
+  if (
+    dayOff === null ||
+    dayOff === undefined ||
+    dayOff === 'none' ||
+    dayOff === false ||
+    dayOff === '' ||
+    dayOff === 'Saturday' ||
+    dayOff === 5
+  )
+    return null;
   if (dayOff === 'any') return 'any';
-  if (typeof dayOff === 'number' && dayOff >= 0 && dayOff < DAYS.length) return dayOff;
-  const idx = DAYS.findIndex((d) => d.toLowerCase() === String(dayOff).toLowerCase());
+  if (typeof dayOff === 'number' && dayOff >= 0 && dayOff < 5) return dayOff;
+  const idx = DAYS.slice(0, 5).findIndex((d) => d.toLowerCase() === String(dayOff).toLowerCase());
   return idx >= 0 ? idx : null;
 }
 export function metrics(items) {
@@ -154,8 +163,10 @@ function scoreSchedule(items, m, penalty, settings, preset) {
   if (preset === 'travel') score += m.travel * 70;
   if (preset === 'balanced')
     score = m.balance * 30 + m.gaps * 2 + penalty * 30 + (settings.travel ? m.travel * 35 : 0);
-  if (settings.dayOff && settings.dayOff !== 'none')
-    score -= (6 - m.days) * 20;
+  if (settings.dayOff && settings.dayOff !== 'none') {
+    const busyWeekdays = new Set(items.filter((x) => x.day < 5).map((x) => x.day)).size;
+    score -= (5 - busyWeekdays) * 30;
+  }
   return score;
 }
 function deadlineFor(settings) {
@@ -326,7 +337,7 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
   const dayOffPref = parseDayOff(settings.dayOff);
   if (dayOffPref !== null && !settings._dayOffAttempt) {
     if (dayOffPref === 'any') {
-      const candidateDays = [4, 0, 2, 3, 1, 5];
+      const candidateDays = [4, 0, 2, 3, 1]; // Friday, Monday, Wednesday, Thursday, Tuesday (Weekdays only, Saturday is already a holiday)
       for (const d of candidateDays) {
         const attempt = solve(
           courses,

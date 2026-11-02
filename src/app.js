@@ -769,7 +769,6 @@ function preferencesView() {
             <option value="Wednesday" ${state.settings.dayOff === 'Wednesday' ? 'selected' : ''}>Wednesday off (Mid-week break)</option>
             <option value="Thursday" ${state.settings.dayOff === 'Thursday' ? 'selected' : ''}>Thursday off</option>
             <option value="Tuesday" ${state.settings.dayOff === 'Tuesday' ? 'selected' : ''}>Tuesday off</option>
-            <option value="Saturday" ${state.settings.dayOff === 'Saturday' ? 'selected' : ''}>Saturday off (Free weekend)</option>
           </select>
         </div>
       </div>
@@ -837,7 +836,7 @@ function resultsView() {
       (x) => x.course.scheduled !== false && base.get(x.course.code) !== slotBundle(x.section)
     ).length;
   const busyDays = new Set(r.items.map((x) => x.day));
-  const freeDays = DAYS.filter((_, d) => !busyDays.has(d));
+  const freeWeekdays = DAYS.slice(0, 5).filter((_, d) => !busyDays.has(d));
   const first = r.items.length
     ? TIMES[Math.min(...r.items.map((x) => x.period))].split('–')[0]
     : '—';
@@ -889,8 +888,8 @@ function resultsView() {
             const moved = changed(s);
             const sameRoutine = i > 0 && dailyPattern(s) === dailyPattern(result.results[0]);
             const sBusy = new Set(s.items.map((x) => x.day));
-            const sFree = DAYS.filter((_, d) => !sBusy.has(d));
-            const freeDayTag = sFree.length > 0 ? ` · ${sFree[0]} off` : '';
+            const sFreeWeekdays = DAYS.slice(0, 5).filter((_, d) => !sBusy.has(d));
+            const freeDayTag = sFreeWeekdays.length > 0 ? ` · ${sFreeWeekdays[0]} off` : '';
             return `
             <button data-result="${i}" class="tab-btn ${i === resultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === resultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
@@ -914,10 +913,10 @@ function resultsView() {
     </div>
 
     <div class="comparison-summary-bar">
-      ${freeDays.length > 0 ? `
+      ${freeWeekdays.length > 0 ? `
       <div class="summary-pill pill-day-off">
         <span class="pill-dot pill-dot-green"></span>
-        <span><b>${freeDays.join(', ')}</b> off</span>
+        <span><b>${freeWeekdays.join(', ')}</b> off</span>
       </div>
       ` : ''}
       <div class="summary-pill">
@@ -957,7 +956,7 @@ function resultsView() {
           <thead>
             <tr>
               <th class="time-header-col">Time</th>
-              ${DAYS.map((d, dIdx) => `<th class="day-header ${!busyDays.has(dIdx) ? 'is-free-day' : ''}">${d.slice(0, 3)}${!busyDays.has(dIdx) ? ' <span class="free-day-badge">Off</span>' : ''}</th>`).join('')}
+              ${DAYS.map((d, dIdx) => `<th class="day-header ${dIdx < 5 && !busyDays.has(dIdx) ? 'is-free-day' : ''}">${d.slice(0, 3)}${dIdx < 5 && !busyDays.has(dIdx) ? ' <span class="free-day-badge">Off</span>' : ''}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
@@ -983,7 +982,7 @@ function resultsView() {
                         </div>
                       `
                           : `
-                        <span class="free-slot free ${!busyDays.has(d) ? 'free-day-slot' : ''}" ${!busyDays.has(d) ? `title="${DAYS[d]} is free"` : ''}>—</span>
+                        <span class="free-slot free ${d < 5 && !busyDays.has(d) ? 'free-day-slot' : ''}" ${d < 5 && !busyDays.has(d) ? `title="${DAYS[d]} is free"` : ''}>—</span>
                       `
                       }
                     </td>
