@@ -902,7 +902,7 @@ function preferencesView() {
         <label class="toggle-row toggle" for="dayOffToggle">
           <div class="toggle-info">
             <strong>Keep a weekday off</strong>
-            <small class="toggle-desc">Schedule classes across 4–5 days to keep an entire day completely free.</small>
+            <small class="toggle-desc">Schedule classes across 4 days to keep a weekday free (best fit).</small>
           </div>
           <div class="switch">
             <input id="dayOffToggle" type="checkbox" ${state.settings.dayOff && state.settings.dayOff !== 'none' ? 'checked' : ''}>
@@ -911,22 +911,7 @@ function preferencesView() {
         </label>
       </div>
 
-      <div class="day-off-panel" id="day-off-panel" style="${state.settings.dayOff && state.settings.dayOff !== 'none' ? 'display: block;' : 'display: none;'}">
-        <div class="day-off-card">
-          <div class="day-off-card-header">
-            <label class="field-label" for="dayOffSelect">Choose day off</label>
-            <span class="day-off-badge">4–5 day week</span>
-          </div>
-          <select id="dayOffSelect" class="styled-select day-off-select">
-            <option value="any" ${state.settings.dayOff === 'any' ? 'selected' : ''}>Any weekday (Best fit)</option>
-            <option value="Friday" ${state.settings.dayOff === 'Friday' ? 'selected' : ''}>Friday off (3-day weekend)</option>
-            <option value="Monday" ${state.settings.dayOff === 'Monday' ? 'selected' : ''}>Monday off (3-day weekend)</option>
-            <option value="Wednesday" ${state.settings.dayOff === 'Wednesday' ? 'selected' : ''}>Wednesday off (Mid-week break)</option>
-            <option value="Thursday" ${state.settings.dayOff === 'Thursday' ? 'selected' : ''}>Thursday off</option>
-            <option value="Tuesday" ${state.settings.dayOff === 'Tuesday' ? 'selected' : ''}>Tuesday off</option>
-          </select>
-        </div>
-      </div>
+
 
       <details class="bus-timing-panel" id="details-bus" ${state.settings.bus || openDetails.has('bus') ? 'open' : ''}>
         <summary class="manual-options-summary">Bus timing settings</summary>
@@ -1069,6 +1054,12 @@ function resultsView() {
     </div>
 
     <div class="metrics-summary-bar">
+      ${freeWeekdays.length > 0 ? `
+      <div class="summary-pill pill-day-off">
+        <span class="pill-dot pill-dot-green"></span>
+        <span><b>${freeWeekdays.join(', ')}</b> off</span>
+      </div>
+      ` : ''}
       <div class="summary-pill">
         <span><b>${first} – ${last}</b> campus day</span>
       </div>
@@ -1697,6 +1688,17 @@ function twinPreferencesView() {
           </div>
           <div class="switch">
             <input id="twin-travel-${idx}" type="checkbox" ${student.settings.travel ? 'checked' : ''}>
+            <span class="switch-slider"></span>
+          </div>
+        </label>
+
+        <label class="toggle-row toggle" for="twin-dayOff-${idx}">
+          <div class="toggle-info">
+            <strong>Keep a weekday off</strong>
+            <small class="toggle-desc">Fit classes into 4 days for a free weekday.</small>
+          </div>
+          <div class="switch">
+            <input id="twin-dayOff-${idx}" type="checkbox" ${student.settings.dayOff && student.settings.dayOff !== 'none' ? 'checked' : ''}>
             <span class="switch-slider"></span>
           </div>
         </label>
@@ -2387,6 +2389,18 @@ function bind() {
   });
 
   [0, 1].forEach((idx) => {
+    const el = $(`#twin-dayOff-${idx}`);
+    if (el) {
+      el.onchange = () => {
+        const student = idx === 0 ? twinState.student1 : twinState.student2;
+        student.settings.dayOff = el.checked ? 'any' : 'none';
+        invalidate();
+        render();
+      };
+    }
+  });
+
+  [0, 1].forEach((idx) => {
     const student = idx === 0 ? twinState.student1 : twinState.student2;
     $(`#twin-busTime-${idx}`)?.addEventListener('change', (e) => {
       student.settings.busTime = e.target.value;
@@ -2606,6 +2620,15 @@ function bind() {
       };
     }
   });
+
+  const dayOffEl = $('#dayOffToggle');
+  if (dayOffEl) {
+    dayOffEl.onchange = () => {
+      state.settings.dayOff = dayOffEl.checked ? 'any' : 'none';
+      invalidate();
+      render();
+    };
+  }
 
   $('#busTime')?.addEventListener('change', (e) => {
     state.settings.busTime = e.target.value;
