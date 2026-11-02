@@ -74,6 +74,13 @@ export function lunchValid(items) {
       !items.some((x) => x.day === d && x.period === 3)
   );
 }
+export function parseDayOff(dayOff) {
+  if (dayOff === null || dayOff === undefined || dayOff === 'none' || dayOff === false || dayOff === '') return null;
+  if (dayOff === 'any') return 'any';
+  if (typeof dayOff === 'number' && dayOff >= 0 && dayOff < DAYS.length) return dayOff;
+  const idx = DAYS.findIndex((d) => d.toLowerCase() === String(dayOff).toLowerCase());
+  return idx >= 0 ? idx : null;
+}
 export function metrics(items) {
   let gaps = 0,
     travel = 0,
@@ -147,6 +154,8 @@ function scoreSchedule(items, m, penalty, settings, preset) {
   if (preset === 'travel') score += m.travel * 70;
   if (preset === 'balanced')
     score = m.balance * 30 + m.gaps * 2 + penalty * 30 + (settings.travel ? m.travel * 35 : 0);
+  if (settings.dayOff && settings.dayOff !== 'none')
+    score -= (6 - m.days) * 20;
   return score;
 }
 function deadlineFor(settings) {
@@ -166,6 +175,8 @@ function sectionItems(course, section) {
 function scheduleFrom(chosen, settings, preset) {
   const items = chosen.flatMap(({ course, section }) => sectionItems(course, section)),
     m = metrics(items);
+  const busyDays = new Set(items.map((x) => x.day));
+  const freeDays = DAYS.filter((_, d) => !busyDays.has(d));
   const enriched = chosen.map(({ course, section }) => ({
     course,
     section,
@@ -183,6 +194,7 @@ function scheduleFrom(chosen, settings, preset) {
     chosen: enriched,
     items,
     metrics: m,
+    freeDays,
     signature,
     score: scoreSchedule(items, m, penalty, settings, preset),
   };
@@ -310,6 +322,70 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
       morningFallback: true,
     };
   }
+
+  const dayOffPref = parseDayOff(settings.dayOff);
+  if (dayOffPref !== null && !settings._dayOffAttempt) {
+    if (dayOffPref === 'any') {
+      const candidateDays = [4, 0, 2, 3, 1, 5];
+      for (const d of candidateDays) {
+        const attempt = solve(
+          courses,
+          { ...settings, _dayOffAttempt: true, _dayOffTarget: d },
+          preset,
+          limit,
+          hooks
+        );
+        if (attempt.results.length) {
+          return {
+            ...attempt,
+            dayOffAchieved: true,
+            dayOffMatched: DAYS[d],
+          };
+        }
+      }
+      const fallback = solve(
+        courses,
+        { ...settings, _dayOffAttempt: true, dayOff: 'none' },
+        preset,
+        limit,
+        hooks
+      );
+      return {
+        ...fallback,
+        dayOffFallback: true,
+        dayOffRequested: 'Any weekday',
+      };
+    } else {
+      const attempt = solve(
+        courses,
+        { ...settings, _dayOffAttempt: true, _dayOffTarget: dayOffPref },
+        preset,
+        limit,
+        hooks
+      );
+      if (attempt.results.length) {
+        return {
+          ...attempt,
+          dayOffAchieved: true,
+          dayOffMatched: DAYS[dayOffPref],
+        };
+      }
+      const fallback = solve(
+        courses,
+        { ...settings, _dayOffAttempt: true, dayOff: 'none' },
+        preset,
+        limit,
+        hooks
+      );
+      return {
+        ...fallback,
+        dayOffFallback: true,
+        dayOffRequested: DAYS[dayOffPref],
+        dayOffReason: attempt.reason,
+      };
+    }
+  }
+
   limit = Math.min(100, Math.max(1, Number(limit) || 5));
   const prepared = new WeakMap();
   const started = Date.now(),
@@ -343,8 +419,10 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
       for (const section of options) {
         const items = sectionItems(c, section);
         let low = 0,
-          high = 0;
+          high = 0,
+          dayBits = 0;
         for (const x of items) {
+          dayBits |= 1 << x.day;
           const bit = x.day * 7 + x.period;
           if (bit < 32) low |= 1 << bit;
           else high |= 1 << (bit - 32);
@@ -353,6 +431,7 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
           items,
           low,
           high,
+          dayBits,
           penalty: preferencePenalty(c, section),
           signature: c.code + ':' + slotBundle(section, c.scheduled),
         });
@@ -378,6 +457,27 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
       nodes: 0,
       truncated: false,
     };
+  const targetDay = typeof settings._dayOffTarget === 'number' ? settings._dayOffTarget : null;
+  if (targetDay !== null) {
+    const impossibleCourses = lists.filter(({ options }) =>
+      options.every((s) => {
+        const p = prepared.get(s);
+        return p && (p.dayBits & (1 << targetDay));
+      })
+    );
+    if (impossibleCourses.length) {
+      return {
+        results: [],
+        reason:
+          `Cannot keep ${DAYS[targetDay]} off because all sections for ` +
+          impossibleCourses.map((c) => c.course.code).join(', ') +
+          ` have classes on ${DAYS[targetDay]}.`,
+        nodes: 0,
+        truncated: false,
+      };
+    }
+  }
+
   let nodes = 0,
     truncated = false;
   const pool = new Map(),
@@ -430,6 +530,7 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
       if (truncated) return;
       const info = prepared.get(s),
         added = info.items;
+      if (targetDay !== null && (info.dayBits & (1 << targetDay))) continue;
       if (low & info.low || high & info.high) continue;
       if (bus && added.some((x) => END[x.period] > deadline)) continue;
       if (settings._morningOnly && added.some((x) => END[x.period] > 795)) continue;

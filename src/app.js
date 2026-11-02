@@ -59,7 +59,7 @@ let state = {
   branch: '',
   courses: [],
   preset: 'compact',
-  settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10 },
+  settings: { lunch: true, travel: true, bus: false, busTime: '16:20', walkMinutes: 10, dayOff: 'none' },
   ...saved,
 };
 
@@ -743,6 +743,35 @@ function preferencesView() {
             <span class="switch-slider"></span>
           </div>
         </label>
+
+        <label class="toggle-row toggle" for="dayOffToggle">
+          <div class="toggle-info">
+            <strong>Keep a weekday off</strong>
+            <small class="toggle-desc">Schedule classes across 4–5 days to keep an entire day completely free.</small>
+          </div>
+          <div class="switch">
+            <input id="dayOffToggle" type="checkbox" ${state.settings.dayOff && state.settings.dayOff !== 'none' ? 'checked' : ''}>
+            <span class="switch-slider"></span>
+          </div>
+        </label>
+      </div>
+
+      <div class="day-off-panel" id="day-off-panel" style="${state.settings.dayOff && state.settings.dayOff !== 'none' ? 'display: block;' : 'display: none;'}">
+        <div class="day-off-card">
+          <div class="day-off-card-header">
+            <label class="field-label" for="dayOffSelect">Choose day off</label>
+            <span class="day-off-badge">4–5 day week</span>
+          </div>
+          <select id="dayOffSelect" class="styled-select day-off-select">
+            <option value="any" ${state.settings.dayOff === 'any' ? 'selected' : ''}>Any weekday (Best fit)</option>
+            <option value="Friday" ${state.settings.dayOff === 'Friday' ? 'selected' : ''}>Friday off (3-day weekend)</option>
+            <option value="Monday" ${state.settings.dayOff === 'Monday' ? 'selected' : ''}>Monday off (3-day weekend)</option>
+            <option value="Wednesday" ${state.settings.dayOff === 'Wednesday' ? 'selected' : ''}>Wednesday off (Mid-week break)</option>
+            <option value="Thursday" ${state.settings.dayOff === 'Thursday' ? 'selected' : ''}>Thursday off</option>
+            <option value="Tuesday" ${state.settings.dayOff === 'Tuesday' ? 'selected' : ''}>Tuesday off</option>
+            <option value="Saturday" ${state.settings.dayOff === 'Saturday' ? 'selected' : ''}>Saturday off (Free weekend)</option>
+          </select>
+        </div>
       </div>
 
       <details class="bus-timing-panel" id="details-bus" ${state.settings.bus || openDetails.has('bus') ? 'open' : ''}>
@@ -807,6 +836,8 @@ function resultsView() {
     s.chosen.filter(
       (x) => x.course.scheduled !== false && base.get(x.course.code) !== slotBundle(x.section)
     ).length;
+  const busyDays = new Set(r.items.map((x) => x.day));
+  const freeDays = DAYS.filter((_, d) => !busyDays.has(d));
   const first = r.items.length
     ? TIMES[Math.min(...r.items.map((x) => x.period))].split('–')[0]
     : '—';
@@ -815,6 +846,22 @@ function resultsView() {
     : '—';
 
   return `
+    ${result.dayOffAchieved ? `
+      <div class="notice-box success-note" style="margin-bottom: 16px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>${esc(result.dayOffMatched)} is completely free!</strong> All your classes have been scheduled without any sessions on ${esc(result.dayOffMatched)}.</span>
+      </div>
+    ` : ''}
+    ${result.dayOffFallback ? `
+      <div class="notice-box subtle-note" style="margin-bottom: 16px;">
+        <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75">
+          <circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v4M8 5h.01"/>
+        </svg>
+        <span>A timetable with <strong>${esc(result.dayOffRequested)}</strong> completely off was not possible with your uploaded course options${result.dayOffReason ? ` (${esc(result.dayOffReason)})` : ''}. Showing the best alternative schedule.</span>
+      </div>
+    ` : ''}
     ${result.morningFallback ? '<div class="notice-box subtle-note" style="margin-bottom:16px">A morning-only timetable was not found. These alternatives include later classes.</div>' : ''}
     ${
       result.truncated
@@ -841,10 +888,13 @@ function resultsView() {
               : '—';
             const moved = changed(s);
             const sameRoutine = i > 0 && dailyPattern(s) === dailyPattern(result.results[0]);
+            const sBusy = new Set(s.items.map((x) => x.day));
+            const sFree = DAYS.filter((_, d) => !sBusy.has(d));
+            const freeDayTag = sFree.length > 0 ? ` · ${sFree[0]} off` : '';
             return `
             <button data-result="${i}" class="tab-btn ${i === resultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === resultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
-              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${sameRoutine ? ' · Same routine' : ''}${moved ? ' · ' + moved + ' courses moved' : ''}</span>
+              <span class="tab-sub">${sFirst}–${sLast} · ${s.metrics.gaps} gaps · ${s.metrics.travel} AB2${freeDayTag}${sameRoutine ? ' · Same routine' : ''}${moved ? ' · ' + moved + ' courses moved' : ''}</span>
             </button>
           `;
           })
@@ -864,6 +914,12 @@ function resultsView() {
     </div>
 
     <div class="comparison-summary-bar">
+      ${freeDays.length > 0 ? `
+      <div class="summary-pill pill-day-off">
+        <span class="pill-dot pill-dot-green"></span>
+        <span><b>${freeDays.join(', ')}</b> off</span>
+      </div>
+      ` : ''}
       <div class="summary-pill">
         <span class="pill-dot"></span>
         <span><b>${first}</b> first class</span>
@@ -901,7 +957,7 @@ function resultsView() {
           <thead>
             <tr>
               <th class="time-header-col">Time</th>
-              ${DAYS.map((d) => `<th class="day-header">${d.slice(0, 3)}</th>`).join('')}
+              ${DAYS.map((d, dIdx) => `<th class="day-header ${!busyDays.has(dIdx) ? 'is-free-day' : ''}">${d.slice(0, 3)}${!busyDays.has(dIdx) ? ' <span class="free-day-badge">Off</span>' : ''}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
@@ -927,7 +983,7 @@ function resultsView() {
                         </div>
                       `
                           : `
-                        <span class="free-slot free">—</span>
+                        <span class="free-slot free ${!busyDays.has(d) ? 'free-day-slot' : ''}" ${!busyDays.has(d) ? `title="${DAYS[d]} is free"` : ''}>—</span>
                       `
                       }
                     </td>
@@ -1207,6 +1263,23 @@ function bind() {
         render();
       })
   );
+
+  $('#dayOffToggle')?.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      const selectVal = $('#dayOffSelect')?.value;
+      state.settings.dayOff = selectVal && selectVal !== 'none' ? selectVal : 'any';
+    } else {
+      state.settings.dayOff = 'none';
+    }
+    invalidate();
+    render();
+  });
+
+  $('#dayOffSelect')?.addEventListener('change', (e) => {
+    state.settings.dayOff = e.target.value;
+    invalidate();
+    render();
+  });
 
   for (const key of ['lunch', 'bus', 'travel', 'busTime', 'walkMinutes']) {
     $('#' + key)?.addEventListener('change', (e) => {
