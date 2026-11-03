@@ -536,7 +536,7 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
     const impossibleCourses = lists.filter(({ options }) =>
       options.every((s) => {
         const p = prepared.get(s);
-        return p && (p.dayBits & (1 << targetDay));
+        return p && p.dayBits & (1 << targetDay);
       })
     );
     if (impossibleCourses.length) {
@@ -604,7 +604,7 @@ export function solve(courses, settings = {}, preset = 'compact', limit = 5, hoo
       if (truncated) return;
       const info = prepared.get(s),
         added = info.items;
-      if (targetDay !== null && (info.dayBits & (1 << targetDay))) continue;
+      if (targetDay !== null && info.dayBits & (1 << targetDay)) continue;
       if (low & info.low || high & info.high) continue;
       if (bus && added.some((x) => END[x.period] > deadline)) continue;
       if (settings._morningOnly && added.some((x) => END[x.period] > 795)) continue;
@@ -1252,7 +1252,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     const impossibleCourses1 = preparedList1.filter(({ options }) =>
       options.every((s) => {
         const p = prepared1.get(s);
-        return p && (p.dayBits & (1 << targetDay1));
+        return p && p.dayBits & (1 << targetDay1);
       })
     );
     if (impossibleCourses1.length) {
@@ -1273,7 +1273,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
     const impossibleCourses2 = preparedList2.filter(({ options }) =>
       options.every((s) => {
         const p = prepared2.get(s);
-        return p && (p.dayBits & (1 << targetDay2));
+        return p && p.dayBits & (1 << targetDay2);
       })
     );
     if (impossibleCourses2.length) {
@@ -1430,8 +1430,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       item.pairs.every((pair) => {
         const p1Info = prepared1.get(pair.s1);
         const p2Info = prepared2.get(pair.s2);
-        if (targetDay1 !== null && p1Info && (p1Info.dayBits & (1 << targetDay1))) return true;
-        if (targetDay2 !== null && p2Info && (p2Info.dayBits & (1 << targetDay2))) return true;
+        if (targetDay1 !== null && p1Info && p1Info.dayBits & (1 << targetDay1)) return true;
+        if (targetDay2 !== null && p2Info && p2Info.dayBits & (1 << targetDay2)) return true;
         return false;
       })
     );
@@ -1486,7 +1486,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const { course, options } = uniqueList[k];
       for (const section of options) {
         const p = preparedMap.get(section);
-        if (targetDay !== null && (p.dayBits & (1 << targetDay))) continue;
+        if (targetDay !== null && p.dayBits & (1 << targetDay)) continue;
         if (low & p.low || high & p.high) continue;
         if (isBus && p.items.some((x) => END[x.period] > deadline)) continue;
         if (isMorningOnly && p.items.some((x) => END[x.period] > 795)) continue;
@@ -1637,8 +1637,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
       const p1Info = prepared1.get(pair.s1);
       const p2Info = prepared2.get(pair.s2);
 
-      if (targetDay1 !== null && (p1Info.dayBits & (1 << targetDay1))) continue;
-      if (targetDay2 !== null && (p2Info.dayBits & (1 << targetDay2))) continue;
+      if (targetDay1 !== null && p1Info.dayBits & (1 << targetDay1)) continue;
+      if (targetDay2 !== null && p2Info.dayBits & (1 << targetDay2)) continue;
 
       // Student 1 checks
       if (low1 & p1Info.low || high1 & p1Info.high) continue;
@@ -1948,7 +1948,7 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
           const { course, options } = uniqueList[k];
           for (const s of options) {
             const p = prepMap.get(s);
-            if (targetDay !== null && (p.dayBits & (1 << targetDay))) continue;
+            if (targetDay !== null && p.dayBits & (1 << targetDay)) continue;
             if (low & p.low || high & p.high) continue;
             rec(k + 1, low | p.low, high | p.high, [...items, ...p.items], pen + p.penalty, [
               ...chosen,
@@ -2049,8 +2049,8 @@ export function solveTwin(students, options = {}, limit = 5, hooks = {}) {
         for (const pair of item.pairs) {
           const p1Info = prepared1.get(pair.s1);
           const p2Info = prepared2.get(pair.s2);
-          if (targetDay1 !== null && (p1Info.dayBits & (1 << targetDay1))) continue;
-          if (targetDay2 !== null && (p2Info.dayBits & (1 << targetDay2))) continue;
+          if (targetDay1 !== null && p1Info.dayBits & (1 << targetDay1)) continue;
+          if (targetDay2 !== null && p2Info.dayBits & (1 << targetDay2)) continue;
           if (low1 & p1Info.low || high1 & p1Info.high) continue;
           if (low2 & p2Info.low || high2 & p2Info.high) continue;
 

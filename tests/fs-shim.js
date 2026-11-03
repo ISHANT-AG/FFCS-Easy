@@ -6,4 +6,3 @@ export function readFileSync(url, encoding) {
 }
 
 export default { readFileSync };
-

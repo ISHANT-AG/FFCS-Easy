@@ -1,3386 +1,3634 @@
 [
   {
-    "batch": "23MEI",
-    "code": "CSD3002",
-    "name": "Secure Software Engineering",
-    "type": "LTP",
+    "batch": "26BCE",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
     "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "23MEI",
-    "code": "CSD3010",
-    "name": "Cyber Physical Systems",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MEI",
-    "code": "CSD4002",
-    "name": "Ethical Hacking",
     "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "23MEI",
-    "code": "CSD4004",
-    "name": "Cyber Clinic",
-    "type": "P",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "23MEI",
-    "code": "CSD5003",
-    "name": "Database Security",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "23MEI",
-    "code": "CSE3016",
-    "name": "AWS Solution Architect",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "23MEI",
-    "code": "DSN2097",
-    "name": "Internship",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSA3003",
-    "name": "Reinforcement Learning",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSA3008",
-    "name": "AI Clinic",
-    "type": "P",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSA3015",
-    "name": "R Programming",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSA4003",
-    "name": "Data Mining and Data Warehousing",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSE3006",
-    "name": "Computer Networks",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIM",
-    "code": "CSE3016",
-    "name": "AWS Solution Architect",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "23MIM",
-    "code": "DSN2097",
-    "name": "Internship",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CDS3006",
-    "name": "Data Analysis and Visualization",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CDS3007",
-    "name": "Data Clinic",
-    "type": "P",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CDS4003",
-    "name": "Data Engineering",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CHI3016",
-    "name": "Applied Statistics for Health Data Science",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEOE"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CSA3003",
-    "name": "Reinforcement Learning",
-    "type": "LT",
-    "credits": 2,
-    "category": "PE"
-  },
-  {
-    "batch": "23MIP",
-    "code": "CSE3016",
-    "name": "AWS Solution Architect",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "23MIP",
-    "code": "DSN2097",
-    "name": "Internship",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "23MIP",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
     "category": "UCNSC"
   },
   {
-    "batch": "23MSI",
-    "code": "BIO3021",
-    "name": "Forensic Biology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY3001",
-    "name": "Cell Biology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY3003",
-    "name": "Biodiversity and Conservation Biology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY3009",
-    "name": "Proteomics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY4002",
-    "name": "Microbial Genetics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY4003",
-    "name": "Research Methodology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "23MSI",
-    "code": "BIY4011",
-    "name": "Pharmaceutical Biotechnology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BAC",
-    "code": "CSE2006",
-    "name": "Programming in Java",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "CSE3010",
-    "name": "Computer Vision",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "CSE4005",
-    "name": "Machine Learning",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BAC",
-    "code": "EAC2005",
-    "name": "Robotics And Mechatronics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "EAC3001",
-    "name": "Principles Of Communication Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "ECE4001",
-    "name": "Linear Integrated Circuits",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAC",
-    "code": "MAT3004",
-    "name": "Random Process",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BAI",
-    "code": "CSE3001",
-    "name": "Database Management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAI",
-    "code": "CSE3006",
-    "name": "Computer Networks",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAI",
-    "code": "CSE3010",
-    "name": "Computer Vision",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BAI",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BAI",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BAI",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "24BAI",
-    "code": "MEE2014",
-    "name": "Engineering Design and Modeling",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "24BAI",
-    "code": "SST2003",
-    "name": "Dynamics of Workplace Communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BAS",
-    "code": "ASE2005",
-    "name": "AEROSPACE STRUCTURES",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAS",
-    "code": "ASE2006",
-    "name": "Aerospace Propulsion",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAS",
-    "code": "ASE3004",
-    "name": "Space Flight Mechanics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BAS",
-    "code": "CDS3005",
-    "name": "Foundations of Data Science",
-    "type": "LP",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "24BAS",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BAS",
-    "code": "MAT3002",
-    "name": "Applied Linear Algebra",
-    "type": "LT",
-    "credits": 3,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "24BAS",
-    "code": "MEA3015",
-    "name": "Unmanned Aerial Vehicles",
-    "type": "LP",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT2006",
-    "name": "Corporate Social Responsibility",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT2007",
-    "name": "Ecommerce",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT2016",
-    "name": "Emotional Intelligence",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT3002",
-    "name": "Entrepreneurship Development",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT3011",
-    "name": "Supply Chain Management",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BBA",
-    "code": "BMT3098",
-    "name": "Major Project",
-    "type": "PJ",
-    "credits": 6,
-    "category": "PC"
-  },
-  {
-    "batch": "24BBA",
-    "code": "HUM2001",
-    "name": "Behavioural Science",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEOE"
-  },
-  {
-    "batch": "24BCE",
-    "code": "CSE2004",
-    "name": "Theory of Computation and Compiler Design",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCE",
-    "code": "CSE3011",
-    "name": "Python Programming",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCE",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BCE",
-    "code": "ECE2002",
-    "name": "Digital Logic Design",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCE",
-    "code": "MAT2002",
-    "name": "Discrete Mathematics and Graph theory",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "24BCE",
-    "code": "MGT2003",
-    "name": "Technology Entrepreneurship",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEHSSME"
-  },
-  {
-    "batch": "24BCE",
-    "code": "PLA1004",
-    "name": "Competitive Coding Practice",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSE3001",
-    "name": "Database Management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSE3004",
-    "name": "Design and Analysis of Algorithms",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSG3003",
-    "name": "Agile Game Development",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSG3004",
-    "name": "Augmented and Virtual Reality in Gaming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCG",
-    "code": "CSG4010",
-    "name": "HTML5 Game Development",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BCG",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BCG",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BCY",
-    "code": "CSE2004",
-    "name": "Theory of Computation and Compiler Design",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCY",
-    "code": "CSE2006",
-    "name": "Programming in Java",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BCY",
-    "code": "CSE3001",
-    "name": "Database Management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCY",
-    "code": "CSE3003",
-    "name": "Operating System",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BCY",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BCY",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BCY",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BCY",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BEC",
-    "code": "CSE2006",
-    "name": "Programming in Java",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BEC",
-    "code": "CSE4005",
-    "name": "Machine Learning",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BEC",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BEC",
-    "code": "EAC3001",
-    "name": "Principles Of Communication Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEC",
-    "code": "ECE4001",
-    "name": "Linear Integrated Circuits",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEC",
-    "code": "ECE4012",
-    "name": "Digital Image Processing",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BEC",
-    "code": "ECE4018",
-    "name": "Data communication and networking",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEC",
-    "code": "MAT3004",
-    "name": "Random Process",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BET",
-    "code": "CET2001",
-    "name": "Foundations of Education Technology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BET",
-    "code": "CET3012",
-    "name": "Gaming for Education",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BET",
-    "code": "CSE3006",
-    "name": "Computer networks",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BET",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BET",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BET",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BET",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BET",
-    "code": "SST2003",
-    "name": "Dynamics of workplace communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BEY",
-    "code": "CEC3001",
-    "name": "IoT in E-Commerce",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEY",
-    "code": "CEC3002",
-    "name": "Business Intelligence",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEY",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BEY",
-    "code": "CSG2001",
-    "name": "Augmented Reality and Virtual Reality",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BEY",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BEY",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BEY",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BEY",
-    "code": "SST2003",
-    "name": "Dynamics of workplace communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CDS3005",
-    "name": "Foundations of Data Science",
-    "type": "LP",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CHY1002",
-    "name": "Environmental Science",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CSA4008",
-    "name": "Applied Machine Learning",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CSD3009",
-    "name": "Data Structures and Analysis of Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CSE3006",
-    "name": "Computer Networks",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BHI",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BHI",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BHI",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BME",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BME",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "24BME",
-    "code": "MEE2014",
-    "name": "Engineering Design and Modelling",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "24BME",
-    "code": "MEE3002",
-    "name": "DESIGN OF MACHINE ELEMENTS",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BME",
-    "code": "MEE3004",
-    "name": "HEAT TRANSFER",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BME",
-    "code": "MEE3014",
-    "name": "ROBOTICS AND AUTOMATION",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BME",
-    "code": "MEE3019",
-    "name": "Additive Manufacturing Technologies",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BME",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BMR",
-    "code": "CDS3005",
-    "name": "FOUNDATIONS OF DATA SCIENCE",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "24BMR",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MEE2009",
-    "name": "INSTRUMENTATION AND CONTROL ENGG",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MEE3001",
-    "name": "CAD CAM",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MEE3002",
-    "name": "DESIGN OF MACHINE ELEMENTS",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MEE3004",
-    "name": "HEAT TRANSFER",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MEE3014",
-    "name": "ROBOTICS AND AUTOMATION",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BMR",
-    "code": "MGT2003",
-    "name": "TECHNOLOGY ENTREPRENEURSHIP",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEHSSME"
-  },
-  {
-    "batch": "24BMR",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "BIO2003",
-    "name": "Biomaterials",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "BIO3005",
-    "name": "Medical Imaging Techniques and Data Analysis",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "BIY3004",
-    "name": "Bioinformatics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "CHY2007",
-    "name": "Modelling and Simulation of Biological Systems",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BOE",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BOE",
-    "code": "EEE3100",
-    "name": "Bio signals and Image Processing",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "MEE2014",
-    "name": "Engineering Design and Modelling",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "24BOE",
-    "code": "PHY2011",
-    "name": "Biophysics",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CCA2006",
-    "name": "Cloud Automation Tools and Applications",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CCA3007",
-    "name": "High Performance Computing",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CSD3010",
-    "name": "Cyber Physical Systems",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CSE3006",
-    "name": "Computer Networks",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CSE3007",
-    "name": "Artificial Intelligence",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24BSA",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24BSA",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24BSA",
-    "code": "MAT2003",
-    "name": "Applied Numerical Methods",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24BSA",
-    "code": "PLA1006",
-    "name": "LATERAL THINKING",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MEI",
-    "code": "CSD4007",
-    "name": "Cloud Security",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24MEI",
-    "code": "CSE2004",
-    "name": "Theory Of Computation And Compiler Design",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24MEI",
-    "code": "CSE3003",
-    "name": "Operating System",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24MEI",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24MEI",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24MEI",
-    "code": "ECE3004",
-    "name": "Microprocessors And Microcontrollers",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24MEI",
-    "code": "PLA1004",
-    "name": "Competitive Coding Practices",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MIM",
-    "code": "CSA2002",
-    "name": "Introduction to Drones",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "24MIM",
-    "code": "CSA3003",
-    "name": "Reinforcement Learning",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "24MIM",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24MIM",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24MIM",
-    "code": "MAT3017",
-    "name": "Statistical Inference and Series of Functions",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24MIM",
-    "code": "PLA1004",
-    "name": "Competitive Coding Practice",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MIM",
-    "code": "SST2003",
-    "name": "Dynamics of Workplace Communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MIP",
-    "code": "CSE3001",
-    "name": "Database Management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24MIP",
-    "code": "CSE3015",
-    "name": "AWS Cloud Practitioner",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24MIP",
-    "code": "DSN3099",
-    "name": "Engineering Project in Community Service",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24MIP",
-    "code": "MAT2003",
-    "name": "Applied Numerical Methods",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "24MIP",
-    "code": "PLA1004",
-    "name": "Competitive Coding Practice",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MIP",
-    "code": "SST2003",
-    "name": "Dynamics of Workplace Communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "24MSI",
-    "code": "BIO2003",
-    "name": "Biomaterials",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24MSI",
-    "code": "BIY3004",
-    "name": "Bioinformatics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "24MSI",
-    "code": "BIY3008",
-    "name": "Science, Engineering &Technology Project",
-    "type": "PJ",
-    "credits": 2,
-    "category": "UCPI"
-  },
-  {
-    "batch": "24MSI",
-    "code": "BIY4011",
-    "name": "Pharmaceutical Biotechnology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24MSI",
-    "code": "CDS3005",
-    "name": "Foundations of data science",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "24MSI",
-    "code": "EEE3100",
-    "name": "Bio signals and Image Processing",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PE"
-  },
-  {
-    "batch": "24MSI",
-    "code": "MGT2003",
-    "name": "Technology Entrepreneurship",
-    "type": "LT",
-    "credits": 3,
-    "category": "UEHSSME"
-  },
-  {
-    "batch": "24MSI",
-    "code": "PHY2011",
-    "name": "Biophysics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "25BAC",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BAC",
-    "code": "EAC1002",
-    "name": "Analog Electronics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "EAC1005",
-    "name": "Fundamentals Of Cybernetics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "ECE2003",
-    "name": "Signals & Systems",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAC",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAC",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BAC",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAI",
-    "code": "CSA2003",
-    "name": "Digital Logic and Computer Architecture",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAI",
-    "code": "CSE2006",
-    "name": "Programming In Java",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BAI",
-    "code": "CSE3003",
-    "name": "Operating Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAI",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BAI",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAI",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAI",
-    "code": "MAT2002",
-    "name": "Discrete Mathematics and Graph Theory",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BAI",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAS",
-    "code": "ASE1004",
-    "name": "Mechanics of Materials",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAS",
-    "code": "ASE2013",
-    "name": "Fluid Mechanics for Aerospace Engineering",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BAS",
-    "code": "DSN2098",
-    "name": "Project Exhibition – I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BAS",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "25BAS",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BAS",
-    "code": "EXC0001",
-    "name": "Extra Curriculur Activities",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAS",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BAS",
-    "code": "MAT2003",
-    "name": "Applied Numerical methods",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "25BAS",
-    "code": "MEE1002",
-    "name": "Engineering Mechanics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BBA",
-    "code": "BMT2002",
-    "name": "Strategic Talent Management",
-    "type": "LT",
-    "credits": 4,
-    "category": "MC"
-  },
-  {
-    "batch": "25BBA",
-    "code": "BMT2012",
-    "name": "Essentials of Marketing",
-    "type": "LT",
-    "credits": 4,
-    "category": "DSE"
-  },
-  {
-    "batch": "25BBA",
-    "code": "BMT2015",
-    "name": "Business Ethics and Corporate Governance",
-    "type": "LT",
-    "credits": 3,
-    "category": "SEC"
-  },
-  {
-    "batch": "25BBA",
-    "code": "HUM1014",
-    "name": "Indian Constitution",
-    "type": "LT",
-    "credits": 3,
-    "category": "MDC"
-  },
-  {
-    "batch": "25BBA",
-    "code": "MAT2007",
-    "name": "Business Statistics",
-    "type": "LT",
-    "credits": 4,
-    "category": "DSC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "CSE2001",
-    "name": "Object Oriented Programming with C++",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "CSE3001",
-    "name": "Database Management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BCE",
-    "code": "ECE2002",
-    "name": "Digital Logic Design",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCE",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCE",
-    "code": "MAT3002",
-    "name": "Applied Linear Algebra",
-    "type": "LT",
-    "credits": 3,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "MEE2014",
-    "name": "Engineering Design and Modeling",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "25BCE",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCG",
-    "code": "CET3012",
-    "name": "Gaming for Education",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "25BCG",
-    "code": "CSE2002",
-    "name": "Data Structures and Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCG",
-    "code": "CSE2003",
-    "name": "Computer Architecture and Organization",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCG",
-    "code": "CSG2006",
-    "name": "Game Programming using Unity",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCG",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BCG",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCG",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCG",
-    "code": "MAT3002",
-    "name": "Applied Linear Algebra",
-    "type": "LT",
-    "credits": 3,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BCG",
-    "code": "PHY1005",
-    "name": "Physics of Game Development",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BCG",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCY",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BCY",
-    "code": "CSE2001",
-    "name": "Object Oriented Programming with C++",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCY",
-    "code": "CSE2003",
-    "name": "Computer Architecture and Organization",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCY",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BCY",
-    "code": "ECE3004",
-    "name": "Microprocessors And Microcontrollers",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BCY",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCY",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BCY",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "25BCY",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BCY",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEC",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BEC",
-    "code": "EAC1002",
-    "name": "Analog Electronics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "ECE2003",
-    "name": "Signals & systems",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "EEE2001",
-    "name": "Network analysis",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "ENG2005",
-    "name": "Advanced technical communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEC",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEC",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "SST1003",
-    "name": "Professional communication skills for engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BEC",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BET",
-    "code": "CET2001",
-    "name": "Foundations of Education Technology",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BET",
-    "code": "CET3012",
-    "name": "Gaming for Education",
-    "type": "LP",
-    "credits": 3,
-    "category": "PE"
-  },
-  {
-    "batch": "25BET",
-    "code": "CSA2003",
-    "name": "Digital Logic and Computer Architecture",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BET",
-    "code": "CSD3009",
-    "name": "Data Structures and Analysis of Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BET",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BET",
-    "code": "ENG2005",
-    "name": "ADVANCED TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BET",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BET",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BET",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BET",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEY",
-    "code": "CSE2002",
-    "name": "Data Structures and Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEY",
-    "code": "CSE2003",
-    "name": "Computer Architecture and Organization",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEY",
-    "code": "CSE2006",
-    "name": "Programming in Java",
-    "type": "LP",
-    "credits": 3,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BEY",
-    "code": "CSE3001",
-    "name": "Database management Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BEY",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BEY",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BEY",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEY",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BEY",
-    "code": "MAT2003",
-    "name": "Applied Numerical Methods",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "25BEY",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BHI",
-    "code": "CHI1001",
-    "name": "Introduction to Health Informatics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BHI",
-    "code": "CHI2001",
-    "name": "IOT in Healthcare",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BHI",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BHI",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "25BHI",
-    "code": "ENG2005",
-    "name": "ADVANCED TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BHI",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BHI",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BHI",
-    "code": "MAT3003",
-    "name": "Probability, Statistics and Reliability",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BHI",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BME",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BME",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BME",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BME",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BME",
-    "code": "MAT3002",
-    "name": "Applied Linear Algebra",
-    "type": "LT",
-    "credits": 3,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BME",
-    "code": "MEE1001",
-    "name": "ENGINEERING DRAWING",
-    "type": "LP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BME",
-    "code": "MEE1002",
-    "name": "ENGINEERING MECHANICS",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BME",
-    "code": "MEE1004",
-    "name": "ENGINEERING THERMODYNAMICS",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BME",
-    "code": "MEE2003",
-    "name": "MANUFACTURING PROCESSES",
-    "type": "LP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BME",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BME",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BMR",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BMR",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25BMR",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BMR",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BMR",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "25BMR",
-    "code": "MEE1002",
-    "name": "ENGINEERING MECHANICS",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BMR",
-    "code": "MEE1004",
-    "name": "ENGINEERING THERMODYNAMICS",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BMR",
-    "code": "MEE2003",
-    "name": "Manufacturing Processes",
-    "type": "LP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BMR",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BMR",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BOE",
-    "code": "BIO1103",
-    "name": "Cell and Tissue Culture Techniques",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "BIO2002",
-    "name": "Molecular Biology and Genetic Engineering",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "BIO3012",
-    "name": "Global Health Challenges",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "CSE3011",
-    "name": "Python Programming",
-    "type": "LP",
-    "credits": 3,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BOE",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BOE",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BOE",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BOE",
-    "code": "MAT3011",
-    "name": "Transform Techniques",
-    "type": "LT",
-    "credits": 3,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BOE",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BSA",
-    "code": "CDS3005",
-    "name": "Foundations of Data Science",
-    "type": "LP",
-    "credits": 3,
-    "category": "UEME"
-  },
-  {
-    "batch": "25BSA",
-    "code": "CSD3009",
-    "name": "Data Structures and Analysis of Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BSA",
-    "code": "CSE3003",
-    "name": "Operating Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BSA",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25BSA",
-    "code": "ECE2002",
-    "name": "Digital Logic Design",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25BSA",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BSA",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25BSA",
-    "code": "MAT2002",
-    "name": "Discrete Mathematics and Graph Theory",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25BSA",
-    "code": "SST2003",
-    "name": "Dynamics of Workplace Communication Skills",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25BSA",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MEI",
-    "code": "CSD3005",
-    "name": "Data Privacy",
-    "type": "LP",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25MEI",
-    "code": "CSD3009",
-    "name": "DATA STRUCTURES AND ANALYSIS OF ALGORITHMS",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MEI",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25MEI",
-    "code": "ECE2002",
-    "name": "Digital Logic Design",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MEI",
-    "code": "ECE3004",
-    "name": "Microprocessors And Microcontrollers",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MEI",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MEI",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MEI",
-    "code": "MAT2002",
-    "name": "Discrete Mathematics and Graph Theory",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "25MEI",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIB",
-    "code": "BIY3004",
-    "name": "Bioinformatics",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "CHI1001",
-    "name": "Introduction to Health Informatics",
-    "type": "LT",
-    "credits": 3,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "CHY1003",
-    "name": "Biochemistry",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "CSA2001",
-    "name": "Fundamentals in AI & ML",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25MIB",
-    "code": "ENG2005",
-    "name": "Advanced Technical Communication",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIB",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIB",
-    "code": "MAT2003",
-    "name": "Applied Numerical Methods",
-    "type": "LT",
-    "credits": 3,
-    "category": "UENSE"
-  },
-  {
-    "batch": "25MIB",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
-    "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25MIB",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIM",
+    "batch": "26BCE",
     "code": "CSA2001",
     "name": "Fundamentals in AI and ML (Flipped Course)",
-    "type": "LTP",
     "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BCE",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BCE",
+    "code": "SST1003",
+    "name": "Professional Communication Skills for Engineers",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCE",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
     "category": "PC"
   },
   {
-    "batch": "25MIM",
+    "batch": "26BCE",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BCE",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BCE",
     "code": "CSE2002",
     "name": "Data Structures and Algorithms",
-    "type": "LTP",
     "credits": 4,
+    "type": "LTP",
     "category": "PC"
   },
   {
-    "batch": "25MIM",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
-    "category": "UCPI"
-  },
-  {
-    "batch": "25MIM",
-    "code": "ECE2002",
-    "name": "Digital Logic Design",
-    "type": "LTP",
+    "batch": "25BCE",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
     "credits": 4,
+    "type": "LTP",
     "category": "PC"
   },
   {
-    "batch": "25MIM",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIM",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIM",
-    "code": "HUM1012",
-    "name": "Logic and Language Structures",
-    "type": "LT",
+    "batch": "25BCE",
+    "code": "MGT2003",
+    "name": "Technology Entrepreneurship",
     "credits": 3,
+    "type": "LT",
     "category": "UEHSSME"
   },
   {
-    "batch": "25MIM",
-    "code": "MAT2002",
-    "name": "Discrete Mathematics and Graph Theory",
-    "type": "LT",
+    "batch": "25BCE",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
     "credits": 4,
+    "type": "LT",
     "category": "UCNSC"
   },
   {
-    "batch": "25MIM",
-    "code": "SST1003",
-    "name": "Professional Communication Skills for Engineers",
-    "type": "P",
+    "batch": "25BCE",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
     "credits": 1,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "25MIM",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
     "type": "PJ",
-    "credits": 1,
-    "category": "UEOE"
-  },
-  {
-    "batch": "25MIP",
-    "code": "CSA2002",
-    "name": "Introduction to Drones",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIP",
-    "code": "CSE2002",
-    "name": "Data Structures and Algorithms",
-    "type": "LTP",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIP",
-    "code": "CSE2003",
-    "name": "Computer Architecture and Organization",
-    "type": "LT",
-    "credits": 4,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIP",
-    "code": "DSN2096",
-    "name": "Engineering Design",
-    "type": "LT",
-    "credits": 2,
-    "category": "PC"
-  },
-  {
-    "batch": "25MIP",
-    "code": "DSN2098",
-    "name": "Project Exhibition - I",
-    "type": "PJ",
-    "credits": 1,
     "category": "UCPI"
   },
   {
-    "batch": "25MIP",
-    "code": "EXC0001",
-    "name": "Extracurricular Activity",
-    "type": "PJ",
-    "credits": 0,
-    "category": "UEOE"
+    "batch": "25BCE",
+    "code": "ECE3004",
+    "name": "Microprocessors And Microcontrollers",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
   },
   {
-    "batch": "25MIP",
-    "code": "HUM0003",
-    "name": "INDIAN CONSTITUTION",
-    "type": "LT",
+    "batch": "25BCE",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
     "credits": 2,
+    "type": "LT",
     "category": "UEOE"
   },
   {
-    "batch": "25MIP",
-    "code": "MAT2005",
-    "name": "Transform Techniques and Difference Equations",
-    "type": "LT",
+    "batch": "25BCE",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "MAT2003",
+    "name": "Applied Numerical Methods",
     "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "24BCE",
+    "code": "CSE3003",
+    "name": "Operating Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "CSE3004",
+    "name": "Design and Analysis of Algorithms",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "CSE3005",
+    "name": "Software Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "CSE2003",
+    "name": "Computer Architecture and Organization",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BCE",
+    "code": "CSE3015",
+    "name": "AWS Cloud Practitioner",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "26BAI",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CHY1005",
+    "name": "Introduction to Computational chemistry",
+    "credits": 4,
+    "type": "LTP",
     "category": "UCNSC"
   },
   {
-    "batch": "25MIP",
+    "batch": "26BAI",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BAI",
     "code": "SST1003",
     "name": "Professional Communication Skills for Engineers",
-    "type": "P",
     "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BAI",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BAI",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BAI",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BAI",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BAI",
+    "code": "CSE2004",
+    "name": "Theory of Computation and Compiler Design",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAI",
+    "code": "CSE3006",
+    "name": "Computer Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAI",
+    "code": "CSD3009",
+    "name": "Data Structures and Analysis of Algorithms",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAI",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSA4002",
+    "name": "Artificial Neural Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSA4008",
+    "name": "Applied Machine Learning",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSA3006",
+    "name": "Data Mining and Warehousing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSA3007",
+    "name": "Deep Learning",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSA4028",
+    "name": "Natural Language Processing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAI",
+    "code": "CSE3015",
+    "name": "AWS Cloud Practitioner",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAI",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CHY1007",
+    "name": "Forensic Chemistry & applications",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BCY",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CSD1001",
+    "name": "Principles of Digital Forensics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26BCY",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BCY",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "25BCY",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BCY",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BCY",
+    "code": "CSE3003",
+    "name": "Operating System",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BCY",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BCY",
+    "code": "CSE3001",
+    "name": "Database Management Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BCY",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BCY",
+    "code": "CSD3009",
+    "name": "Data Structures and Analysis of Algorithms",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCY",
+    "code": "PLA1004",
+    "name": "Competitive Coding Practice",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BCY",
+    "code": "MAT2003",
+    "name": "Applied Numerical Methods",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "24BCY",
+    "code": "CSD4002",
+    "name": "Ethical Hacking",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCY",
+    "code": "CSE3006",
+    "name": "Computer Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCY",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCY",
+    "code": "CSE3016",
+    "name": "AWS Solution Architect",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BCY",
+    "code": "CSD4001",
+    "name": "Software Vulnerability Testing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "EEE1001",
+    "name": "Electrical Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "SST1003",
+    "name": "Professional Communication Skill for Engineers",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CHY1005",
+    "name": "Introduction of Computational Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CSA2001",
+    "name": "Fundamentals of AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BCG",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BCG",
+    "code": "CSE2004",
+    "name": "Theory of Computation and Compiler Design",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BCG",
+    "code": "CSE3003",
+    "name": "Operating Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BCG",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BCG",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BCG",
+    "code": "MAT3008",
+    "name": "Computational Game Theory",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BCG",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BCG",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BCG",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSE3006",
+    "name": "Computer Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSG3006",
+    "name": "Visual Effects and Computer Graphics",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSG3005",
+    "name": "Gaming in Cloud",
+    "credits": 3,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSG3007",
+    "name": "Design Game using Artificial Intelligence and Machine Learning",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSG3008",
+    "name": "3D Modelling and Animation",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSG2011",
+    "name": "Game Design and Programming Using Unreal Engine",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BCG",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BCG",
+    "code": "PLA1004",
+    "name": "Competitive Programming Practices",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BSA",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BSA",
+    "code": "SST1003",
+    "name": "Professional Communication Skills for Engineers",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CHY1005",
+    "name": "Introduction to Computational Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BSA",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CSE3001",
+    "name": "Database Management System",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CCA2002",
+    "name": "Cloud Architecture and Services",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CCA3001",
+    "name": "Cloud Data Management",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CSE3015",
+    "name": "AWS Cloud Practitioner",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "25BSA",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "25BSA",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BSA",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BSA",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "CSE2003",
+    "name": "Computer Architecture and Organization",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "CSE2004",
+    "name": "Theory of Computation and Compiler Design",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "CCA2001",
+    "name": "Cloud Computing and Virtualization",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "CCA3001",
+    "name": "Cloud Data Management",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "CCA3002",
+    "name": "Fog and Edge Computing",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BSA",
+    "code": "PLA1004",
+    "name": "Competitive Programming Practices",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CHY1005",
+    "name": "Introduction to Computational Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "PHY2011",
+    "name": "Biophysics",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CSA2001",
+    "name": "Fundamentals of AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BHI",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BHI",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BHI",
+    "code": "MEE2014",
+    "name": "Engineering Design & Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BHI",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BHI",
+    "code": "SST1003",
+    "name": "Professional Communication Skills for Engineers",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BHI",
+    "code": "CHY1002",
+    "name": "Environmental Science",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BHI",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BHI",
+    "code": "CHI1002",
+    "name": "Security and Privacy Policies and Regulations for Health Care",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BHI",
+    "code": "DSN2099",
+    "name": "Project Exhibition - 2",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CSE3010",
+    "name": "Computer Vision",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CSE3003",
+    "name": "Operating Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "BIO2006",
+    "name": "Medical Electronics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CHI2002",
+    "name": "Embedded Systems Design Using ARM",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CHI3001",
+    "name": "App Development for Healthcare Informatics",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CHI3003",
+    "name": "Artificial Intelligence in Health Care",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "CHI3005",
+    "name": "Wearable Technology and IoT",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BHI",
+    "code": "PLA1004",
+    "name": "Competitive Coding Practice",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "BIO1001",
+    "name": "Introduction to Bioengineering",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "BIO1101",
+    "name": "Physiology of Cells and Tissues",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "PHY1001",
+    "name": "Engineering Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "MAT2101",
+    "name": "Applications of Differential Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BOE",
+    "code": "CSE0001",
+    "name": "Digital literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BOE",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BOE",
+    "code": "EEE3100",
+    "name": "Bio signals and Image Processing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "ECE2101",
+    "name": "Analog Circuits",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "BIO3005",
+    "name": "Medical Imaging Techniques and Data Analysis",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "BIO3014",
+    "name": "Cancer Biology",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "25BOE",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BOE",
+    "code": "MAT3015",
+    "name": "Biostatistics",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "PLA1005",
+    "name": "Competitive Coding Practice",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BOE",
+    "code": "BIO3020",
+    "name": "Personalized Medicines",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BOE",
+    "code": "BIO3002",
+    "name": "Immune Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BOE",
+    "code": "BIO3003",
+    "name": "Tissue Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BOE",
+    "code": "BIO3022",
+    "name": "Stem Cells and Regenerative Medicine",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BOE",
+    "code": "BIO3023",
+    "name": "Biomechanics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BOE",
+    "code": "EEE3101",
+    "name": "Bio system and Control",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BOE",
+    "code": "PHY3001",
+    "name": "Bio Optics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BOE",
+    "code": "BIO3020",
+    "name": "Personalized Medicines",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BOE",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BET",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BET",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML (Flipped Course)",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BET",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BET",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BET",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BET",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BET",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BET",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BET",
+    "code": "SST1003",
+    "name": "Professional Communication Skills for Engineers",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BET",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BET",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BET",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BET",
+    "code": "CSG3008",
+    "name": "3D Modelling and Animation",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BET",
+    "code": "CSG3004",
+    "name": "Augmented Reality and Virtual Reality in Gaming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BET",
+    "code": "CET3001",
+    "name": "Educational Data Mining and Learning Analytics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BET",
+    "code": "CSE3001",
+    "name": "Database Management Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BET",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BET",
+    "code": "PLA1004",
+    "name": "Competitive Coding Practice",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BET",
+    "code": "MAT2003",
+    "name": "Applied Numerical Method",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "24BET",
+    "code": "CSG3004",
+    "name": "Augmented Reality and Virtual Reality in Gaming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BET",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BET",
+    "code": "CSG3008",
+    "name": "3D Modelling and Animation",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BET",
+    "code": "CET3001",
+    "name": "Educational Data Mining and Learning Analytics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BET",
+    "code": "CSE3016",
+    "name": "AWS Solution Architect",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CEC3006",
+    "name": "E-Customer Relationship Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CEC3003",
+    "name": "Warehouse Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "PLA1004",
+    "name": "Competitive Coding Practices",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CSE3004",
+    "name": "Design Analysis Of Algorithm",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CEC2001",
+    "name": "Introduction to E Commerce",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEY",
+    "code": "CSE3016",
+    "name": "AWS Solution Architect",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "26BAS",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BAS",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BAS",
+    "code": "CHY1001",
+    "name": "Engineering Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics And Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "PHY1001",
+    "name": "Engineering Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "ASE2009",
+    "name": "Introduction to Aerospace Engineering",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BAS",
+    "code": "MEE1002",
+    "name": "Engineering Mechanics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BAS",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BAS",
+    "code": "ASE2012",
+    "name": "Thermodynamics for Aerospace Engineering",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "ASE2005",
+    "name": "Aerospace Structures",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAS",
+    "code": "ASE2003",
+    "name": "Mechanisms and Machine Theory",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAS",
+    "code": "MAT2004",
+    "name": "Operations Research",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE2010",
+    "name": "Guidance, Navigation & Control",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE2004",
+    "name": "Aircraft Manufacturing Technology",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE5001",
+    "name": "Aerospace Vehicle Design",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE2007",
+    "name": "Computer Aided Aircraft Drawing",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE3007",
+    "name": "Smart Materials for Aerospace",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAS",
+    "code": "ASE3010",
+    "name": "Rockets and Missile Technology",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAS",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BME",
+    "code": "MEE1002",
+    "name": "Engineering Mechanics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26BME",
+    "code": "CHY1001",
+    "name": "Engineering Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BME",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BME",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BME",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BME",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BME",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BME",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BME",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BME",
+    "code": "MAT2005",
+    "name": "Differential and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25BME",
+    "code": "MEE1005",
+    "name": "Fluid Mechanics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BME",
+    "code": "MEE2010",
+    "name": "Kinematics of Machinery",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BME",
+    "code": "MEE2002",
+    "name": "Strength of Materials",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BME",
+    "code": "MEE2009",
+    "name": "Instrumentation and Control Engineering",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "25BME",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BME",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "24BME",
+    "code": "MEE2001",
+    "name": "Machine Drawing",
+    "credits": 4,
+    "type": "P",
+    "category": "PC"
+  },
+  {
+    "batch": "24BME",
+    "code": "MEE4001",
+    "name": "Design of Transmission Systems",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BME",
+    "code": "MEE2004",
+    "name": "Thermal Engineering Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BME",
+    "code": "MEE3015",
+    "name": "Mechatronics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BME",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "MEE1002",
+    "name": "Engineering Mechanics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CHY1001",
+    "name": "Engineering Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CSA2001",
+    "name": "Fundamentals in AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BMR",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BMR",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "DSN2099",
+    "name": "Project Exhibition II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BMR",
+    "code": "MEE1005",
+    "name": "Fluid Mechanics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "MEE1003",
+    "name": "Materials Engineering and Technology",
+    "credits": 4,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "MEE2002",
+    "name": "Strength of Materials",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BMR",
+    "code": "MEE2009",
+    "name": "Instrumentation and Control Engineering",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "25BMR",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BMR",
+    "code": "MEE3015",
+    "name": "Mechatronics",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BMR",
+    "code": "MEA2006",
+    "name": "Foundation to Robotics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BMR",
+    "code": "MEA3006",
+    "name": "Robotics Perception and Planning",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BMR",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BAC",
+    "code": "PHY1001",
+    "name": "Engineering Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BAC",
+    "code": "CSA2001",
+    "name": "Fundamentals of AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "CHY1001",
+    "name": "Engineering Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "ECE2002",
+    "name": "Digital Logic Design",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BAC",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BAC",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BAC",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BAC",
+    "code": "CSE2002",
+    "name": "Data Structures And Algorithms",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "EAC2002",
+    "name": "Electromagnetics And Transmission Lines",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "EAC2006",
+    "name": "Multimedia Signal Processing",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "ECE3004",
+    "name": "Microprocessor And Microcontroller",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BAC",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BAC",
+    "code": "CSA4020",
+    "name": "Deep Learning",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAC",
+    "code": "EAC4001",
+    "name": "Robot Motion Control",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BAC",
+    "code": "ECE3006",
+    "name": "VLSI Design",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAC",
+    "code": "ECE4010",
+    "name": "Embedded Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAC",
+    "code": "EAC4010",
+    "name": "Autonomous Robotics",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAC",
+    "code": "CSA3003",
+    "name": "Reinforcement Learning",
+    "credits": 2,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BAC",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "PHY1001",
+    "name": "Engineering Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "26BEC",
+    "code": "CSA2001",
+    "name": "Fundamentals of AI and ML",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "CHY1001",
+    "name": "Engineering Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "ECE2002",
+    "name": "Digital Logic Design",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26BEC",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BEC",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BEC",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modelling",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "ECE3005",
+    "name": "Digital Signal Processing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "DSN2099",
+    "name": "Project Exhibition - II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BEC",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BEC",
+    "code": "ECE3004",
+    "name": "Microprocessor And Microcontroller",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "CSE2002",
+    "name": "Data Structures And Algorithms",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25BEC",
+    "code": "EAC2002",
+    "name": "Electromagnetics And Transmission Lines",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE3006",
+    "name": "VLSI design",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE4008",
+    "name": "Wireless and optical communication systems",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE3010",
+    "name": "Information theory and Coding",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE4002",
+    "name": "Antenna and wave propagation",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE4007",
+    "name": "Wireless sensor networks",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BEC",
+    "code": "ECE4010",
+    "name": "Embedded systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24BEC",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CHY1005",
+    "name": "Introduction to Computational Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "EEE1001",
+    "name": "Electrical Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26MIM",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIM",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIM",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25MIM",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "25MIM",
+    "code": "CSE2003",
+    "name": "Computer Architecture and Organization",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIM",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25MIM",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25MIM",
+    "code": "CSE2004",
+    "name": "Theory of Computation and Compiler Design",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIM",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "MAT3016",
+    "name": "Stochastic Process",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "CSE3003",
+    "name": "Operating Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "CSE3004",
+    "name": "Design Analysis of Algorithms",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "CSE3001",
+    "name": "Database Management Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIM",
+    "code": "CSE3016",
+    "name": "AWS Solution Architect",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA4017",
+    "name": "Optimization Methods in Machine Learning",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA3020",
+    "name": "Generative AI",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA4008",
+    "name": "Applied Machine Learning",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA4016",
+    "name": "Hardware Architecture for Machine Learning",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA4001",
+    "name": "Algorithm for Intelligent Systems",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIM",
+    "code": "CSA4002",
+    "name": "Artificial Neural Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CHY1007",
+    "name": "Forensic Chemistry and Applications",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "EEE1001",
+    "name": "Electric Circuits and Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CSD1001",
+    "name": "Principles of Digital Forensics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26MEI",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "26MEI",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MEI",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "25MEI",
+    "code": "MAT2005",
+    "name": "Transform Techniques and Difference Equations",
+    "credits": 3,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25MEI",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25MEI",
+    "code": "CSE3001",
+    "name": "Database Management Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MEI",
+    "code": "CSE2003",
+    "name": "Computer Architecture and Organization",
+    "credits": 4,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "25MEI",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "25MEI",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24MEI",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "24MEI",
+    "code": "MAT2003",
+    "name": "Applied Numerical methods",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "24MEI",
+    "code": "CSE3006",
+    "name": "Computer Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MEI",
+    "code": "CSE4001",
+    "name": "Internet and Web Programming",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MEI",
+    "code": "CSD4001",
+    "name": "Software Vulnerability Testing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MEI",
+    "code": "CSD4012",
+    "name": "Web Security",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "24MEI",
+    "code": "CSD6005",
+    "name": "Wireless and Mobile Security",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24MEI",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSD4001",
+    "name": "Software Vulnerability Testing",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSD4003",
+    "name": "Network and System Security",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSD5002",
+    "name": "Virtualization Essentials",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSD5005",
+    "name": "Network Analysis, Architecture and Design",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSE3017",
+    "name": "Salesforce",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "23MEI",
+    "code": "CSD3004",
+    "name": "Cyber Threat Analysis",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "26MIP",
+    "code": "PHY1003",
+    "name": "Introduction to Computational Physics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CHY1005",
+    "name": "Introduction to Computational Chemistry",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics And Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "ENG2005",
+    "name": "Advanced Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIP",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIP",
+    "code": "CSE2006",
+    "name": "Programming in Java",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIP",
+    "code": "CSE3001",
+    "name": "Database Management System",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIP",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25MIP",
+    "code": "MAT2003",
+    "name": "Applied Numerical Methods",
+    "credits": 3,
+    "type": "LT",
+    "category": "UENSE"
+  },
+  {
+    "batch": "25MIP",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
     "category": "UCSDC"
   },
   {
     "batch": "25MIP",
-    "code": "HUM0002",
-    "name": "Swachh Bharat",
-    "type": "PJ",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIP",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
     "credits": 1,
-    "category": "UEOE"
+    "type": "PJ",
+    "category": "UCPI"
   },
   {
-    "batch": "26BAC",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BAC",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "26BAC",
-    "code": "MAT1003",
-    "name": "Calculus",
+    "batch": "24MIP",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "credits": 3,
     "type": "LT",
-    "credits": 4,
     "category": "UCNSC"
   },
   {
-    "batch": "26BAI",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BAI",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
+    "batch": "24MIP",
+    "code": "CSA3007",
+    "name": "Deep Learning",
+    "credits": 4,
     "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BAI",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BAI",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BAS",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BAS",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BAS",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BBA",
-    "code": "BMT1001",
-    "name": "Business Mathematics",
-    "type": "LT",
-    "credits": 4,
-    "category": "UEOE"
-  },
-  {
-    "batch": "26BBA",
-    "code": "BMT1004",
-    "name": "Information Technology in Business",
-    "type": "LT",
-    "credits": 4,
-    "category": "UEOE"
-  },
-  {
-    "batch": "26BBA",
-    "code": "BMT2003",
-    "name": "Principles Of Accounting",
-    "type": "LT",
-    "credits": 4,
-    "category": "UEOE"
-  },
-  {
-    "batch": "26BCE",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BCE",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCE",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BCE",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCG",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCG",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BCG",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCG",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BCY",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCY",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BCY",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BCY",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BEC",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BEC",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "26BEC",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BET",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BET",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BET",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BET",
-    "code": "MAT1031",
-    "name": "Introduction to Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BHI",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BHI",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BHI",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BHI",
-    "code": "MAT1031",
-    "name": "Introduction to Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BME",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BME",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "26BME",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BMR",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BMR",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "26BMR",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BOE",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BOE",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCBESC"
-  },
-  {
-    "batch": "26BOE",
-    "code": "MAT1002",
-    "name": "Calculus for Bio Engineers",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BSA",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
-    "category": "UCSDC"
-  },
-  {
-    "batch": "26BSA",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26BSA",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26BSA",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MEI",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
     "category": "PC"
   },
   {
-    "batch": "26MEI",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MEI",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MEI",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
+    "batch": "24MIP",
+    "code": "CSE3006",
+    "name": "Computer Networks",
     "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26MIB",
-    "code": "EEE1001",
-    "name": "Electric Circuits and Systems",
     "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIP",
+    "code": "CDS3002",
+    "name": "Introduction to Scalable Systems",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MIP",
+    "code": "CSE3011",
+    "name": "Python Programming",
+    "credits": 3,
+    "type": "LP",
+    "category": "PE"
+  },
+  {
+    "batch": "24MIP",
+    "code": "CSE3016",
+    "name": "AWS Solution Architect",
     "credits": 4,
+    "type": "LTP",
+    "category": "PE"
+  },
+  {
+    "batch": "24MIP",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "23MIP",
+    "code": "CDS4007",
+    "name": "Machine learning for Large Datasets",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIP",
+    "code": "CSA4002",
+    "name": "Artificial Neural Networks",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIP",
+    "code": "CDS3001",
+    "name": "Distributed Systems",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIP",
+    "code": "MAS5009",
+    "name": "Application Development using MLOps",
+    "credits": 3,
+    "type": "LP",
+    "category": "PC"
+  },
+  {
+    "batch": "23MIP",
+    "code": "CDS4011",
+    "name": "Embedded Computing for IOT",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "23MIP",
+    "code": "CHI4010",
+    "name": "Healthcare Data Analytics",
+    "credits": 3,
+    "type": "LP",
     "category": "PE"
   },
   {
     "batch": "26MIB",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
+    "code": "CHY1005",
+    "name": "Introduction to Computational chemistry",
     "credits": 4,
+    "type": "LTP",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "26MIB",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "credits": 2,
+    "type": "LTP",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIB",
+    "code": "ENG1004",
+    "name": "Effective Technical Communication",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "26MIB",
+    "code": "BIO1001",
+    "name": "Introduction to Bioengineering",
+    "credits": 3,
+    "type": "LT",
     "category": "PE"
   },
   {
     "batch": "26MIB",
-    "code": "MAT1002",
-    "name": "Calculus for Bioengineers",
-    "type": "LT",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
     "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26MIM",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
     "type": "LTP",
-    "credits": 4,
     "category": "PC"
   },
   {
-    "batch": "26MIM",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
-    "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MIM",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
+    "batch": "26MIB",
+    "code": "BIA1001",
+    "name": "Cell Biology & Genetics",
     "credits": 4,
-    "category": "UCNSC"
-  },
-  {
-    "batch": "26MIM",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
     "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MIP",
-    "code": "CSE1021",
-    "name": "Introduction to Problem Solving And Programming",
-    "type": "LTP",
-    "credits": 4,
     "category": "PC"
   },
   {
-    "batch": "26MIP",
-    "code": "ENG1004",
-    "name": "EFFECTIVE TECHNICAL COMMUNICATION",
+    "batch": "26MIB",
+    "code": "MAT2101",
+    "name": "Application of Differential Equation",
+    "credits": 3,
     "type": "LT",
-    "credits": 2,
-    "category": "UCHSSMC"
-  },
-  {
-    "batch": "26MIP",
-    "code": "MAT1003",
-    "name": "Calculus",
-    "type": "LT",
-    "credits": 4,
     "category": "UCNSC"
   },
   {
-    "batch": "26MIP",
-    "code": "CHY1006",
-    "name": "Environmental Sustainability",
+    "batch": "26MIB",
+    "code": "CSE0001",
+    "name": "Digital Literacy",
+    "credits": 1,
     "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26MIB",
+    "code": "CSE0002",
+    "name": "Open Source Software (Linux Administration)",
     "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIB",
+    "code": "MAT2002",
+    "name": "Discrete Mathematics and Graph Theory",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "BIO2002",
+    "name": "Molecular Biology and Genetic Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "BIA2001",
+    "name": "Quantum Chemistry for Biological Systems",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "CSE2002",
+    "name": "Data Structures and Algorithms",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "MAT3003",
+    "name": "Probability, Statistics and Reliability",
+    "credits": 4,
+    "type": "LT",
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "SST2003",
+    "name": "Dynamics of Workplace Communication Skills",
+    "credits": 1,
+    "type": "P",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "25MIB",
+    "code": "CSE0002",
+    "name": "Open-Source Software (Linux Administration)",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25MIB",
+    "code": "DSN2099",
+    "name": "Project Exhibition \u2013 II",
+    "credits": 1,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIO3002",
+    "name": "Immune Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIO3003",
+    "name": "Tissue Engineering",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIO3022",
+    "name": "Stem Cells and Regenerative Medicine",
+    "credits": 4,
+    "type": "LTP",
+    "category": "PC"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIY3005",
+    "name": "Bioprocess Technology",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIY3011",
+    "name": "Nutrition and Health",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24MSI",
+    "code": "PHY3001",
+    "name": "Bio Optics",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24MSI",
+    "code": "BIO3017",
+    "name": "Advanced Biomaterials & Manufacturing Process",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24MSI",
+    "code": "PLA1006",
+    "name": "Lateral Thinking",
+    "credits": 2,
+    "type": "LT",
+    "category": "UCSDC"
+  },
+  {
+    "batch": "23MSI",
+    "code": "BIY3005",
+    "name": "Bioprocess Technology",
+    "credits": 3,
+    "type": "LT",
+    "category": "PC"
+  },
+  {
+    "batch": "23MSI",
+    "code": "BIO3017",
+    "name": "Advanced Biomaterials & Manufacturing Process",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "23MSI",
+    "code": "BIY3011",
+    "name": "Nutrition and Health",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "23MSI",
+    "code": "HUM1002",
+    "name": "Emotional Intelligence",
+    "credits": 3,
+    "type": "LT",
     "category": "UCHSSMC"
+  },
+  {
+    "batch": "22MSI",
+    "code": "DSN5097",
+    "name": "Comprehensive Exam",
+    "credits": 2,
+    "type": "PJ",
+    "category": "UCPI"
+  },
+  {
+    "batch": "26BBA",
+    "code": "CHY1002",
+    "name": "Environmental Science",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "ENG2006",
+    "name": "Business Communication I",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT2005",
+    "name": "Leadership & Team Building",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1002",
+    "name": "Micro Economics",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1003",
+    "name": "Fundamentals of Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1013",
+    "name": "Human Resource Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT1015",
+    "name": "Indian Knowledge System",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "HUM1108",
+    "name": "Swachh Bharat",
+    "credits": 2,
+    "type": "PJ",
+    "category": "UEOE"
+  },
+  {
+    "batch": "26BBA",
+    "code": "BMT3011",
+    "name": "Supply Chain Management",
+    "credits": 4,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "HUM2001",
+    "name": "Behavioral Science",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2014",
+    "name": "Securities Analysis and Portfolio Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2018",
+    "name": "Business Policy and Competitive Strategy",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2009",
+    "name": "Consumer Behaviour",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2022",
+    "name": "Life Skills & Personality Development",
+    "credits": 2,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2021",
+    "name": "Insurance Management",
+    "credits": 4,
+    "type": "LTP",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2016",
+    "name": "Emotional Intelligence",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "SST1001",
+    "name": "Introduction to Soft Skills",
+    "credits": 3,
+    "type": "P",
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BBA",
+    "code": "BMT2025",
+    "name": "Summer Internship",
+    "credits": 2,
+    "type": "PJ",
+    "category": "UEOE"
+  },
+  {
+    "batch": "24BBA",
+    "code": "BMT3004",
+    "name": "Customer Relationship Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BBA",
+    "code": "BMT3005",
+    "name": "Digital Marketing",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BBA",
+    "code": "BMT3006",
+    "name": "Basic Insurance Processes",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BBA",
+    "code": "BMT3010",
+    "name": "Talent Management",
+    "credits": 3,
+    "type": "LT",
+    "category": "PE"
+  },
+  {
+    "batch": "24BBA",
+    "code": "HUM1014",
+    "name": "Indian Constitution",
+    "credits": 3,
+    "type": "LT",
+    "category": "UEOE"
   }
 ]

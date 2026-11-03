@@ -178,7 +178,7 @@ const json = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url)));
 test('full-semester 32-setting matrix preserves rules and safe faculty switching', (t) => {
   const library = json('../data/sections.json'),
     edm = json('edm-screenshot-sections.json'),
-    catalogue = json('../data/catalogue.json');
+    catalogue = json('fixtures/ten-course-plan.json');
   const courses = catalogue
     .filter((c) => c.batch === '25BCE')
     .map((c) => ({

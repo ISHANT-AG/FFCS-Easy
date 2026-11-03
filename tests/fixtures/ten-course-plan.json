@@ -1,0 +1,82 @@
+[
+  {
+    "batch": "25BCE",
+    "code": "CHY1006",
+    "name": "Environmental Sustainability",
+    "type": "LT",
+    "credits": 2,
+    "category": "UCHSSMC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "CSE2001",
+    "name": "Object Oriented Programming with C++",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "CSE3001",
+    "name": "Database Management Systems",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "DSN2098",
+    "name": "Project Exhibition - I",
+    "type": "PJ",
+    "credits": 1,
+    "category": "UCPI"
+  },
+  {
+    "batch": "25BCE",
+    "code": "ECE2002",
+    "name": "Digital Logic Design",
+    "type": "LTP",
+    "credits": 4,
+    "category": "PC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "EXC0001",
+    "name": "Extracurricular Activity",
+    "type": "PJ",
+    "credits": 0,
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BCE",
+    "code": "HUM0003",
+    "name": "INDIAN CONSTITUTION",
+    "type": "LT",
+    "credits": 2,
+    "category": "UEOE"
+  },
+  {
+    "batch": "25BCE",
+    "code": "MAT3002",
+    "name": "Applied Linear Algebra",
+    "type": "LT",
+    "credits": 3,
+    "category": "UCNSC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "MEE2014",
+    "name": "Engineering Design and Modeling",
+    "type": "LTP",
+    "credits": 4,
+    "category": "UCBESC"
+  },
+  {
+    "batch": "25BCE",
+    "code": "HUM0002",
+    "name": "Swachh Bharat",
+    "type": "PJ",
+    "credits": 1,
+    "category": "UEOE"
+  }
+]

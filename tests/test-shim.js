@@ -2,7 +2,7 @@ export const suite = {
   queue: [],
   passed: 0,
   failed: 0,
-  tests: []
+  tests: [],
 };
 
 export default function test(name, fn) {
@@ -22,4 +22,3 @@ export async function runAllTests() {
   }
   return suite;
 }
-

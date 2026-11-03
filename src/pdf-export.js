@@ -1,4 +1,4 @@
-import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=c5e3eb1974e5';
+import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=97b845f91550';
 const ascii = (s) =>
   String(s ?? '')
     .replace(/[–−]/g, '-')
@@ -83,7 +83,7 @@ export function createTimetablePdf(JsPDF, schedule, { option = 1, courses } = {}
   doc.setFontSize(9);
   doc.setTextColor(85, 95, 90);
   doc.text(
-    'Fall 2026-27  |  ' +
+    'Winter 2026-27  |  ' +
       schedule.metrics.gaps +
       ' gap slots  |  ' +
       schedule.metrics.travel +
@@ -210,7 +210,7 @@ export function renderSchedulePage(
   doc.setFontSize(9);
   doc.setTextColor(85, 95, 90);
 
-  let sub = `Fall 2026-27  |  ${schedule.metrics.gaps} gap slots  |  ${schedule.metrics.travel} consecutive AB2 trips`;
+  let sub = `Winter 2026-27  |  ${schedule.metrics.gaps} gap slots  |  ${schedule.metrics.travel} consecutive AB2 trips`;
   if (matchSummary && matchSummary.together != null) {
     sub += `  |  Together in ${matchSummary.together} of ${matchSummary.commonScheduled} common courses`;
   }

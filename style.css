@@ -3158,7 +3158,9 @@ button {
   font-size: 30px;
   color: #cbd5e1;
   cursor: pointer;
-  transition: color 0.15s ease, transform 0.15s ease;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
   line-height: 1;
 }
 .star-rating label:hover,
@@ -3212,10 +3214,12 @@ button {
   border-radius: 8px;
   resize: vertical;
   min-height: 80px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .feedback-form textarea:focus,
-.feedback-form input[type="text"]:focus {
+.feedback-form input[type='text']:focus {
   outline: none;
   border-color: #1e3a8a;
   box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
@@ -3225,7 +3229,7 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-.feedback-form input[type="text"] {
+.feedback-form input[type='text'] {
   width: 100%;
   box-sizing: border-box;
   padding: 8px 12px;
@@ -3233,7 +3237,9 @@ button {
   font-size: 0.85rem;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .feedback-actions {
   display: flex;

@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=c5e3eb1974e5';
-import { startGeneration } from './generation.js?v=c5e3eb1974e5';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=c5e3eb1974e5';
-import { pdfItemsToText } from './pdf-text.js?v=c5e3eb1974e5';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=97b845f91550';
+import { startGeneration } from './generation.js?v=97b845f91550';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=97b845f91550';
+import { pdfItemsToText } from './pdf-text.js?v=97b845f91550';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=c5e3eb1974e5';
-import { parsePortalText } from './portal.js?v=c5e3eb1974e5';
-import { validatePdfUpload } from './uploads.js?v=c5e3eb1974e5';
+} from './engine.js?v=97b845f91550';
+import { parsePortalText } from './portal.js?v=97b845f91550';
+import { validatePdfUpload } from './uploads.js?v=97b845f91550';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -77,7 +77,14 @@ let state = {
   branch: '',
   courses: [],
   preset: 'compact',
-  settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
+  settings: {
+    lunch: true,
+    travel: true,
+    bus: false,
+    busTime: '16:45',
+    walkMinutes: 10,
+    dayOff: 'none',
+  },
   ...saved,
 };
 
@@ -89,7 +96,14 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
+    settings: {
+      lunch: true,
+      travel: true,
+      bus: false,
+      busTime: '16:45',
+      walkMinutes: 10,
+      dayOff: 'none',
+    },
   },
   student2: {
     name: 'Friend',
@@ -97,7 +111,14 @@ let twinState = {
     branch: '',
     courses: [],
     preset: 'compact',
-    settings: { lunch: true, travel: true, bus: false, busTime: '16:45', walkMinutes: 10, dayOff: 'none' },
+    settings: {
+      lunch: true,
+      travel: true,
+      bus: false,
+      busTime: '16:45',
+      walkMinutes: 10,
+      dayOff: 'none',
+    },
   },
   ...savedTwin,
 };
@@ -205,7 +226,7 @@ function availableBranches(year = state.year) {
       catalogue.filter((c) => c.batch && c.batch.startsWith(p)).map((c) => c.batch.slice(2))
     ),
   ];
-  if (Number(year) === 4) {
+  if (Number(year) === 4 || Number(year) === 5) {
     return [...new Set([...fromCat, ...Object.keys(branches)])].sort();
   }
   return fromCat.sort();
@@ -333,7 +354,7 @@ function render() {
           </a>
           <div class="brand-meta">
             <span class="meta-slash" aria-hidden="true">/</span>
-            <span class="semester-pill">Fall 2026–27</span>
+            <span class="semester-pill">Winter 2026–27</span>
           </div>
           <button type="button" class="watch-demo" id="watch-demo" aria-haspopup="dialog"><svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 3.5v13l10-6.5z"/></svg><span>Watch demo</span></button>
           <button type="button" class="feedback-btn-header" id="open-feedback" aria-haspopup="dialog" title="Share feedback or report an issue"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zm-4 0h-2v2h2V9z" clip-rule="evenodd"/></svg><span>Feedback</span></button>
@@ -603,7 +624,7 @@ function coursesView() {
                 </div>
                 <div>
                   <strong>No prescribed courses in the catalogue for ${esc(branches[state.branch] || state.branch)} (Year ${state.year}).</strong>
-                  <p>Fourth-year students can add their backlog, elective, or capstone project courses on the left using <strong>+ Add a course</strong>.</p>
+                  <p>Senior students (Year 4 & 5) can add their backlog, elective, or capstone project courses on the left using <strong>+ Add a course</strong>.</p>
                 </div>
               </div>
             `
@@ -990,22 +1011,30 @@ function resultsView() {
     : '—';
 
   return `
-    ${result.dayOffAchieved ? `
+    ${
+      result.dayOffAchieved
+        ? `
       <div class="notice-box success-note" style="margin-bottom: 16px;">
         <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M13.5 4.5L6.5 11.5L3 8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span><strong>${esc(result.dayOffMatched)} is completely free!</strong> All your classes have been scheduled without any sessions on ${esc(result.dayOffMatched)}.</span>
       </div>
-    ` : ''}
-    ${result.dayOffFallback ? `
+    `
+        : ''
+    }
+    ${
+      result.dayOffFallback
+        ? `
       <div class="notice-box subtle-note" style="margin-bottom: 16px;">
         <svg class="notice-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75">
           <circle cx="8" cy="8" r="6.5"/><path d="M8 7.5v4M8 5h.01"/>
         </svg>
         <span>A timetable with <strong>${esc(result.dayOffRequested)}</strong> completely off was not possible with your uploaded course options${result.dayOffReason ? ` (${esc(result.dayOffReason)})` : ''}. Showing the best alternative schedule.</span>
       </div>
-    ` : ''}
+    `
+        : ''
+    }
     ${result.morningFallback ? '<div class="notice-box subtle-note" style="margin-bottom:16px">A morning-only timetable was not found. These alternatives include later classes.</div>' : ''}
     ${
       result.truncated
@@ -1034,9 +1063,10 @@ function resultsView() {
             const sameRoutine = i > 0 && dailyPattern(s) === dailyPattern(result.results[0]);
             const sBusy = new Set(s.items.map((x) => x.day));
             const sFreeWeekdays = DAYS.slice(0, 5).filter((_, d) => !sBusy.has(d));
-            const offDaysLabel = sFreeWeekdays.length > 0
-              ? `${sFreeWeekdays.length} day${sFreeWeekdays.length > 1 ? 's' : ''} off (${sFreeWeekdays.join(', ')})`
-              : 'No days off';
+            const offDaysLabel =
+              sFreeWeekdays.length > 0
+                ? `${sFreeWeekdays.length} day${sFreeWeekdays.length > 1 ? 's' : ''} off (${sFreeWeekdays.join(', ')})`
+                : 'No days off';
             return `
             <button data-result="${i}" class="tab-btn ${i === resultIndex ? 'is-selected selected' : ''}" role="tab" aria-selected="${i === resultIndex}">
               <span class="tab-label">Option ${i + 1}</span>
@@ -1080,7 +1110,7 @@ function resultsView() {
 
     <div class="print-only" style="display: none; margin-bottom: 14px;">
       <h1 style="font-size: 20px; font-weight: 700; color: var(--color-primary); margin: 0 0 4px;">FFCS easy · Timetable (Option ${resultIndex + 1})</h1>
-      <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Fall 2026–27 · ${r.metrics.gaps} free slots · ${r.metrics.travel} AB2 transitions</p>
+      <p style="font-size: 12px; color: var(--color-text-muted); margin: 0;">Winter 2026–27 · ${r.metrics.gaps} free slots · ${r.metrics.travel} AB2 transitions</p>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
@@ -3085,7 +3115,8 @@ if (typeof window !== 'undefined') {
 
 // Feedback Dialog Management
 // Google Apps Script Web App URL to log feedback to Google Sheet:
-const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyuPDObemX1GDvK1kLozHYmSDNLl1cJaXf9grHed3OMq0FrbK6GW1w5X69cqY4YkBqSmQ/exec';
+const FEEDBACK_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbyuPDObemX1GDvK1kLozHYmSDNLl1cJaXf9grHed3OMq0FrbK6GW1w5X69cqY4YkBqSmQ/exec';
 
 const feedbackDialog = $('#feedback-dialog');
 const feedbackForm = $('#feedback-form');
@@ -3134,7 +3165,7 @@ feedbackForm?.addEventListener('submit', async (e) => {
     name: fd.get('name') || 'Anonymous',
     contact: fd.get('contact') || '',
     step: state.step,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   // Save to localStorage so feedback is preserved
@@ -3153,7 +3184,7 @@ feedbackForm?.addEventListener('submit', async (e) => {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(feedbackData)
+        body: JSON.stringify(feedbackData),
       });
     } catch (err) {
       console.warn('Could not send to Google Sheet', err);

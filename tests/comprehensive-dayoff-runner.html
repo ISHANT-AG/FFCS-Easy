@@ -1,570 +1,727 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Comprehensive Day Off & Twin FFCS Test Runner</title>
-</head>
-<body>
-  <h1>Running tests...</h1>
-  <div id="test-output">RUNNING</div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Comprehensive Day Off & Twin FFCS Test Runner</title>
+  </head>
+  <body>
+    <h1>Running tests...</h1>
+    <div id="test-output">RUNNING</div>
 
-  <script>
-    window.onerror = function(msg, url, line, col, error) {
-      document.getElementById('test-output').textContent = JSON.stringify({
-        error: String(msg) + ' at line ' + line + ':' + col,
-        stack: error ? error.stack : ''
-      });
-    };
-    window.onunhandledrejection = function(e) {
-      document.getElementById('test-output').textContent = JSON.stringify({
-        unhandledRejection: String(e.reason),
-        stack: e.reason ? e.reason.stack : ''
-      });
-    };
-  </script>
+    <script>
+      window.onerror = function (msg, url, line, col, error) {
+        document.getElementById('test-output').textContent = JSON.stringify({
+          error: String(msg) + ' at line ' + line + ':' + col,
+          stack: error ? error.stack : '',
+        });
+      };
+      window.onunhandledrejection = function (e) {
+        document.getElementById('test-output').textContent = JSON.stringify({
+          unhandledRejection: String(e.reason),
+          stack: e.reason ? e.reason.stack : '',
+        });
+      };
+    </script>
 
-  <script type="module">
-    import {
-      DAYS,
-      TIMES,
-      parseSlots,
-      solve,
-      solveTwin,
-      changeFaculty,
-      changeTwinFaculty,
-      findCommonCourses,
-      parseDayOff,
-      metrics
-    } from '../src/engine.js';
-    import { parsePortalText } from '../src/portal.js';
+    <script type="module">
+      import {
+        DAYS,
+        TIMES,
+        parseSlots,
+        solve,
+        solveTwin,
+        changeFaculty,
+        changeTwinFaculty,
+        findCommonCourses,
+        parseDayOff,
+        metrics,
+      } from '../src/engine.js';
+      import { parsePortalText } from '../src/portal.js';
 
-    const section = (slots, faculty = 'Prof A', venue = 'AB1-101', seats = '40') => ({
-      id: 'sec-' + Math.random().toString(36).slice(2, 9),
-      slots,
-      faculty,
-      venue,
-      seats: String(seats),
-    });
-
-    const course = (code, sections, extra = {}) => ({
-      code,
-      name: 'Course ' + code,
-      scheduled: true,
-      sections,
-      preferred: [],
-      avoid: [],
-      ...extra,
-    });
-
-    const results = {
-      passed: 0,
-      failed: 0,
-      tests: []
-    };
-
-    function assert(condition, message) {
-      if (!condition) {
-        throw new Error(message || 'Assertion failed');
-      }
-    }
-
-    function assertEqual(actual, expected, message) {
-      if (actual !== expected) {
-        throw new Error(`${message ? message + ': ' : ''}Expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`);
-      }
-    }
-
-    async function runTest(name, fn) {
-      try {
-        await fn();
-        results.passed++;
-        results.tests.push({ name, status: 'PASS' });
-      } catch (err) {
-        results.failed++;
-        results.tests.push({ name, status: 'FAIL', error: err.message, stack: err.stack });
-      }
-    }
-
-    // Helper: sample multi-section courses
-    // A11: Mon p0 (8:30-10:00), Wed p0, Fri p0
-    // B11: Mon p1 (10:05-11:35), Wed p1, Fri p1
-    // C11: Mon p2 (11:40-13:10), Wed p2, Fri p2
-    // D11: Tue p0, Thu p0
-    // E11: Tue p1, Thu p1
-    // F11: Tue p2, Thu p2
-    // A21: Mon p3, Wed p3, Fri p3
-    // D21: Tue p3, Thu p3
-    // A12: Mon p2 (11:40), Wed p2, Fri p2 -> wait, let's check GRID:
-    // GRID[0] = ['A11', 'B11', 'C11', 'A21', 'A14', 'B21', 'C21'] (Monday: p0 to p6)
-    // GRID[1] = ['D11', 'E11', 'F11', 'D21', 'E14', 'E21', 'F21'] (Tuesday)
-    // GRID[2] = ['A12', 'B12', 'C12', 'A22', 'B14', 'B22', 'A24'] (Wednesday)
-    // GRID[3] = ['D12', 'E12', 'F12', 'D22', 'F14', 'E22', 'F22'] (Thursday)
-    // GRID[4] = ['A13', 'B13', 'C13', 'A23', 'C14', 'B23', 'B24'] (Friday)
-    // GRID[5] = ['D13', 'E13', 'F13', 'D23', 'D14', 'D24', 'E23'] (Saturday)
-
-    // Notice VIT FFCS slot theory:
-    // A11 is Mon p0 (8:30)
-    // A12 is Wed p0 (8:30)
-    // A13 is Fri p0 (8:30)
-    // So 'A11+A12+A13' meets Mon, Wed, Fri at 8:30!
-    // D11+D12 meets Tue, Thu at 8:30!
-    // If a student takes courses on Tue/Thu only (e.g. D11+D12, E11+E12, F11+F12, D21+D22):
-    // Monday, Wednesday, Friday are ALL completely free weekdays!
-
-    // COURSE FIXTURES:
-    // Course 1: Can meet Mon/Wed/Fri (A11+A12+A13) OR Tue/Thu (D11+D12)
-    const makeC1 = () => course('CSE1001', [
-      section('A11+A12+A13', 'Dr. Sharma', 'AB1-101', 30),
-      section('D11+D12', 'Dr. Sharma', 'AB1-102', 30),
-    ]);
-
-    // Course 2: Can meet Mon/Wed/Fri (B11+B12+B13) OR Tue/Thu (E11+E12)
-    const makeC2 = () => course('CSE1002', [
-      section('B11+B12+B13', 'Dr. Patel', 'AB1-103', 30),
-      section('E11+E12', 'Dr. Patel', 'AB1-104', 30),
-    ]);
-
-    // Course 3: Can meet Mon/Wed/Fri (C11+C12) (Mon+Wed only, Fri free!) OR Tue/Thu (F11+F12)
-    const makeC3 = () => course('MAT1001', [
-      section('C11+C12', 'Dr. Rao', 'AB1-201', 30),
-      section('F11+F12', 'Dr. Rao', 'AB1-202', 30),
-    ]);
-
-    // Course 4: Can meet Mon/Wed (A21+A22) OR Tue/Thu (D21+D22)
-    const makeC4 = () => course('PHY1001', [
-      section('A21+A22', 'Dr. Singh', 'AB1-301', 30),
-      section('D21+D22', 'Dr. Singh', 'AB1-302', 30),
-    ]);
-
-    // Course with only Friday meeting:
-    const makeFridayCourse = () => course('HUM1001', [
-      section('A13', 'Dr. Kumar', 'AB1-401', 30)
-    ]);
-
-    // Course with only Monday meeting:
-    const makeMondayCourse = () => course('HUM1002', [
-      section('A11', 'Dr. Verma', 'AB1-402', 30)
-    ]);
-
-    // ----------------------------------------------------
-    // TEST 1: The Exact User Repro Case
-    // Individual mode gives a free day with dayOff: 'any'
-    // Twin mode with SAME faculty list and SAME preferences MUST give a free day for both!
-    // ----------------------------------------------------
-    await runTest('User Repro Case: Twin mode achieves free day when individual mode does', async () => {
-      const courses1 = [makeC1(), makeC2(), makeC3(), makeC4()];
-      const courses2 = [makeC1(), makeC2(), makeC3(), makeC4()];
-
-      // Individual run:
-      const indRes = solve(courses1, { lunch: true, dayOff: 'any' }, 'compact', 5);
-      assert(indRes.results.length > 0, 'Individual solver must find a timetable');
-      const indSched = indRes.results[0];
-      const indBusy = new Set(indSched.items.map(x => x.day));
-      const indFreeWeekdays = [0, 1, 2, 3, 4].filter(d => !indBusy.has(d));
-      assert(indFreeWeekdays.length > 0, 'Individual timetable must have at least one free weekday');
-      assert(indRes.dayOffAchieved === true, 'Individual result must report dayOffAchieved: true');
-
-      // Twin run with identical courses and identical preferences:
-      const twinRes = solveTwin([
-        { name: 'Student 1', courses: courses1, settings: { lunch: true, dayOff: 'any' }, preset: 'compact' },
-        { name: 'Student 2', courses: courses2, settings: { lunch: true, dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Twin solver must find a paired timetable');
-      assert(twinRes.dayOffAchieved1 === true, 'Twin result must report dayOffAchieved1: true');
-      assert(twinRes.dayOffAchieved2 === true, 'Twin result must report dayOffAchieved2: true');
-      assertEqual(twinRes.dayOffMatched1, twinRes.dayOffMatched2, 'Both students should have the exact same free day');
-      assertEqual(twinRes.dayOffTogether, true, 'Both students should have dayOffTogether: true');
-
-      // Check the actual timetables for Student 1 and Student 2:
-      const bestPair = twinRes.results[0];
-      const s1Busy = new Set(bestPair.student1.items.map(x => x.day));
-      const s2Busy = new Set(bestPair.student2.items.map(x => x.day));
-
-      const matchedDayIdx = DAYS.indexOf(twinRes.dayOffMatched1);
-      assert(!s1Busy.has(matchedDayIdx), `Student 1 timetable must have ${DAYS[matchedDayIdx]} completely free`);
-      assert(!s2Busy.has(matchedDayIdx), `Student 2 timetable must have ${DAYS[matchedDayIdx]} completely free`);
-
-      // All common courses should be together:
-      assertEqual(bestPair.matchSummary.together, 4, 'All 4 courses should be matched together');
-    });
-
-    // ----------------------------------------------------
-    // TEST 2: Individual Mode with all Presets + dayOff: 'any'
-    // ----------------------------------------------------
-    for (const preset of ['compact', 'morning', 'balanced', 'travel', 'bus']) {
-      await runTest(`Individual Mode: Preset "${preset}" with dayOff: "any"`, async () => {
-        const courses = [makeC1(), makeC2(), makeC3(), makeC4()];
-        const res = solve(courses, { lunch: true, dayOff: 'any' }, preset, 5);
-        assert(res.results.length > 0, `Solver should find timetable for preset ${preset}`);
-        assert(res.dayOffAchieved === true, `dayOffAchieved should be true for preset ${preset}`);
-        const busy = new Set(res.results[0].items.map(x => x.day));
-        const matchedIdx = DAYS.indexOf(res.dayOffMatched);
-        assert(!busy.has(matchedIdx), `Matched day ${res.dayOffMatched} must not have any classes`);
-        assert(matchedIdx < 5, `Matched day must be a weekday (Mon-Fri), was ${DAYS[matchedIdx]}`);
-      });
-    }
-
-    // Evening preset: classes start after 13:15
-    await runTest('Individual Mode: Preset "evening" with dayOff: "any"', async () => {
-      const eveningCourses = [
-        course('EC1', [
-          section('A21+A22+A23', 'Prof 1', 'AB1', 30), // Mon, Wed, Fri p3 (13:15)
-          section('D21+D22', 'Prof 1', 'AB1', 30),     // Tue, Thu p3 (13:15)
-        ]),
-        course('EC2', [
-          section('A14+B14+C14', 'Prof 2', 'AB1', 30), // Mon, Wed, Fri p4 (14:50)
-          section('E14+F14', 'Prof 2', 'AB1', 30),     // Tue, Thu p4 (14:50)
-        ]),
-      ];
-      const res = solve(eveningCourses, { dayOff: 'any' }, 'evening', 5);
-      assert(res.results.length > 0, 'Solver should find evening timetable with day off');
-      assert(res.dayOffAchieved === true, 'dayOffAchieved should be true');
-      const busy = new Set(res.results[0].items.map(x => x.day));
-      const matchedIdx = DAYS.indexOf(res.dayOffMatched);
-      assert(!busy.has(matchedIdx), `Matched day ${res.dayOffMatched} must be free`);
-    });
-
-    // ----------------------------------------------------
-    // TEST 3: Specific Weekday Off Request (Individual & Twin)
-    // ----------------------------------------------------
-    await runTest('Specific day off: Friday (index 4) for Individual and Twin', async () => {
-      const courses1 = [makeC1(), makeC2(), makeC3(), makeC4()];
-      const courses2 = [makeC1(), makeC2(), makeC3(), makeC4()];
-
-      const indRes = solve(courses1, { dayOff: 'Friday' }, 'compact', 5);
-      assert(indRes.results.length > 0, 'Individual should find Friday off');
-      assertEqual(indRes.dayOffMatched, 'Friday', 'Matched day must be Friday');
-
-      const twinRes = solveTwin([
-        { name: 'S1', courses: courses1, settings: { dayOff: 'Friday' }, preset: 'compact' },
-        { name: 'S2', courses: courses2, settings: { dayOff: 'Friday' }, preset: 'compact' }
-      ], {}, 5);
-      assert(twinRes.results.length > 0, 'Twin should find Friday off');
-      assertEqual(twinRes.dayOffMatched1, 'Friday');
-      assertEqual(twinRes.dayOffMatched2, 'Friday');
-      assertEqual(twinRes.dayOffTogether, true);
-    });
-
-    await runTest('Specific day off: Monday (index 0)', async () => {
-      const coursesNoMonday = [
-        course('NMC1', [section('D11+D12', 'Prof 1', 'AB1', 30)]), // Tue, Thu p0
-        course('NMC2', [section('E11+E12', 'Prof 2', 'AB1', 30)]), // Tue, Thu p1
-        course('NMC3', [section('A12+A13', 'Prof 3', 'AB1', 30)]), // Wed, Fri p0
-        course('NMC4', [section('B12+B13', 'Prof 4', 'AB1', 30)]), // Wed, Fri p1
-      ];
-      const res = solve(coursesNoMonday, { dayOff: 'Monday' }, 'compact', 5);
-      assert(res.results.length > 0, 'Solver should find Monday off');
-      assertEqual(res.dayOffMatched, 'Monday');
-      const busy = new Set(res.results[0].items.map(x => x.day));
-      assert(!busy.has(0), 'Monday must not be in busy days');
-    });
-
-    // ----------------------------------------------------
-    // TEST 4: Saturday Holiday Integrity
-    // Saturday is day 5. parseDayOff should treat it as null.
-    // ----------------------------------------------------
-    await runTest('Saturday is excluded from weekday off consideration', async () => {
-      assertEqual(parseDayOff('Saturday'), null, 'parseDayOff("Saturday") must be null');
-      assertEqual(parseDayOff(5), null, 'parseDayOff(5) must be null');
-
-      // Candidate days in 'any' should only be 0..4
-      const courses = [
-        course('MON_ONLY', [section('A11')]), // Mon
-        course('TUE_ONLY', [section('D11')]), // Tue
-        course('WED_ONLY', [section('A12')]), // Wed
-        course('THU_ONLY', [section('D12')]), // Thu
-        course('FRI_ONLY', [section('A13')]), // Fri
-      ];
-      // Every weekday Mon-Fri has a required class! Saturday is free.
-      // But since Saturday is already a holiday, dayOff='any' must NOT count Saturday!
-      // It should trigger fallback because no WEEKDAY can be off!
-      const res = solve(courses, { dayOff: 'any' }, 'compact', 5);
-      assert(res.results.length > 0, 'Should find fallback timetable');
-      assertEqual(res.dayOffFallback, true, 'Must trigger dayOffFallback: true since Mon-Fri all have classes');
-      assert(!res.dayOffAchieved, 'Must not claim dayOffAchieved when only Saturday is free');
-    });
-
-    // ----------------------------------------------------
-    // TEST 5: Twin Mode Asymmetric Courses (Both dayOff: 'any')
-    // Student 1 has CSE courses, Student 2 has ECE courses, sharing 2 common courses
-    // ----------------------------------------------------
-    await runTest('Twin Mode: Mixed courses with shared day off', async () => {
-      const commonA = makeC1();
-      const commonB = makeC2();
-      const s1Unique = makeC3();
-      const s2Unique = makeC4();
-
-      const courses1 = [commonA, commonB, s1Unique];
-      const courses2 = [commonA, commonB, s2Unique];
-
-      const twinRes = solveTwin([
-        { name: 'Student 1', courses: courses1, settings: { dayOff: 'any' }, preset: 'compact' },
-        { name: 'Student 2', courses: courses2, settings: { dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Twin solver should find paired timetable');
-      assert(twinRes.dayOffAchieved1 === true, 'Student 1 dayOff achieved');
-      assert(twinRes.dayOffAchieved2 === true, 'Student 2 dayOff achieved');
-      assert(twinRes.dayOffTogether === true, 'Both should have the same day off together');
-
-      const pair = twinRes.results[0];
-      const dayIdx = DAYS.indexOf(twinRes.dayOffMatched1);
-      const s1Busy = new Set(pair.student1.items.map(x => x.day));
-      const s2Busy = new Set(pair.student2.items.map(x => x.day));
-      assert(!s1Busy.has(dayIdx), 'Student 1 has no classes on matched day');
-      assert(!s2Busy.has(dayIdx), 'Student 2 has no classes on matched day');
-    });
-
-    // ----------------------------------------------------
-    // TEST 6: Twin Mode Distinct Weekdays Off (When Shared is Impossible)
-    // Student 1 has courses covering Mon, Tue, Wed, Thu -> ONLY Friday can be free for S1
-    // Student 2 has courses covering Tue, Wed, Thu, Fri -> ONLY Monday can be free for S2
-    // ----------------------------------------------------
-    await runTest('Twin Mode: Distinct days off when shared day is impossible', async () => {
-      const commonTue = course('COMM_TUE', [section('D11', 'Prof T', 'AB1', 30)]);
-      const commonWed = course('COMM_WED', [section('A12', 'Prof W', 'AB1', 30)]);
-      const commonThu = course('COMM_THU', [section('D12', 'Prof H', 'AB1', 30)]);
-
-      // S1 has Monday course (so Mon is busy for S1, Friday is free)
-      const courses1 = [commonTue, commonWed, commonThu, course('S1_MON', [section('A11', 'Prof M', 'AB1', 30)])];
-      // S2 has Friday course (so Fri is busy for S2, Monday is free)
-      const courses2 = [commonTue, commonWed, commonThu, course('S2_FRI', [section('A13', 'Prof F', 'AB1', 30)])];
-
-      const twinRes = solveTwin([
-        { name: 'S1', courses: courses1, settings: { dayOff: 'any' }, preset: 'compact' },
-        { name: 'S2', courses: courses2, settings: { dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Should find paired timetable');
-      assert(twinRes.dayOffAchieved1 === true, 'Student 1 day off achieved');
-      assert(twinRes.dayOffAchieved2 === true, 'Student 2 day off achieved');
-      assertEqual(twinRes.dayOffMatched1, 'Friday', 'Student 1 only free day is Friday');
-      assertEqual(twinRes.dayOffMatched2, 'Monday', 'Student 2 only free day is Monday');
-      assertEqual(twinRes.dayOffTogether, false, 'dayOffTogether should be false');
-
-      const pair = twinRes.results[0];
-      const s1Busy = new Set(pair.student1.items.map(x => x.day));
-      const s2Busy = new Set(pair.student2.items.map(x => x.day));
-      assert(!s1Busy.has(4), 'Student 1 has Friday off');
-      assert(!s2Busy.has(0), 'Student 2 has Monday off');
-    });
-
-    // ----------------------------------------------------
-    // TEST 7: Twin Mode Only One Student Requests Day Off
-    // ----------------------------------------------------
-    await runTest('Twin Mode: Only Student 1 requests dayOff', async () => {
-      const courses1 = [makeC1(), makeC2(), makeC3()];
-      const courses2 = [makeC1(), makeC2(), makeC3()];
-
-      const twinRes = solveTwin([
-        { name: 'S1', courses: courses1, settings: { dayOff: 'any' }, preset: 'compact' },
-        { name: 'S2', courses: courses2, settings: { dayOff: 'none' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Should find timetable');
-      assert(twinRes.dayOffAchieved1 === true, 'Student 1 day off achieved');
-      assert(!twinRes.dayOffAchieved2, 'Student 2 did not request day off');
-
-      const pair = twinRes.results[0];
-      const d1 = DAYS.indexOf(twinRes.dayOffMatched1);
-      const s1Busy = new Set(pair.student1.items.map(x => x.day));
-      assert(!s1Busy.has(d1), `Student 1 must have ${DAYS[d1]} off`);
-    });
-
-    await runTest('Twin Mode: Only Student 2 requests dayOff', async () => {
-      const courses1 = [makeC1(), makeC2(), makeC3()];
-      const courses2 = [makeC1(), makeC2(), makeC3()];
-
-      const twinRes = solveTwin([
-        { name: 'S1', courses: courses1, settings: { dayOff: 'none' }, preset: 'compact' },
-        { name: 'S2', courses: courses2, settings: { dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Should find timetable');
-      assert(!twinRes.dayOffAchieved1, 'Student 1 did not request day off');
-      assert(twinRes.dayOffAchieved2 === true, 'Student 2 day off achieved');
-
-      const pair = twinRes.results[0];
-      const d2 = DAYS.indexOf(twinRes.dayOffMatched2);
-      const s2Busy = new Set(pair.student2.items.map(x => x.day));
-      assert(!s2Busy.has(d2), `Student 2 must have ${DAYS[d2]} off`);
-    });
-
-    // ----------------------------------------------------
-    // TEST 8: Twin Mode Fallback When Day Off is Impossible for Both
-    // ----------------------------------------------------
-    await runTest('Twin Mode: Graceful fallback when day off is impossible', async () => {
-      // Courses that occupy Mon, Tue, Wed, Thu, Fri:
-      const fullWeekCourses = [
-        course('C_MON', [section('A11')]),
-        course('C_TUE', [section('D11')]),
-        course('C_WED', [section('A12')]),
-        course('C_THU', [section('D12')]),
-        course('C_FRI', [section('A13')]),
-      ];
-
-      const twinRes = solveTwin([
-        { name: 'S1', courses: fullWeekCourses, settings: { dayOff: 'any' }, preset: 'compact' },
-        { name: 'S2', courses: fullWeekCourses, settings: { dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
-
-      assert(twinRes.results.length > 0, 'Should return fallback results without crashing');
-      assertEqual(twinRes.dayOffFallback1, true, 'Student 1 should have fallback: true');
-      assertEqual(twinRes.dayOffFallback2, true, 'Student 2 should have fallback: true');
-      assertEqual(twinRes.results[0].matchSummary.together, 5, 'All courses still matched together');
-    });
-
-    // ----------------------------------------------------
-    // TEST 9: In-cell Faculty Change with dayOff
-    // ----------------------------------------------------
-    await runTest('In-cell Faculty Change maintains timetable and recalculates', async () => {
-      const makeMulti1 = () => course('CSE1001', [
-        section('A11+A12', 'Prof Alfa', 'AB1-101', 30),
-        section('A11+A12', 'Prof Beta', 'AB1-102', 30),
-      ]);
-      const makeCourse2 = () => course('CSE1002', [section('B11+B12', 'Prof Gamma', 'AB1-103', 30)]);
-
-      const indRes = solve([makeMulti1(), makeCourse2()], { dayOff: 'Friday' }, 'compact', 5);
-      const initialSched = indRes.results[0];
-      const item1Ind = initialSched.chosen.find(x => x.course.code === 'CSE1001');
-      const initialFaculty = item1Ind.section.faculty;
-
-      // Change faculty to alternative section with same slots
-      const altSection = item1Ind.alternatives.find(s => s.faculty !== initialFaculty);
-      if (altSection) {
-        const updatedSched = changeFaculty(initialSched, 'CSE1001', altSection.id, { dayOff: 'Friday' }, 'compact');
-        assertEqual(updatedSched.chosen.find(x => x.course.code === 'CSE1001').section.faculty, altSection.faculty, 'Faculty should update');
-        const busy = new Set(updatedSched.items.map(x => x.day));
-        assert(!busy.has(4), 'Friday remains free after faculty change');
-      }
-
-      // Twin faculty change
-      const twinRes = solveTwin([
-        { name: 'S1', courses: [makeMulti1(), makeCourse2()], settings: { dayOff: 'Friday' }, preset: 'compact' },
-        { name: 'S2', courses: [makeMulti1(), makeCourse2()], settings: { dayOff: 'Friday' }, preset: 'compact' }
-      ], {}, 5);
-
-      const initialPair = twinRes.results[0];
-      const item1Twin = initialPair.student1.chosen.find(x => x.course.code === 'CSE1001');
-      const twinAlt = item1Twin.bothAlternatives.find(s => s.faculty !== item1Twin.section.faculty);
-      if (twinAlt) {
-        const updatedPair = changeTwinFaculty(
-          initialPair,
-          0,
-          'CSE1001',
-          twinAlt.id,
-          true,
-          { dayOff: 'Friday' },
-          { dayOff: 'Friday' }
-        );
-        assertEqual(updatedPair.student1.chosen.find(x => x.course.code === 'CSE1001').section.faculty, twinAlt.faculty);
-        assertEqual(updatedPair.student2.chosen.find(x => x.course.code === 'CSE1001').section.faculty, twinAlt.faculty);
-        assertEqual(updatedPair.matchedTogether, 2);
-      }
-    });
-
-    // ----------------------------------------------------
-    // TEST 10: Lunch and Bus settings with dayOff
-    // ----------------------------------------------------
-    await runTest('Lunch break and bus cutoff constraints with dayOff', async () => {
-      // Slot A11 is period 0 (8:30-10:00).
-      // Slot C11 is period 2 (11:40-13:10) on Monday.
-      // Slot A21 is period 3 (13:15-14:45) on Monday.
-      // Having BOTH C11 and A21 on Monday violates lunch break.
-      // Course with lunch conflict:
-      const courses = [
-        course('C1', [
-          section('A11+A12', 'Prof 1', 'AB1', 30),
-          section('C11+C12', 'Prof 1', 'AB1', 30),
-        ]),
-        course('C2', [
-          section('A21+A22', 'Prof 2', 'AB1', 30),
-        ]),
-      ];
-
-      // With lunch: true and dayOff: 'Friday'
-      const res = solve(courses, { lunch: true, dayOff: 'Friday' }, 'compact', 5);
-      assert(res.results.length > 0, 'Solver should find lunch-valid schedule with Friday off');
-      // Must NOT choose C11+C12 because A21 is in C2:
-      const c1Chosen = res.results[0].chosen.find(x => x.course.code === 'C1');
-      assertEqual(c1Chosen.section.slots, 'A11+A12', 'Should pick lunch-safe slots');
-      const busy = new Set(res.results[0].items.map(x => x.day));
-      assert(!busy.has(4), 'Friday is free');
-    });
-
-    // ----------------------------------------------------
-    // TEST 11: Real VIT Portal Fixtures with 5 courses + Project in Twin Mode
-    // ----------------------------------------------------
-    await runTest('Real VIT Portal Fixtures: 5 courses + Project in Twin Mode with dayOff', async () => {
-      const fixtures = await fetch('./portal-fixtures.json').then(r => r.json());
-      const realCourses = ['MAT3002', 'CSE2001', 'CSE3001', 'ECE2002', 'HUM0003'].map(code => {
-        const item = fixtures.find(x => x.code === code);
-        const parsed = parsePortalText(item.text);
-        return {
-          code,
-          name: parsed.name || code,
-          scheduled: true,
-          sections: parsed.sections.map((s, idx) => ({ ...s, id: `${code}-${idx}` })),
-          preferred: [],
-          avoid: []
-        };
+      const section = (slots, faculty = 'Prof A', venue = 'AB1-101', seats = '40') => ({
+        id: 'sec-' + Math.random().toString(36).slice(2, 9),
+        slots,
+        faculty,
+        venue,
+        seats: String(seats),
       });
 
-      // Add project course DSN2098 (no weekly classes)
-      const projItem = fixtures.find(x => x.code === 'DSN2098');
-      const parsedProj = parsePortalText(projItem.text);
-      const projCourse = {
-        code: 'DSN2098',
-        name: 'Project Exhibition - I',
-        scheduled: false,
-        sections: parsedProj.sections.map((s, idx) => ({ ...s, id: `DSN-${idx}` })),
+      const course = (code, sections, extra = {}) => ({
+        code,
+        name: 'Course ' + code,
+        scheduled: true,
+        sections,
         preferred: [],
-        avoid: []
+        avoid: [],
+        ...extra,
+      });
+
+      const results = {
+        passed: 0,
+        failed: 0,
+        tests: [],
       };
 
-      const fullLoad1 = [...realCourses, projCourse];
-      const fullLoad2 = [...realCourses, projCourse];
+      function assert(condition, message) {
+        if (!condition) {
+          throw new Error(message || 'Assertion failed');
+        }
+      }
 
-      const twinRes = solveTwin([
-        { name: 'Alice', courses: fullLoad1, settings: { dayOff: 'any' }, preset: 'compact' },
-        { name: 'Bob', courses: fullLoad2, settings: { dayOff: 'any' }, preset: 'compact' }
-      ], {}, 5);
+      function assertEqual(actual, expected, message) {
+        if (actual !== expected) {
+          throw new Error(
+            `${message ? message + ': ' : ''}Expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`
+          );
+        }
+      }
 
-      assert(twinRes.results.length > 0, 'Should find paired timetable for real VIT courses');
-      const best = twinRes.results[0];
-      assert(best.matchSummary.together >= 3, 'Should match multiple courses together in real data');
-      // Verify project course was scheduled as project
-      const projMatch = best.matchSummary.courses.find(c => c.code === 'DSN2098');
-      assertEqual(projMatch.status, 'project', 'Project course must be classified as project');
-    });
+      async function runTest(name, fn) {
+        try {
+          await fn();
+          results.passed++;
+          results.tests.push({ name, status: 'PASS' });
+        } catch (err) {
+          results.failed++;
+          results.tests.push({ name, status: 'FAIL', error: err.message, stack: err.stack });
+        }
+      }
 
-    // ----------------------------------------------------
-    // TEST 12: Multiple Free Weekdays (e.g. 2 Days Off)
-    // ----------------------------------------------------
-    await runTest('Multiple Free Days: Schedule with 2 weekdays off', async () => {
-      // Courses only on Mon, Tue, Wed (so Thu and Fri are both free weekdays!)
-      const lightCourses = [
-        course('LC1', [section('A11', 'Prof A', 'AB1', 30)]), // Mon
-        course('LC2', [section('D11', 'Prof B', 'AB1', 30)]), // Tue
-        course('LC3', [section('A12', 'Prof C', 'AB1', 30)]), // Wed
-      ];
+      // Helper: sample multi-section courses
+      // A11: Mon p0 (8:30-10:00), Wed p0, Fri p0
+      // B11: Mon p1 (10:05-11:35), Wed p1, Fri p1
+      // C11: Mon p2 (11:40-13:10), Wed p2, Fri p2
+      // D11: Tue p0, Thu p0
+      // E11: Tue p1, Thu p1
+      // F11: Tue p2, Thu p2
+      // A21: Mon p3, Wed p3, Fri p3
+      // D21: Tue p3, Thu p3
+      // A12: Mon p2 (11:40), Wed p2, Fri p2 -> wait, let's check GRID:
+      // GRID[0] = ['A11', 'B11', 'C11', 'A21', 'A14', 'B21', 'C21'] (Monday: p0 to p6)
+      // GRID[1] = ['D11', 'E11', 'F11', 'D21', 'E14', 'E21', 'F21'] (Tuesday)
+      // GRID[2] = ['A12', 'B12', 'C12', 'A22', 'B14', 'B22', 'A24'] (Wednesday)
+      // GRID[3] = ['D12', 'E12', 'F12', 'D22', 'F14', 'E22', 'F22'] (Thursday)
+      // GRID[4] = ['A13', 'B13', 'C13', 'A23', 'C14', 'B23', 'B24'] (Friday)
+      // GRID[5] = ['D13', 'E13', 'F13', 'D23', 'D14', 'D24', 'E23'] (Saturday)
 
-      const res = solve(lightCourses, { dayOff: 'any' }, 'compact', 5);
-      assert(res.results.length > 0);
-      assert(res.dayOffAchieved === true);
-      const busy = new Set(res.results[0].items.map(x => x.day));
-      const free = [0, 1, 2, 3, 4].filter(d => !busy.has(d));
-      assert(free.includes(3), 'Thursday is free');
-      assert(free.includes(4), 'Friday is free');
-      assertEqual(free.length, 2, 'Exactly 2 weekdays free');
-    });
+      // Notice VIT FFCS slot theory:
+      // A11 is Mon p0 (8:30)
+      // A12 is Wed p0 (8:30)
+      // A13 is Fri p0 (8:30)
+      // So 'A11+A12+A13' meets Mon, Wed, Fri at 8:30!
+      // D11+D12 meets Tue, Thu at 8:30!
+      // If a student takes courses on Tue/Thu only (e.g. D11+D12, E11+E12, F11+F12, D21+D22):
+      // Monday, Wednesday, Friday are ALL completely free weekdays!
 
-    // Write final results to DOM
-    const outputEl = document.getElementById('test-output');
-    outputEl.textContent = JSON.stringify(results, null, 2);
-    document.body.className = results.failed === 0 ? 'all-passed' : 'has-failures';
-    console.log('TEST SUMMARY:', results.passed, 'passed,', results.failed, 'failed');
-  </script>
-</body>
+      // COURSE FIXTURES:
+      // Course 1: Can meet Mon/Wed/Fri (A11+A12+A13) OR Tue/Thu (D11+D12)
+      const makeC1 = () =>
+        course('CSE1001', [
+          section('A11+A12+A13', 'Dr. Sharma', 'AB1-101', 30),
+          section('D11+D12', 'Dr. Sharma', 'AB1-102', 30),
+        ]);
+
+      // Course 2: Can meet Mon/Wed/Fri (B11+B12+B13) OR Tue/Thu (E11+E12)
+      const makeC2 = () =>
+        course('CSE1002', [
+          section('B11+B12+B13', 'Dr. Patel', 'AB1-103', 30),
+          section('E11+E12', 'Dr. Patel', 'AB1-104', 30),
+        ]);
+
+      // Course 3: Can meet Mon/Wed/Fri (C11+C12) (Mon+Wed only, Fri free!) OR Tue/Thu (F11+F12)
+      const makeC3 = () =>
+        course('MAT1001', [
+          section('C11+C12', 'Dr. Rao', 'AB1-201', 30),
+          section('F11+F12', 'Dr. Rao', 'AB1-202', 30),
+        ]);
+
+      // Course 4: Can meet Mon/Wed (A21+A22) OR Tue/Thu (D21+D22)
+      const makeC4 = () =>
+        course('PHY1001', [
+          section('A21+A22', 'Dr. Singh', 'AB1-301', 30),
+          section('D21+D22', 'Dr. Singh', 'AB1-302', 30),
+        ]);
+
+      // Course with only Friday meeting:
+      const makeFridayCourse = () =>
+        course('HUM1001', [section('A13', 'Dr. Kumar', 'AB1-401', 30)]);
+
+      // Course with only Monday meeting:
+      const makeMondayCourse = () =>
+        course('HUM1002', [section('A11', 'Dr. Verma', 'AB1-402', 30)]);
+
+      // ----------------------------------------------------
+      // TEST 1: The Exact User Repro Case
+      // Individual mode gives a free day with dayOff: 'any'
+      // Twin mode with SAME faculty list and SAME preferences MUST give a free day for both!
+      // ----------------------------------------------------
+      await runTest(
+        'User Repro Case: Twin mode achieves free day when individual mode does',
+        async () => {
+          const courses1 = [makeC1(), makeC2(), makeC3(), makeC4()];
+          const courses2 = [makeC1(), makeC2(), makeC3(), makeC4()];
+
+          // Individual run:
+          const indRes = solve(courses1, { lunch: true, dayOff: 'any' }, 'compact', 5);
+          assert(indRes.results.length > 0, 'Individual solver must find a timetable');
+          const indSched = indRes.results[0];
+          const indBusy = new Set(indSched.items.map((x) => x.day));
+          const indFreeWeekdays = [0, 1, 2, 3, 4].filter((d) => !indBusy.has(d));
+          assert(
+            indFreeWeekdays.length > 0,
+            'Individual timetable must have at least one free weekday'
+          );
+          assert(
+            indRes.dayOffAchieved === true,
+            'Individual result must report dayOffAchieved: true'
+          );
+
+          // Twin run with identical courses and identical preferences:
+          const twinRes = solveTwin(
+            [
+              {
+                name: 'Student 1',
+                courses: courses1,
+                settings: { lunch: true, dayOff: 'any' },
+                preset: 'compact',
+              },
+              {
+                name: 'Student 2',
+                courses: courses2,
+                settings: { lunch: true, dayOff: 'any' },
+                preset: 'compact',
+              },
+            ],
+            {},
+            5
+          );
+
+          assert(twinRes.results.length > 0, 'Twin solver must find a paired timetable');
+          assert(twinRes.dayOffAchieved1 === true, 'Twin result must report dayOffAchieved1: true');
+          assert(twinRes.dayOffAchieved2 === true, 'Twin result must report dayOffAchieved2: true');
+          assertEqual(
+            twinRes.dayOffMatched1,
+            twinRes.dayOffMatched2,
+            'Both students should have the exact same free day'
+          );
+          assertEqual(
+            twinRes.dayOffTogether,
+            true,
+            'Both students should have dayOffTogether: true'
+          );
+
+          // Check the actual timetables for Student 1 and Student 2:
+          const bestPair = twinRes.results[0];
+          const s1Busy = new Set(bestPair.student1.items.map((x) => x.day));
+          const s2Busy = new Set(bestPair.student2.items.map((x) => x.day));
+
+          const matchedDayIdx = DAYS.indexOf(twinRes.dayOffMatched1);
+          assert(
+            !s1Busy.has(matchedDayIdx),
+            `Student 1 timetable must have ${DAYS[matchedDayIdx]} completely free`
+          );
+          assert(
+            !s2Busy.has(matchedDayIdx),
+            `Student 2 timetable must have ${DAYS[matchedDayIdx]} completely free`
+          );
+
+          // All common courses should be together:
+          assertEqual(
+            bestPair.matchSummary.together,
+            4,
+            'All 4 courses should be matched together'
+          );
+        }
+      );
+
+      // ----------------------------------------------------
+      // TEST 2: Individual Mode with all Presets + dayOff: 'any'
+      // ----------------------------------------------------
+      for (const preset of ['compact', 'morning', 'balanced', 'travel', 'bus']) {
+        await runTest(`Individual Mode: Preset "${preset}" with dayOff: "any"`, async () => {
+          const courses = [makeC1(), makeC2(), makeC3(), makeC4()];
+          const res = solve(courses, { lunch: true, dayOff: 'any' }, preset, 5);
+          assert(res.results.length > 0, `Solver should find timetable for preset ${preset}`);
+          assert(res.dayOffAchieved === true, `dayOffAchieved should be true for preset ${preset}`);
+          const busy = new Set(res.results[0].items.map((x) => x.day));
+          const matchedIdx = DAYS.indexOf(res.dayOffMatched);
+          assert(
+            !busy.has(matchedIdx),
+            `Matched day ${res.dayOffMatched} must not have any classes`
+          );
+          assert(
+            matchedIdx < 5,
+            `Matched day must be a weekday (Mon-Fri), was ${DAYS[matchedIdx]}`
+          );
+        });
+      }
+
+      // Evening preset: classes start after 13:15
+      await runTest('Individual Mode: Preset "evening" with dayOff: "any"', async () => {
+        const eveningCourses = [
+          course('EC1', [
+            section('A21+A22+A23', 'Prof 1', 'AB1', 30), // Mon, Wed, Fri p3 (13:15)
+            section('D21+D22', 'Prof 1', 'AB1', 30), // Tue, Thu p3 (13:15)
+          ]),
+          course('EC2', [
+            section('A14+B14+C14', 'Prof 2', 'AB1', 30), // Mon, Wed, Fri p4 (14:50)
+            section('E14+F14', 'Prof 2', 'AB1', 30), // Tue, Thu p4 (14:50)
+          ]),
+        ];
+        const res = solve(eveningCourses, { dayOff: 'any' }, 'evening', 5);
+        assert(res.results.length > 0, 'Solver should find evening timetable with day off');
+        assert(res.dayOffAchieved === true, 'dayOffAchieved should be true');
+        const busy = new Set(res.results[0].items.map((x) => x.day));
+        const matchedIdx = DAYS.indexOf(res.dayOffMatched);
+        assert(!busy.has(matchedIdx), `Matched day ${res.dayOffMatched} must be free`);
+      });
+
+      // ----------------------------------------------------
+      // TEST 3: Specific Weekday Off Request (Individual & Twin)
+      // ----------------------------------------------------
+      await runTest('Specific day off: Friday (index 4) for Individual and Twin', async () => {
+        const courses1 = [makeC1(), makeC2(), makeC3(), makeC4()];
+        const courses2 = [makeC1(), makeC2(), makeC3(), makeC4()];
+
+        const indRes = solve(courses1, { dayOff: 'Friday' }, 'compact', 5);
+        assert(indRes.results.length > 0, 'Individual should find Friday off');
+        assertEqual(indRes.dayOffMatched, 'Friday', 'Matched day must be Friday');
+
+        const twinRes = solveTwin(
+          [
+            { name: 'S1', courses: courses1, settings: { dayOff: 'Friday' }, preset: 'compact' },
+            { name: 'S2', courses: courses2, settings: { dayOff: 'Friday' }, preset: 'compact' },
+          ],
+          {},
+          5
+        );
+        assert(twinRes.results.length > 0, 'Twin should find Friday off');
+        assertEqual(twinRes.dayOffMatched1, 'Friday');
+        assertEqual(twinRes.dayOffMatched2, 'Friday');
+        assertEqual(twinRes.dayOffTogether, true);
+      });
+
+      await runTest('Specific day off: Monday (index 0)', async () => {
+        const coursesNoMonday = [
+          course('NMC1', [section('D11+D12', 'Prof 1', 'AB1', 30)]), // Tue, Thu p0
+          course('NMC2', [section('E11+E12', 'Prof 2', 'AB1', 30)]), // Tue, Thu p1
+          course('NMC3', [section('A12+A13', 'Prof 3', 'AB1', 30)]), // Wed, Fri p0
+          course('NMC4', [section('B12+B13', 'Prof 4', 'AB1', 30)]), // Wed, Fri p1
+        ];
+        const res = solve(coursesNoMonday, { dayOff: 'Monday' }, 'compact', 5);
+        assert(res.results.length > 0, 'Solver should find Monday off');
+        assertEqual(res.dayOffMatched, 'Monday');
+        const busy = new Set(res.results[0].items.map((x) => x.day));
+        assert(!busy.has(0), 'Monday must not be in busy days');
+      });
+
+      // ----------------------------------------------------
+      // TEST 4: Saturday Holiday Integrity
+      // Saturday is day 5. parseDayOff should treat it as null.
+      // ----------------------------------------------------
+      await runTest('Saturday is excluded from weekday off consideration', async () => {
+        assertEqual(parseDayOff('Saturday'), null, 'parseDayOff("Saturday") must be null');
+        assertEqual(parseDayOff(5), null, 'parseDayOff(5) must be null');
+
+        // Candidate days in 'any' should only be 0..4
+        const courses = [
+          course('MON_ONLY', [section('A11')]), // Mon
+          course('TUE_ONLY', [section('D11')]), // Tue
+          course('WED_ONLY', [section('A12')]), // Wed
+          course('THU_ONLY', [section('D12')]), // Thu
+          course('FRI_ONLY', [section('A13')]), // Fri
+        ];
+        // Every weekday Mon-Fri has a required class! Saturday is free.
+        // But since Saturday is already a holiday, dayOff='any' must NOT count Saturday!
+        // It should trigger fallback because no WEEKDAY can be off!
+        const res = solve(courses, { dayOff: 'any' }, 'compact', 5);
+        assert(res.results.length > 0, 'Should find fallback timetable');
+        assertEqual(
+          res.dayOffFallback,
+          true,
+          'Must trigger dayOffFallback: true since Mon-Fri all have classes'
+        );
+        assert(!res.dayOffAchieved, 'Must not claim dayOffAchieved when only Saturday is free');
+      });
+
+      // ----------------------------------------------------
+      // TEST 5: Twin Mode Asymmetric Courses (Both dayOff: 'any')
+      // Student 1 has CSE courses, Student 2 has ECE courses, sharing 2 common courses
+      // ----------------------------------------------------
+      await runTest('Twin Mode: Mixed courses with shared day off', async () => {
+        const commonA = makeC1();
+        const commonB = makeC2();
+        const s1Unique = makeC3();
+        const s2Unique = makeC4();
+
+        const courses1 = [commonA, commonB, s1Unique];
+        const courses2 = [commonA, commonB, s2Unique];
+
+        const twinRes = solveTwin(
+          [
+            {
+              name: 'Student 1',
+              courses: courses1,
+              settings: { dayOff: 'any' },
+              preset: 'compact',
+            },
+            {
+              name: 'Student 2',
+              courses: courses2,
+              settings: { dayOff: 'any' },
+              preset: 'compact',
+            },
+          ],
+          {},
+          5
+        );
+
+        assert(twinRes.results.length > 0, 'Twin solver should find paired timetable');
+        assert(twinRes.dayOffAchieved1 === true, 'Student 1 dayOff achieved');
+        assert(twinRes.dayOffAchieved2 === true, 'Student 2 dayOff achieved');
+        assert(twinRes.dayOffTogether === true, 'Both should have the same day off together');
+
+        const pair = twinRes.results[0];
+        const dayIdx = DAYS.indexOf(twinRes.dayOffMatched1);
+        const s1Busy = new Set(pair.student1.items.map((x) => x.day));
+        const s2Busy = new Set(pair.student2.items.map((x) => x.day));
+        assert(!s1Busy.has(dayIdx), 'Student 1 has no classes on matched day');
+        assert(!s2Busy.has(dayIdx), 'Student 2 has no classes on matched day');
+      });
+
+      // ----------------------------------------------------
+      // TEST 6: Twin Mode Distinct Weekdays Off (When Shared is Impossible)
+      // Student 1 has courses covering Mon, Tue, Wed, Thu -> ONLY Friday can be free for S1
+      // Student 2 has courses covering Tue, Wed, Thu, Fri -> ONLY Monday can be free for S2
+      // ----------------------------------------------------
+      await runTest('Twin Mode: Distinct days off when shared day is impossible', async () => {
+        const commonTue = course('COMM_TUE', [section('D11', 'Prof T', 'AB1', 30)]);
+        const commonWed = course('COMM_WED', [section('A12', 'Prof W', 'AB1', 30)]);
+        const commonThu = course('COMM_THU', [section('D12', 'Prof H', 'AB1', 30)]);
+
+        // S1 has Monday course (so Mon is busy for S1, Friday is free)
+        const courses1 = [
+          commonTue,
+          commonWed,
+          commonThu,
+          course('S1_MON', [section('A11', 'Prof M', 'AB1', 30)]),
+        ];
+        // S2 has Friday course (so Fri is busy for S2, Monday is free)
+        const courses2 = [
+          commonTue,
+          commonWed,
+          commonThu,
+          course('S2_FRI', [section('A13', 'Prof F', 'AB1', 30)]),
+        ];
+
+        const twinRes = solveTwin(
+          [
+            { name: 'S1', courses: courses1, settings: { dayOff: 'any' }, preset: 'compact' },
+            { name: 'S2', courses: courses2, settings: { dayOff: 'any' }, preset: 'compact' },
+          ],
+          {},
+          5
+        );
+
+        assert(twinRes.results.length > 0, 'Should find paired timetable');
+        assert(twinRes.dayOffAchieved1 === true, 'Student 1 day off achieved');
+        assert(twinRes.dayOffAchieved2 === true, 'Student 2 day off achieved');
+        assertEqual(twinRes.dayOffMatched1, 'Friday', 'Student 1 only free day is Friday');
+        assertEqual(twinRes.dayOffMatched2, 'Monday', 'Student 2 only free day is Monday');
+        assertEqual(twinRes.dayOffTogether, false, 'dayOffTogether should be false');
+
+        const pair = twinRes.results[0];
+        const s1Busy = new Set(pair.student1.items.map((x) => x.day));
+        const s2Busy = new Set(pair.student2.items.map((x) => x.day));
+        assert(!s1Busy.has(4), 'Student 1 has Friday off');
+        assert(!s2Busy.has(0), 'Student 2 has Monday off');
+      });
+
+      // ----------------------------------------------------
+      // TEST 7: Twin Mode Only One Student Requests Day Off
+      // ----------------------------------------------------
+      await runTest('Twin Mode: Only Student 1 requests dayOff', async () => {
+        const courses1 = [makeC1(), makeC2(), makeC3()];
+        const courses2 = [makeC1(), makeC2(), makeC3()];
+
+        const twinRes = solveTwin(
+          [
+            { name: 'S1', courses: courses1, settings: { dayOff: 'any' }, preset: 'compact' },
+            { name: 'S2', courses: courses2, settings: { dayOff: 'none' }, preset: 'compact' },
+          ],
+          {},
+          5
+        );
+
+        assert(twinRes.results.length > 0, 'Should find timetable');
+        assert(twinRes.dayOffAchieved1 === true, 'Student 1 day off achieved');
+        assert(!twinRes.dayOffAchieved2, 'Student 2 did not request day off');
+
+        const pair = twinRes.results[0];
+        const d1 = DAYS.indexOf(twinRes.dayOffMatched1);
+        const s1Busy = new Set(pair.student1.items.map((x) => x.day));
+        assert(!s1Busy.has(d1), `Student 1 must have ${DAYS[d1]} off`);
+      });
+
+      await runTest('Twin Mode: Only Student 2 requests dayOff', async () => {
+        const courses1 = [makeC1(), makeC2(), makeC3()];
+        const courses2 = [makeC1(), makeC2(), makeC3()];
+
+        const twinRes = solveTwin(
+          [
+            { name: 'S1', courses: courses1, settings: { dayOff: 'none' }, preset: 'compact' },
+            { name: 'S2', courses: courses2, settings: { dayOff: 'any' }, preset: 'compact' },
+          ],
+          {},
+          5
+        );
+
+        assert(twinRes.results.length > 0, 'Should find timetable');
+        assert(!twinRes.dayOffAchieved1, 'Student 1 did not request day off');
+        assert(twinRes.dayOffAchieved2 === true, 'Student 2 day off achieved');
+
+        const pair = twinRes.results[0];
+        const d2 = DAYS.indexOf(twinRes.dayOffMatched2);
+        const s2Busy = new Set(pair.student2.items.map((x) => x.day));
+        assert(!s2Busy.has(d2), `Student 2 must have ${DAYS[d2]} off`);
+      });
+
+      // ----------------------------------------------------
+      // TEST 8: Twin Mode Fallback When Day Off is Impossible for Both
+      // ----------------------------------------------------
+      await runTest('Twin Mode: Graceful fallback when day off is impossible', async () => {
+        // Courses that occupy Mon, Tue, Wed, Thu, Fri:
+        const fullWeekCourses = [
+          course('C_MON', [section('A11')]),
+          course('C_TUE', [section('D11')]),
+          course('C_WED', [section('A12')]),
+          course('C_THU', [section('D12')]),
+          course('C_FRI', [section('A13')]),
+        ];
+
+        const twinRes = solveTwin(
+          [
+            {
+              name: 'S1',
+              courses: fullWeekCourses,
+              settings: { dayOff: 'any' },
+              preset: 'compact',
+            },
+            {
+              name: 'S2',
+              courses: fullWeekCourses,
+              settings: { dayOff: 'any' },
+              preset: 'compact',
+            },
+          ],
+          {},
+          5
+        );
+
+        assert(twinRes.results.length > 0, 'Should return fallback results without crashing');
+        assertEqual(twinRes.dayOffFallback1, true, 'Student 1 should have fallback: true');
+        assertEqual(twinRes.dayOffFallback2, true, 'Student 2 should have fallback: true');
+        assertEqual(
+          twinRes.results[0].matchSummary.together,
+          5,
+          'All courses still matched together'
+        );
+      });
+
+      // ----------------------------------------------------
+      // TEST 9: In-cell Faculty Change with dayOff
+      // ----------------------------------------------------
+      await runTest('In-cell Faculty Change maintains timetable and recalculates', async () => {
+        const makeMulti1 = () =>
+          course('CSE1001', [
+            section('A11+A12', 'Prof Alfa', 'AB1-101', 30),
+            section('A11+A12', 'Prof Beta', 'AB1-102', 30),
+          ]);
+        const makeCourse2 = () =>
+          course('CSE1002', [section('B11+B12', 'Prof Gamma', 'AB1-103', 30)]);
+
+        const indRes = solve([makeMulti1(), makeCourse2()], { dayOff: 'Friday' }, 'compact', 5);
+        const initialSched = indRes.results[0];
+        const item1Ind = initialSched.chosen.find((x) => x.course.code === 'CSE1001');
+        const initialFaculty = item1Ind.section.faculty;
+
+        // Change faculty to alternative section with same slots
+        const altSection = item1Ind.alternatives.find((s) => s.faculty !== initialFaculty);
+        if (altSection) {
+          const updatedSched = changeFaculty(
+            initialSched,
+            'CSE1001',
+            altSection.id,
+            { dayOff: 'Friday' },
+            'compact'
+          );
+          assertEqual(
+            updatedSched.chosen.find((x) => x.course.code === 'CSE1001').section.faculty,
+            altSection.faculty,
+            'Faculty should update'
+          );
+          const busy = new Set(updatedSched.items.map((x) => x.day));
+          assert(!busy.has(4), 'Friday remains free after faculty change');
+        }
+
+        // Twin faculty change
+        const twinRes = solveTwin(
+          [
+            {
+              name: 'S1',
+              courses: [makeMulti1(), makeCourse2()],
+              settings: { dayOff: 'Friday' },
+              preset: 'compact',
+            },
+            {
+              name: 'S2',
+              courses: [makeMulti1(), makeCourse2()],
+              settings: { dayOff: 'Friday' },
+              preset: 'compact',
+            },
+          ],
+          {},
+          5
+        );
+
+        const initialPair = twinRes.results[0];
+        const item1Twin = initialPair.student1.chosen.find((x) => x.course.code === 'CSE1001');
+        const twinAlt = item1Twin.bothAlternatives.find(
+          (s) => s.faculty !== item1Twin.section.faculty
+        );
+        if (twinAlt) {
+          const updatedPair = changeTwinFaculty(
+            initialPair,
+            0,
+            'CSE1001',
+            twinAlt.id,
+            true,
+            { dayOff: 'Friday' },
+            { dayOff: 'Friday' }
+          );
+          assertEqual(
+            updatedPair.student1.chosen.find((x) => x.course.code === 'CSE1001').section.faculty,
+            twinAlt.faculty
+          );
+          assertEqual(
+            updatedPair.student2.chosen.find((x) => x.course.code === 'CSE1001').section.faculty,
+            twinAlt.faculty
+          );
+          assertEqual(updatedPair.matchedTogether, 2);
+        }
+      });
+
+      // ----------------------------------------------------
+      // TEST 10: Lunch and Bus settings with dayOff
+      // ----------------------------------------------------
+      await runTest('Lunch break and bus cutoff constraints with dayOff', async () => {
+        // Slot A11 is period 0 (8:30-10:00).
+        // Slot C11 is period 2 (11:40-13:10) on Monday.
+        // Slot A21 is period 3 (13:15-14:45) on Monday.
+        // Having BOTH C11 and A21 on Monday violates lunch break.
+        // Course with lunch conflict:
+        const courses = [
+          course('C1', [
+            section('A11+A12', 'Prof 1', 'AB1', 30),
+            section('C11+C12', 'Prof 1', 'AB1', 30),
+          ]),
+          course('C2', [section('A21+A22', 'Prof 2', 'AB1', 30)]),
+        ];
+
+        // With lunch: true and dayOff: 'Friday'
+        const res = solve(courses, { lunch: true, dayOff: 'Friday' }, 'compact', 5);
+        assert(res.results.length > 0, 'Solver should find lunch-valid schedule with Friday off');
+        // Must NOT choose C11+C12 because A21 is in C2:
+        const c1Chosen = res.results[0].chosen.find((x) => x.course.code === 'C1');
+        assertEqual(c1Chosen.section.slots, 'A11+A12', 'Should pick lunch-safe slots');
+        const busy = new Set(res.results[0].items.map((x) => x.day));
+        assert(!busy.has(4), 'Friday is free');
+      });
+
+      // ----------------------------------------------------
+      // TEST 11: Real VIT Portal Fixtures with 5 courses + Project in Twin Mode
+      // ----------------------------------------------------
+      await runTest(
+        'Real VIT Portal Fixtures: 5 courses + Project in Twin Mode with dayOff',
+        async () => {
+          const fixtures = await fetch('./portal-fixtures.json').then((r) => r.json());
+          const realCourses = ['MAT3002', 'CSE2001', 'CSE3001', 'ECE2002', 'HUM0003'].map(
+            (code) => {
+              const item = fixtures.find((x) => x.code === code);
+              const parsed = parsePortalText(item.text);
+              return {
+                code,
+                name: parsed.name || code,
+                scheduled: true,
+                sections: parsed.sections.map((s, idx) => ({ ...s, id: `${code}-${idx}` })),
+                preferred: [],
+                avoid: [],
+              };
+            }
+          );
+
+          // Add project course DSN2098 (no weekly classes)
+          const projItem = fixtures.find((x) => x.code === 'DSN2098');
+          const parsedProj = parsePortalText(projItem.text);
+          const projCourse = {
+            code: 'DSN2098',
+            name: 'Project Exhibition - I',
+            scheduled: false,
+            sections: parsedProj.sections.map((s, idx) => ({ ...s, id: `DSN-${idx}` })),
+            preferred: [],
+            avoid: [],
+          };
+
+          const fullLoad1 = [...realCourses, projCourse];
+          const fullLoad2 = [...realCourses, projCourse];
+
+          const twinRes = solveTwin(
+            [
+              { name: 'Alice', courses: fullLoad1, settings: { dayOff: 'any' }, preset: 'compact' },
+              { name: 'Bob', courses: fullLoad2, settings: { dayOff: 'any' }, preset: 'compact' },
+            ],
+            {},
+            5
+          );
+
+          assert(twinRes.results.length > 0, 'Should find paired timetable for real VIT courses');
+          const best = twinRes.results[0];
+          assert(
+            best.matchSummary.together >= 3,
+            'Should match multiple courses together in real data'
+          );
+          // Verify project course was scheduled as project
+          const projMatch = best.matchSummary.courses.find((c) => c.code === 'DSN2098');
+          assertEqual(projMatch.status, 'project', 'Project course must be classified as project');
+        }
+      );
+
+      // ----------------------------------------------------
+      // TEST 12: Multiple Free Weekdays (e.g. 2 Days Off)
+      // ----------------------------------------------------
+      await runTest('Multiple Free Days: Schedule with 2 weekdays off', async () => {
+        // Courses only on Mon, Tue, Wed (so Thu and Fri are both free weekdays!)
+        const lightCourses = [
+          course('LC1', [section('A11', 'Prof A', 'AB1', 30)]), // Mon
+          course('LC2', [section('D11', 'Prof B', 'AB1', 30)]), // Tue
+          course('LC3', [section('A12', 'Prof C', 'AB1', 30)]), // Wed
+        ];
+
+        const res = solve(lightCourses, { dayOff: 'any' }, 'compact', 5);
+        assert(res.results.length > 0);
+        assert(res.dayOffAchieved === true);
+        const busy = new Set(res.results[0].items.map((x) => x.day));
+        const free = [0, 1, 2, 3, 4].filter((d) => !busy.has(d));
+        assert(free.includes(3), 'Thursday is free');
+        assert(free.includes(4), 'Friday is free');
+        assertEqual(free.length, 2, 'Exactly 2 weekdays free');
+      });
+
+      // Write final results to DOM
+      const outputEl = document.getElementById('test-output');
+      outputEl.textContent = JSON.stringify(results, null, 2);
+      document.body.className = results.failed === 0 ? 'all-passed' : 'has-failures';
+      console.log('TEST SUMMARY:', results.passed, 'passed,', results.failed, 'failed');
+    </script>
+  </body>
 </html>

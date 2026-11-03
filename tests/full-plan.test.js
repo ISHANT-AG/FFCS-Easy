@@ -5,7 +5,7 @@ import { solve, GRID } from '../src/engine.js';
 const json = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url)));
 test('full ten-course plan returns five results within a bounded search', () => {
   const library = json('../data/sections.json'),
-    catalogue = json('../data/catalogue.json'),
+    catalogue = json('fixtures/ten-course-plan.json'),
     edm = json('edm-screenshot-sections.json');
   const courses = catalogue
     .filter((c) => c.batch === '25BCE')

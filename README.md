@@ -8,7 +8,7 @@ In this folder, run `python3 -m http.server 5173 --bind 127.0.0.1`, then open ht
 
 ## Student flow
 
-- Year means current study year for Fall 2026–27: second year maps to admission batch 2025, third to 2024, fourth to 2023. The supplied catalogue supports only those available programmes. Unsupported years show an empty state.
+- Year means current study year for Winter 2026–27: first year maps to admission batch 2026, second year to 2025, third to 2024, fourth to 2023, fifth to 2022. The supplied catalogue supports all programmes from the official course list. Fourth and fifth-year students can select any branch to add elective, backlog or project courses.
 - Branch selection loads the college-provided courses. Students can add or remove courses.
 - Faculty sections always start empty. Each student uploads their own PDF for each course. Recognised, valid rows save automatically and show the filename with a saved status. Invalid/unreadable rows remain editable for correction. Manual entry/editing is inside a collapsed section. No shared/mock dataset is loaded into a student's plan.
 - Preferred and avoided faculty are optional comma-separated names; matching ignores casing and repeated spaces. Preferences are soft; avoid is a hard exclusion. Existing strict faculty support remains in the engine.
@@ -81,6 +81,10 @@ Reupload identity canonicalizes faculty, slot ordering and venue aliases so a ne
 ## Timing diversity — 30 October 2026
 
 The first timetable is the best preference match found. Subsequent choices maximize their minimum course-timing distance from all selected timetables, with changed meeting slots breaking changed-course ties and preference score breaking remaining ties. Faculty and venue variations do not count as another timing layout. The bounded candidate pool preserves both quality leaders and diverse arrangements instead of retaining only near-identical low-score schedules. The UI labels differences as courses moved. Hard seat, avoid, clash, lunch and bus constraints still apply; fewer than five distinct valid layouts are returned when necessary.
+
+## Winter Semester 2026–27 Course List
+
+Updated `data/catalogue.json` with the complete, official Winter Semester 2026–27 FFCS Course List (454 entries across 60 batches: 26BCE through 22MSI). Both 4th-year and 5th-year students can select any engineering or science branch to plan their semester and add elective, backlog or project courses.
 
 ## Freshers catalogue — 30 October 2026
 
