@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=c951bfc01714';
-import { startGeneration } from './generation.js?v=c951bfc01714';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=c951bfc01714';
-import { pdfItemsToText } from './pdf-text.js?v=c951bfc01714';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=f9a64ef67aba';
+import { startGeneration } from './generation.js?v=f9a64ef67aba';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=f9a64ef67aba';
+import { pdfItemsToText } from './pdf-text.js?v=f9a64ef67aba';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=c951bfc01714';
-import { parsePortalText } from './portal.js?v=c951bfc01714';
-import { validatePdfUpload } from './uploads.js?v=c951bfc01714';
+} from './engine.js?v=f9a64ef67aba';
+import { parsePortalText } from './portal.js?v=f9a64ef67aba';
+import { validatePdfUpload } from './uploads.js?v=f9a64ef67aba';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
