@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=97b845f91550';
-import { startGeneration } from './generation.js?v=97b845f91550';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=97b845f91550';
-import { pdfItemsToText } from './pdf-text.js?v=97b845f91550';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=c951bfc01714';
+import { startGeneration } from './generation.js?v=c951bfc01714';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=c951bfc01714';
+import { pdfItemsToText } from './pdf-text.js?v=c951bfc01714';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=97b845f91550';
-import { parsePortalText } from './portal.js?v=97b845f91550';
-import { validatePdfUpload } from './uploads.js?v=97b845f91550';
+} from './engine.js?v=c951bfc01714';
+import { parsePortalText } from './portal.js?v=c951bfc01714';
+import { validatePdfUpload } from './uploads.js?v=c951bfc01714';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -667,6 +667,26 @@ function coursesView() {
   `;
 }
 
+function facultyPdfGuide() {
+  return `
+    <details class="pdf-save-guide">
+      <summary>
+        <span class="pdf-guide-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+        <span class="pdf-guide-title"><span>How to save your faculty PDF</span><small>3 quick steps · screenshots included</small></span>
+        <span class="pdf-guide-action"><span class="pdf-guide-show">View steps</span><span class="pdf-guide-hide">Hide steps</span><svg class="pdf-guide-chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span>
+      </summary>
+      <div class="pdf-guide-content">
+        <ol class="pdf-guide-steps">
+          <li><div class="pdf-guide-copy"><h3>Open your course in FFCS</h3><p>Choose a subject in your FFCS portal and open its faculty list. Make sure the slots, faculty names and available seats are visible.</p></div><img src="assets/pdf-guide/course-list.webp" alt="FFCS course details and faculty list with slots and available seats" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Open print and choose Save as PDF</h3><p>Press <kbd>⌘</kbd> + <kbd>P</kbd> on Mac or <kbd>Ctrl</kbd> + <kbd>P</kbd> on Windows. In the print window, choose <strong>Save as PDF</strong> as the printer or destination. Keep <strong>All pages</strong> selected and check that the full faculty table appears in the preview.</p></div><img src="assets/pdf-guide/print-dialog.webp" alt="Browser print window with Save as PDF selected and all pages included" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Save it, then upload here</h3><p>Click <strong>Save</strong>, give the file a course name such as <strong>CPP.pdf</strong>, and choose a folder on your device. Come back here and upload that PDF under the matching course. Repeat for your other courses.</p></div><img src="assets/pdf-guide/save-dialog.webp" alt="Save dialog for choosing the PDF file name and folder, then clicking Save" loading="lazy"></li>
+        </ol>
+        <p class="pdf-guide-note">Save directly from the FFCS portal so the text stays readable. Upload the PDF file, rather than a screenshot.</p>
+      </div>
+    </details>
+  `;
+}
+
 function facultyView() {
   const readyCourses = state.courses.filter((c) => getCourseStatus(c).isReady);
   const progressPct = state.courses.length
@@ -674,6 +694,7 @@ function facultyView() {
     : 100;
 
   return `
+    ${facultyPdfGuide()}
     <div class="faculty-workspace">
       <aside class="faculty-navigator">
         <div class="navigator-card panel">
@@ -1472,6 +1493,7 @@ function twinFacultyView(studentIdx) {
     : 100;
 
   return `
+    ${facultyPdfGuide()}
     <div class="faculty-workspace">
       <aside class="faculty-navigator">
         <div class="navigator-card panel">
