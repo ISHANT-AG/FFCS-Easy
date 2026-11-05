@@ -1,15 +1,20 @@
 // Read course rows only. Portal navigation, personal details and existing clash
 // labels belong to the source session and are never scheduling instructions.
 export function parsePortalText(text) {
-  const header = text.match(
-    /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|[^\n]+?\s+0\s+0\s+0\s+1)/i
-  );
-  if (!header) throw Error('No recognised course heading in this PDF.');
+  // Portal exports use either a descriptive heading, a short LP/LT code,
+  // or a separate course-code/title table on the Modify Slot screen.
+  const header =
+    text.match(
+      /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|LP\b|LT[PJ]?\b|PJ\b|[^\n]+?\s+0\s+0\s+0\s+1)/i
+    ) ||
+    text.match(/Course Code:\s*([A-Z]{3}\d{4})\s+Course Title:\s*(.+?)(?:\s+Course Type:|\n|$)/i) ||
+    text.match(/Course Code\s+Course Title\s*\n\s*([A-Z]{3}\d{4})\s+([^\n]+)/i);
+  if (!header) throw Error('Could not find the course code and title in this PDF.');
   const code = header[1].toUpperCase(),
     name = header[2].trim(),
     sections = [];
-  const weeklyPattern =
-    /^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)\s+(\S+)\s+(.+?)\s+(?:NONE|Clashed with\s+.*?)\s+(\d+)(?:\s*Copyright.*)?$/i;
+  const slotStart = /^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)(?:\s|$)/i;
+  const hasSeatColumn = /\b(?:Available|Available Seats|Seats)\b/i.test(text);
   const records = [];
   let current = [];
   const flush = () => {
@@ -18,33 +23,64 @@ export function parsePortalText(text) {
   };
   for (const raw of text.split('\n')) {
     const line = raw.trim();
-    if (/^[A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*(?:\s|$)/i.test(line)) {
+    if (slotStart.test(line)) {
       flush();
       current = [line];
     } else if (
-      /^(Copyright|Regular$|Course Option|Register\b|Go Back|Slot Venue|Select Course|https?:|\d{2}\/\d{2}\/\d{4})/i.test(
+      /^(Copyright|Regular$|Course Option|Register\b|Update\b|Go Back|Slot\s+Venue|Select Course|https?:|\d{2}\/\d{2}\/\d{4}|VTOP\b|Text transcription|Course Code)/i.test(
         line
       )
     )
       flush();
     else if (current.length && line) current.push(line);
-    if (current.length && weeklyPattern.test(current.join(' '))) flush();
+    if (
+      current.length &&
+      /\s(?:NONE|Clashed with\s+.*?|Similar to Registered Slot|Registered Slot)\s+\d+(?:\s+Selected)?$/i.test(
+        current.join(' ')
+      )
+    )
+      flush();
   }
   flush();
-  for (const record of records) {
-    const weekly = record.match(weeklyPattern);
-    if (weekly)
-      sections.push({
-        slots: weekly[1].replace(/\s/g, '').toUpperCase(),
-        venue: weekly[2],
-        faculty: weekly[3].trim(),
-        seats: weekly[4],
-      });
-  }
-  if (records.length && sections.length !== records.length)
-    throw Error(
-      `Could only read ${sections.length} of ${records.length} faculty rows. The list was not saved; please use a text PDF or correct the rows manually.`
+  let skippedRows = 0;
+  for (let record of records) {
+    record = record.replace(/Copyright[\s\S]*$/i, '').trim();
+    const row = record.match(/^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)\s+(\S+)\s+(.+)$/i);
+    if (!row) {
+      skippedRows++;
+      continue;
+    }
+    let faculty = row[3].trim(),
+      seats = '';
+    const status = faculty.match(
+      /\s+(NONE\b|Clashed with\b|Similar to Registered Slot\b|Registered Slot\b)/i
     );
+    if (status) {
+      const tail = faculty
+        .slice(status.index)
+        .replace(/\s+Selected\s*$/i, '')
+        .trim();
+      seats = tail.match(/\b(\d+)\s*$/)?.[1] ?? '';
+      faculty = faculty.slice(0, status.index).trim();
+    } else if (hasSeatColumn) {
+      // A number in a faculty name (FACE TRAINER 2) is not a seat count.
+      const seat = faculty.match(/\s+(\d+)\s*(?:Selected)?\s*$/i);
+      if (seat && !/^FACE\s+TRAINER\s+\d+$/i.test(faculty)) {
+        seats = seat[1];
+        faculty = faculty.slice(0, seat.index).trim();
+      }
+    }
+    if (!faculty || !/[A-Za-z]/.test(faculty)) {
+      skippedRows++;
+      continue;
+    }
+    sections.push({
+      slots: row[1].replace(/\s/g, '').toUpperCase(),
+      venue: row[2],
+      faculty,
+      seats,
+    });
+  }
   for (const raw of text.split('\n')) {
     const project = raw
       .trim()
@@ -53,7 +89,7 @@ export function parsePortalText(text) {
       sections.push({ slots: 'NIL', venue: 'NIL', faculty: project[2].trim(), seats: project[3] });
   }
   if (!sections.length) throw Error('Course found, but no supported section rows could be read.');
-  return { code, name, scheduled: sections.some((s) => s.slots !== 'NIL'), sections };
+  return { code, name, scheduled: sections.some((s) => s.slots !== 'NIL'), sections, skippedRows };
 }
 
 export function parseScreenshotText(text) {

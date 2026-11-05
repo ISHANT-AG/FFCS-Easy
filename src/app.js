@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=f9a64ef67aba';
-import { startGeneration } from './generation.js?v=f9a64ef67aba';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=f9a64ef67aba';
-import { pdfItemsToText } from './pdf-text.js?v=f9a64ef67aba';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=9d748dcaf48a';
+import { startGeneration } from './generation.js?v=9d748dcaf48a';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=9d748dcaf48a';
+import { pdfItemsToText } from './pdf-text.js?v=9d748dcaf48a';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=f9a64ef67aba';
-import { parsePortalText } from './portal.js?v=f9a64ef67aba';
-import { validatePdfUpload } from './uploads.js?v=f9a64ef67aba';
+} from './engine.js?v=9d748dcaf48a';
+import { parsePortalText } from './portal.js?v=9d748dcaf48a';
+import { validatePdfUpload } from './uploads.js?v=9d748dcaf48a';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2889,7 +2889,7 @@ async function readUpload(id, file) {
       delete drafts[id];
       delete c.uploadError;
       invalidate();
-      toast(`${c.code}: ${c.sections.length} options saved.`);
+      toast(`${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       drafts[id] = {
         text: reviewText,
@@ -2933,7 +2933,7 @@ async function readTwinUpload(studentIdx, id, file) {
       delete twinDrafts[studentIdx][id];
       delete c.uploadError;
       invalidate();
-      toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.`);
+      toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       twinDrafts[studentIdx][id] = {
         text: reviewText,
