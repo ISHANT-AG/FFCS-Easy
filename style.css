@@ -2663,6 +2663,16 @@ button {
   border-radius: 9px;
   margin: auto;
 }
+.pdf-guide-figure {
+  margin: 0;
+}
+.pdf-guide-figure figcaption {
+  max-width: 1000px;
+  margin: 8px auto 0;
+  color: #626977;
+  font-size: 12px;
+  line-height: 1.5;
+}
 .pdf-guide-note {
   font-size: 13px;
   line-height: 1.6;

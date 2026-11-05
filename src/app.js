@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=b30646aa0312';
-import { startGeneration } from './generation.js?v=b30646aa0312';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=b30646aa0312';
-import { pdfItemsToText } from './pdf-text.js?v=b30646aa0312';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=8eb5c6681671';
+import { startGeneration } from './generation.js?v=8eb5c6681671';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=8eb5c6681671';
+import { pdfItemsToText } from './pdf-text.js?v=8eb5c6681671';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=b30646aa0312';
-import { parsePortalText } from './portal.js?v=b30646aa0312';
-import { validatePdfUpload } from './uploads.js?v=b30646aa0312';
+} from './engine.js?v=8eb5c6681671';
+import { parsePortalText } from './portal.js?v=8eb5c6681671';
+import { validatePdfUpload } from './uploads.js?v=8eb5c6681671';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -678,7 +678,7 @@ function facultyPdfGuide() {
       <div class="pdf-guide-content">
         <ol class="pdf-guide-steps">
           <li><div class="pdf-guide-copy"><h3>Open your course in FFCS</h3><p>Choose a subject in your FFCS portal and open its faculty list. Make sure the slots, faculty names and available seats are visible.</p></div><img src="assets/pdf-guide/course-list.webp" alt="FFCS course details and faculty list with slots and available seats" loading="lazy"></li>
-          <li><div class="pdf-guide-copy"><h3>Open print and choose Save as PDF</h3><p>Press <kbd>⌘</kbd> + <kbd>P</kbd> on Mac or <kbd>Ctrl</kbd> + <kbd>P</kbd> on Windows. In the print window, choose <strong>Save as PDF</strong> as the printer or destination. Keep <strong>All pages</strong> selected and check that the full faculty table appears in the preview.</p></div><img src="assets/pdf-guide/print-dialog.webp" alt="Browser print window with Save as PDF selected and all pages included" loading="lazy"></li>
+          <li><div class="pdf-guide-copy"><h3>Choose Landscape and Ledger</h3><p>Press <kbd>⌘</kbd> + <kbd>P</kbd> on Mac or <kbd>Ctrl</kbd> + <kbd>P</kbd> on Windows. Choose <strong>Save as PDF</strong>, set the layout to <strong>Landscape</strong>, then open <strong>More settings</strong> and set <strong>Paper size</strong> to <strong>Ledger (11 × 17 in)</strong>. Keep <strong>All pages</strong> selected and check that the full faculty table appears in the preview.</p></div><figure class="pdf-guide-figure"><img src="assets/pdf-guide/print-settings.webp" alt="Print settings showing Landscape selected and the Paper size control; change the shown Legal size to Ledger before saving" loading="lazy"><figcaption>In this example, the paper size still shows Legal. Change it to Ledger before saving.</figcaption></figure></li>
           <li><div class="pdf-guide-copy"><h3>Save it, then upload here</h3><p>Click <strong>Save</strong>, give the file a course name such as <strong>CPP.pdf</strong>, and choose a folder on your device. Come back here and upload that PDF under the matching course. Repeat for your other courses.</p></div><img src="assets/pdf-guide/save-dialog.webp" alt="Save dialog for choosing the PDF file name and folder, then clicking Save" loading="lazy"></li>
         </ol>
         <p class="pdf-guide-note">Save directly from the FFCS portal so the text stays readable. Upload the PDF file, rather than a screenshot.</p>
