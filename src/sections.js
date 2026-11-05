@@ -1,4 +1,4 @@
-import { validateSection, slotBundle } from './engine.js?v=f678e3580334';
+import { validateSection, slotBundle } from './engine.js?v=b30646aa0312';
 export const needsFaculty = (c) => !c.online && c.scheduled !== false && !(c.sections || []).length;
 
 export function getCourseStatus(c) {
