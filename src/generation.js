@@ -7,7 +7,7 @@ export function startGeneration(
     onProgress = () => {},
     timeoutMs = 10000,
     createWorker = () =>
-      new Worker(new URL('./worker.js?v=8eb5c6681671', import.meta.url), { type: 'module' }),
+      new Worker(new URL('./worker.js?v=962b4370406a', import.meta.url), { type: 'module' }),
   } = {}
 ) {
   let actual = null,
