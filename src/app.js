@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=64a61db12020';
-import { startGeneration } from './generation.js?v=64a61db12020';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=64a61db12020';
-import { pdfItemsToText } from './pdf-text.js?v=64a61db12020';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=f691f21f8cdd';
+import { startGeneration } from './generation.js?v=f691f21f8cdd';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=f691f21f8cdd';
+import { pdfItemsToText } from './pdf-text.js?v=f691f21f8cdd';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=64a61db12020';
-import { parsePortalText } from './portal.js?v=64a61db12020';
-import { validatePdfUpload } from './uploads.js?v=64a61db12020';
+} from './engine.js?v=f691f21f8cdd';
+import { parsePortalText } from './portal.js?v=f691f21f8cdd';
+import { validatePdfUpload } from './uploads.js?v=f691f21f8cdd';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -147,7 +147,6 @@ let drafts = state.pendingUploads || {};
 let twinDrafts = [{}, {}];
 let uploading = new Set();
 let openDetails = new Set();
-let lastFacultyNoticePage = null;
 
 function persist() {
   try {
@@ -272,13 +271,6 @@ function switchMode(newMode) {
 function render() {
   const isTwin = appMode === 'twin';
   const currentStep = isTwin ? twinState.step : state.step;
-  const facultyNoticePage = isTwin
-    ? currentStep === 1 || currentStep === 2
-      ? `twin-${currentStep}`
-      : null
-    : currentStep === 1
-      ? 'individual'
-      : null;
 
   const individualSteps = ['Courses', 'Faculty', 'Preferences', 'Timetable'];
   const name1 = twinState.student1.name || 'You';
@@ -492,10 +484,6 @@ function render() {
   `;
 
   bind();
-  if (facultyNoticePage !== lastFacultyNoticePage) {
-    lastFacultyNoticePage = facultyNoticePage;
-    if (facultyNoticePage) requestAnimationFrame(showScreenshotPdfNotice);
-  }
 }
 
 function coursesView() {
@@ -2895,6 +2883,10 @@ function showScreenshotPdfNotice() {
   if (!dialog.open) dialog.showModal();
 }
 
+function isScreenshotPdfError(error) {
+  return /No readable text found/.test(error?.message || '');
+}
+
 function hasNoSeatCounts(rows) {
   return rows.length > 0 && rows.every((s) => s.seats === '' || s.seats == null);
 }
@@ -2904,6 +2896,7 @@ async function readUpload(id, file) {
   const c = state.courses.find((c) => c.id === id);
   if (!c) return;
   let missingSeatNotice = false;
+  let screenshotPdfNotice = false;
   uploading.add(id);
   delete c.uploadError;
   render();
@@ -2935,11 +2928,13 @@ async function readUpload(id, file) {
     }
   } catch (e) {
     c.uploadError = e.message;
+    screenshotPdfNotice = isScreenshotPdfError(e);
     toast(e.message);
   } finally {
     uploading.delete(id);
     render();
     if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (screenshotPdfNotice) requestAnimationFrame(showScreenshotPdfNotice);
   }
 }
 
@@ -2950,6 +2945,7 @@ async function readTwinUpload(studentIdx, id, file) {
   if (!c) return;
   const key = `${studentIdx}:${id}`;
   let missingSeatNotice = false;
+  let screenshotPdfNotice = false;
   uploading.add(key);
   delete c.uploadError;
   render();
@@ -2983,11 +2979,13 @@ async function readTwinUpload(studentIdx, id, file) {
     }
   } catch (e) {
     c.uploadError = e.message;
+    screenshotPdfNotice = isScreenshotPdfError(e);
     toast(e.message);
   } finally {
     uploading.delete(key);
     render();
     if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (screenshotPdfNotice) requestAnimationFrame(showScreenshotPdfNotice);
   }
 }
 
