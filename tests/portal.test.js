@@ -100,3 +100,15 @@ test('missing seats remain eligible while explicit zero seats are excluded', () 
     ['FACE TRAINER 2', 'FACE TRAINER 7']
   );
 });
+
+test('practical-only workplace communication PDF imports every faculty row', async () => {
+  const f = JSON.parse(await readFile(new URL('workplace-portal-fixture.json', import.meta.url)));
+  const r = parsePortalText(f.text);
+  assert.equal(r.code, 'SST2003');
+  assert.equal(r.name, 'Dynamics of workplace communication Skills');
+  assert.equal(r.sections.length, f.count);
+  assert.equal(r.sections[0].faculty, 'ANITA YADAV');
+  assert.equal(r.sections[0].seats, '67');
+  assert.equal(r.sections.at(-1).faculty, 'TAUSEEF QAMAR');
+  assert.equal(r.sections.at(-1).seats, '32');
+});

@@ -5,7 +5,7 @@ export function parsePortalText(text) {
   // or a separate course-code/title table on the Modify Slot screen.
   const header =
     text.match(
-      /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|LP\b|LT[PJ]?\b|PJ\b|[^\n]+?\s+0\s+0\s+0\s+1)/i
+      /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|Practical|Tutorial|Theory|Project|LP\b|LT[PJ]?\b|PJ\b|P\b|[^\n]+?\s+0\s+0\s+0\s+1)/i
     ) ||
     text.match(/Course Code:\s*([A-Z]{3}\d{4})\s+Course Title:\s*(.+?)(?:\s+Course Type:|\n|$)/i) ||
     text.match(/Course Code\s+Course Title\s*\n\s*([A-Z]{3}\d{4})\s+([^\n]+)/i);

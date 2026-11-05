@@ -1,6 +1,6 @@
 // A failed module import must not leave students with an empty page.
 try {
-  await import('./app.js?v=9d748dcaf48a');
+  await import('./app.js?v=8cbccb668794');
 } catch (error) {
   console.error('FFCS startup failed:', error);
   document.querySelector('#intro-splash')?.remove();
