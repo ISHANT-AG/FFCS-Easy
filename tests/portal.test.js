@@ -157,6 +157,14 @@ test('missing heading can use the selected course while conflicting course codes
   assert.equal(r.code, 'CSE2006');
   assert.equal(r.sections[0].faculty, 'FACE TRAINER 2');
   assert.equal(r.sections[0].seats, '');
+  const prefixed = parsePortalText(
+    'Course Type Slot Venue Faculty Available Seats\n' +
+      'Lecture and Tutorial Hours Only A11+A12 AB-101 ALICE NONE 65 4 61',
+    selected
+  );
+  assert.equal(prefixed.code, 'CSE2006');
+  assert.equal(prefixed.sections[0].faculty, 'ALICE');
+  assert.equal(prefixed.sections[0].seats, '61');
   assert.throws(() => parsePortalText('Course CSE2001\nA11 AB-101 TEACHER', selected), /CSE2001/);
 });
 test('Full markers exclude sections even without a numeric seat count', () => {

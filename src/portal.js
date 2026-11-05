@@ -16,7 +16,7 @@ export function parsePortalText(text, selectedCourse = null) {
     text.match(
       /Course Owner\s+Course Code\s+Course Title[^\n]*\n\s*\S+\s+([A-Z]{3}\d{4})\s+(.+?)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+(?:\s|$)/i
     );
-  if (!header && selectedCourse?.code && /^[A-F][12][1-4](?:\s|\+)/im.test(text)) {
+  if (!header && selectedCourse?.code) {
     const foundCode = text.match(/\b[A-Z]{3}\d{4}\b/i)?.[0]?.toUpperCase();
     if (foundCode && foundCode !== selectedCourse.code.toUpperCase())
       throw Error('This PDF is for ' + foundCode + '. Upload it under that course.');
