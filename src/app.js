@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=8cbccb668794';
-import { startGeneration } from './generation.js?v=8cbccb668794';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=8cbccb668794';
-import { pdfItemsToText } from './pdf-text.js?v=8cbccb668794';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=7ca3f983c3d1';
+import { startGeneration } from './generation.js?v=7ca3f983c3d1';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=7ca3f983c3d1';
+import { pdfItemsToText } from './pdf-text.js?v=7ca3f983c3d1';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=8cbccb668794';
-import { parsePortalText } from './portal.js?v=8cbccb668794';
-import { validatePdfUpload } from './uploads.js?v=8cbccb668794';
+} from './engine.js?v=7ca3f983c3d1';
+import { parsePortalText } from './portal.js?v=7ca3f983c3d1';
+import { validatePdfUpload } from './uploads.js?v=7ca3f983c3d1';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2866,17 +2866,23 @@ async function pdfText(file) {
   return text;
 }
 
+function showSeatAvailabilityNotice() {
+  const dialog = $('#seat-availability-dialog');
+  if (!dialog.open) dialog.showModal();
+}
+
 async function readUpload(id, file) {
   if (!file) return;
   const c = state.courses.find((c) => c.id === id);
   if (!c) return;
+  let missingSeatNotice = false;
   uploading.add(id);
   delete c.uploadError;
   render();
   try {
     await validatePdfUpload(file);
     const text = await pdfText(file),
-      parsed = parsePortalText(text);
+      parsed = parsePortalText(text, c);
     if (parsed.code !== c.code)
       throw Error('This PDF is for ' + parsed.code + '. Upload it under that course.');
     const rows = (parsed.sections || []).map((s) => ({ ...s, id: uid() }));
@@ -2889,6 +2895,7 @@ async function readUpload(id, file) {
       delete drafts[id];
       delete c.uploadError;
       invalidate();
+      missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
       toast(`${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       drafts[id] = {
@@ -2903,6 +2910,7 @@ async function readUpload(id, file) {
   } finally {
     uploading.delete(id);
     render();
+    if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
   }
 }
 
@@ -2912,13 +2920,14 @@ async function readTwinUpload(studentIdx, id, file) {
   const c = student.courses.find((c) => c.id === id);
   if (!c) return;
   const key = `${studentIdx}:${id}`;
+  let missingSeatNotice = false;
   uploading.add(key);
   delete c.uploadError;
   render();
   try {
     await validatePdfUpload(file);
     const text = await pdfText(file),
-      parsed = parsePortalText(text);
+      parsed = parsePortalText(text, c);
     if (parsed.code !== c.code)
       throw Error(
         `This PDF is for ${parsed.code}. Upload it under that course for ${student.name}.`
@@ -2933,6 +2942,7 @@ async function readTwinUpload(studentIdx, id, file) {
       delete twinDrafts[studentIdx][id];
       delete c.uploadError;
       invalidate();
+      missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
       toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       twinDrafts[studentIdx][id] = {
@@ -2947,6 +2957,7 @@ async function readTwinUpload(studentIdx, id, file) {
   } finally {
     uploading.delete(key);
     render();
+    if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
   }
 }
 
@@ -3102,6 +3113,7 @@ function generateTwin() {
 }
 
 render();
+$('#seat-availability-dismiss').onclick = () => $('#seat-availability-dialog').close();
 
 // Keep the player outside step renders; closing unloads it and stops playback.
 const demoDialog = $('#demo-dialog');

@@ -78,3 +78,14 @@ test('distinct NIL project rows with the same faculty are preserved and reupload
   assert.equal(r.results.length, 1);
   assert.equal(r.results[0].chosen[0].section.id, 'two');
 });
+
+test('a missing-seat reupload preserves a previously known full section', () => {
+  const previous = { id: 'saved', faculty: 'TEACHER', slots: 'A11', venue: 'AB-101', seats: '0' };
+  const c = { scheduled: true, sections: [previous] };
+  const unknown = mergeSections(c, [{ ...previous, id: 'new', seats: '' }]);
+  assert.equal(unknown[0].seats, '0');
+  assert.equal(
+    mergeSections({ ...c, sections: unknown }, [{ ...previous, seats: '4' }])[0].seats,
+    '4'
+  );
+});

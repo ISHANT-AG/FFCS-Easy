@@ -1,14 +1,24 @@
 // Read course rows only. Portal navigation, personal details and existing clash
 // labels belong to the source session and are never scheduling instructions.
-export function parsePortalText(text) {
+export function parsePortalText(text, selectedCourse = null) {
+  if (!text.trim())
+    throw Error(
+      'No readable text found. Save the faculty page as a text PDF; image-only PDFs are not supported.'
+    );
   // Portal exports use either a descriptive heading, a short LP/LT code,
   // or a separate course-code/title table on the Modify Slot screen.
-  const header =
+  let header =
     text.match(
       /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|Practical|Tutorial|Theory|Project|LP\b|LT[PJ]?\b|PJ\b|P\b|[^\n]+?\s+0\s+0\s+0\s+1)/i
     ) ||
     text.match(/Course Code:\s*([A-Z]{3}\d{4})\s+Course Title:\s*(.+?)(?:\s+Course Type:|\n|$)/i) ||
     text.match(/Course Code\s+Course Title\s*\n\s*([A-Z]{3}\d{4})\s+([^\n]+)/i);
+  if (!header && selectedCourse?.code && /^[A-F][12][1-4](?:\s|\+)/im.test(text)) {
+    const foundCode = text.match(/\b[A-Z]{3}\d{4}\b/i)?.[0]?.toUpperCase();
+    if (foundCode && foundCode !== selectedCourse.code.toUpperCase())
+      throw Error('This PDF is for ' + foundCode + '. Upload it under that course.');
+    header = ['', selectedCourse.code, selectedCourse.name || selectedCourse.code];
+  }
   if (!header) throw Error('Could not find the course code and title in this PDF.');
   const code = header[1].toUpperCase(),
     name = header[2].trim(),
@@ -52,6 +62,11 @@ export function parsePortalText(text) {
     }
     let faculty = row[3].trim(),
       seats = '';
+    const full = /\s+(?:Full|No seats(?: available)?|Sold out)\s*$/i.test(faculty);
+    if (full) {
+      faculty = faculty.replace(/\s+(?:Full|No seats(?: available)?|Sold out)\s*$/i, '').trim();
+      seats = '0';
+    }
     const status = faculty.match(
       /\s+(NONE\b|Clashed with\b|Similar to Registered Slot\b|Registered Slot\b)/i
     );
@@ -60,9 +75,9 @@ export function parsePortalText(text) {
         .slice(status.index)
         .replace(/\s+Selected\s*$/i, '')
         .trim();
-      seats = tail.match(/\b(\d+)\s*$/)?.[1] ?? '';
+      if (!full) seats = tail.match(/\b(\d+)\s*$/)?.[1] ?? '';
       faculty = faculty.slice(0, status.index).trim();
-    } else if (hasSeatColumn) {
+    } else if (hasSeatColumn && !full) {
       // A number in a faculty name (FACE TRAINER 2) is not a seat count.
       const seat = faculty.match(/\s+(\d+)\s*(?:Selected)?\s*$/i);
       if (seat && !/^FACE\s+TRAINER\s+\d+$/i.test(faculty)) {

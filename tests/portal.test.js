@@ -112,3 +112,33 @@ test('practical-only workplace communication PDF imports every faculty row', asy
   assert.equal(r.sections.at(-1).faculty, 'TAUSEEF QAMAR');
   assert.equal(r.sections.at(-1).seats, '32');
 });
+
+test('missing heading can use the selected course while conflicting course codes stay blocked', () => {
+  const selected = { code: 'CSE2006', name: 'Programming in Java' };
+  const r = parsePortalText('Slot Venue Faculty\nA11 AB-101 FACE TRAINER 2', selected);
+  assert.equal(r.code, 'CSE2006');
+  assert.equal(r.sections[0].faculty, 'FACE TRAINER 2');
+  assert.equal(r.sections[0].seats, '');
+  assert.throws(() => parsePortalText('Course CSE2001\nA11 AB-101 TEACHER', selected), /CSE2001/);
+});
+test('Full markers exclude sections even without a numeric seat count', () => {
+  const r = parsePortalText(
+    'CSE2006 - Java - LP\nSlot Venue Faculty Available\nA11 AB-101 TEACHER Full\nB11 AB-102 OTHER NONE Full\nC11 AB-103 THIRD No seats available\nD11 AB-104 OPEN'
+  );
+  assert.deepEqual(
+    r.sections.map((s) => s.seats),
+    ['0', '0', '0', '']
+  );
+  assert.deepEqual(
+    r.sections.map((s) => s.faculty),
+    ['TEACHER', 'OTHER', 'THIRD', 'OPEN']
+  );
+  const course = { scheduled: true, avoid: [], preferred: [], sections: r.sections };
+  assert.deepEqual(
+    eligibleSections(course).map((s) => s.faculty),
+    ['OPEN']
+  );
+});
+test('empty image-only text reports a clear text PDF requirement', () => {
+  assert.throws(() => parsePortalText('   '), /image-only PDFs/);
+});

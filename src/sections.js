@@ -1,4 +1,4 @@
-import { validateSection, slotBundle } from './engine.js?v=8cbccb668794';
+import { validateSection, slotBundle } from './engine.js?v=7ca3f983c3d1';
 export const needsFaculty = (c) => !c.online && c.scheduled !== false && !(c.sections || []).length;
 
 export function getCourseStatus(c) {
@@ -78,7 +78,12 @@ export function mergeSections(course, incoming) {
         merged.push({ ...row });
       } else {
         const i = positions.get(rowKey);
-        merged[i] = { ...merged[i], ...row, id: merged[i].id };
+        merged[i] = {
+          ...merged[i],
+          ...row,
+          seats: row.seats === '' ? merged[i].seats : row.seats,
+          id: merged[i].id,
+        };
       }
     }
   }
