@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=7ca3f983c3d1';
-import { startGeneration } from './generation.js?v=7ca3f983c3d1';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=7ca3f983c3d1';
-import { pdfItemsToText } from './pdf-text.js?v=7ca3f983c3d1';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=cb6a94724176';
+import { startGeneration } from './generation.js?v=cb6a94724176';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=cb6a94724176';
+import { pdfItemsToText } from './pdf-text.js?v=cb6a94724176';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=7ca3f983c3d1';
-import { parsePortalText } from './portal.js?v=7ca3f983c3d1';
-import { validatePdfUpload } from './uploads.js?v=7ca3f983c3d1';
+} from './engine.js?v=cb6a94724176';
+import { parsePortalText } from './portal.js?v=cb6a94724176';
+import { validatePdfUpload } from './uploads.js?v=cb6a94724176';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2144,6 +2144,13 @@ function renderTimetableGrid(
 }
 
 function bind() {
+  document.querySelectorAll('details.manual-options-details').forEach((details) => {
+    details.addEventListener('toggle', () => {
+      const key = details.id.slice('details-'.length);
+      if (details.open) openDetails.add(key);
+      else openDetails.delete(key);
+    });
+  });
   $('#watch-demo')?.addEventListener('click', (e) => {
     e.stopPropagation();
     const dialog = $('#demo-dialog');
@@ -2896,6 +2903,7 @@ async function readUpload(id, file) {
       delete c.uploadError;
       invalidate();
       missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
+      if (missingSeatNotice) openDetails.add(`manual-${id}`);
       toast(`${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       drafts[id] = {
@@ -2943,6 +2951,7 @@ async function readTwinUpload(studentIdx, id, file) {
       delete c.uploadError;
       invalidate();
       missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
+      if (missingSeatNotice) openDetails.add(`manual-${studentIdx}-${id}`);
       toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
       twinDrafts[studentIdx][id] = {

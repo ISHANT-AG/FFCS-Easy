@@ -1,4 +1,4 @@
-import { solve, solveTwin } from './engine.js?v=7ca3f983c3d1';
+import { solve, solveTwin } from './engine.js?v=cb6a94724176';
 
 self.onmessage = ({ data }) => {
   try {
