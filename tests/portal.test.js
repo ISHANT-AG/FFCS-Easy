@@ -72,6 +72,26 @@ test('total, allotted and available columns keep only the available seat count',
   ]);
 });
 
+test('VTOP course table and course-type-prefixed rows import with seat availability', () => {
+  const r = parsePortalText(
+    'Course Owner Course Code Course Title L T P J C Pre-Requisite Co-Requisite Anti-Requisite\n' +
+    'SASL MAT2003 Applied Numerical Method 2 1 0 0 3\n' +
+    'Course Type Slot Venue Faculty Slot Status Total Seats Alloted Seats Available Seats\n' +
+    'Lecture and Tutorial Hours Only A11+A12 CR-013 SUCHISMITA PATRA Clashed with A11/ A12 65 8 57\n' +
+    'Lecture and Tutorial Hours Only B11+B12 AB-103 MAYANK SHARMA NONE 65 9 56\n' +
+    'Lecture and Tutorial Hours Only B22+B24 CR-019 DHARMALINGAM M Copyright © 2020 Software Development Cell (VIT) Clashed with B24 65 5 60\n' +
+    'Go Back'
+  );
+  assert.equal(r.code, 'MAT2003');
+  assert.equal(r.name, 'Applied Numerical Method');
+  assert.equal(r.sections.length, 3);
+  assert.deepEqual(r.sections.map(({ faculty, seats }) => [faculty, seats]), [
+    ['SUCHISMITA PATRA', '57'],
+    ['MAYANK SHARMA', '56'],
+    ['DHARMALINGAM M', '60'],
+  ]);
+});
+
 const javaFixtures = JSON.parse(
   await readFile(new URL('java-portal-fixtures.json', import.meta.url))
 );

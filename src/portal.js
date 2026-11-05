@@ -12,7 +12,10 @@ export function parsePortalText(text, selectedCourse = null) {
       /\b([A-Z]{3}\d{4})\s*-\s*(.+?)\s*-\s*(?:Lecture|Practical|Tutorial|Theory|Project|LP\b|LT[PJ]?\b|PJ\b|P\b|[^\n]+?\s+0\s+0\s+0\s+1)/i
     ) ||
     text.match(/Course Code:\s*([A-Z]{3}\d{4})\s+Course Title:\s*(.+?)(?:\s+Course Type:|\n|$)/i) ||
-    text.match(/Course Code\s+Course Title\s*\n\s*([A-Z]{3}\d{4})\s+([^\n]+)/i);
+    text.match(/Course Code\s+Course Title\s*\n\s*([A-Z]{3}\d{4})\s+([^\n]+)/i) ||
+    text.match(
+      /Course Owner\s+Course Code\s+Course Title[^\n]*\n\s*\S+\s+([A-Z]{3}\d{4})\s+(.+?)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+(?:\s|$)/i
+    );
   if (!header && selectedCourse?.code && /^[A-F][12][1-4](?:\s|\+)/im.test(text)) {
     const foundCode = text.match(/\b[A-Z]{3}\d{4}\b/i)?.[0]?.toUpperCase();
     if (foundCode && foundCode !== selectedCourse.code.toUpperCase())
@@ -25,7 +28,7 @@ export function parsePortalText(text, selectedCourse = null) {
     sections = [];
   const slotStart = /^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)(?:\s|$)/i;
   const hasSeatColumn = /\b(?:Available|Available Seats|Seats)\b/i.test(text);
-  const hasSeatBreakdown = /Total\s+Seats\s+Allotted\s+Available/i.test(text);
+  const hasSeatBreakdown = /Total\s+Seats\s+Allot(?:t)?ed(?:\s+Seats)?\s+Available(?:\s+Seats)?/i.test(text);
   const records = [];
   let current = [];
   const flush = () => {
@@ -33,7 +36,10 @@ export function parsePortalText(text, selectedCourse = null) {
     current = [];
   };
   for (const raw of text.split('\n')) {
-    const line = raw.trim();
+    const line = raw.trim().replace(
+      /^(?:Lecture|Practical|Tutorial|Theory|Project)\b.*?\s+(?=[A-F][12][1-4](?:\s|\+))/i,
+      ''
+    );
     if (slotStart.test(line)) {
       flush();
       current = [line];
@@ -55,7 +61,10 @@ export function parsePortalText(text, selectedCourse = null) {
   flush();
   let skippedRows = 0;
   for (let record of records) {
-    record = record.replace(/Copyright[\s\S]*$/i, '').trim();
+    record = record
+      .replace(/Copyright\s+©?\s*2020\s+Software Development Cell\s*\(VIT\)/gi, '')
+      .replace(/Copyright[\s\S]*$/i, '')
+      .trim();
     const row = record.match(/^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)\s+(\S+)\s+(.+)$/i);
     if (!row) {
       skippedRows++;
