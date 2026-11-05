@@ -25,6 +25,7 @@ export function parsePortalText(text, selectedCourse = null) {
     sections = [];
   const slotStart = /^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)(?:\s|$)/i;
   const hasSeatColumn = /\b(?:Available|Available Seats|Seats)\b/i.test(text);
+  const hasSeatBreakdown = /Total\s+Seats\s+Allotted\s+Available/i.test(text);
   const records = [];
   let current = [];
   const flush = () => {
@@ -37,7 +38,7 @@ export function parsePortalText(text, selectedCourse = null) {
       flush();
       current = [line];
     } else if (
-      /^(Copyright|Regular$|Course Option|Register\b|Update\b|Go Back|Slot\s+Venue|Select Course|https?:|\d{2}\/\d{2}\/\d{4}|VTOP\b|Text transcription|Course Code)/i.test(
+      /^(Copyright|Regular$|Course Option|Register\b|Update\b|Go Back|Slot\s+Venue|Select Course|https?:|\d{2}\/\d{2}\/\d{4}|VTOP\b|Text transcription|Course Code|\d+\s+options transcribed|Student-prepared dataset)/i.test(
         line
       )
     )
@@ -61,7 +62,18 @@ export function parsePortalText(text, selectedCourse = null) {
       continue;
     }
     let faculty = row[3].trim(),
-      seats = '';
+      seats = '',
+      parsedBreakdown = false;
+    if (hasSeatBreakdown) {
+      // Student-prepared tables can show Total, Allotted and Available as
+      // separate columns, with an em dash for an unreadable seat value.
+      const breakdown = faculty.match(/\s+(\d+)\s+(\d+|[—–-])\s+(\d+|[—–-])\s*$/);
+      if (breakdown) {
+        parsedBreakdown = true;
+        seats = /^\d+$/.test(breakdown[3]) ? breakdown[3] : '';
+        faculty = faculty.slice(0, breakdown.index).replace(/\s+[—–-]\s*$/, '').trim();
+      }
+    }
     const full = /\s+(?:Full|No seats(?: available)?|Sold out)\s*$/i.test(faculty);
     if (full) {
       faculty = faculty.replace(/\s+(?:Full|No seats(?: available)?|Sold out)\s*$/i, '').trim();
@@ -75,9 +87,9 @@ export function parsePortalText(text, selectedCourse = null) {
         .slice(status.index)
         .replace(/\s+Selected\s*$/i, '')
         .trim();
-      if (!full) seats = tail.match(/\b(\d+)\s*$/)?.[1] ?? '';
+      if (!full && !parsedBreakdown) seats = tail.match(/\b(\d+)\s*$/)?.[1] ?? '';
       faculty = faculty.slice(0, status.index).trim();
-    } else if (hasSeatColumn && !full) {
+    } else if (hasSeatColumn && !full && !parsedBreakdown) {
       // A number in a faculty name (FACE TRAINER 2) is not a seat count.
       const seat = faculty.match(/\s+(\d+)\s*(?:Selected)?\s*$/i);
       if (seat && !/^FACE\s+TRAINER\s+\d+$/i.test(faculty)) {

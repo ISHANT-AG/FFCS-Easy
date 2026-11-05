@@ -54,6 +54,24 @@ test('readable faculty rows import even when a seat value cannot be read', () =>
   assert.equal(r.sections[1].seats, '');
 });
 
+test('total, allotted and available columns keep only the available seat count', () => {
+  const r = parsePortalText(
+    'PHY1003 - Introduction to Computational Physics - Lecture and Tutorial, practical hours only\n' +
+    'Slot Venue Faculty Slot Status Total Seats Allotted Available\n' +
+    'A11+A12+A13 CR-002 SHARAD CHANDRA TRIPATHI — 65 0 65\n' +
+    'A11+A12+A13 CR-003 GEETANJALI GIRI — 65 17 48\n' +
+    'A21+A22+A23 CR-004 ABHINAV KUMAR — 65 — —\n' +
+    'C21+F11+F12 CR-002 SARAVANAN L — 65 6 59\n' +
+    '40 options transcribed. Seat counts are snapshots from the supplied VTOP screenshots.'
+  );
+  assert.deepEqual(r.sections.map(({ faculty, seats }) => [faculty, seats]), [
+    ['SHARAD CHANDRA TRIPATHI', '65'],
+    ['GEETANJALI GIRI', '48'],
+    ['ABHINAV KUMAR', ''],
+    ['SARAVANAN L', '59'],
+  ]);
+});
+
 const javaFixtures = JSON.parse(
   await readFile(new URL('java-portal-fixtures.json', import.meta.url))
 );

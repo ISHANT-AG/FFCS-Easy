@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=cb6a94724176';
-import { startGeneration } from './generation.js?v=cb6a94724176';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=cb6a94724176';
-import { pdfItemsToText } from './pdf-text.js?v=cb6a94724176';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=f678e3580334';
+import { startGeneration } from './generation.js?v=f678e3580334';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=f678e3580334';
+import { pdfItemsToText } from './pdf-text.js?v=f678e3580334';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=cb6a94724176';
-import { parsePortalText } from './portal.js?v=cb6a94724176';
-import { validatePdfUpload } from './uploads.js?v=cb6a94724176';
+} from './engine.js?v=f678e3580334';
+import { parsePortalText } from './portal.js?v=f678e3580334';
+import { validatePdfUpload } from './uploads.js?v=f678e3580334';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2873,8 +2873,15 @@ async function pdfText(file) {
   return text;
 }
 
-function showSeatAvailabilityNotice() {
+function showSeatAvailabilityNotice(missing, total) {
   const dialog = $('#seat-availability-dialog');
+  const allMissing = missing === total;
+  $('#seat-availability-title').textContent = allMissing
+    ? 'Seat availability unavailable'
+    : 'Some seat counts are missing';
+  $('#seat-availability-copy').textContent = allMissing
+    ? `This PDF has no readable seat counts for its ${total} options. We’ve included them; remove any that are full.`
+    : `${missing} of ${total} options ${missing === 1 ? 'has' : 'have'} no readable seat count. We’ve included ${missing === 1 ? 'it' : 'them'}; remove ${missing === 1 ? 'it' : 'them'} if full.`;
   if (!dialog.open) dialog.showModal();
 }
 
@@ -2882,7 +2889,8 @@ async function readUpload(id, file) {
   if (!file) return;
   const c = state.courses.find((c) => c.id === id);
   if (!c) return;
-  let missingSeatNotice = false;
+  let missingSeatNotice = 0;
+  let uploadedRowCount = 0;
   uploading.add(id);
   delete c.uploadError;
   render();
@@ -2902,7 +2910,8 @@ async function readUpload(id, file) {
       delete drafts[id];
       delete c.uploadError;
       invalidate();
-      missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
+      uploadedRowCount = rows.length;
+      missingSeatNotice = rows.filter((s) => s.seats === '' || s.seats == null).length;
       if (missingSeatNotice) openDetails.add(`manual-${id}`);
       toast(`${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
@@ -2918,7 +2927,8 @@ async function readUpload(id, file) {
   } finally {
     uploading.delete(id);
     render();
-    if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (missingSeatNotice)
+      requestAnimationFrame(() => showSeatAvailabilityNotice(missingSeatNotice, uploadedRowCount));
   }
 }
 
@@ -2928,7 +2938,8 @@ async function readTwinUpload(studentIdx, id, file) {
   const c = student.courses.find((c) => c.id === id);
   if (!c) return;
   const key = `${studentIdx}:${id}`;
-  let missingSeatNotice = false;
+  let missingSeatNotice = 0;
+  let uploadedRowCount = 0;
   uploading.add(key);
   delete c.uploadError;
   render();
@@ -2950,7 +2961,8 @@ async function readTwinUpload(studentIdx, id, file) {
       delete twinDrafts[studentIdx][id];
       delete c.uploadError;
       invalidate();
-      missingSeatNotice = rows.some((s) => s.seats === '' || s.seats == null);
+      uploadedRowCount = rows.length;
+      missingSeatNotice = rows.filter((s) => s.seats === '' || s.seats == null).length;
       if (missingSeatNotice) openDetails.add(`manual-${studentIdx}-${id}`);
       toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
     } catch (validation) {
@@ -2966,7 +2978,8 @@ async function readTwinUpload(studentIdx, id, file) {
   } finally {
     uploading.delete(key);
     render();
-    if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (missingSeatNotice)
+      requestAnimationFrame(() => showSeatAvailabilityNotice(missingSeatNotice, uploadedRowCount));
   }
 }
 
