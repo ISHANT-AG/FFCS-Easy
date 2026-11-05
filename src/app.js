@@ -1,7 +1,7 @@
-import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=962b4370406a';
-import { startGeneration } from './generation.js?v=962b4370406a';
-import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=962b4370406a';
-import { pdfItemsToText } from './pdf-text.js?v=962b4370406a';
+import { downloadTimetablePdf, downloadTwinTimetablePdf } from './pdf-export.js?v=f691f21f8cdd';
+import { startGeneration } from './generation.js?v=f691f21f8cdd';
+import { mergeSections, needsFaculty, getCourseStatus } from './sections.js?v=f691f21f8cdd';
+import { pdfItemsToText } from './pdf-text.js?v=f691f21f8cdd';
 import {
   TIMES,
   DAYS,
@@ -15,9 +15,9 @@ import {
   findCommonCourses,
   normalizeCourseCode,
   changeTwinFaculty,
-} from './engine.js?v=962b4370406a';
-import { parsePortalText } from './portal.js?v=962b4370406a';
-import { validatePdfUpload } from './uploads.js?v=962b4370406a';
+} from './engine.js?v=f691f21f8cdd';
+import { parsePortalText } from './portal.js?v=f691f21f8cdd';
+import { validatePdfUpload } from './uploads.js?v=f691f21f8cdd';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
@@ -2878,6 +2878,15 @@ function showSeatAvailabilityNotice() {
   if (!dialog.open) dialog.showModal();
 }
 
+function showScreenshotPdfNotice() {
+  const dialog = $('#screenshot-pdf-dialog');
+  if (!dialog.open) dialog.showModal();
+}
+
+function isScreenshotPdfError(error) {
+  return /No readable text found/.test(error?.message || '');
+}
+
 function hasNoSeatCounts(rows) {
   return rows.length > 0 && rows.every((s) => s.seats === '' || s.seats == null);
 }
@@ -2887,6 +2896,7 @@ async function readUpload(id, file) {
   const c = state.courses.find((c) => c.id === id);
   if (!c) return;
   let missingSeatNotice = false;
+  let screenshotPdfNotice = false;
   uploading.add(id);
   delete c.uploadError;
   render();
@@ -2918,11 +2928,13 @@ async function readUpload(id, file) {
     }
   } catch (e) {
     c.uploadError = e.message;
+    screenshotPdfNotice = isScreenshotPdfError(e);
     toast(e.message);
   } finally {
     uploading.delete(id);
     render();
     if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (screenshotPdfNotice) requestAnimationFrame(showScreenshotPdfNotice);
   }
 }
 
@@ -2933,6 +2945,7 @@ async function readTwinUpload(studentIdx, id, file) {
   if (!c) return;
   const key = `${studentIdx}:${id}`;
   let missingSeatNotice = false;
+  let screenshotPdfNotice = false;
   uploading.add(key);
   delete c.uploadError;
   render();
@@ -2966,11 +2979,13 @@ async function readTwinUpload(studentIdx, id, file) {
     }
   } catch (e) {
     c.uploadError = e.message;
+    screenshotPdfNotice = isScreenshotPdfError(e);
     toast(e.message);
   } finally {
     uploading.delete(key);
     render();
     if (missingSeatNotice) requestAnimationFrame(showSeatAvailabilityNotice);
+    if (screenshotPdfNotice) requestAnimationFrame(showScreenshotPdfNotice);
   }
 }
 
@@ -3127,6 +3142,7 @@ function generateTwin() {
 
 render();
 $('#seat-availability-dismiss').onclick = () => $('#seat-availability-dialog').close();
+$('#screenshot-pdf-dismiss').onclick = () => $('#screenshot-pdf-dialog').close();
 
 // Keep the player outside step renders; closing unloads it and stops playback.
 const demoDialog = $('#demo-dialog');

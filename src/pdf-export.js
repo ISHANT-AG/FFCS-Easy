@@ -1,4 +1,4 @@
-import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=962b4370406a';
+import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=f691f21f8cdd';
 const ascii = (s) =>
   String(s ?? '')
     .replace(/[–−]/g, '-')
