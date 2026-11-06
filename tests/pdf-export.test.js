@@ -21,6 +21,7 @@ class PdfRecorder {
     this.options = options;
     this.texts = [];
     this.rectangles = [];
+    this.pages = 1;
     this.internal = { pageSize: { getWidth: () => 297, getHeight: () => 210 } };
   }
   setProperties() {}
@@ -39,6 +40,9 @@ class PdfRecorder {
   splitTextToSize(value) {
     return [value];
   }
+  addPage() {
+    this.pages++;
+  }
 }
 test('landscape export draws all six weekdays and the full timetable inside page bounds', () => {
   const r = solve([c]).results[0],
@@ -53,6 +57,10 @@ test('landscape export draws all six weekdays and the full timetable inside page
   assert.ok(doc.texts.some((t) => t.value === 'SANAT JAIN'));
   assert.ok(doc.texts.some((t) => t.value === 'AB1-102'));
   assert.ok(doc.texts.some((t) => t.value.includes('Timetable 5')));
+  assert.equal(doc.pages, 2);
+  assert.ok(doc.texts.some((t) => t.value.includes('Selected faculty summary')));
+  assert.ok(doc.texts.some((t) => t.value === 'A11'));
+  assert.ok(doc.texts.some((t) => t.value === '10'));
 });
 test('PDF export rejects removed courses and stale rooms or slot changes', () => {
   const r = solve([c]).results[0];

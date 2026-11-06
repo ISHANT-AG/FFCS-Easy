@@ -486,7 +486,7 @@ test('21. Correct named individual and combined PDF exports', () => {
     courses1: cAlice,
     courses2: cBob,
   });
-  assert.equal(docAlice.pages, 1);
+  assert.equal(docAlice.pages, 2);
   assert.match(docAlice.properties.title, /Alice/);
 
   // Test individual export Bob
@@ -495,7 +495,7 @@ test('21. Correct named individual and combined PDF exports', () => {
     courses1: cAlice,
     courses2: cBob,
   });
-  assert.equal(docBob.pages, 1);
+  assert.equal(docBob.pages, 2);
   assert.match(docBob.properties.title, /Bob/);
 
   // Test combined export (both)
@@ -504,7 +504,8 @@ test('21. Correct named individual and combined PDF exports', () => {
     courses1: cAlice,
     courses2: cBob,
   });
-  assert.equal(docBoth.pages, 2);
+  assert.equal(docBoth.pages, 4);
+  assert.ok(docBoth.calls.some((text) => String(text).includes('Selected faculty summary')));
 });
 
 test('17. Independent uploads and preferences for each student', () => {
@@ -794,13 +795,13 @@ test('27. PDF export succeeds with optional unuploaded projects', () => {
     assertExportEligible(pair.student2, cBob);
   });
 
-  // Combined export must succeed and render 2 pages
+  // Combined export includes a timetable and faculty summary for each student.
   const docBoth = createTwinTimetablePdf(MockJsPDF, pair, {
     which: 'both',
     courses1: cAlice,
     courses2: cBob,
   });
-  assert.equal(docBoth.pages, 2);
+  assert.equal(docBoth.pages, 4);
 });
 
 test('28. PDF export strictly rejects avoided or removed faculty', () => {

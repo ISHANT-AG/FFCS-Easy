@@ -1,4 +1,4 @@
-import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=02cf8726c599';
+import { DAYS, TIMES, eligibleSections, slotBundle } from './engine.js?v=c330bfab4cda';
 const ascii = (s) =>
   String(s ?? '')
     .replace(/[–−]/g, '-')
@@ -182,7 +182,62 @@ export function createTimetablePdf(JsPDF, schedule, { option = 1, courses } = {}
     doc.setFontSize(6.5);
     doc.text(doc.splitTextToSize(ascii(text), width), margin, bottom + 12);
   }
+  appendFacultySummary(doc, schedule, { option });
   return doc;
+}
+
+function appendFacultySummary(doc, schedule, { option, studentName = '' } = {}) {
+  const rows = schedule.chosen || [];
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const title = `Selected faculty summary | Option ${option}${studentName ? ` | ${studentName}` : ''}`;
+  const columns = [10, 39, 133, 199, 254];
+  const widths = [29, 94, 66, 55, pageWidth - 264];
+  const labels = ['Course', 'Faculty', 'Slots', 'Venue', 'Seats'];
+  const rowHeight = 12;
+  let y = 39;
+
+  const startPage = () => {
+    doc.addPage('a4', 'landscape');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(30, 58, 138);
+    doc.text(ascii(title), 10, 16);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(85, 95, 90);
+    doc.text('Use this list to check your sections in FFCS before registration.', 10, 23);
+    doc.setLineWidth(0.2);
+    doc.setDrawColor(205, 214, 204);
+    doc.setFillColor(237, 243, 251);
+    doc.rect(10, 30, pageWidth - 20, 9, 'FD');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(36, 60, 49);
+    labels.forEach((label, i) => doc.text(label, columns[i] + 2, 36));
+    y = 39;
+  };
+
+  startPage();
+  for (const { course, section } of rows) {
+    if (y + rowHeight > doc.internal.pageSize.getHeight() - 10) startPage();
+    const values = [
+      course.code,
+      section?.faculty || 'Not selected',
+      section?.slots || 'NIL',
+      section?.venue || 'NIL',
+      section?.seats == null || section.seats === '' ? '-' : String(section.seats),
+    ];
+    doc.setFillColor(...(Math.round((y - 39) / rowHeight) % 2 ? [255, 255, 255] : [248, 250, 253]));
+    doc.rect(10, y, pageWidth - 20, rowHeight, 'FD');
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(30, 47, 38);
+    values.forEach((value, i) => {
+      const lines = doc.splitTextToSize(ascii(value), widths[i] - 4);
+      doc.text(lines.slice(0, 2), columns[i] + 2, y + 4.5, { lineHeightFactor: 1.1 });
+    });
+    y += rowHeight;
+  }
 }
 
 export function renderSchedulePage(
@@ -373,6 +428,7 @@ export function createTwinTimetablePdf(
       partnerName: name2,
       matchSummary: twinPair.matchSummary,
     });
+    appendFacultySummary(doc, sched1, { option, studentName: name1 });
   } else if (which === 'student2') {
     renderSchedulePage(doc, sched2, {
       option,
@@ -380,14 +436,16 @@ export function createTwinTimetablePdf(
       partnerName: name1,
       matchSummary: twinPair.matchSummary,
     });
+    appendFacultySummary(doc, sched2, { option, studentName: name2 });
   } else {
-    // Both: Page 1 for Student 1, Page 2 for Student 2
+    // Give each student a timetable followed by their own faculty summary.
     renderSchedulePage(doc, sched1, {
       option,
       studentName: name1,
       partnerName: name2,
       matchSummary: twinPair.matchSummary,
     });
+    appendFacultySummary(doc, sched1, { option, studentName: name1 });
     doc.addPage('a4', 'landscape');
     renderSchedulePage(doc, sched2, {
       option,
@@ -395,6 +453,7 @@ export function createTwinTimetablePdf(
       partnerName: name1,
       matchSummary: twinPair.matchSummary,
     });
+    appendFacultySummary(doc, sched2, { option, studentName: name2 });
   }
 
   return doc;
