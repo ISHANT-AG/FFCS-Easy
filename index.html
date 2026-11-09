@@ -42,14 +42,28 @@
 
     <div id="app"></div>
     <div id="toast" role="status" aria-live="polite"></div>
-    <dialog id="seat-availability-dialog" class="seat-availability-dialog" aria-labelledby="seat-availability-title" aria-describedby="seat-availability-copy">
+    <dialog
+      id="seat-availability-dialog"
+      class="seat-availability-dialog"
+      aria-labelledby="seat-availability-title"
+      aria-describedby="seat-availability-copy"
+    >
       <h2 id="seat-availability-title">Seat availability unavailable</h2>
-      <p id="seat-availability-copy">This PDF has no readable seat counts. We’ve included the options; remove any that are full.</p>
+      <p id="seat-availability-copy">
+        This PDF has no readable seat counts. We’ve included the options; remove any that are full.
+      </p>
       <button type="button" id="seat-availability-dismiss" class="primary">Got it</button>
     </dialog>
-    <dialog id="screenshot-pdf-dialog" class="seat-availability-dialog" aria-labelledby="screenshot-pdf-title" aria-describedby="screenshot-pdf-copy">
+    <dialog
+      id="screenshot-pdf-dialog"
+      class="seat-availability-dialog"
+      aria-labelledby="screenshot-pdf-title"
+      aria-describedby="screenshot-pdf-copy"
+    >
       <h2 id="screenshot-pdf-title">Screenshot PDFs can’t be uploaded 🔪🔫</h2>
-      <p id="screenshot-pdf-copy">Use Print → Save as PDF in FFCS so faculty names, slots, and available seats stay readable.</p>
+      <p id="screenshot-pdf-copy">
+        Use Print → Save as PDF in FFCS so faculty names, slots, and available seats stay readable.
+      </p>
       <button type="button" id="screenshot-pdf-dismiss" class="primary">Got it</button>
     </dialog>
     <!-- Feedback Dialog -->
