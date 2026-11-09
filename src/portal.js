@@ -28,7 +28,8 @@ export function parsePortalText(text, selectedCourse = null) {
     sections = [];
   const slotStart = /^([A-F][12][1-4](?:\s*\+\s*[A-F][12][1-4])*)(?:\s|$)/i;
   const hasSeatColumn = /\b(?:Available|Available Seats|Seats)\b/i.test(text);
-  const hasSeatBreakdown = /Total\s+Seats\s+Allot(?:t)?ed(?:\s+Seats)?\s+Available(?:\s+Seats)?/i.test(text);
+  const hasSeatBreakdown =
+    /Total\s+Seats\s+Allot(?:t)?ed(?:\s+Seats)?\s+Available(?:\s+Seats)?/i.test(text);
   const records = [];
   let current = [];
   const flush = () => {
@@ -36,10 +37,12 @@ export function parsePortalText(text, selectedCourse = null) {
     current = [];
   };
   for (const raw of text.split('\n')) {
-    const line = raw.trim().replace(
-      /^(?:Lecture|Practical|Tutorial|Theory|Project)\b.*?\s+(?=[A-F][12][1-4](?:\s|\+))/i,
-      ''
-    );
+    const line = raw
+      .trim()
+      .replace(
+        /^(?:Lecture|Practical|Tutorial|Theory|Project)\b.*?\s+(?=[A-F][12][1-4](?:\s|\+))/i,
+        ''
+      );
     if (slotStart.test(line)) {
       flush();
       current = [line];
@@ -80,7 +83,10 @@ export function parsePortalText(text, selectedCourse = null) {
       if (breakdown) {
         parsedBreakdown = true;
         seats = /^\d+$/.test(breakdown[3]) ? breakdown[3] : '';
-        faculty = faculty.slice(0, breakdown.index).replace(/\s+[—–-]\s*$/, '').trim();
+        faculty = faculty
+          .slice(0, breakdown.index)
+          .replace(/\s+[—–-]\s*$/, '')
+          .trim();
       }
     }
     const full = /\s+(?:Full|No seats(?: available)?|Sold out)\s*$/i.test(faculty);

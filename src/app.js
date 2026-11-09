@@ -2918,7 +2918,9 @@ async function readUpload(id, file) {
       invalidate();
       missingSeatNotice = hasNoSeatCounts(rows);
       if (missingSeatNotice) openDetails.add(`manual-${id}`);
-      toast(`${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
+      toast(
+        `${c.code}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`
+      );
     } catch (validation) {
       drafts[id] = {
         text: reviewText,
@@ -2969,7 +2971,9 @@ async function readTwinUpload(studentIdx, id, file) {
       invalidate();
       missingSeatNotice = hasNoSeatCounts(rows);
       if (missingSeatNotice) openDetails.add(`manual-${studentIdx}-${id}`);
-      toast(`${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`);
+      toast(
+        `${c.code} for ${student.name}: ${c.sections.length} options saved.${parsed.skippedRows ? ` ${parsed.skippedRows} unreadable rows skipped.` : ''}`
+      );
     } catch (validation) {
       twinDrafts[studentIdx][id] = {
         text: reviewText,

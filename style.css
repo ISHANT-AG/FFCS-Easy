@@ -3956,8 +3956,16 @@ button {
   padding: 24px;
   color: var(--color-text-main);
   background: var(--bg-surface);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
 }
-.seat-availability-dialog::backdrop { background: rgba(20, 26, 42, .45); }
-.seat-availability-dialog h2 { font-size: 20px; margin: 0 0 12px; }
-.seat-availability-dialog p { line-height: 1.6; margin: 0 0 20px; }
+.seat-availability-dialog::backdrop {
+  background: rgba(20, 26, 42, 0.45);
+}
+.seat-availability-dialog h2 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.seat-availability-dialog p {
+  line-height: 1.6;
+  margin: 0 0 20px;
+}

@@ -57,39 +57,45 @@ test('readable faculty rows import even when a seat value cannot be read', () =>
 test('total, allotted and available columns keep only the available seat count', () => {
   const r = parsePortalText(
     'PHY1003 - Introduction to Computational Physics - Lecture and Tutorial, practical hours only\n' +
-    'Slot Venue Faculty Slot Status Total Seats Allotted Available\n' +
-    'A11+A12+A13 CR-002 SHARAD CHANDRA TRIPATHI — 65 0 65\n' +
-    'A11+A12+A13 CR-003 GEETANJALI GIRI — 65 17 48\n' +
-    'A21+A22+A23 CR-004 ABHINAV KUMAR — 65 — —\n' +
-    'C21+F11+F12 CR-002 SARAVANAN L — 65 6 59\n' +
-    '40 options transcribed. Seat counts are snapshots from the supplied VTOP screenshots.'
+      'Slot Venue Faculty Slot Status Total Seats Allotted Available\n' +
+      'A11+A12+A13 CR-002 SHARAD CHANDRA TRIPATHI — 65 0 65\n' +
+      'A11+A12+A13 CR-003 GEETANJALI GIRI — 65 17 48\n' +
+      'A21+A22+A23 CR-004 ABHINAV KUMAR — 65 — —\n' +
+      'C21+F11+F12 CR-002 SARAVANAN L — 65 6 59\n' +
+      '40 options transcribed. Seat counts are snapshots from the supplied VTOP screenshots.'
   );
-  assert.deepEqual(r.sections.map(({ faculty, seats }) => [faculty, seats]), [
-    ['SHARAD CHANDRA TRIPATHI', '65'],
-    ['GEETANJALI GIRI', '48'],
-    ['ABHINAV KUMAR', ''],
-    ['SARAVANAN L', '59'],
-  ]);
+  assert.deepEqual(
+    r.sections.map(({ faculty, seats }) => [faculty, seats]),
+    [
+      ['SHARAD CHANDRA TRIPATHI', '65'],
+      ['GEETANJALI GIRI', '48'],
+      ['ABHINAV KUMAR', ''],
+      ['SARAVANAN L', '59'],
+    ]
+  );
 });
 
 test('VTOP course table and course-type-prefixed rows import with seat availability', () => {
   const r = parsePortalText(
     'Course Owner Course Code Course Title L T P J C Pre-Requisite Co-Requisite Anti-Requisite\n' +
-    'SASL MAT2003 Applied Numerical Method 2 1 0 0 3\n' +
-    'Course Type Slot Venue Faculty Slot Status Total Seats Alloted Seats Available Seats\n' +
-    'Lecture and Tutorial Hours Only A11+A12 CR-013 SUCHISMITA PATRA Clashed with A11/ A12 65 8 57\n' +
-    'Lecture and Tutorial Hours Only B11+B12 AB-103 MAYANK SHARMA NONE 65 9 56\n' +
-    'Lecture and Tutorial Hours Only B22+B24 CR-019 DHARMALINGAM M Copyright © 2020 Software Development Cell (VIT) Clashed with B24 65 5 60\n' +
-    'Go Back'
+      'SASL MAT2003 Applied Numerical Method 2 1 0 0 3\n' +
+      'Course Type Slot Venue Faculty Slot Status Total Seats Alloted Seats Available Seats\n' +
+      'Lecture and Tutorial Hours Only A11+A12 CR-013 SUCHISMITA PATRA Clashed with A11/ A12 65 8 57\n' +
+      'Lecture and Tutorial Hours Only B11+B12 AB-103 MAYANK SHARMA NONE 65 9 56\n' +
+      'Lecture and Tutorial Hours Only B22+B24 CR-019 DHARMALINGAM M Copyright © 2020 Software Development Cell (VIT) Clashed with B24 65 5 60\n' +
+      'Go Back'
   );
   assert.equal(r.code, 'MAT2003');
   assert.equal(r.name, 'Applied Numerical Method');
   assert.equal(r.sections.length, 3);
-  assert.deepEqual(r.sections.map(({ faculty, seats }) => [faculty, seats]), [
-    ['SUCHISMITA PATRA', '57'],
-    ['MAYANK SHARMA', '56'],
-    ['DHARMALINGAM M', '60'],
-  ]);
+  assert.deepEqual(
+    r.sections.map(({ faculty, seats }) => [faculty, seats]),
+    [
+      ['SUCHISMITA PATRA', '57'],
+      ['MAYANK SHARMA', '56'],
+      ['DHARMALINGAM M', '60'],
+    ]
+  );
 });
 
 const javaFixtures = JSON.parse(
